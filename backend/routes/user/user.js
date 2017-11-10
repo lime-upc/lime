@@ -1,8 +1,11 @@
 /**
- * Router module that handles the USER REST API
+ * Router module that handles the USER REST API and USER LOGIN
  */
 var express = require('express');
 var crypto = require('crypto');
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
+
 
 module.exports = function (app) {
 
@@ -18,7 +21,17 @@ module.exports = function (app) {
      * Authentication: YES
      * Permissions: Admin
      */
+    router.get("/",passport.authenticate('jwt', { session: false }));
     router.get("/", function (req, res) {
+
+        if (req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            return;
+        }
+
+
+        //NOTE: User object is already in req.user!!!
+
         User.find({}, 'email first_name last_name date_of_birth gender preferences')
             .then(function(response){
                 if (!response) {
@@ -115,7 +128,13 @@ module.exports = function (app) {
      * Authentication: Yes
      * Permissions: The own user, Admin
      */
+    router.get("/:email",passport.authenticate('jwt', { session: false }));
     router.get("/:email", function (req, res) {
+
+        if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            return;
+        }
 
 
         User.findOne({email: req.params.email}, 'email first_name last_name date_of_birth gender preferences')
@@ -149,7 +168,13 @@ module.exports = function (app) {
      * Authentication: Yes
      * Permissions: Admin and the own user
      */
+    router.put("/:email",passport.authenticate('jwt', { session: false }));
     router.put("/:email",function (req,res) {
+
+        if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            return;
+        }
 
         //There is no required parameter.
 
@@ -216,7 +241,13 @@ module.exports = function (app) {
      * Authentication: YES
      * Permissions: Admin
      */
+    router.delete("/:email",passport.authenticate('jwt', { session: false }));
     router.delete("/:email", function(req,res){
+
+        if (req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            return;
+        }
 
         User.remove({email:req.params.email})
             .then(function(obj){
@@ -267,12 +298,13 @@ module.exports = function (app) {
                     return;
                 }
 
-                //No error
+                //No error. Generate JWT with email
+                var token = jwt.sign({ email: req.body.email }, 'SECRET');
+
                 res.send({
                     "error": false,
-                    "message": "Logged successfully"
+                    "message": token
                 });
-
 
             })
             .catch(function(error){
