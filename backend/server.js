@@ -11,12 +11,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 
-app.use('/', function(req, res) {
-    console.log("hola");
-});
+
 
 //Load models from the ./models folder
 app.models = require('./models');
+
+//Load routes
+require('./routes')(app);
+
 
 mongoose.connect("mongodb://localhost/lime");
 mongoose.connection.once('open', function () {
