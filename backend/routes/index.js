@@ -1,8 +1,6 @@
 /*
-* Módulo principal de routes.
-* Este módulo se encarga de definir las rutas y los routers que manejan
-* cada una de ellas.
-* @author Ismael Rodríguez, Sergio Soro, David Vergara. 2016.
+* Routes main module.
+* This module is responsible for defining the routes and the routes that handle each of them.
 */
 module.exports = function(app) {
 

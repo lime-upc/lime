@@ -1,16 +1,16 @@
 var express = require('express'),
     mongoose = require('mongoose'),
+    config = require("./config"),
     bodyParser = require('body-parser'),
     passport = require('passport');
 
 
 var app = express();
+app.use(passport.initialize()); //Init passport
 
 //To accept JSON and encoded values in URL
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-
 
 
 //Load models from the ./models folder
@@ -19,15 +19,13 @@ app.models = require('./models');
 //Load routes
 require('./routes')(app);
 
-app.use(passport.initialize());
-
-
+//Set-up passport with JWT strategy
 var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 var opts = {};
 
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt'); //JWT comes from Auth Header Bearer strategy
-opts.secretOrKey = 'SECRET';
+opts.secretOrKey = config.jwtsecret;
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 
@@ -38,20 +36,20 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
         if (user) {
             return done(null, user);
         } else {
-            return done(null, false);
+            return done(null, false); //When mail does not exist
         }
     });
 }));
 
 
 
-mongoose.connect("mongodb://localhost/lime");
+mongoose.connect(config.db);
 mongoose.connection.once('open', function () {
 
     console.log("[INFO] Connected to MongoDB via Mongoose ");
 
     //Start listening after connection to MongoDB
-    app.listen(3000, function () {
+    app.listen(config.port, function () {
         console.log("[INFO] Express server running on port 3000");
     });
 });

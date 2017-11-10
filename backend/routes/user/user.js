@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var crypto = require('crypto');
+var config = require('../../config');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 
@@ -29,8 +30,6 @@ module.exports = function (app) {
             return;
         }
 
-
-        //NOTE: User object is already in req.user!!!
 
         User.find({}, 'email first_name last_name date_of_birth gender preferences')
             .then(function(response){
@@ -214,6 +213,10 @@ module.exports = function (app) {
         User.findOneAndUpdate({email: req.params.email}, updateObject, {new:true})
             .then(function(response){
 
+                if(!response){
+                    res.status(404).send({"error": true, "message": "The user does not exist"});
+                    return;
+                }
 
 
                 //Just send the updated data without password
@@ -251,9 +254,18 @@ module.exports = function (app) {
 
         User.remove({email:req.params.email})
             .then(function(obj){
+
+                if(obj.result.n === 0){
+                    res.send({
+                        "error": true,
+                        "message": "User does not exist"
+                    });
+                    return;
+                }
+
                 res.send({
                     "error": false,
-                    "message": "Removed " + obj.result.n + " users"
+                    "message": "Removed successfully"
                 });
             })
             .catch(function(error){
@@ -299,7 +311,7 @@ module.exports = function (app) {
                 }
 
                 //No error. Generate JWT with email
-                var token = jwt.sign({ email: req.body.email }, 'SECRET');
+                var token = jwt.sign({ email: req.body.email }, config.jwtsecret);
 
                 res.send({
                     "error": false,
@@ -308,16 +320,12 @@ module.exports = function (app) {
 
             })
             .catch(function(error){
+                res.status(500).send({"error": true, "message": "Error removing user " + error});
 
             });
 
 
-
     });
-
-
-
-
 
 
     return router;
