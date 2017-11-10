@@ -2,7 +2,8 @@ var express = require('express'),
     mongoose = require('mongoose'),
     config = require("./config"),
     bodyParser = require('body-parser'),
-    passport = require('passport');
+    passport = require('passport'),
+    cors = require('cors');
 
 
 var app = express();
@@ -12,7 +13,8 @@ app.use(passport.initialize()); //Init passport
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-
+//Enable CORS requests on all routes
+app.use(cors());
 //Load models from the ./models folder
 app.models = require('./models');
 

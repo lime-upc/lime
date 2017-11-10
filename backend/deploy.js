@@ -4,14 +4,10 @@
 var mongoose = require('mongoose'),
 config = require("./config"),
 models = require("./models"),
-crypto = require('crypto'),
-express = require("express");
-
+crypto = require('crypto');
 
 
 var User = models.User;
-
-var app = express();
 
 //Database URL
 var dbUrl = config.db;
