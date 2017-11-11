@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Log-in</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form (ngSubmit)="doRegister()">
+    <h3>Login data</h3>
+
+
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="text" required [(ngModel)]="formData.email" name="email"></ion-input>
+    </ion-item>
+    <h3 class="fieldError" *ngIf="errors.email">Type your email</h3>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" required [(ngModel)]="formData.password" name="password"></ion-input>
+    </ion-item>
+    <h3 class="fieldError" *ngIf="errors.password">Type your password</h3>
+
+
+    <button ion-button block type="submit">Login</button>
+  </form>
+
+
+</ion-content>

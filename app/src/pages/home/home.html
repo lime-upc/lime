@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Lime Rewards</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -14,5 +14,6 @@
     Hello world :)
   </p>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button ion-button primary (click)="goLogin($event, item)">Log-in</button>
+  <button ion-button secondary (click)="goRegister($event, item)">Register</button>
 </ion-content>

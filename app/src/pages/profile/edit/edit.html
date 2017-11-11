@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>New Account</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form (ngSubmit)="doUpdate()">
+    <h3>Login data</h3>
+
+
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="text" required [(ngModel)]="formData.email" name="email"></ion-input>
+    </ion-item>
+    <h3 class="fieldError" *ngIf="errors.email">Type your email</h3>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" required [(ngModel)]="formData.password" name="password"></ion-input>
+    </ion-item>
+    <h3 class="fieldError" *ngIf="errors.password">Type your password</h3>
+    <h3>Profile</h3>
+    <ion-item>
+      <ion-label>First name</ion-label>
+      <ion-input type="text" required [(ngModel)]="formData.first_name" name="first_name"></ion-input>
+    </ion-item>
+    <h3 class="fieldError" *ngIf="errors.first_name">Type your first name</h3>
+    <ion-item>
+      <ion-label>Last name</ion-label>
+      <ion-input type="text" required [(ngModel)]="formData.last_name" name="last_name"></ion-input>
+    </ion-item>
+    <h3 class="fieldError" *ngIf="errors.last_name">Type your last name</h3>
+    <ion-item>
+      <ion-label>Birth date</ion-label>
+      <ion-input type="date" required [(ngModel)]="formData.date_of_birth" name="date_of_birth"></ion-input>
+    </ion-item>
+    <h3 class="fieldError" *ngIf="errors.date_of_birth">Select your birth date</h3>
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-select required [(ngModel)]="formData.gender" name="gender">
+        <ion-option value="female">Female</ion-option>
+        <ion-option value="male">Male</ion-option>
+      </ion-select>
+      <h3 class="fieldError" *ngIf="errors.gender">Select your gender</h3>
+    </ion-item>
+
+    <h3>Tell us what you like</h3>
+    <ion-list>
+
+      <h3 class="fieldError" *ngIf="errors.preferences">Select at least one preference</h3>
+      <ion-item *ngFor="let preference of preferencesList" (click)="preference.selected = !preference.selected">
+
+        <input
+              type="checkbox"
+               name={{preference.name}}
+               [ngModel]="preference.selected"
+          /> {{preference.name}}
+      </ion-item>
+
+
+
+    </ion-list>
+    <button ion-button block type="submit">Register</button>
+  </form>
+
+
+</ion-content>
