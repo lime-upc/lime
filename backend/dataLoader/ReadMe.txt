@@ -1,3 +1,7 @@
+API Key for Google Places API:
+AIzaSyDSQ9WzBTaM49moFFEbw41jERSh-LYsyf0
+
+
 1) Install/Update node and npm:
 nvm install 8.9
 nvm use 8.9 
@@ -19,7 +23,6 @@ cd ~/NPM-NodeJs
 node script.js
 
 
-
 4) Install mongoDB on Mac (https://treehouse.github.io/installation-guides/mac/mongo-mac.html)
 brew update
 brew install mongodb
@@ -27,6 +30,8 @@ sudo mkdir -p /data/db
 sudo chown -R `id -un` /data/db
 mongod --dbpath=/data
 
+
+5) Useful MONGODB commands:
 
 To enter Mongo shell:
 mongo

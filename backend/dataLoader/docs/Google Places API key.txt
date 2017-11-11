@@ -1,2 +1,0 @@
-API Key for Google Places API:
-AIzaSyDSQ9WzBTaM49moFFEbw41jERSh-LYsyf0
