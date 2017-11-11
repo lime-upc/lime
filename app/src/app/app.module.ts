@@ -21,6 +21,8 @@ import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {Http} from "@angular/http";
 import {ProfilePage} from "../pages/profile/profile";
 import {EditProfilePage} from "../pages/profile/edit/edit";
+import {StaticDataService} from "../services/preferences";
+import {GoogleMaps} from "@ionic-native/google-maps";
 
 let storage = new Storage({});
 
@@ -65,8 +67,10 @@ export function getAuthHttp(http) {
   ],
   providers: [
     StatusBar,
+    GoogleMaps,
     SplashScreen,
     AuthenticationService,
+    StaticDataService,
     {
       provide: AuthHttp,
       useFactory: getAuthHttp,

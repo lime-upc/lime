@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import {StaticDataService} from "../../services/preferences";
 
 type userProfile = {
   email: string;
@@ -24,7 +25,7 @@ export class RegisterPage {
   preferencesList: any[];
   errors: any;
 
-  constructor(public navCtrl: NavController, private http: HttpClient) {
+  constructor(public navCtrl: NavController, private http: HttpClient, private staticData: StaticDataService) {
 
     //To store the local errors
     this.errors = {
@@ -49,15 +50,19 @@ export class RegisterPage {
     };
 
     //List of preferences of food
-    this.preferencesList = [
-      {name: "Indian food", selected: false},
-      {name: "Pizza", selected: false},
-      {name: "Coffee", selected: false},
-      {name: "Vegan", selected: false}
-    ];
+    let completeList = staticData.getPreferences();
+    this.preferencesList = [];
+    for(let i = 0; i < completeList.length; i++){
+      this.preferencesList.push({name: staticData.underscoreToText(completeList[i]), code: completeList[i], selected: false});
+    }
+
 
 
   }
+
+
+
+
 
   doRegister(){
 
@@ -81,7 +86,7 @@ export class RegisterPage {
     userData.preferences = [];
     for (let entry of this.preferencesList){
      if(entry.selected){
-       userData.preferences.push(entry.name);
+       userData.preferences.push(entry.code);
      }
    }
 

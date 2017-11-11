@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { AuthHttp } from 'angular2-jwt';
 import { AuthenticationService } from '../../../services/AuthenticationService';
+import {StaticDataService} from "../../../services/preferences";
 
 type userProfile = {
   email: string;
@@ -27,7 +28,11 @@ export class EditProfilePage {
   errors: any;
   email: String;
 
-  constructor(public navCtrl: NavController, private http: HttpClient, private authHttp: AuthHttp, private authenticationService: AuthenticationService) {
+  constructor(public navCtrl: NavController,
+              private http: HttpClient,
+              private authHttp: AuthHttp,
+              private authenticationService: AuthenticationService,
+              private staticData: StaticDataService) {
 
 
     this.email = this.authenticationService.getEmail();
@@ -50,17 +55,18 @@ export class EditProfilePage {
       last_name: "",
       password: "",
       date_of_birth: "",
-      gender: "",
-      preferences: []
+      gender: ""
     };
 
-    //List of preferences of food
-    this.preferencesList = [
-      {name: "Indian food", selected: false},
-      {name: "Pizza", selected: false},
-      {name: "Coffee", selected: false},
-      {name: "Vegan", selected: false}
-    ];
+
+    //List of preferences of food, empty at beginning
+    let completeList = staticData.getPreferences();
+    this.preferencesList = [];
+    for(let i = 0; i < completeList.length; i++){
+      this.preferencesList.push({name: staticData.underscoreToText(completeList[i]), code: completeList[i], selected: false});
+    }
+
+
 
     this.loadData();
 
@@ -82,7 +88,17 @@ export class EditProfilePage {
           this.formData.date_of_birth = userData.date_of_birth.substr(0,10);
           this.formData.gender = userData.gender;
 
-          //TODO: Preferences list
+
+          for (let preferenceCode of userData.preferences) {
+            //Have to set to true in preference list
+            for (let p of this.preferencesList){
+              if(p.code == preferenceCode){
+                p.selected = true;
+                break;
+              }
+            }
+          }
+
         },
         err => {
           //Show error
@@ -107,13 +123,13 @@ export class EditProfilePage {
 
 
     //Copy the form data into userData variable
-    var userData =  JSON.parse(JSON.stringify(this.formData));
+    let userData =  JSON.parse(JSON.stringify(this.formData));
 
     //Serialize preferences to send them
     userData.preferences = [];
     for (let entry of this.preferencesList){
      if(entry.selected){
-       userData.preferences.push(entry.name);
+       userData.preferences.push(entry.code);
      }
    }
 

@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>New Account</ion-title>
+    <ion-title>Edit your profile</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -15,13 +15,13 @@
 
     <ion-item>
       <ion-label>Email</ion-label>
-      <ion-input type="text" required [(ngModel)]="formData.email" name="email"></ion-input>
+      <ion-input type="text" disabled  [(ngModel)]="formData.email" name="email"></ion-input>
     </ion-item>
     <h3 class="fieldError" *ngIf="errors.email">Type your email</h3>
 
     <ion-item>
       <ion-label>Password</ion-label>
-      <ion-input type="password" required [(ngModel)]="formData.password" name="password"></ion-input>
+      <ion-input type="password" placeholder="Type only if you want to change it"  [(ngModel)]="formData.password" name="password"></ion-input>
     </ion-item>
     <h3 class="fieldError" *ngIf="errors.password">Type your password</h3>
     <h3>Profile</h3>
