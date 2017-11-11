@@ -28,10 +28,13 @@ brew update
 brew install mongodb
 sudo mkdir -p /data/db
 sudo chown -R `id -un` /data/db
-mongod --dbpath=/data
 
 
 5) Useful MONGODB commands:
+
+To launch MongoDB server:
+mongod --dbpath=/data
+
 
 To enter Mongo shell:
 mongo

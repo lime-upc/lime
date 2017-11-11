@@ -36,6 +36,9 @@ function retrieveData()
         delete response.json.results[i].reference;
         delete response.json.results[i].icon;
 
+
+    //anti-duplicates mechanism: do not append if the result is already in the results string
+    if (!resultsString.includes(response.json.results[i].place_id))
     	resultsString = resultsString+JSON.stringify(response.json.results[i], null, 4)+",";
     }
 
