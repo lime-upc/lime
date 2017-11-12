@@ -3,6 +3,7 @@ import {MenuController, NavController} from 'ionic-angular';
 import { AuthenticationService } from '../../services/AuthenticationService';
 import {MapPage} from "../map/map";
 import {HomePage} from "../home/home";
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
   selector: 'page-loading',
@@ -10,7 +11,7 @@ import {HomePage} from "../home/home";
 })
 export class LoadingPage {
 
-  constructor(public navCtrl: NavController, private authService: AuthenticationService, private menu: MenuController) {
+  constructor(public navCtrl: NavController, private authService: AuthenticationService, private menu: MenuController,private statusBar: StatusBar) {
 
     this.menu.enable(false);
     this.menu.swipeEnable(false);
@@ -23,6 +24,10 @@ export class LoadingPage {
         console.log("I catched");
         this.navCtrl.setRoot(HomePage);
       });
+
+
+// set status bar to white
+    this.statusBar.backgroundColorByHexString('#fbc602');
 
 
 
