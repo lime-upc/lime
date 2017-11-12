@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {MenuController, NavController} from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../../services/AuthenticationService';
 import {HomePage} from "../home/home";
@@ -23,7 +23,12 @@ export class MapPage {
 
   @ViewChild('map') mapElement: ElementRef;
   email: string;
-  constructor(public navCtrl: NavController, private http: HttpClient, private authenticationService:AuthenticationService, private googleMaps: GoogleMaps) {
+  map: any;
+  constructor(public navCtrl: NavController, private http: HttpClient, private authenticationService:AuthenticationService,
+              private googleMaps: GoogleMaps, private menu: MenuController) {
+
+    this.menu.enable(true);
+    this.menu.swipeEnable(true);
 
     this.email = authenticationService.getEmail();
 
@@ -35,7 +40,7 @@ export class MapPage {
 
   logOut(){
     this.authenticationService.logout();
-    this.navCtrl.push(HomePage);
+    this.navCtrl.setRoot(HomePage);
   }
 
 

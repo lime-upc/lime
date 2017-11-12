@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { AuthHttp } from 'angular2-jwt';
 import { MapPage } from '../map/map';
 import { AuthenticationService } from '../../services/AuthenticationService';
+import { MenuController } from 'ionic-angular';
 
 type loginData = {
   email: string;
@@ -20,7 +21,13 @@ export class LoginPage {
   formData: loginData;
   errors: any;
 
-  constructor(public navCtrl: NavController, private authHttp: AuthHttp, private authenticationService:AuthenticationService) {
+  constructor(public navCtrl: NavController,
+              private authHttp: AuthHttp,
+              private authenticationService:AuthenticationService,
+              private menu: MenuController) {
+
+    this.menu.enable(false);
+    this.menu.swipeEnable(false);
 
     //To store the local errors
     this.errors = {

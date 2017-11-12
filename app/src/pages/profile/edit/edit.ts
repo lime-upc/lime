@@ -12,7 +12,6 @@ type userProfile = {
   last_name: string;
   date_of_birth: string;
   gender: string;
-  preferences: string[];
 }
 
 

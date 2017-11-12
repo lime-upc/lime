@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {MenuController, NavController} from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import {StaticDataService} from "../../services/preferences";
 
@@ -25,7 +25,10 @@ export class RegisterPage {
   preferencesList: any[];
   errors: any;
 
-  constructor(public navCtrl: NavController, private http: HttpClient, private staticData: StaticDataService) {
+  constructor(public navCtrl: NavController, private http: HttpClient, private staticData: StaticDataService, private menu:MenuController) {
+
+    this.menu.enable(false);
+    this.menu.swipeEnable(false);
 
     //To store the local errors
     this.errors = {
