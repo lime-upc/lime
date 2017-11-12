@@ -44,14 +44,15 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 }));
 
 
-
-mongoose.connect(config.db);
+//If Heroku, use local MongoDB URI
+mongoose.connect( process.env.MONGODB_URI || config.db);
 mongoose.connection.once('open', function () {
 
     console.log("[INFO] Connected to MongoDB via Mongoose ");
 
     //Start listening after connection to MongoDB
-    app.listen(config.port, function () {
+    //If Heroku, use that port
+    app.listen( process.env.PORT || config.port, function () {
         console.log("[INFO] Express server running on port 3000");
     });
 });
