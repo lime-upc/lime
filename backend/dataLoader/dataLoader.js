@@ -55,7 +55,7 @@ function saveResults(){
 
   resultsString=resultsString.substring(0,resultsString.length-1);
   var date = new Date();
-  fs.appendFile('outputFile.txt', '{"download_timestamp" : "'+ date.toUTCString() +'", "results" : ['+resultsString+']}', (err) => {
+  fs.appendFile('outputFile.json', '{"download_timestamp" : "'+ date.toUTCString() +'", "results" : ['+resultsString+']}', (err) => {
     if (err) throw err;
   });  
   console.log("Places sucessfully retrieved on "+date.toUTCString() + " and written to JSON file!");

@@ -11,7 +11,7 @@ sudo npm install -g npm
 sudo npm install npm@latest -g
 
 2) Install Google Maps Services Node.js client, MongoDB Driver
-cd ~/NPM-NodeJs
+cd ~/NPM
 npm init --yes
 npm install @google/maps
 npm install mongodb
@@ -19,7 +19,7 @@ npm install mongodb
 //http://www.opentechguides.com/how-to/article/nodejs/125/express-mongodb-json.html
 
 >>>3) Run the js script:
-cd ~/NPM-NodeJs
+cd ~/NPM
 node script.js
 
 
@@ -33,7 +33,7 @@ sudo chown -R `id -un` /data/db
 5) Useful MONGODB commands:
 
 To launch MongoDB server:
-mongod --dbpath=/data
+mongod
 
 
 To enter Mongo shell:
