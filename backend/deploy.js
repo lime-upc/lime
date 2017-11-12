@@ -10,7 +10,7 @@ crypto = require('crypto');
 var User = models.User;
 
 //Database URL
-var dbUrl = config.db;
+var dbUrl = (process.env.MONGODB_URI || config.db);
 
 
 console.log("[INFO] Starting deploy");
