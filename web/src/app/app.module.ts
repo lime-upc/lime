@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from "./profile/profile.component";
 import { FooterComponent } from './footer/footer.component';
+
+import { ModalModule } from "./modal/modal.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
+    ProfileComponent,
     FooterComponent,
   ],
   imports: [
@@ -22,7 +26,8 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

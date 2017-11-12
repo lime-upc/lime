@@ -1,0 +1,71 @@
+<div class="container">
+  <div id="crm-header">
+    <div id="logo"></div>
+    <div id="account-name">
+      <h1>Lime's restaurant</h1>
+    </div>
+  </div>
+
+  <div id="crm-content">
+    <div id="profile-section">
+      <h3>Profile</h3>
+      <div class="crm-block">
+        <div class="crm-block-row">
+          <div class="crm-block-cell-left">
+            <b>Type of business</b>
+          </div>
+          <div class="crm-block-cell-right">{{ businessTypes.join('; ') }}
+          </div>
+        </div>
+        <div class="crm-block-row">
+          <div class="crm-block-cell-left">
+            <b>Address</b>
+          </div>
+          <div class="crm-block-cell-right">{{ address }}</div>
+        </div>
+
+        <div class="crm-block-row">
+          <div class="crm-block-cell-left">
+            <b>Email</b>
+          </div>
+          <div class="crm-block-cell-right">{{ email }}</div>
+        </div>
+        <div class="crm-block-row">
+          <div class="crm-block-cell-left">
+            <b>Phone number</b>
+          </div>
+          <div class="crm-block-cell-right">{{ phone }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="notifications-section">
+      <h3>Automatic notifications</h3>
+
+      <div class="crm-block">
+        <div *ngFor="let n of notifications" class="crm-block-row crm-block-row-editable">
+          <div class="crm-block-cell-left">
+            <b>{{n.title}}</b>
+          </div>
+          <div class="crm-block-cell-right">
+            {{n.description}}
+          </div>
+        </div>
+        <div class="crm-block-row">
+          <button (click)='openAddNotificationModal(modalId)'>Add Notification</button>
+          <!--<app-modal [modalTitle]="Add Notification" [blocking]='false' [modalId]='add-notification-modal'>-->
+            <!--<div>Fields for modal</div>-->
+          <!--</app-modal>-->
+        </div>
+      </div>
+    </div>
+
+    <div id="additional-info-section">
+      <h3>Additional information</h3>
+    </div>
+  </div>
+
+  <div id="crm-footer">
+
+  </div>
+</div>

@@ -1,0 +1,25 @@
+.crm-block {
+  background-color: #eeeeee;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-left: 10px;
+  padding-bottom: 3px;
+  padding-top: 3px;
+  height: auto;
+}
+
+.crm-block-row {
+  margin: 2px;
+  width: 100%;
+}
+
+.crm-block-cell-left {
+  width: 20%;
+  display: inline-block;
+}
+
+.crm-block-cell-right {
+  width: 80%;
+  display: inline;
+}
