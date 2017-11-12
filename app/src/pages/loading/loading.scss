@@ -1,4 +1,4 @@
-page-home {
+page-loading {
 
   img{
     height: 50vh;
@@ -7,15 +7,14 @@ page-home {
     display: block;
   }
 
+
   .bottom {
     padding: $content-padding;
     position: fixed;
     bottom:0;
     left: 0;
     right: 0;
+    font-size:1.3em;
   }
+
 }
-
-
-
-

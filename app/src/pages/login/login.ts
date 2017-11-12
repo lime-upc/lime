@@ -4,6 +4,7 @@ import { AuthHttp } from 'angular2-jwt';
 import { MapPage } from '../map/map';
 import { AuthenticationService } from '../../services/AuthenticationService';
 import { MenuController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 type loginData = {
   email: string;
@@ -24,7 +25,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
               private authHttp: AuthHttp,
               private authenticationService:AuthenticationService,
-              private menu: MenuController) {
+              private menu: MenuController,
+              private toast: ToastController) {
 
     this.menu.enable(false);
     this.menu.swipeEnable(false);
@@ -80,13 +82,25 @@ export class LoginPage {
         res => {
           //Success!! Store token in localStorage
           var response = JSON.parse((res as any)._body);
-          this.authenticationService.setToken(response.message);
-          this.goMap();
+          this.authenticationService.setTokenAndFetchData(response.message)
+            .then(res => {
+              this.toast.create(
+                {message: 'Welcome back ' + res.first_name,
+                  duration: 3000,
+                  position: 'bottom'}).present();
+              this.goMap();
+            });
+
         },
         err => {
           //Show error
           var error = JSON.parse(err._body);
-          alert("ERROR: " + error.message);
+          this.toast.create(
+            {message: 'Error: ' + error.message,
+              duration: 3000,
+              position: 'bottom'}).present();
+
+
         }
       );
 

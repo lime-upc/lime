@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { AuthHttp } from 'angular2-jwt';
 import { AuthenticationService } from '../../../services/AuthenticationService';
 import {StaticDataService} from "../../../services/preferences";
+import {ProfilePage} from "../profile";
 
 type userProfile = {
   email: string;
@@ -25,16 +26,15 @@ export class EditProfilePage {
   formData: userProfile;
   preferencesList: any[];
   errors: any;
-  email: String;
 
   constructor(public navCtrl: NavController,
               private http: HttpClient,
               private authHttp: AuthHttp,
               private authenticationService: AuthenticationService,
-              private staticData: StaticDataService) {
+              private staticData: StaticDataService,
+              private toast: ToastController) {
 
 
-    this.email = this.authenticationService.getEmail();
 
     //To store the local errors
     this.errors = {
@@ -67,12 +67,33 @@ export class EditProfilePage {
 
 
 
-    this.loadData();
+    authenticationService.getUserData()
+      .then(userData => {
+        this.formData = JSON.parse(JSON.stringify(userData)); //We make a copy of the data
+        this.formData.date_of_birth = this.formData.date_of_birth.substr(0,10);
+        for (let preferenceCode of userData.preferences) {
+          //Have to set to true in preference list
+          for (let p of this.preferencesList){
+            if(p.code == preferenceCode){
+              p.selected = true;
+              break;
+            }
+          }
+        }
+
+      })
+      .catch(message => {
+        this.toast.create(
+          {message: 'Error: ' + message,
+            duration: 3000,
+            position: 'bottom'}
+        ).present();
+      });
 
 
   }
 
-  loadData(){
+  /*loadData(){
     this.authHttp.get('http://localhost:3000/users/' + this.email)
       .subscribe(
         res => {
@@ -105,7 +126,7 @@ export class EditProfilePage {
           alert("ERROR: " + error.message);
         }
       );
-  }
+  }*/
 
   doUpdate(){
 
@@ -151,19 +172,35 @@ export class EditProfilePage {
 
     //Do not do anything if there is any error
     if(hasError){
-      alert("Please, fill the form correctly");
+      this.toast.create(
+        {message: 'Please, fill all the fields',
+          duration: 3000,
+          position: 'bottom'}
+      ).present();
       return;
     }
 
     //If no error, we submit
-    this.authHttp.put('http://localhost:3000/users/' + this.email, userData)
+    this.authHttp.put('http://localhost:3000/users/' + this.formData.email, userData)
       .subscribe(
         res => {
-          alert("Updated successfully.")
+          console.dir(res);
+          var response = JSON.parse((res as any)._body);
+          this.authenticationService.updateUserData(response.message);
+          this.toast.create(
+            {message: 'Details updated successfully',
+              duration: 3000,
+              position: 'bottom'}
+          ).present();
+          this.navCtrl.pop();
         },
         err => {
           var error = JSON.parse(err.error);
-          alert("ERROR: " + error.message);
+          this.toast.create(
+            {message: 'Error: ' + error.message,
+              duration: 3000,
+              position: 'bottom'}
+          ).present();
         }
       );
 

@@ -8,52 +8,126 @@ import { AuthHttp } from 'angular2-jwt';
 export class AuthenticationService {
 
   token: String;
+  userData: any = {};
 
   jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(private storage: Storage, private authHttp: AuthHttp) {
-    //At beginning, load token from memory
-    this.storage.get('jwt')
-      .then((val) => {
-          console.log("Loaded token: " + val);
-          this.token = val;
-      });
 
   }
 
 
 
-  setToken(newToken: string){
+  /**
+   * Public function to retrieve the user data.
+   * If not logged in, throws error.
+   */
+  getUserData(){
+
+    if (this.token && this.userData){ //Data already loaded
+      return Promise.resolve(this.userData);
+    }
+
+    return this.loadUserData();
+
+  }
+
+  updateUserData(userData: any){
+    this.userData = userData;
+  }
+
+
+  //When set new token, also retrieve new data
+  setTokenAndFetchData(newToken: string){
 
     //Saves in local storage
-    this.storage.set('jwt',newToken);
+    return this.storage.set('jwt',newToken)
+      .then((res) => {
 
-    //Sets value in memory
-    this.token = newToken;
+        //Sets value in memory
+        this.token = newToken;
+
+        //Retrieves new data
+        return this.loadUserData();
+      });
+
+
   }
+
 
   logout(){
 
     //Clears in local storage
-    this.storage.set('jwt',undefined);
+    this.storage.set('jwt',undefined)
+      .then(res => {
+          this.token = undefined;
+          this.userData = undefined;
+      });
 
-    //Clears in memory
-    this.token = undefined;
-  }
 
-  getToken(){
-    return this.token;
-  }
-
-  getEmail(){
-    if(!this.token){
-      return undefined;
-    }
-    return this.jwtHelper.decodeToken(this.token as string).email;
   }
 
   isAuthenticated(){
-    return this.token != undefined;
+    return this.token != undefined && this.userData != undefined;
   }
+
+  //Returns token from localstorage, or undefined if it does not exist.
+  private loadToken(){
+    return this.storage.get('jwt')
+      .then((val) => {
+        console.log("Loaded token: " + val);
+        this.token = val;
+        return this.token;
+      });
+  }
+
+
+
+
+
+  private loadUserData(){
+
+    return this.loadToken()
+      .then(token => {
+
+
+        if(!token){
+          throw "User is not authenticated";
+        }
+
+        let email = this.jwtHelper.decodeToken(token as string).email;
+        return this.authHttp.get('http://localhost:3000/users/' + email)
+          .toPromise()
+          .then(res => {
+
+            var response = JSON.parse((res as any)._body);
+            var newData = response.message;
+
+            //console.dir(newData);
+            this.userData = {};
+            this.userData.email = newData.email;
+            this.userData.first_name = newData.first_name;
+            this.userData.last_name = newData.last_name;
+            this.userData.date_of_birth = newData.date_of_birth;
+            this.userData.gender = newData.gender;
+            this.userData.preferences = newData.preferences;
+            return this.userData;
+          })
+          .catch(err => {
+            let error = JSON.parse(err._body);
+            throw error.message;
+          });
+
+        }
+
+      )
+      .catch(err => {
+        throw err;
+      })
+
+  }
+
+
+
 
 }

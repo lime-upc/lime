@@ -4,10 +4,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { RegisterPage } from '../pages/register/register';
 import {ProfilePage} from "../pages/profile/profile";
 import {MapPage} from "../pages/map/map";
+import {LoadingPage} from "../pages/loading/loading";
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +14,8 @@ import {MapPage} from "../pages/map/map";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+
+  rootPage: any = LoadingPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -24,10 +24,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: MapPage },
-      { title: 'User Profile & Settings', component: ProfilePage },
-      { title: 'Virtual Wallet', component: MapPage},
-      { title: 'Favourite Places', component: MapPage}
+      { title: 'Map', component: MapPage },
+      { title: 'User Profile & Settings', component: ProfilePage }
     ];
 
   }

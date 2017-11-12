@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {MenuController, NavController} from 'ionic-angular';
+import {MenuController, NavController, ToastController} from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../../services/AuthenticationService';
 import {HomePage} from "../home/home";
@@ -22,16 +22,26 @@ declare var google;
 export class MapPage {
 
   @ViewChild('map') mapElement: ElementRef;
-  email: string;
   map: any;
+  userData: any = {};
   constructor(public navCtrl: NavController, private http: HttpClient, private authenticationService:AuthenticationService,
-              private googleMaps: GoogleMaps, private menu: MenuController) {
+              private googleMaps: GoogleMaps, private menu: MenuController,private toast: ToastController) {
 
     this.menu.enable(true);
     this.menu.swipeEnable(true);
 
-    this.email = authenticationService.getEmail();
+  }
 
+
+  //Load user data
+  ionViewDidEnter(){
+    this.authenticationService.getUserData()
+      .then(userData => {
+        this.userData = userData
+      })
+      .catch(message => {
+        alert("ERROR: " + message);
+      });
   }
 
   ionViewDidLoad() {
@@ -40,11 +50,18 @@ export class MapPage {
 
   logOut(){
     this.authenticationService.logout();
+    this.toast.create(
+      {message: 'See you soon!',
+        duration: 3000,
+        position: 'bottom'}
+    ).present();
     this.navCtrl.setRoot(HomePage);
   }
 
 
   loadMap(){
+    this.menu.enable(true);
+    this.menu.swipeEnable(true);
 
     var self = this;
 
@@ -53,7 +70,8 @@ export class MapPage {
     let mapOptions = {
       center: latLng,
       zoom: 13,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true
     };
 
     this.map = new google.maps.Map(self.mapElement.nativeElement, mapOptions);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MenuController, NavController} from 'ionic-angular';
+import {MenuController, NavController, ToastController} from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import {StaticDataService} from "../../services/preferences";
 
@@ -25,7 +25,7 @@ export class RegisterPage {
   preferencesList: any[];
   errors: any;
 
-  constructor(public navCtrl: NavController, private http: HttpClient, private staticData: StaticDataService, private menu:MenuController) {
+  constructor(public navCtrl: NavController, private http: HttpClient, private staticData: StaticDataService, private menu:MenuController,private toast: ToastController) {
 
     this.menu.enable(false);
     this.menu.swipeEnable(false);
@@ -113,7 +113,11 @@ export class RegisterPage {
 
     //Do not do anything if there is any error
     if(hasError){
-      alert("Please, fill the form correctly");
+      this.toast.create(
+        {message: 'Please, fill all the required fields.',
+          duration: 3000,
+          position: 'bottom'}
+      ).present();
       return;
     }
 
@@ -121,11 +125,21 @@ export class RegisterPage {
     this.http.post('http://localhost:3000/users/', userData)
       .subscribe(
         res => {
-          alert("Registered successfully! Please log-in now.")
+          this.toast.create(
+             {message: 'Registered successfully. You may now log-in.',
+              duration: 3000,
+              position: 'bottom'}
+          ).present();
+          this.navCtrl.pop();
+
         },
         err => {
           var error = JSON.parse(err.error);
-          alert("ERROR: " + error.message);
+          this.toast.create(
+            {message: 'Error: ' + error.message,
+              duration: 3000,
+              position: 'bottom'}
+          ).present();
         }
       );
 

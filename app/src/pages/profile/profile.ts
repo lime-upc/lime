@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { AuthHttp } from 'angular2-jwt';
 import { AuthenticationService } from '../../services/AuthenticationService';
 import {EditProfilePage} from "./edit/edit";
-
+import 'rxjs/add/operator/toPromise';
 type loginData = {
   email: string;
   password: string;
@@ -17,19 +17,26 @@ type loginData = {
 export class ProfilePage {
 
 
-  userData: any;
-  first_name: string;
-  last_name: string;
+  userData: any = {};
   email: string;
-  date_of_birth: string;
-  gender: string;
+
 
   constructor(public navCtrl: NavController, private authHttp: AuthHttp, private authenticationService:AuthenticationService) {
 
-    this.email = authenticationService.getEmail();
+
+  }
 
 
-    this.loadData();
+  //Important: Each time we visit the page, refresh the user data.
+  ionViewDidEnter(){
+    this.authenticationService.getUserData()
+      .then(userData => {
+        this.userData = userData;
+        this.userData.date_of_birth = this.userData.date_of_birth.substring(0,10);
+      })
+      .catch(message => {
+        alert("ERROR: " + message);
+      });
   }
 
 
@@ -37,27 +44,6 @@ export class ProfilePage {
     this.navCtrl.push(EditProfilePage);
   }
 
-  loadData(){
 
-    this.authHttp.get('http://localhost:3000/users/' + this.email)
-      .subscribe(
-        res => {
-          //Success!! Store token in localStorage
-          var response = JSON.parse((res as any)._body);
-          this.userData = response.message;
-          this.first_name = this.userData.first_name;
-          this.last_name = this.userData.last_name;
-          this.date_of_birth = this.userData.date_of_birth;
-          this.gender = this.userData.gender;
-
-        },
-        err => {
-          //Show error
-          var error = JSON.parse(err._body);
-          alert("ERROR: " + error.message);
-        }
-      );
-
-  }
 
 }

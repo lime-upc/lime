@@ -15,7 +15,6 @@ export class HomePage {
     this.menu.enable(false);
     this.menu.swipeEnable(false);
 
-    this.authService.getToken(); //Just to load in memory
 
   }
 

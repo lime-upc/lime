@@ -3,17 +3,38 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Profile</ion-title>
+    <ion-title>User Profile</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="back">
 
-Name: {{first_name}} <br/>
-Mail: {{email}} <br/>
-Birthdate: {{date_of_birth}} <br/>
-Gender: {{gender}}
 
-  <button ion-button primary (click)="goEdit()">Edit profile</button>
+  <ion-card>
+    <ion-card-header text-center>
+      <b class="personName">{{userData.first_name}} {{userData.last_name}}</b>
+    </ion-card-header>
+    <ion-card-content>
+      <b>Email: </b>{{userData.email}} <br/>
+      <b>Birth date: </b>{{userData.date_of_birth}}<br/>
+      <b>Gender: </b>{{userData.gender}}
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item-group>
+
+
+    <button class="borderButton" ion-item (click)="goEdit()">
+      <ion-icon name="person" item-start color="secondary"></ion-icon>
+      <ion-label>Edit profile</ion-label>
+    </button>
+    <ion-item>
+      <ion-icon name="lock" item-start color="danger"></ion-icon>
+      <ion-label>Privacy mode</ion-label>
+      <ion-toggle color="secondary"></ion-toggle>
+    </ion-item>
+    </ion-item-group>
+  </ion-list>
+
 
 </ion-content>

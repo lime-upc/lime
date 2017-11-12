@@ -1,13 +1,13 @@
-<ion-menu [content]="content" >
+<ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>LIME REWARDS</ion-title>
+      <ion-title class="menu-header"><img src="assets/imgs/lime.png"/>&nbsp; LIME REWARDS</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content class="menu-content">
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="menu-item">
         {{p.title}}
       </button>
     </ion-list>

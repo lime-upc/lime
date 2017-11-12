@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="back">
 
   <form (ngSubmit)="doRegister()">
     <h3>Login data</h3>
@@ -23,7 +23,7 @@
     <h3 class="fieldError" *ngIf="errors.password">Type your password</h3>
 
 
-    <button ion-button block type="submit">Login</button>
+    <button ion-button block type="submit" class="importantButton">Login</button>
   </form>
 
 

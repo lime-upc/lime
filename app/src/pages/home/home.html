@@ -1,16 +1,17 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Lime Rewards</ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding>
-  <h3>LIME Rewards</h3>
 
-  <p>
-    Hello world :)
-  </p>
+<ion-content padding class="back">
 
-  <button ion-button primary (click)="goLogin($event, item)">Log-in</button>
-  <button ion-button secondary (click)="goRegister($event, item)">Register</button>
+  <img src="assets/imgs/lime.png"/>
+  <div class="titleText">
+    <span>LIME REWARDS</span>
+  </div>
+
+
+  <div class="bottom" text-center>
+
+    <button ion-button block class="importantButton" (click)="goLogin($event, item)">LOG-IN</button>
+    <button ion-button block clear class="secondaryButton" (click)="goRegister($event, item)">NEW ACCOUNT</button>
+  </div>
+
 </ion-content>

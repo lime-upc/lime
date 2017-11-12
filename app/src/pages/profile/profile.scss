@@ -1,2 +1,18 @@
-page-login {
+page-profile {
+  .personName{
+    color:black;
+    size: 1.4em;
+  }
+
+  ion-item{
+    border-radius: 7px !important;
+    border: 1px solid grey !important;
+    margin-bottom:8px !important;
+  }
+
+  .borderButton{
+    border-radius: 7px !important;
+    border: 1px solid grey !important;
+    margin-bottom:8px !important;
+  }
 }

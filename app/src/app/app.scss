@@ -14,3 +14,62 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.titleText{
+  text-align:center;
+  width:100%;
+  font-size: 2.5em;
+  color: #b40000;
+}
+
+.back{
+  background-image: url('../assets/imgs/background.png');
+  // background: url('../../img/getstart.png');
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+.limeColor{
+  background-color: #fcc800;
+  color: black;
+}
+
+.importantButton{
+  background-color: #fcc800;
+  font-size: 1.5em;
+  color: black;
+}
+
+
+.secondaryButton{
+  background-color: transparent;
+  color: black;
+  font-size: 1.2em;
+}
+
+.menu-content{
+  background-color:#fcd540;
+}
+
+.menu-item {
+  background-color:#fcd540;
+
+}
+
+
+.toolbar-background {
+  background-color: #fcc800;
+}
+
+.menu-header img{
+  max-height: 40px;
+}
+
+/**To remove Google copyright and logo*/
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+  display:none;
+}
+.gmnoprint div {
+  background:none !important;
+}

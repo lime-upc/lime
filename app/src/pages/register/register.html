@@ -7,11 +7,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="back">
 
   <form (ngSubmit)="doRegister()">
-    <h3>Login data</h3>
-
+    <h3><ion-icon name="key"></ion-icon> Login data</h3>
 
     <ion-item>
       <ion-label>Email</ion-label>
@@ -24,7 +23,7 @@
       <ion-input type="password" required [(ngModel)]="formData.password" name="password"></ion-input>
     </ion-item>
     <h3 class="fieldError" *ngIf="errors.password">Type your password</h3>
-    <h3>Profile</h3>
+    <h3><ion-icon name="person"></ion-icon> Profile</h3>
     <ion-item>
       <ion-label>First name</ion-label>
       <ion-input type="text" required [(ngModel)]="formData.first_name" name="first_name"></ion-input>
@@ -49,7 +48,7 @@
       <h3 class="fieldError" *ngIf="errors.gender">Select your gender</h3>
     </ion-item>
 
-    <h3>Tell us what you like</h3>
+    <h3><ion-icon name="heart"></ion-icon> Tell us what you like</h3>
     <ion-list>
 
       <h3 class="fieldError" *ngIf="errors.preferences">Select at least one preference</h3>
@@ -65,7 +64,7 @@
 
 
     </ion-list>
-    <button ion-button block type="submit">Register</button>
+    <button ion-button block type="submit" class="importantButton">Register</button>
   </form>
 
 
