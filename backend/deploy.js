@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 config = require("./config"),
 models = require("./models"),
 crypto = require('crypto');
-
+process = require('process');
 
 var User = models.User;
 
@@ -58,9 +58,11 @@ mongoose.connection.once('open', function () {
         .then(function (response) {
             console.log('* Regular user added!');
             console.log('[DONE] Deploy finished');
+            process.exit();
         })
         .catch(function(error){
             console.log(error);
+            process.exit();
         });
 
 });
