@@ -1,1 +1,1 @@
-web: "node backend/deploy.js; node backend/server.js"
+web: "node deploy.js; node server.js"
