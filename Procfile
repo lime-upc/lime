@@ -1,1 +1,1 @@
-web: "cd backend; node deploy.js; npm start"
+web: "node backend/deploy.js; node backend/server.js"
