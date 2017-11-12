@@ -53,7 +53,7 @@ mongoose.connection.once('open', function () {
     //Start listening after connection to MongoDB
     //If Heroku, use that port
     app.listen( process.env.PORT || config.port, function () {
-        console.log("[INFO] Express server running on port 3000");
+        console.log("[INFO] Express server running on port "  + (process.env.PORT || config.port));
     });
 });
 
