@@ -3,15 +3,6 @@ import {MenuController, NavController, ToastController} from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../../services/AuthenticationService';
 import {HomePage} from "../home/home";
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker
-} from '@ionic-native/google-maps';
 
 declare var google;
 
@@ -25,7 +16,7 @@ export class MapPage {
   map: any;
   userData: any = {};
   constructor(public navCtrl: NavController, private http: HttpClient, private authenticationService:AuthenticationService,
-              private googleMaps: GoogleMaps, private menu: MenuController,private toast: ToastController) {
+              private menu: MenuController,private toast: ToastController) {
 
     this.menu.enable(true);
     this.menu.swipeEnable(true);

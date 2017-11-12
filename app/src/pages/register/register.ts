@@ -122,7 +122,7 @@ export class RegisterPage {
     }
 
     //If no error, we submit
-    this.http.post('http://localhost:3000/users/', userData)
+    this.http.post('https://lime-backend.herokuapp.com/users/', userData)
       .subscribe(
         res => {
           this.toast.create(

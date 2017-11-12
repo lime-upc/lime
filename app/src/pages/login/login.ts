@@ -77,7 +77,7 @@ export class LoginPage {
     }
 
     //If no error, we submit
-    this.authHttp.post('http://192.168.1.166:3000/users/login', loginData)
+    this.authHttp.post('https://lime-backend.herokuapp.com/users/login', loginData)
       .subscribe(
         res => {
           //Success!! Store token in localStorage

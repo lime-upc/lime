@@ -96,7 +96,7 @@ export class AuthenticationService {
         }
 
         let email = this.jwtHelper.decodeToken(token as string).email;
-        return this.authHttp.get('http://localhost:3000/users/' + email)
+        return this.authHttp.get('https://lime-backend.herokuapp.com/users/' + email)
           .toPromise()
           .then(res => {
 

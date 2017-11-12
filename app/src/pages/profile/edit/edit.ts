@@ -181,7 +181,7 @@ export class EditProfilePage {
     }
 
     //If no error, we submit
-    this.authHttp.put('http://localhost:3000/users/' + this.formData.email, userData)
+    this.authHttp.put('https://lime-backend.herokuapp.com/users/' + this.formData.email, userData)
       .subscribe(
         res => {
           console.dir(res);
