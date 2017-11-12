@@ -36,7 +36,7 @@
     <h3 class="fieldError" *ngIf="errors.last_name">Type your last name</h3>
     <ion-item>
       <ion-label>Birth date</ion-label>
-      <ion-input type="date" required [(ngModel)]="formData.date_of_birth" name="date_of_birth"></ion-input>
+      <ion-datetime required displayFormat="MM/DD/YYYY" [(ngModel)]="formData.date_of_birth" name="date_of_birth"></ion-datetime>
     </ion-item>
     <h3 class="fieldError" *ngIf="errors.date_of_birth">Select your birth date</h3>
     <ion-item>
