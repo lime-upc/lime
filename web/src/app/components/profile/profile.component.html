@@ -45,17 +45,21 @@
       <div class="crm-block">
         <div *ngFor="let n of notifications" class="crm-block-row crm-block-row-editable">
           <div class="crm-block-cell-left">
-            <b>{{n.title}}</b>
+            <mat-form-field>
+              <input class="crm-notification-description" matInput
+                     [(ngModel)]="n.title"/>
+            </mat-form-field>
           </div>
           <div class="crm-block-cell-right">
-            {{n.description}}
+            <mat-form-field>
+              <textarea class="crm-notification-description" matInput matTextareaAutosize
+                        [(ngModel)]="n.description"></textarea>
+            </mat-form-field>
+            <button mat-raised-button color="primary">Send</button>
           </div>
         </div>
         <div class="crm-block-row">
-          <button (click)='openAddNotificationModal(modalId)'>Add Notification</button>
-          <!--<app-modal [modalTitle]="Add Notification" [blocking]='false' [modalId]='add-notification-modal'>-->
-            <!--<div>Fields for modal</div>-->
-          <!--</app-modal>-->
+          <button (click)="addNotification('title', 'description')"><b>+</b></button>
         </div>
       </div>
     </div>

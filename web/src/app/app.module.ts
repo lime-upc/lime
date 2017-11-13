@@ -16,10 +16,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { ProfileComponent } from "./profile/profile.component";
+import { ProfileComponent } from "./components/profile/profile.component";
 import { FooterComponent } from './components/footer/footer.component';
-
-import { ModalModule } from "./modal/modal.module";
 
 @NgModule({
   declarations: [
@@ -40,8 +38,7 @@ import { ModalModule } from "./modal/modal.module";
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    ModalModule
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
