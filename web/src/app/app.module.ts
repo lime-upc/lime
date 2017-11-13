@@ -4,12 +4,20 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+/* Modules from material design */
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 import { ProfileComponent } from "./profile/profile.component";
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 import { ModalModule } from "./modal/modal.module";
 
@@ -18,6 +26,8 @@ import { ModalModule } from "./modal/modal.module";
     AppComponent,
     NavbarComponent,
     HomeComponent,
+    LoginComponent,
+    RegistrationComponent,
     ProfileComponent,
     FooterComponent,
   ],
@@ -27,6 +37,10 @@ import { ModalModule } from "./modal/modal.module";
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
     ModalModule
   ],
   providers: [],

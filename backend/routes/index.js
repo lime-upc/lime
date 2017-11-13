@@ -3,9 +3,8 @@
 * This module is responsible for defining the routes and the routes that handle each of them.
 */
 module.exports = function(app) {
-
-
     app.use("/users",require('./user/user')(app));
+    app.use("/businesses",require('./business/business')(app));
 
 /*
     Sample code from a previous project.
