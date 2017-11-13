@@ -7,5 +7,6 @@
 
 
 module.exports = {
-    User: require('./user.js')
+    User: require('./user.js'),
+    Business: require('./business.js')
 };
