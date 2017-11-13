@@ -51,6 +51,14 @@ TO completely REMOVE A DATABASE:
 use databaseToBeDropped
 db.dropDatabase()
 
+
+To dump a collection froma MongoDB database
+(outside from the MongoDB shell!)
+mongodump --collection businesses --db SpatialDB
+https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/
+
+
+
 First steps:
 http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/
 https://www.w3schools.com/nodejs/nodejs_mongodb_insert.asp
