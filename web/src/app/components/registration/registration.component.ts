@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 type businessProfile = {
   email: string;
@@ -20,7 +21,7 @@ export class RegistrationComponent implements OnInit {
   formData: businessProfile;
   errors: any;
 
-  constructor(private http : Http) { 
+  constructor(private http : Http, private router: Router) { 
 
      //To store the local errors
      this.errors = {
@@ -72,6 +73,7 @@ export class RegistrationComponent implements OnInit {
       this.http.post('http://localhost:3000/businesses/register', businessData)
       .subscribe(
         res => {
+          this.router.navigate(['/']); // Redirect to home page after success
           alert('Success : you are registered !');
         },
         err => {
