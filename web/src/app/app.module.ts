@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, RequestOptions } from '@angular/http';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 /* Modules from material design */
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,6 +21,10 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.component';
 import { AuthenticationService } from 'app/services/AuthenticationService';
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig(), http, options);
+}
 
 @NgModule({
   declarations: [
@@ -44,7 +49,11 @@ import { AuthenticationService } from 'app/services/AuthenticationService';
     MatButtonModule
   ],
   providers: [
-    AuthenticationService // I THINK IT IS SOMETHING WITH THE PROVIERS : ERROR : Can't resolve all the parameters for Auth...
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }
   ],
   bootstrap: [AppComponent]
 })

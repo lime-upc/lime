@@ -81,7 +81,7 @@ export class AuthenticationService {
         }
 
         let email = this.jwtHelper.decodeToken(token as string).email;
-        return this.authHttp.get('http://localhost:3000/businesses/businessData' + email)
+        return this.authHttp.get('http://localhost:3000/businesses/' + email)
           .toPromise()
           .then(res => {
 
