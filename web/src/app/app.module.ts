@@ -16,8 +16,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { ProfileComponent } from "./components/profile/profile.component";
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.component';
+import { AuthenticationService } from 'app/services/AuthenticationService';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.co
     HomeComponent,
     LoginComponent,
     RegistrationComponent,
+    ProfileComponent,
     FooterComponent,
     PageNotFoundComponent,
   ],
@@ -38,9 +41,11 @@ import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.co
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatButtonModule,
+    MatButtonModule
   ],
-  providers: [],
+  providers: [
+    AuthenticationService // I THINK IT IS SOMETHING WITH THE PROVIERS : ERROR : Can't resolve all the parameters for Auth...
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
