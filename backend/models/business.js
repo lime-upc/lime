@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var BusinessSchema = mongoose.Schema({
     email: {type: String, required:true, unique: true},
     password: {type: String, required: true},
-    name_person_in_charge: {type: String},
+    person_in_charge_name: {type: String},
     address: {type: String},
     phone_number: {type: String}
 });

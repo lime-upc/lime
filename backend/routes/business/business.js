@@ -29,7 +29,7 @@ module.exports = function (app) {
             return;
         }
 
-        Business.findOne({email: req.params.email}, 'email name_person_in_charge address phone_number')
+        Business.findOne({email: req.params.email}, 'email person_in_charge_name address phone_number')
             .then(function(result){
 
                 if (!result) {
@@ -57,7 +57,7 @@ module.exports = function (app) {
     router.post("/", function(req,res){
 
         //Check that all the fields in request are completed
-        if (!req.body.email || !req.body.password) {
+        if (!req.body.email || !req.body.password || !req.body.person_in_charge_name) {
                 res.status(400).send({
                     "error": true,
                     "message": "All the parameters are required"
@@ -73,9 +73,9 @@ module.exports = function (app) {
             {
                 email: req.body.email,
                 password: passHash,
-                name_person_in_charge: "",
+                person_in_charge_name: req.body.person_in_charge_name,
                 address: "",
-                phone_number: "",
+                phone_number: req.body.phone_number,
             }
         );
 

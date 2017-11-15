@@ -27,11 +27,9 @@ export class RegistrationComponent implements OnInit {
      this.errors = {
       email: undefined,
       password: undefined,
-      first_name: undefined,
-      last_name: undefined,
-      date_of_birth: undefined,
-      gender: undefined,
-      preferences: undefined
+      person_in_charge_name: undefined,
+      address: undefined,
+      phone_number: undefined
     };
 
     //To store the input data
@@ -63,6 +61,7 @@ export class RegistrationComponent implements OnInit {
     //Check for errors
     this.errors.email = !businessData.email;
     this.errors.password = !businessData.password;
+    this.errors.person_in_charge_name = !businessData.person_in_charge_name;
     for (let key in this.errors){
       if (this.errors[key]) {hasError = true;}
     }
@@ -70,7 +69,7 @@ export class RegistrationComponent implements OnInit {
     if(hasError){
       alert('All the field are required');
     } else {
-      this.http.post('http://localhost:3000/businesses/register', businessData)
+      this.http.post('http://localhost:3000/businesses', businessData)
       .subscribe(
         res => {
           this.router.navigate(['/']); // Redirect to home page after success
