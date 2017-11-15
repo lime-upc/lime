@@ -43,7 +43,7 @@ function retrieveData(finalCallback)
                             resultsString = resultsString+JSON.stringify(response.json.results[i], null, 4)+",";
                     }
 
-                    console.log("Place " + item + " done");
+                    console.log("Places of category "+item + " successfully retrieved!");
                     callback(null); //To indicate that iteration is finished, without errors
                 }
                 else{
