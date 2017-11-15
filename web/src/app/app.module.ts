@@ -44,7 +44,7 @@ import { AuthenticationService } from 'app/services/AuthenticationService';
     MatButtonModule
   ],
   providers: [
-    AuthenticationService // I THINK IT IS SOMETHING WITH THE PROVIERS : ERROR : Can't resolve all the parameters for Auth...
+    //AuthenticationService // I THINK IT IS SOMETHING WITH THE PROVIERS : ERROR : Can't resolve all the parameters for Auth...
   ],
   bootstrap: [AppComponent]
 })

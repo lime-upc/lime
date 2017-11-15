@@ -20,13 +20,13 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'profile',
+    component: ProfileComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }, 
-  {
-    path: 'profile',
-    component: ProfileComponent
-  }
 ];
 
 @NgModule({
