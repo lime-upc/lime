@@ -31,16 +31,39 @@ opts.secretOrKey = config.jwtsecret;
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 
-    app.models.User.findOne({email: jwt_payload.email}, function(err, user) {
-        if (err) {
-            return done(err, false);
-        }
-        if (user) {
-            return done(null, user);
-        } else {
-            return done(null, false); //When mail does not exist
-        }
-    });
+
+    var isBusiness = jwt_payload.business;
+
+    if(isBusiness){
+        app.models.Business.findOne({email: jwt_payload.email}, function(err, user) {
+                if (err) {
+                    return done(err, false);
+                }
+                if (user) {
+                    return done(null, user);
+                } else {
+                    return done(null, false); //When mail does not exist
+                }
+            });
+    }
+    else{
+        app.models.User.findOne({email: jwt_payload.email}, function(err, user) {
+            if (err) {
+                return done(err, false);
+            }
+            if (user) {
+                return done(null, user);
+            } else {
+                return done(null, false); //When mail does not exist
+            }
+        });
+    }
+    
+
+
+
+
+
 }));
 
 

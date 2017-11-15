@@ -16,6 +16,10 @@ const routes: Routes = [
     component: RegistrationComponent
   },
   {
+    path: 'profile',
+    component: ProfileComponent
+  }
+  {
     path: '',
     component: HomeComponent
   },
@@ -26,7 +30,8 @@ const routes: Routes = [
   {
     path: '**',
     component: PageNotFoundComponent
-  }, 
+  }
+  
 ];
 
 @NgModule({
