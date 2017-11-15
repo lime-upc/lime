@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'app/services/AuthenticationService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'profile',
@@ -13,7 +15,11 @@ export class ProfileComponent implements OnInit {
   phone: string;
   notifications: Array<{title: string, description: string}> = [];
 
-  constructor() { }
+  constructor(private auth: AuthenticationService, router: Router) { 
+    if (!auth.isAuthentificated()) {
+      router.navigate(['/login']);
+    }
+  }
 
   ngOnInit() {
     this.businessTypes = this.loadBusinessTypes();

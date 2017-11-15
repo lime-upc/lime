@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
@@ -9,10 +10,14 @@ export class AuthenticationService {
 
   public token: string;
   
-  constructor(private http: Http) {
+  constructor(private http: Http, private router: Router) {
       // set token if saved in local storage
       var currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.token = currentUser && currentUser.token;
+  }
+
+  isAuthentificated() {
+    return this.token != undefined;
   }
   
   login(email: string, password: string): Observable<boolean> {
@@ -40,5 +45,6 @@ export class AuthenticationService {
     // clear token remove user from local storage to log user out
     this.token = null;
     localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']); 
   }
 }

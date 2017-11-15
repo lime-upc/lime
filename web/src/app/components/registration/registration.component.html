@@ -10,11 +10,11 @@
   </mat-form-field>
   
   <mat-form-field>
-    <input type="text" required [(ngModel)]="formData.person_in_charge_name" matInput placeholder="Person in charge">
+    <input type="text" [(ngModel)]="formData.person_in_charge_name" matInput placeholder="Person in charge">
   </mat-form-field>
 
   <mat-form-field>
-    <input type="text" required [(ngModel)]="formData.phone_number" matInput placeholder="Phone number">
+    <input type="text" [(ngModel)]="formData.phone_number" matInput placeholder="Phone number">
   </mat-form-field>
 
   <button (click)="signUp()" mat-raised-button color="primary">Sign up</button>

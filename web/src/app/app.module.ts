@@ -4,13 +4,16 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { AuthenticationService } from 'app/services/AuthenticationService';
 
 /* Modules from material design */
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
+/* Components (pages)*/
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -20,11 +23,6 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { ProfileComponent } from "./components/profile/profile.component";
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.component';
-import { AuthenticationService } from 'app/services/AuthenticationService';
-
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig(), http, options);
-}
 
 @NgModule({
   declarations: [
@@ -46,7 +44,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSidenavModule
   ],
   providers: [
     AuthenticationService
