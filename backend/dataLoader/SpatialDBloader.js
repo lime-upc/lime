@@ -39,8 +39,9 @@ MongoClient.connect(url, function(err, db) {
             rating: jsonContent.results[i].rating,
             address: replacer(JSON.stringify(jsonContent.results[i].vicinity)),
             additional_information: "",
-            notification_text: "",
-            tags: "",
+            notification_texts: [],
+            notification_in_use_index: 0,
+            tags: [],
             affiliated: false,
             permanently_closed: perm_closed
         };

@@ -10,11 +10,12 @@ npm cache clean --force
 sudo npm install -g npm 
 sudo npm install npm@latest -g
 
-2) Install Google Maps Services Node.js client, MongoDB Driver
+2) Install Google Maps Services Node.js client, MongoDB Driver, Async
 cd ~/NPM
 npm init --yes
 npm install @google/maps
 npm install mongodb
+npm install async
 
 3) Install mongoDB on Mac (https://treehouse.github.io/installation-guides/mac/mongo-mac.html)
 brew update
@@ -50,8 +51,8 @@ use databaseToBeDropped
 db.dropDatabase()
 
 
-To dump a collection froma MongoDB database
-(outside from the MongoDB shell!)
+To dump a collection from a MongoDB database
+(outside of the MongoDB shell)
 mongodump --collection businesses --db SpatialDB
 https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/
 
