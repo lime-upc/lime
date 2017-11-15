@@ -3,4 +3,4 @@
 node_modules/
 backend/config.js
 app/*.iml
-backend/.DS_Store
+.DS_Store
