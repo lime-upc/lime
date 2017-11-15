@@ -2,13 +2,13 @@
   <h1>Login</h1>
 
   <mat-form-field>
-    <input class="email" matInput placeholder="Email">
+    <input class="email" [(ngModel)]="formData.email" matInput placeholder="Email">
   </mat-form-field>
 
   <mat-form-field>
-      <input class="password" matInput placeholder="Password" type="password"/>
+      <input class="password" [(ngModel)]="formData.password" matInput placeholder="Password" type="password"/>
     </mat-form-field>
     
-    <button mat-raised-button color="primary"> Sign in </button>
+    <button (click)="signIn()" mat-raised-button color="primary"> Sign in </button>
     <a routerLink="/registration" routerLinkActive="active">Register now !</a>
   </div>

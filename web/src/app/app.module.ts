@@ -49,11 +49,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatButtonModule
   ],
   providers: [
-    {
-      provide: AuthHttp,
-      useFactory: authHttpServiceFactory,
-      deps: [Http, RequestOptions]
-    }
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

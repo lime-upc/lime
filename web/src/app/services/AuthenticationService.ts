@@ -1,107 +1,44 @@
 import { Injectable } from '@angular/core';
-import { JwtHelper, AuthHttp } from "angular2-jwt";
+import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map'
 
 
 @Injectable()
 export class AuthenticationService {
 
-  token: String;
-  businessOwnerData: any = {};
-
-  jwtHelper: JwtHelper = new JwtHelper();
-
-  constructor(private storage: Storage, private authHttp: AuthHttp) {
-
+  public token: string;
+  
+  constructor(private http: Http) {
+      // set token if saved in local storage
+      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.token = currentUser && currentUser.token;
   }
-
-  /**
-   * Public function to retrieve the businessOwner data.
-   * If not logged in, throws error.
-   */
-  getBusinessOwnerData(){
-
-    if (this.token && this.businessOwnerData){ //Data already loaded
-      return Promise.resolve(this.businessOwnerData);
-    }
-
-    return this.loadBusinessOwnerData();
-
-  }
-
-  updateBusinessOwnerData(businessOwnerData: any){
-    this.businessOwnerData = businessOwnerData;
-  }
-
-  //When set new token, also retrieve new data
-  setTokenAndFetchData(newToken: string){
-
-    //Saves in local storage
-    return this.storage.set('jwt',newToken)
-      .then((res) => {
-
-        //Sets value in memory
-        this.token = newToken;
-
-        //Retrieves new data
-        return this.loadBusinessOwnerData();
-      });
-  }
-
-  logout(){
-
-    //Clears in local storage
-    this.storage.set('jwt',undefined)
-      .then(res => {
-          this.token = undefined;
-          this.businessOwnerData = undefined;
-      });
-  }
-
-  isAuthenticated(){
-    return this.token != undefined && this.businessOwnerData != undefined;
-  }
-
-  //Returns token from localstorage, or undefined if it does not exist.
-  private loadToken(){
-    return this.storage.get('jwt')
-      .then((val) => {
-        console.log("Loaded token: " + val);
-        this.token = val;
-        return this.token;
-      });
-  }
-
-  private loadBusinessOwnerData(){
-
-    return this.loadToken()
-      .then(token => {
-        
-        if(!token){
-          throw "Business owner is not authenticated";
+  
+  login(email: string, password: string): Observable<boolean> {
+    return this.http.post('http://localhost:3000/businesses/login', { email: email, password: password })
+      .map((response: Response) => {
+        // login successful if there's a jwt token in the response
+        let token = JSON.parse((response as any)._body).message;
+        if (token) {
+          // set token property
+          this.token = token;
+  
+          // store email and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('currentUser', JSON.stringify({ email: email, token: token }));
+  
+          // return true to indicate successful login
+          return true;
+        } else {
+          // return false to indicate failed login
+          return false;
         }
-
-        let email = this.jwtHelper.decodeToken(token as string).email;
-        return this.authHttp.get('http://localhost:3000/businesses/' + email)
-          .toPromise()
-          .then(res => {
-
-            var response = JSON.parse((res as any)._body);
-            var newData = response.message;
-
-            this.businessOwnerData = {};
-            this.businessOwnerData.email = newData.email;
-            return this.businessOwnerData;
-          })
-          .catch(err => {
-            let error = JSON.parse(err._body);
-            throw error.message;
-          });
-
-        }
-
-      )
-      .catch(err => {
-        throw err;
-      })
+      });
+  }
+  
+  logout(): void {
+    // clear token remove user from local storage to log user out
+    this.token = null;
+    localStorage.removeItem('currentUser');
   }
 }

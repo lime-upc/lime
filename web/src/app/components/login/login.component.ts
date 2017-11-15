@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   errors: any;
 
   constructor(private http : Http,
-              //private authHttp: AuthHttp,
               private authenticationService: AuthenticationService,
               private router: Router) { 
         
@@ -35,6 +34,17 @@ export class LoginComponent implements OnInit {
           email: "",
           password: ""
         };
+  }
+
+  signIn() {
+    this.authenticationService.login(this.formData.email, this.formData.password)
+        .subscribe(result => {
+            if (result === true) {
+                this.router.navigate(['/']);
+            } else {
+                alert('Email or password incorrect')
+            }
+        });
   }
 
   /*signIn(){
