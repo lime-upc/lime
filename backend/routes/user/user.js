@@ -25,6 +25,8 @@ module.exports = function (app) {
     router.get("/",passport.authenticate('jwt', { session: false }));
     router.get("/", function (req, res) {
 
+
+
         if (req.user.email !== 'admin@lime.com'){
             res.status(403).send({error: true, message: "You are not authorized to perform this action"});
             return;
@@ -311,7 +313,7 @@ module.exports = function (app) {
                 }
 
                 //No error. Generate JWT with email
-                var token = jwt.sign({ email: req.body.email }, config.jwtsecret);
+                var token = jwt.sign({ email: req.body.email, business: false }, config.jwtsecret);
 
                 res.send({
                     "error": false,

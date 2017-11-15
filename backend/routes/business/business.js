@@ -21,8 +21,8 @@ module.exports = function (app) {
      * Authentication: Yes
      * Permissions: The own BO, Admin
      */
-    router.get("/businessData",passport.authenticate('jwt', { session: false }));
-    router.get("/businessData", function (req, res) {
+    router.get("/:email",passport.authenticate('jwt', { session: false }));
+    router.get("/:email", function (req, res) {
 
         if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
             res.status(403).send({error: true, message: "You are not authorized to perform this action"});
@@ -48,13 +48,13 @@ module.exports = function (app) {
     });
 
     /**
-     * POST /register = Creates new business owner
+     * POST / = Creates new business owner
      *
      * Authentication: No
      * Permissions: Everybody
      */
 
-    router.post("/register", function(req,res){
+    router.post("/", function(req,res){
 
         //Check that all the fields in request are completed
         if (!req.body.email || !req.body.password) {
@@ -135,7 +135,7 @@ module.exports = function (app) {
                         }
         
                         //No error. Generate JWT with email
-                        var token = jwt.sign({ email: req.body.email }, config.jwtsecret);
+                        var token = jwt.sign({ email: req.body.email, business: true }, config.jwtsecret);
         
                         res.send({
                             "error": false,
