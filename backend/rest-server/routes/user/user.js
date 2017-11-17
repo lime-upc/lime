@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var crypto = require('crypto');
-var config = require('../../config');
+var config = require('../../../config');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 

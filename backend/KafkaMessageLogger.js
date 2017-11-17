@@ -1,9 +1,9 @@
 var avro = require('avsc');
 var kafka = require('kafka-node');
 var HighLevelConsumer = kafka.HighLevelConsumer;
-var KeyedMessage = kafka.KeyedMessage;
 var Client = kafka.Client;
-var KafkaClient = kafka.KafkaClient;
+var config = require('./config');
+
 var avroSchema = {
 	name: 'LocationType',
 	type: 'record',
@@ -29,7 +29,7 @@ var avroSchema = {
 
 //1st: Create a client
 var type = avro.parse(avroSchema);
-var client = new Client('localhost:2181','my-client-id',{
+var client = new Client(config.kafka_host,'my-client-id',{
 	sessionTimeout: 300,
 	spinDelay: 100,
 	retries: 2

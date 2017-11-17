@@ -3,7 +3,7 @@
  * users and sends it to Kafka.
  */
 var express = require('express');
-var config = require('../../config');
+var config = require('../../../config');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 var avro = require('avsc'),
@@ -26,7 +26,7 @@ module.exports = function (app) {
     if(config.kafka_enabled){
 
         //Connect to Kafka
-        var client = new Client(config.kafka_host,'my-client-id',{
+        var client = new Client(config.kafka_host,'node-server',{
             sessionTimeout: 300,
             spinDelay: 100,
             retries: 2

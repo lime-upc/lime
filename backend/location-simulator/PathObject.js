@@ -1,17 +1,21 @@
+/**
+ * Class that holds a path parsed from GeoJson format.
+ * It has interesting methods to know the lat and long that the user would be after moving X meters.
+ *
+ * Author: Ismael Rodriguez, 17/11/17
+ */
 var fs = require('fs');
 
 module.exports = function(geojsonFilename){
 
 	var contents = fs.readFileSync(geojsonFilename, 'utf8');
 	var geojsonObject = JSON.parse(contents);
-	var coordinates  = geojsonObject.features[0].geometry.coordinates[0];
-
-	this.coordinates = coordinates;
-	this.segments = [];
+    this.coordinates  = geojsonObject.features[0].geometry.coordinates[0];
+    this.segments = [];
 	this.totalDistanceInM = 0;
 
 	//Fill the segments
-	for(let i = 0; i < this.coordinates.length -1; i++){
+	for(var i = 0; i < this.coordinates.length -1; i++){
 		var startPoint = new Point(this.coordinates[i][0],this.coordinates[i][1]);
 		var endPoint = new Point(this.coordinates[i+1][0],this.coordinates[i+1][1]); //No problem, index controlled in loop
 		var segment = new Segment(startPoint, endPoint);
@@ -20,15 +24,16 @@ module.exports = function(geojsonFilename){
 	}
 
 
+	console.log("[INFO] Path " + geojsonFilename + " loaded. Total distance: " + this.totalDistanceInM);
 
-	for(let i = 0; i < 20; i++){
+	/*for(let i = 0; i < 20; i++){
 		console.log("[" + i + "] " + this.segments[i].toString());
-	}
+	}*/
 
 
 	this.getPointFromDistanceInM = function(distanceInM){
 		var previousDistance = 0;
-		for(let i =0; i < this.segments.length; i++){
+		for(var i =0; i < this.segments.length; i++){
 			var segment = this.segments[i];
 			var segmentDistanceInM = segment.getDistanceInM();
 			if( (distanceInM >= previousDistance) && (distanceInM <= previousDistance + segmentDistanceInM)){
@@ -36,9 +41,9 @@ module.exports = function(geojsonFilename){
 				//Return the point, would be the start point plus the remainign distane
 				//Yes, I know that I am supossing that earth is flat here, but not in the segment calculation,
 				//so at least the result is approximate.
-				let distanceInSegment = distanceInM - previousDistance;
-				let unitaryLat = (segment.end.lat - segment.start.lat)/segmentDistanceInM;
-				let unitaryLong = (segment.end.long - segment.start.long)/segmentDistanceInM;
+				var distanceInSegment = distanceInM - previousDistance;
+				var unitaryLat = (segment.end.lat - segment.start.lat)/segmentDistanceInM;
+				var unitaryLong = (segment.end.long - segment.start.long)/segmentDistanceInM;
 
 				return new Point(segment.start.lat + unitaryLat*distanceInSegment, segment.start.long + unitaryLong*distanceInSegment);
 
@@ -53,7 +58,7 @@ module.exports = function(geojsonFilename){
 	
 
 
-}
+};
 
 
 function Segment(startPoint,endPoint){
@@ -64,11 +69,11 @@ function Segment(startPoint,endPoint){
 
 
 		return getDistanceFromLatLonInM(this.start.lat,this.start.long,this.end.lat,this.end.long);
-	}
+	};
 
 	this.toString = function(){
 		return "START: (" + startPoint.lat + "," + startPoint.long + "), END: ("  + endPoint.lat + "," + endPoint.long + "), DISTANCE: " + this.getDistanceInM() + " m.";
-	}
+	};
 }
 
 function Point(lat,long){

@@ -16,10 +16,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 //Enable CORS requests on all routes
 app.use(cors());
 //Load models from the ./models folder
-app.models = require('./models');
+app.models = require('./rest-server/models');
 
 //Load routes
-require('./routes')(app);
+require('./rest-server/routes')(app);
 
 //Set-up passport with JWT strategy
 var JwtStrategy = require('passport-jwt').Strategy,
