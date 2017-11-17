@@ -80,7 +80,10 @@ module.exports = function (app) {
 
 
         //ERROR: Lat and Long are not supplied
-        if (!req.body.lat || !req.body.long){
+        var lat = Number(req.body.lat);
+        var long = Number(req.body.long);
+
+        if (!req.body.lat || !req.body.long || isNaN(lat) || isNaN(long)){
             res.status(400).send({
                 "error": true,
                 "message": "All the parameters are required"
@@ -93,8 +96,8 @@ module.exports = function (app) {
         var originalMessage =  {
             email: req.user.email,
             timestamp: Date.now(),
-            lat: Number(req.body.lat),
-            long: Number(req.body.long)
+            lat: lat,
+            long: long
         };
 
         //Encode message in Avro
@@ -106,7 +109,7 @@ module.exports = function (app) {
             {
                 topic: 'lime-location',
                 messages: avroMessage,
-                attributes: 1 /* Use GZip compression for payload */ //TODO: why?
+                attributes: 1 /* Use GZip compression for payload */
             }
         ];
 
