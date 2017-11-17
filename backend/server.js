@@ -59,12 +59,12 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
         });
     }
     
-
-
-
-
-
 }));
+
+
+
+
+
 
 
 //If Heroku, use local MongoDB URI

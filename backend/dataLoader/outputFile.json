@@ -1,1088 +1,4 @@
-{"download_timestamp" : "Wed, 15 Nov 2017 14:35:34 GMT", "results" : [{
-    "geometry": {
-        "location": {
-            "lat": 41.40080999999999,
-            "lng": 2.15913
-        }
-    },
-    "name": "La Vietnamita Gràcia",
-    "place_id": "ChIJcRNmG5aipBIRvjtddo3D5pk",
-    "rating": 3.8,
-    "types": [
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer del Torrent de l'Olla, 78, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3924943,
-            "lng": 2.1370499
-        }
-    },
-    "name": "Asador del Mar",
-    "place_id": "ChIJRaf1a3CYpBIRAt3XZ7cEi7U",
-    "rating": 3.7,
-    "types": [
-        "cafe",
-        "meal_takeaway",
-        "bar",
-        "restaurant",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Bori i Fontestà, 45, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.4034614,
-            "lng": 2.1469376
-        }
-    },
-    "name": "Crepería Krampus",
-    "place_id": "ChIJa0hfV6CipBIR3LtY5k3V_uQ",
-    "rating": 4.2,
-    "types": [
-        "bakery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Saragossa, 89, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.38597499999999,
-            "lng": 2.196733
-        }
-    },
-    "name": "Crêperie Bretonne Annaíck",
-    "place_id": "ChIJb_9bdwWjpBIRohL4dO0UyLk",
-    "rating": 4.3,
-    "types": [
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Ramon Trias Fargas, 2, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.402297,
-            "lng": 2.1612892
-        }
-    },
-    "name": "Himali",
-    "place_id": "ChIJWfq8OL6ipBIRO4siD6xF-BM",
-    "rating": 3.9,
-    "types": [
-        "meal_delivery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Milà i Fontanals, 60, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.4005055,
-            "lng": 2.1545392
-        }
-    },
-    "name": "Taberna del Cura",
-    "place_id": "ChIJgXhRA5iipBIRlYIbAhFwH-c",
-    "rating": 3.9,
-    "types": [
-        "meal_takeaway",
-        "bar",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer Gran de Gràcia, 83, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.39229599999999,
-            "lng": 2.152074
-        }
-    },
-    "name": "Gran París",
-    "place_id": "ChIJlVrKI5uipBIRYrhX9PEsy6I",
-    "rating": 3.6,
-    "types": [
-        "restaurant",
-        "meal_delivery",
-        "meal_takeaway",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Muntaner, 182, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.403205,
-            "lng": 2.202471000000001
-        }
-    },
-    "name": "Nice Spice",
-    "place_id": "ChIJOSEZDD-jpBIRPsP7H9phNKA",
-    "rating": 4.1,
-    "types": [
-        "restaurant",
-        "meal_delivery",
-        "meal_takeaway",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Pujades, 207 Bis, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.411452,
-            "lng": 2.180301
-        }
-    },
-    "name": "Kailash Restaurante Tibetano",
-    "place_id": "ChIJhxljRNeipBIRkf_-Svr0MG0",
-    "rating": 4.3,
-    "types": [
-        "meal_delivery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Xifré, 100, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.397894,
-            "lng": 2.150118
-        }
-    },
-    "name": "Boston Pizza Alfons XII",
-    "place_id": "ChIJR3MSM5mipBIRP9PBi4D8ZxI",
-    "rating": 3.7,
-    "types": [
-        "meal_delivery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer d'Alfons XII, 15, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.413726,
-            "lng": 2.1813761
-        }
-    },
-    "name": "Domino's Pizza",
-    "place_id": "ChIJz4Yk-taipBIRvLFx0lmRf2I",
-    "rating": 3.6,
-    "types": [
-        "meal_delivery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer del Freser, 45-47, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.37887759999999,
-            "lng": 2.128652199999999
-        }
-    },
-    "name": "Domino's Pizza",
-    "place_id": "ChIJ5VNUsouYpBIRrFijGBniVHw",
-    "rating": 3.7,
-    "types": [
-        "meal_delivery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Avinguda de Madrid, 118, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3961896,
-            "lng": 2.1803364
-        }
-    },
-    "name": "Domino's Pizza",
-    "place_id": "ChIJ0TvLXOGipBIRrfrw1Z_wc98",
-    "rating": 3.5,
-    "types": [
-        "meal_delivery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Sicília, 113-115, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.385501,
-            "lng": 2.178869
-        }
-    },
-    "name": "Little Bacoa Born",
-    "place_id": "ChIJod-PV_mipBIR3VxRJkLzMKA",
-    "rating": 4.4,
-    "types": [
-        "meal_takeaway",
-        "bar",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Colomines, 2, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.38350870000001,
-            "lng": 2.1836997
-        }
-    },
-    "name": "Bacoa Kiosko Born",
-    "place_id": "ChIJZUuhL_6ipBIRalSxUV4nB8k",
-    "rating": 4.4,
-    "types": [
-        "meal_takeaway",
-        "bar",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Avinguda del Marquès de l'Argentera, 1, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.38582299999999,
-            "lng": 2.136903
-        }
-    },
-    "name": "Boston Pizza Numancia",
-    "place_id": "ChIJUaAFkHyYpBIRODk7E7MVsKo",
-    "rating": 4.1,
-    "types": [
-        "meal_delivery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Numància, 94, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3765596,
-            "lng": 2.1538942
-        }
-    },
-    "name": "Domino's Pizza",
-    "place_id": "ChIJLVZDo3yipBIRCKg1rwoGWCw",
-    "rating": 3.3,
-    "types": [
-        "meal_delivery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Sepúlveda, 38, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.5405965,
-            "lng": 2.4553876
-        }
-    },
-    "name": "Bar La Morera",
-    "place_id": "ChIJl5iHAyy1pBIROBc8mjhT0Hk",
-    "rating": 4.2,
-    "types": [
-        "meal_takeaway",
-        "bar",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Avinguda del Maresme, 507, Mataró"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.4015818,
-            "lng": 2.1354164
-        }
-    },
-    "name": "Boston Pizza Mandri",
-    "place_id": "ChIJN8OUVA2YpBIR2LcUDllE4Vs",
-    "rating": 4.5,
-    "types": [
-        "meal_delivery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Mandri, 3, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.43718129999999,
-            "lng": 2.1894122
-        }
-    },
-    "name": "Pizza Sapri",
-    "place_id": "ChIJvUWVJty8pBIRWWVX00Q0CbY",
-    "rating": 4.3,
-    "types": [
-        "meal_delivery",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer Gran de Sant Andreu, 317, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.429905,
-            "lng": 2.221319
-        }
-    },
-    "name": "Hotel Ciutat de Sant Adrià",
-    "place_id": "ChIJAYmlLKa8pBIRQqNIWEIG_8c",
-    "rating": 3.6,
-    "types": [
-        "cafe",
-        "lodging",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Santa Caterina, 38, Sant Adrià de Besòs"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.408794,
-            "lng": 2.147937
-        }
-    },
-    "name": "Hotel Ronda Lesseps * * * *",
-    "place_id": "ChIJw5fapYqipBIROLWMyAvO9EY",
-    "rating": 3.4,
-    "types": [
-        "parking",
-        "cafe",
-        "lodging",
-        "restaurant",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Ballester, 77, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.231613,
-            "lng": 1.796195
-        }
-    },
-    "name": "Hotel Ibersol Antemare Spa ****",
-    "place_id": "ChIJa1fiIVSAoxIRJxXTmtvBrQo",
-    "rating": 3.9,
-    "types": [
-        "cafe",
-        "lodging",
-        "restaurant",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Avinguda Mare de Déu de Montserrat, 48, Sitges"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.5515291,
-            "lng": 2.0249877
-        }
-    },
-    "name": "Hotel Terrassa Park ***",
-    "place_id": "ChIJb56H4vySpBIRgPD2nowta0U",
-    "rating": 3.7,
-    "types": [
-        "cafe",
-        "lodging",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Avinguda de Santa Eulàlia, 236, Terrassa"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3930169,
-            "lng": 2.1646149
-        }
-    },
-    "name": "Sixtytwo Cocktail Lounge",
-    "place_id": "ChIJJUJbM-2ipBIRXj4x8hQXQwA",
-    "rating": 4.5,
-    "types": [
-        "cafe",
-        "bar",
-        "night_club",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Passeig de Gràcia, 62, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.21462100000001,
-            "lng": 1.724773
-        }
-    },
-    "name": "Hotel Ceferino",
-    "place_id": "ChIJI-8x2fGGoxIRncQvLD1ey4Q",
-    "rating": 4.2,
-    "types": [
-        "cafe",
-        "bar",
-        "lodging",
-        "restaurant",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Passeig Marítim de Ribes Roges, 2, Vilanova i la Geltrú"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.38988200000001,
-            "lng": 2.170694
-        }
-    },
-    "name": "Laie",
-    "place_id": "ChIJP07d6fGipBIR4ffhumY-aLE",
-    "rating": 4.3,
-    "types": [
-        "book_store",
-        "cafe",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Pau Claris, 85, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3965001,
-            "lng": 2.1503821
-        }
-    },
-    "name": "Bopan Forners Artesans",
-    "place_id": "ChIJvzf5jQ2YpBIR8LYABMihcoE",
-    "rating": 3.5,
-    "types": [
-        "bakery",
-        "cafe",
-        "restaurant",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Travessera de Gràcia, 64, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.37690739999999,
-            "lng": 2.1627886
-        }
-    },
-    "name": "Federal Café",
-    "place_id": "ChIJy3JYwWCipBIRlv2wJSQeBsY",
-    "rating": 3.9,
-    "types": [
-        "cafe",
-        "restaurant",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer del Parlament, 39, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3874603,
-            "lng": 2.1626188
-        }
-    },
-    "name": "Cosmo",
-    "place_id": "ChIJt4Ea8oyipBIRW_BF8kcxoRg",
-    "rating": 4.2,
-    "types": [
-        "cafe",
-        "art_gallery",
-        "bar",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer d'Enric Granados, 3, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.38580959999999,
-            "lng": 2.1735743
-        }
-    },
-    "name": "Els 4Gats",
-    "place_id": "ChIJ4ecss_CipBIRzAR_ag45hM8",
-    "price_level": 2,
-    "rating": 3.8,
-    "types": [
-        "restaurant",
-        "cafe",
-        "bar",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Montsió, 3, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.38471810000001,
-            "lng": 2.1829467
-        }
-    },
-    "name": "Bar El Born",
-    "place_id": "ChIJ53xfbP6ipBIR_eLHk4sZ6kg",
-    "rating": 4.1,
-    "types": [
-        "bar",
-        "cafe",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Passeig del Born, 26, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3998739,
-            "lng": 2.1406679
-        }
-    },
-    "name": "Peek a Boo",
-    "place_id": "ChIJrS7vmXSYpBIRAkL-FN9ugTk",
-    "rating": 4.4,
-    "types": [
-        "cafe",
-        "school",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Santaló, 128-130, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3825708,
-            "lng": 2.1732696
-        }
-    },
-    "name": "Granja Dulcinea",
-    "place_id": "ChIJ7a4EQfiipBIRVmyB6aOM_ls",
-    "rating": 4.1,
-    "types": [
-        "cafe",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Petritxol, 2, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3796972,
-            "lng": 2.1754388
-        }
-    },
-    "name": "Ocaña",
-    "place_id": "ChIJ7Uy86VeipBIRs8LOEbx5dEY",
-    "rating": 3.9,
-    "types": [
-        "restaurant",
-        "cafe",
-        "bar",
-        "night_club",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Plaça Reial, 13-15, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.4044433,
-            "lng": 2.1577618
-        }
-    },
-    "name": "Cafè Salambó",
-    "place_id": "ChIJK4sLW7yipBIR8B2-xnRP_qE",
-    "rating": 4,
-    "types": [
-        "restaurant",
-        "cafe",
-        "bar",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Torrijos, 51, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3981023,
-            "lng": 2.1289311
-        }
-    },
-    "name": "Restaurante Dos Torres",
-    "place_id": "ChIJiWudx2uYpBIRdXnxxPAl_dE",
-    "rating": 3.9,
-    "types": [
-        "cafe",
-        "bar",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Via Augusta, 300, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.214062,
-            "lng": 1.723464
-        }
-    },
-    "name": "Marea ApartHotel",
-    "place_id": "ChIJC4v3v_GGoxIRI-72m0e0zpI",
-    "rating": 4.4,
-    "types": [
-        "cafe",
-        "lodging",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Passeig de Ribes Roges, 9, Vilanova i la Geltrú"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3854325,
-            "lng": 2.1819274
-        }
-    },
-    "name": "La Báscula",
-    "place_id": "ChIJcYz_fv6ipBIRskREKUc-peE",
-    "price_level": 2,
-    "rating": 4.3,
-    "types": [
-        "cafe",
-        "restaurant",
-        "food",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer dels Flassaders, 30, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.39591559999999,
-            "lng": 2.1580594
-        }
-    },
-    "name": "Farga",
-    "place_id": "ChIJOzzVNJGipBIRwWFPfLdjsSA",
-    "rating": 3.5,
-    "types": [
-        "restaurant",
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Avinguda Diagonal, 391, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.38383189999999,
-            "lng": 2.1782333
-        }
-    },
-    "name": "Pastisseria La Colmena",
-    "place_id": "ChIJn4lKN_mipBIR5GCoBNWdYp4",
-    "rating": 4.4,
-    "types": [
-        "bakery",
-        "liquor_store",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Plaça de l'Àngel, 12, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.40847549999999,
-            "lng": 2.166226699999999
-        }
-    },
-    "name": "I love cookies",
-    "place_id": "ChIJ69JZp8eipBIRvKKcVEBU7tQ",
-    "rating": 5,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Romans, 39, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3942761,
-            "lng": 2.1536074
-        }
-    },
-    "name": "Cup & Cake",
-    "place_id": "ChIJxSoBaJqipBIR6CfssopDoCY",
-    "rating": 4.1,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer d'Enric Granados, 145, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.39230440000001,
-            "lng": 2.1544112
-        }
-    },
-    "name": "Turris Aribau",
-    "place_id": "ChIJkfSNopqipBIRr55x25-Mpig",
-    "rating": 4.5,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer d'Aribau, 158, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3811356,
-            "lng": 2.1329832
-        }
-    },
-    "name": "Masedy 2001 S.L.",
-    "place_id": "ChIJb98SLIiYpBIRe--Fc9f1NtU",
-    "rating": 2.8,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Avinguda de Madrid, 171, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.4127816,
-            "lng": 2.1783721
-        }
-    },
-    "name": "El Forn Del Barri",
-    "place_id": "ChIJrxKS29CipBIRKIcK7s7lZBU",
-    "rating": 4,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de la Indústria, 249, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.39411990000001,
-            "lng": 2.1582321
-        }
-    },
-    "name": "La Boulangerie",
-    "place_id": "ChIJt6osDJGipBIRJmyHj74zax8",
-    "rating": 4,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer del Rosselló, 235, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.6194131,
-            "lng": 2.280444399999999
-        }
-    },
-    "name": "Pastisseria Diaz",
-    "place_id": "ChIJK5Uh2UrGpBIRUPSIso1JgHw",
-    "rating": 4.7,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer Diagonal, 45, Canovelles"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.393977,
-            "lng": 2.144305999999999
-        }
-    },
-    "name": "Pastisseria Canal - Barcelona",
-    "place_id": "ChIJqbmMLXaYpBIRoeYfgwgS4lc",
-    "rating": 4.4,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Calvet, 15, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.383036,
-            "lng": 2.174422
-        }
-    },
-    "name": "Caelum",
-    "place_id": "ChIJAStogPeipBIRHnVo3egrpOs",
-    "rating": 4.3,
-    "types": [
-        "bakery",
-        "cafe",
-        "bar",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de la Palla, 8, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3945182,
-            "lng": 2.1584461
-        }
-    },
-    "name": "Bopan Forners Artesans",
-    "place_id": "ChIJK_6KFJGipBIRDheRgGgXQvM",
-    "rating": 3.2,
-    "types": [
-        "bakery",
-        "cafe",
-        "meal_takeaway",
-        "restaurant",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Rambla de Catalunya, 119, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.4892086,
-            "lng": 2.0366949
-        }
-    },
-    "name": "María Teresa González Vargas",
-    "place_id": "ChIJI7As4nGRpBIRpAACuWgRX9Y",
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Víctor Balaguer, 4, Rubí"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.3850488,
-            "lng": 2.1827116
-        }
-    },
-    "name": "Hofmann Pastisseria",
-    "place_id": "ChIJI0Kjcf6ipBIRUiHGMcGog88",
-    "rating": 4.6,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer dels Flassaders, 44, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.5259085,
-            "lng": 2.125245
-        }
-    },
-    "name": "Panadería Anabel",
-    "place_id": "ChIJtaWaHb6VpBIRlA3PkFUqF-g",
-    "rating": 3,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Via de Sant Oleguer, 55, Barberà del Vallès"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.2375909,
-            "lng": 1.8079345
-        }
-    },
-    "name": "CHOCO | RAOS: pastelería y bombonería gourmet",
-    "place_id": "ChIJpwmvDUaAoxIR4e_f_pR4KVU",
-    "rating": 5,
-    "types": [
-        "bakery",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer de Sant Bonaventura, 3, Sitges"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.381153,
-            "lng": 2.1796742
-        }
-    },
-    "name": "Mirilla",
-    "place_id": "ChIJwcGMUf-ipBIRfH7hHDZmh_U",
-    "rating": 4.7,
-    "types": [
-        "restaurant",
-        "bakery",
-        "cafe",
-        "bar",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer del Regomir, 16, Barcelona"
-},{
-    "geometry": {
-        "location": {
-            "lat": 41.393844,
-            "lng": 2.134747
-        }
-    },
-    "name": "Central Cafè Doctor Fleming",
-    "place_id": "ChIJhx4i1W-YpBIR6AiBHx6Xm2A",
-    "rating": 3.9,
-    "types": [
-        "cafe",
-        "bakery",
-        "restaurant",
-        "food",
-        "store",
-        "point_of_interest",
-        "establishment"
-    ],
-    "vicinity": "Carrer del Doctor Fleming, 19, Barcelona"
-},{
+{"download_timestamp" : "Thu, 16 Nov 2017 09:59:35 GMT", "results" : [{
     "geometry": {
         "location": {
             "lat": 41.3836052,
@@ -1454,6 +370,749 @@
 },{
     "geometry": {
         "location": {
+            "lat": 41.429905,
+            "lng": 2.221319
+        }
+    },
+    "name": "Hotel Ciutat de Sant Adrià",
+    "place_id": "ChIJAYmlLKa8pBIRQqNIWEIG_8c",
+    "rating": 3.6,
+    "types": [
+        "cafe",
+        "lodging",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Santa Caterina, 38, Sant Adrià de Besòs"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.408794,
+            "lng": 2.147937
+        }
+    },
+    "name": "Hotel Ronda Lesseps * * * *",
+    "place_id": "ChIJw5fapYqipBIROLWMyAvO9EY",
+    "rating": 3.4,
+    "types": [
+        "parking",
+        "cafe",
+        "lodging",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Ballester, 77, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3924943,
+            "lng": 2.1370499
+        }
+    },
+    "name": "Asador del Mar",
+    "place_id": "ChIJRaf1a3CYpBIRAt3XZ7cEi7U",
+    "rating": 3.7,
+    "types": [
+        "cafe",
+        "meal_takeaway",
+        "bar",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Bori i Fontestà, 45, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.231613,
+            "lng": 1.796195
+        }
+    },
+    "name": "Hotel Ibersol Antemare Spa ****",
+    "place_id": "ChIJa1fiIVSAoxIRJxXTmtvBrQo",
+    "rating": 3.9,
+    "types": [
+        "cafe",
+        "lodging",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Avinguda Mare de Déu de Montserrat, 48, Sitges"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.5515291,
+            "lng": 2.0249877
+        }
+    },
+    "name": "Hotel Terrassa Park ***",
+    "place_id": "ChIJb56H4vySpBIRgPD2nowta0U",
+    "rating": 3.7,
+    "types": [
+        "cafe",
+        "lodging",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Avinguda de Santa Eulàlia, 236, Terrassa"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3930169,
+            "lng": 2.1646149
+        }
+    },
+    "name": "Sixtytwo Cocktail Lounge",
+    "place_id": "ChIJJUJbM-2ipBIRXj4x8hQXQwA",
+    "rating": 4.5,
+    "types": [
+        "cafe",
+        "bar",
+        "night_club",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Passeig de Gràcia, 62, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.21462100000001,
+            "lng": 1.724773
+        }
+    },
+    "name": "Hotel Ceferino",
+    "place_id": "ChIJI-8x2fGGoxIRncQvLD1ey4Q",
+    "rating": 4.2,
+    "types": [
+        "cafe",
+        "bar",
+        "lodging",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Passeig Marítim de Ribes Roges, 2, Vilanova i la Geltrú"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.38988200000001,
+            "lng": 2.170694
+        }
+    },
+    "name": "Laie",
+    "place_id": "ChIJP07d6fGipBIR4ffhumY-aLE",
+    "rating": 4.3,
+    "types": [
+        "book_store",
+        "cafe",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Pau Claris, 85, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3965001,
+            "lng": 2.1503821
+        }
+    },
+    "name": "Bopan Forners Artesans",
+    "place_id": "ChIJvzf5jQ2YpBIR8LYABMihcoE",
+    "rating": 3.5,
+    "types": [
+        "bakery",
+        "cafe",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Travessera de Gràcia, 64, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.37690739999999,
+            "lng": 2.1627886
+        }
+    },
+    "name": "Federal Café",
+    "place_id": "ChIJy3JYwWCipBIRlv2wJSQeBsY",
+    "rating": 3.9,
+    "types": [
+        "cafe",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer del Parlament, 39, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3874603,
+            "lng": 2.1626188
+        }
+    },
+    "name": "Cosmo",
+    "place_id": "ChIJt4Ea8oyipBIRW_BF8kcxoRg",
+    "rating": 4.2,
+    "types": [
+        "cafe",
+        "art_gallery",
+        "bar",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer d'Enric Granados, 3, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.38580959999999,
+            "lng": 2.1735743
+        }
+    },
+    "name": "Els 4Gats",
+    "place_id": "ChIJ4ecss_CipBIRzAR_ag45hM8",
+    "price_level": 2,
+    "rating": 3.8,
+    "types": [
+        "restaurant",
+        "cafe",
+        "bar",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Montsió, 3, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.38471810000001,
+            "lng": 2.1829467
+        }
+    },
+    "name": "Bar El Born",
+    "place_id": "ChIJ53xfbP6ipBIR_eLHk4sZ6kg",
+    "rating": 4.1,
+    "types": [
+        "bar",
+        "cafe",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Passeig del Born, 26, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3998739,
+            "lng": 2.1406679
+        }
+    },
+    "name": "Peek a Boo",
+    "place_id": "ChIJrS7vmXSYpBIRAkL-FN9ugTk",
+    "rating": 4.4,
+    "types": [
+        "cafe",
+        "school",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Santaló, 128-130, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3825708,
+            "lng": 2.1732696
+        }
+    },
+    "name": "Granja Dulcinea",
+    "place_id": "ChIJ7a4EQfiipBIRVmyB6aOM_ls",
+    "rating": 4.1,
+    "types": [
+        "cafe",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Petritxol, 2, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3796972,
+            "lng": 2.1754388
+        }
+    },
+    "name": "Ocaña",
+    "place_id": "ChIJ7Uy86VeipBIRs8LOEbx5dEY",
+    "rating": 3.9,
+    "types": [
+        "restaurant",
+        "cafe",
+        "bar",
+        "night_club",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Plaça Reial, 13-15, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.4044433,
+            "lng": 2.1577618
+        }
+    },
+    "name": "Cafè Salambó",
+    "place_id": "ChIJK4sLW7yipBIR8B2-xnRP_qE",
+    "rating": 4,
+    "types": [
+        "restaurant",
+        "cafe",
+        "bar",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Torrijos, 51, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3981023,
+            "lng": 2.1289311
+        }
+    },
+    "name": "Restaurante Dos Torres",
+    "place_id": "ChIJiWudx2uYpBIRdXnxxPAl_dE",
+    "rating": 3.9,
+    "types": [
+        "cafe",
+        "bar",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Via Augusta, 300, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.214062,
+            "lng": 1.723464
+        }
+    },
+    "name": "Marea ApartHotel",
+    "place_id": "ChIJC4v3v_GGoxIRI-72m0e0zpI",
+    "rating": 4.4,
+    "types": [
+        "cafe",
+        "lodging",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Passeig de Ribes Roges, 9, Vilanova i la Geltrú"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3854325,
+            "lng": 2.1819274
+        }
+    },
+    "name": "La Báscula",
+    "place_id": "ChIJcYz_fv6ipBIRskREKUc-peE",
+    "price_level": 2,
+    "rating": 4.3,
+    "types": [
+        "cafe",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer dels Flassaders, 30, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.4034614,
+            "lng": 2.1469376
+        }
+    },
+    "name": "Crepería Krampus",
+    "place_id": "ChIJa0hfV6CipBIR3LtY5k3V_uQ",
+    "rating": 4.2,
+    "types": [
+        "bakery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Saragossa, 89, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.39591559999999,
+            "lng": 2.1580594
+        }
+    },
+    "name": "Farga",
+    "place_id": "ChIJOzzVNJGipBIRwWFPfLdjsSA",
+    "rating": 3.5,
+    "types": [
+        "restaurant",
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Avinguda Diagonal, 391, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.38383189999999,
+            "lng": 2.1782333
+        }
+    },
+    "name": "Pastisseria La Colmena",
+    "place_id": "ChIJn4lKN_mipBIR5GCoBNWdYp4",
+    "rating": 4.4,
+    "types": [
+        "bakery",
+        "liquor_store",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Plaça de l'Àngel, 12, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.40847549999999,
+            "lng": 2.166226699999999
+        }
+    },
+    "name": "I love cookies",
+    "place_id": "ChIJ69JZp8eipBIRvKKcVEBU7tQ",
+    "rating": 5,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Romans, 39, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3942761,
+            "lng": 2.1536074
+        }
+    },
+    "name": "Cup & Cake",
+    "place_id": "ChIJxSoBaJqipBIR6CfssopDoCY",
+    "rating": 4.1,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer d'Enric Granados, 145, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.39230440000001,
+            "lng": 2.1544112
+        }
+    },
+    "name": "Turris Aribau",
+    "place_id": "ChIJkfSNopqipBIRr55x25-Mpig",
+    "rating": 4.5,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer d'Aribau, 158, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3811356,
+            "lng": 2.1329832
+        }
+    },
+    "name": "Masedy 2001 S.L.",
+    "place_id": "ChIJb98SLIiYpBIRe--Fc9f1NtU",
+    "rating": 2.8,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Avinguda de Madrid, 171, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.4127816,
+            "lng": 2.1783721
+        }
+    },
+    "name": "El Forn Del Barri",
+    "place_id": "ChIJrxKS29CipBIRKIcK7s7lZBU",
+    "rating": 4,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de la Indústria, 249, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.39411990000001,
+            "lng": 2.1582321
+        }
+    },
+    "name": "La Boulangerie",
+    "place_id": "ChIJt6osDJGipBIRJmyHj74zax8",
+    "rating": 4,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer del Rosselló, 235, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.6194131,
+            "lng": 2.280444399999999
+        }
+    },
+    "name": "Pastisseria Diaz",
+    "place_id": "ChIJK5Uh2UrGpBIRUPSIso1JgHw",
+    "rating": 4.7,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer Diagonal, 45, Canovelles"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.393977,
+            "lng": 2.144305999999999
+        }
+    },
+    "name": "Pastisseria Canal - Barcelona",
+    "place_id": "ChIJqbmMLXaYpBIRoeYfgwgS4lc",
+    "rating": 4.4,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Calvet, 15, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.383036,
+            "lng": 2.174422
+        }
+    },
+    "name": "Caelum",
+    "place_id": "ChIJAStogPeipBIRHnVo3egrpOs",
+    "rating": 4.3,
+    "types": [
+        "bakery",
+        "cafe",
+        "bar",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de la Palla, 8, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3945182,
+            "lng": 2.1584461
+        }
+    },
+    "name": "Bopan Forners Artesans",
+    "place_id": "ChIJK_6KFJGipBIRDheRgGgXQvM",
+    "rating": 3.2,
+    "types": [
+        "bakery",
+        "cafe",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Rambla de Catalunya, 119, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.4892086,
+            "lng": 2.0366949
+        }
+    },
+    "name": "María Teresa González Vargas",
+    "place_id": "ChIJI7As4nGRpBIRpAACuWgRX9Y",
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Víctor Balaguer, 4, Rubí"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3850488,
+            "lng": 2.1827116
+        }
+    },
+    "name": "Hofmann Pastisseria",
+    "place_id": "ChIJI0Kjcf6ipBIRUiHGMcGog88",
+    "rating": 4.6,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer dels Flassaders, 44, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.5259085,
+            "lng": 2.125245
+        }
+    },
+    "name": "Panadería Anabel",
+    "place_id": "ChIJtaWaHb6VpBIRlA3PkFUqF-g",
+    "rating": 3,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Via de Sant Oleguer, 55, Barberà del Vallès"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.2375909,
+            "lng": 1.8079345
+        }
+    },
+    "name": "CHOCO | RAOS: pastelería y bombonería gourmet",
+    "place_id": "ChIJpwmvDUaAoxIR4e_f_pR4KVU",
+    "rating": 5,
+    "types": [
+        "bakery",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Sant Bonaventura, 3, Sitges"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.381153,
+            "lng": 2.1796742
+        }
+    },
+    "name": "Mirilla",
+    "place_id": "ChIJwcGMUf-ipBIRfH7hHDZmh_U",
+    "rating": 4.7,
+    "types": [
+        "restaurant",
+        "bakery",
+        "cafe",
+        "bar",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer del Regomir, 16, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.393844,
+            "lng": 2.134747
+        }
+    },
+    "name": "Central Cafè Doctor Fleming",
+    "place_id": "ChIJhx4i1W-YpBIR6AiBHx6Xm2A",
+    "rating": 3.9,
+    "types": [
+        "cafe",
+        "bakery",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer del Doctor Fleming, 19, Barcelona"
+},{
+    "geometry": {
+        "location": {
             "lat": 41.3935179,
             "lng": 2.1639813
         }
@@ -1726,4 +1385,345 @@
         "establishment"
     ],
     "vicinity": "Carrer de Provença, 286-288, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.40080999999999,
+            "lng": 2.15913
+        }
+    },
+    "name": "La Vietnamita Gràcia",
+    "place_id": "ChIJcRNmG5aipBIRvjtddo3D5pk",
+    "rating": 3.8,
+    "types": [
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer del Torrent de l'Olla, 78, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.38597499999999,
+            "lng": 2.196733
+        }
+    },
+    "name": "Crêperie Bretonne Annaíck",
+    "place_id": "ChIJb_9bdwWjpBIRohL4dO0UyLk",
+    "rating": 4.3,
+    "types": [
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Ramon Trias Fargas, 2, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.402297,
+            "lng": 2.1612892
+        }
+    },
+    "name": "Himali",
+    "place_id": "ChIJWfq8OL6ipBIRO4siD6xF-BM",
+    "rating": 3.9,
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Milà i Fontanals, 60, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.4005055,
+            "lng": 2.1545392
+        }
+    },
+    "name": "Taberna del Cura",
+    "place_id": "ChIJgXhRA5iipBIRlYIbAhFwH-c",
+    "rating": 3.9,
+    "types": [
+        "meal_takeaway",
+        "bar",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer Gran de Gràcia, 83, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.39229599999999,
+            "lng": 2.152074
+        }
+    },
+    "name": "Gran París",
+    "place_id": "ChIJlVrKI5uipBIRYrhX9PEsy6I",
+    "rating": 3.6,
+    "types": [
+        "restaurant",
+        "meal_delivery",
+        "meal_takeaway",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Muntaner, 182, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.403205,
+            "lng": 2.202471000000001
+        }
+    },
+    "name": "Nice Spice",
+    "place_id": "ChIJOSEZDD-jpBIRPsP7H9phNKA",
+    "rating": 4.1,
+    "types": [
+        "restaurant",
+        "meal_delivery",
+        "meal_takeaway",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Pujades, 207 Bis, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.411452,
+            "lng": 2.180301
+        }
+    },
+    "name": "Kailash Restaurante Tibetano",
+    "place_id": "ChIJhxljRNeipBIRkf_-Svr0MG0",
+    "rating": 4.3,
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Xifré, 100, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.397894,
+            "lng": 2.150118
+        }
+    },
+    "name": "Boston Pizza Alfons XII",
+    "place_id": "ChIJR3MSM5mipBIRP9PBi4D8ZxI",
+    "rating": 3.7,
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer d'Alfons XII, 15, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.413726,
+            "lng": 2.1813761
+        }
+    },
+    "name": "Domino's Pizza",
+    "place_id": "ChIJz4Yk-taipBIRvLFx0lmRf2I",
+    "rating": 3.6,
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer del Freser, 45-47, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.37887759999999,
+            "lng": 2.128652199999999
+        }
+    },
+    "name": "Domino's Pizza",
+    "place_id": "ChIJ5VNUsouYpBIRrFijGBniVHw",
+    "rating": 3.7,
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Avinguda de Madrid, 118, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3961896,
+            "lng": 2.1803364
+        }
+    },
+    "name": "Domino's Pizza",
+    "place_id": "ChIJ0TvLXOGipBIRrfrw1Z_wc98",
+    "rating": 3.5,
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Sicília, 113-115, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.385501,
+            "lng": 2.178869
+        }
+    },
+    "name": "Little Bacoa Born",
+    "place_id": "ChIJod-PV_mipBIR3VxRJkLzMKA",
+    "rating": 4.4,
+    "types": [
+        "meal_takeaway",
+        "bar",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Colomines, 2, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.38350870000001,
+            "lng": 2.1836997
+        }
+    },
+    "name": "Bacoa Kiosko Born",
+    "place_id": "ChIJZUuhL_6ipBIRalSxUV4nB8k",
+    "rating": 4.4,
+    "types": [
+        "meal_takeaway",
+        "bar",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Avinguda del Marquès de l'Argentera, 1, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.38582299999999,
+            "lng": 2.136903
+        }
+    },
+    "name": "Boston Pizza Numancia",
+    "place_id": "ChIJUaAFkHyYpBIRODk7E7MVsKo",
+    "rating": 4.1,
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Numància, 94, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.3765596,
+            "lng": 2.1538942
+        }
+    },
+    "name": "Domino's Pizza",
+    "place_id": "ChIJLVZDo3yipBIRCKg1rwoGWCw",
+    "rating": 3.3,
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Sepúlveda, 38, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.5405965,
+            "lng": 2.4553876
+        }
+    },
+    "name": "Bar La Morera",
+    "place_id": "ChIJl5iHAyy1pBIROBc8mjhT0Hk",
+    "rating": 4.2,
+    "types": [
+        "meal_takeaway",
+        "bar",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Avinguda del Maresme, 507, Mataró"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.4015818,
+            "lng": 2.1354164
+        }
+    },
+    "name": "Boston Pizza Mandri",
+    "place_id": "ChIJN8OUVA2YpBIR2LcUDllE4Vs",
+    "rating": 4.5,
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer de Mandri, 3, Barcelona"
+},{
+    "geometry": {
+        "location": {
+            "lat": 41.43718129999999,
+            "lng": 2.1894122
+        }
+    },
+    "name": "Pizza Sapri",
+    "place_id": "ChIJvUWVJty8pBIRWWVX00Q0CbY",
+    "rating": 4.3,
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "vicinity": "Carrer Gran de Sant Andreu, 317, Barcelona"
 }]}
