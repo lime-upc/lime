@@ -12,6 +12,7 @@ app.use(passport.initialize()); //Init passport
 //To accept JSON and encoded values in URL
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+fa
 
 //Enable CORS requests on all routes
 app.use(cors());
