@@ -4,6 +4,7 @@ var googleMapsClient = require('@google/maps').createClient({
 });
 
 var async = require('async');
+
 //Write to the file system
 const fs = require('fs');
 

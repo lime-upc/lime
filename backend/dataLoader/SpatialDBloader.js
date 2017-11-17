@@ -15,7 +15,7 @@ var MongoClient = require('mongodb').MongoClient
     , assert = require('assert');
 
 // MongoDB connection URL
-var url = 'mongodb://localhost:27017/SpatialDB';
+var url = 'mongodb://localhost:27017/lime';
 
 // Use connect method to connect to the server
 MongoClient.connect(url, function(err, db) {
@@ -47,7 +47,7 @@ MongoClient.connect(url, function(err, db) {
         };
 
         console.log("Inserting " + myobj.name + " into the collection!");
-        db.collection("businesses").insertOne(myobj, function(err, res) {
+        db.collection("SpatialDB").insertOne(myobj, function(err, res) {
             if (err) throw err;
         });
 

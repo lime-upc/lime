@@ -38,13 +38,13 @@ node DBloader.js
 To enter Mongo shell:
 mongo
 show dbs
-use SpatialDB
+use lime
 show collections
-db.businesses.find() //retrieve all
-db.businesses.count() //count number of docs in the collection
+db.SpatialDB.find() //retrieve all
+db.SpatialDB.count() //count number of docs in the collection
 
 
-TO completely REMOVE A COLLECTION: db.businesses.drop()
+TO completely REMOVE A COLLECTION: db.SpatialDB.drop()
 
 TO completely REMOVE A DATABASE: 
 use databaseToBeDropped
@@ -53,7 +53,7 @@ db.dropDatabase()
 
 To dump a collection from a MongoDB database
 (outside of the MongoDB shell)
-mongodump --collection businesses --db SpatialDB
+mongodump --collection SpatialDB --db lime
 https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/
 
 
