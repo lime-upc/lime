@@ -1,4 +1,4 @@
-#LIME Backend
+# LIME Backend
 
 This folder contains the REST server and other useful scripts.
 Please, make sure that you run `npm install` every time you pull, and before running anything.
