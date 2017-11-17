@@ -32,7 +32,7 @@ This script creates 2000 (configurable) fake users, with fake gender, fake birth
 Email format is 'test-X@lime.com' where X is number from 0 to 1999. Password is always 123.
 
 How to run it:
-1. Make sure that Backend and Kafka are running
+1. Make sure that Backend is running
 2. Run `node fakeUserCreator.js`
 
 How to configure it:
