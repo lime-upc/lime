@@ -22,8 +22,8 @@ var UPDATE_FREQUENCY = 10; //In seconds, how often location is sent
 
 //1st. Load files from 'paths' folder
 var paths = [];
-fs.readdirSync('./locationSimulator/paths').forEach(function(file){
-    paths.push(new PathObject('./locationSimulator/paths/' + file));
+fs.readdirSync('./location-simulator/paths').forEach(function(file){
+    paths.push(new PathObject('./location-simulator/paths/' + file));
 
 });
 
