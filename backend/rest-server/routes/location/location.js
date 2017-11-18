@@ -109,7 +109,7 @@ module.exports = function (app) {
             {
                 topic: 'lime-location',
                 messages: avroMessage,
-                attributes: 1 /* Use GZip compression for payload */
+                attributes: 2 /* Use Snappy compression for payload */
             }
         ];
 

@@ -1,6 +1,6 @@
 var avro = require('avsc');
 var kafka = require('kafka-node');
-var HighLevelConsumer = kafka.HighLevelConsumer;
+var Consumer = kafka.Consumer;
 var Client = kafka.Client;
 var config = require('./config');
 
@@ -49,10 +49,10 @@ var options = {
 	autoCommit: true,
 	fetchMaxWaitMs: 1000,
     fetchMaxBytes: 1024 * 1024,
-    encoding: 'buffer'
+    encoding: 'buffer' //Do not specify group, so we can consume from same
 }
 
-var consumer = new HighLevelConsumer(client,topics,options);
+var consumer = new Consumer(client,topics,options);
 
 consumer.on('message', function(message) {
 	try{
