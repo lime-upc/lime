@@ -50,7 +50,7 @@ var options = {
 	fetchMaxWaitMs: 1000,
     fetchMaxBytes: 1024 * 1024,
     encoding: 'buffer' //Do not specify group, so we can consume from same
-}
+};
 
 var consumer = new Consumer(client,topics,options);
 
