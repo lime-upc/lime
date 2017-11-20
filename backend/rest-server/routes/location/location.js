@@ -103,7 +103,7 @@ module.exports = function (app) {
         //Encode message in Avro
         var avroMessage = type.toBuffer(originalMessage);
 
-        console.log(originalMessage);
+        
         //Create payload to send, to lime-location topic
         var payload = [
             {
@@ -113,7 +113,7 @@ module.exports = function (app) {
             }
         ];
 
-
+        
         //SEND: Send payload to Kafka and log result/error
         producer.send(payload, function(error,result){
             console.info('Sent payload to Kafka: ',payload);

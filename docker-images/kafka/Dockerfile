@@ -1,28 +1,26 @@
-#KAFKA and ZOOKEEPER DOCKER IMAGE
-#Author: Ismael Rodriguez, 18/11/17
-#Based on https://github.com/hey-johnnypark/docker-kafka-zookeeper
+FROM anapsix/alpine-java
 
-FROM java:openjdk-8-jre
+ARG kafka_version=1.0.0
+ARG scala_version=2.12
 
-ENV DEBIAN_FRONTEND noninteractive
+MAINTAINER wurstmeister
 
-RUN apt-get update && \
-    apt-get install -y wget supervisor && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get clean
+RUN apk add --update unzip wget curl docker jq coreutils
 
-#Download Kafka+Zookeeper, put it in /opt/
-RUN wget -q http://apache.rediris.es/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O /tmp/kafka.tgz
-RUN tar -xvf /tmp/kafka.tgz -C /opt && rm /tmp/kafka.tgz
-RUN mv /opt/kafka_2.11-1.0.0 /opt/kafka
+ENV KAFKA_VERSION=$kafka_version SCALA_VERSION=$scala_version
+ADD download-kafka.sh /tmp/download-kafka.sh
+RUN chmod a+x /tmp/download-kafka.sh && sync && /tmp/download-kafka.sh && tar xfz /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt && rm /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz && ln -s /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION} /opt/kafka
 
-ADD scripts/start-kafka.sh /usr/bin/start-kafka.sh
-ADD scripts/start-zookeeper.sh /usr/bin/start-zookeeper.sh
+VOLUME ["/kafka"]
 
-#Supervisor config
-ADD supervisor/kafka.conf supervisor/zookeeper.conf /etc/supervisor/conf.d/
-
-#2181 is zookeeper, 9092 is kafka
-EXPOSE 2181 9092
-
-CMD ["supervisord","-n"]
+ENV KAFKA_HOME /opt/kafka
+ENV PATH ${PATH}:${KAFKA_HOME}/bin
+ADD start-kafka.sh /usr/bin/start-kafka.sh
+ADD broker-list.sh /usr/bin/broker-list.sh
+ADD create-topics.sh /usr/bin/create-topics.sh
+# The scripts need to have executable permission
+RUN chmod a+x /usr/bin/start-kafka.sh && \
+    chmod a+x /usr/bin/broker-list.sh && \
+    chmod a+x /usr/bin/create-topics.sh
+# Use "exec" form so that it runs as PID 1 (useful for graceful shutdown)
+CMD ["start-kafka.sh"]
