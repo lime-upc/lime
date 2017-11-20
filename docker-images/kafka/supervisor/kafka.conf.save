@@ -1,6 +1,0 @@
-[program:kafka]
-command=/
-autostart=true
-autorestart=true
-stdout_logfile=/dev/stdout
-stdout_logfile_maxbytes=0
