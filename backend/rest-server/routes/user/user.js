@@ -258,7 +258,7 @@ module.exports = function (app) {
             .then(function(obj){
 
                 if(obj.result.n === 0){
-                    res.send({
+                    res.status(404).send({
                         "error": true,
                         "message": "User does not exist"
                     });

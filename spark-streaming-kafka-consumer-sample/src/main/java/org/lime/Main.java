@@ -36,7 +36,7 @@ public class Main {
         LogManager.getRootLogger().setLevel(Level.ERROR);
 
         Map<String,String> kafkaParams = new HashMap<>();
-        kafkaParams.put("metadata.broker.list","localhost:9092"); //Kafka in localhost
+        kafkaParams.put("metadata.broker.list","192.168.56.20:9092"); //Kafka in localhost
         Set<String> topics = Collections.singleton("lime-location");	//Topic
 
 		//Create Stream as KafkaStream
