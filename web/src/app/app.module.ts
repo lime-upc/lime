@@ -5,13 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { AuthenticationService } from 'app/services/AuthenticationService';
+import { AgmCoreModule } from '@agm/core';
 
 /* Modules from material design */
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 /* Components (pages)*/
 import { AppComponent } from './app.component';
@@ -34,8 +37,12 @@ import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.co
     ProfileComponent,
     FooterComponent,
     PageNotFoundComponent,
+    
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCRaO9CTJImdPCNEx0cU9MSg3a7Lv42Bos'
+    }),
     BrowserModule,
     RouterModule,
     FormsModule,
@@ -45,7 +52,9 @@ import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.co
     MatInputModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSelectModule,
+    MatIconModule
   ],
   providers: [
     AuthenticationService
