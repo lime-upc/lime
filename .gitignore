@@ -3,3 +3,4 @@
 node_modules/
 app/*.iml
 .DS_Store
+target
