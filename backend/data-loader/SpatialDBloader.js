@@ -47,7 +47,7 @@ MongoClient.connect(url, function(err, db) {
         };
 
         console.log("Inserting " + myobj.name + " into the collection!");
-        db.collection("SpatialDB").insertOne(myobj, function(err, res) {
+        db.collection("spatialDB").insertOne(myobj, function(err, res) {
             if (err) throw err;
         });
 
