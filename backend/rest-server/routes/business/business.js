@@ -60,7 +60,7 @@ module.exports = function (app) {
         if (!req.body.email || !req.body.password || !req.body.person_in_charge_name) {
                 res.status(400).send({
                     "error": true,
-                    "message": "All the parameters are required"
+                    "message": "Required parameters are missing"
                 });
                 return;
         }

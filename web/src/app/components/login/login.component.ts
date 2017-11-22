@@ -16,6 +16,7 @@ type loginData = {
 })
 export class LoginComponent implements OnInit {
 
+  loginSuccess: boolean;
   formData: loginData;
   errors: any;
 
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit {
               private auth: AuthenticationService,
               private router: Router) { 
         
-                //To store the local errors
+        this.loginSuccess = false;
+        
+        //To store the local errors
         this.errors = {
           email: undefined,
           password: undefined
@@ -40,11 +43,13 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.formData.email, this.formData.password)
         .subscribe(result => {
         if (result === true) {
+            this.loginSuccess=true;
             this.router.navigate(['/']);
-        } else {
-          alert('Email or password incorrect')
         }
-    });
+        if (!this.loginSuccess) {
+          alert('Error or password incorrect')
+        }
+    })
   }
 
   ngOnInit() {

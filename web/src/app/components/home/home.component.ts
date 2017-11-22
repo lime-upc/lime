@@ -9,14 +9,28 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private auth: AuthenticationService, router: Router) { 
-    if (!auth.isAuthentificated()) {
-      router.navigate(['/login']);
+  date : String; 
+  selected: String;
+
+  coordinates = {
+    barcelona: {
+      lat:41.385064,
+      long: 2.173403,
+      zoom: 14,
+    },
+    upc: {
+      lat:41.388004,
+      long: 2.113280
     }
   }
 
-  logout() {
-    this.auth.logout();
+  constructor(private auth: AuthenticationService, router: Router) { 
+    this.date = (new Date()).toDateString();
+    this.selected = 'all-users';
+    
+    if (!auth.isAuthentificated()) {
+      router.navigate(['/login']);
+    }
   }
 
   ngOnInit() {
