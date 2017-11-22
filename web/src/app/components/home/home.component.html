@@ -1,4 +1,24 @@
 <div class="container">
-  <h1>Home Works!</h1>
-  <button (click)="logout()">Logout</button>
+  <h1>
+    <mat-icon>location_on</mat-icon>
+    Real-time analytics
+  </h1>
+  <agm-map [latitude]="coordinates.barcelona.lat" [longitude]="coordinates.barcelona.long" [zoom]="coordinates.barcelona.zoom">
+      <agm-marker [latitude]="coordinates.upc.lat" [longitude]="coordinates.upc.long"></agm-marker>
+  </agm-map>
+
+  <div class="side-panel">
+    <p>{{ date }}</p>
+
+    <mat-form-field>
+        <mat-select [(value)]="selected">
+          <mat-option value="all-users">All users</mat-option>
+          <mat-option value="age">Age</mat-option>
+          <mat-option value="gender">Gender</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button (click)="openDialog()" mat-raised-button color="primary"> Send real-time notification </button>
+  </div>
+
 </div>

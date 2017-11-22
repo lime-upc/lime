@@ -40,11 +40,12 @@ mongo
 show dbs
 use lime
 show collections
-db.SpatialDB.find() //retrieve all
-db.SpatialDB.count() //count number of docs in the collection
+db.spatialDB.find() //retrieve all
+db.spatialDB.count() //count number of docs in the collection
 
 
-TO completely REMOVE A COLLECTION: db.SpatialDB.drop()
+TO completely REMOVE A COLLECTION: 
+db.spatialDB.drop()
 
 TO completely REMOVE A DATABASE: 
 use databaseToBeDropped
@@ -53,7 +54,7 @@ db.dropDatabase()
 
 To dump a collection from a MongoDB database
 (outside of the MongoDB shell)
-mongodump --collection SpatialDB --db lime
+mongodump --collection spatialDB --db lime
 https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/
 
 

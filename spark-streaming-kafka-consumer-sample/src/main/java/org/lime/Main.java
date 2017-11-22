@@ -1,5 +1,6 @@
 package org.lime;
 
+import com.mongodb.*;
 import kafka.serializer.DefaultDecoder;
 import kafka.serializer.StringDecoder;
 import org.apache.avro.io.BinaryDecoder;
@@ -18,25 +19,34 @@ import org.apache.spark.streaming.api.java.JavaPairInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.kafka.*;
 
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
+
 import java.io.ByteArrayOutputStream;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.*;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class Main {
 
 
     public static void main(String[] args) throws Exception {
 
-        SparkConf conf = new SparkConf().setAppName("03_Spark").setMaster("local[*]");
+        SparkConf conf = new SparkConf().setAppName("03_spark").setMaster("local[*]");
         JavaSparkContext ctx = new JavaSparkContext(conf);
 
         JavaStreamingContext jsc = new JavaStreamingContext(ctx, new Duration(1000));
         LogManager.getRootLogger().setLevel(Level.ERROR);
 
         Map<String,String> kafkaParams = new HashMap<>();
-        kafkaParams.put("metadata.broker.list","192.168.56.20:9092"); //Kafka in localhost
+        kafkaParams.put("metadata.broker.list","192.168.56.20:9092"); //Kafka in VM
         Set<String> topics = Collections.singleton("lime-location");	//Topic
 
 		//Create Stream as KafkaStream
@@ -51,11 +61,29 @@ public class Main {
 				byte[] encodedAvroData = avroRecord._2;
 				//We need to deserialize data to access the object
 				LocationType t = deserialize(encodedAvroData);
+                String email = t.getEmail().toString();
+                String lat = t.getLat().toString();
+                String lon = t.getLong$().toString();
+                // Creating a Mongo client for each RDD (as suggested here to avoid serialization problems: http://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd)
 
-                String data = "email=" + t.getEmail() + ", lat=" + t.getLat() + ", long=" + t.getLong$();
+                MongoClientOptions.Builder options_builder = new MongoClientOptions.Builder();
+                //added to set avoid "com.mongodb.MongoSocketReadException: Prematurely reached end of stream", but still not enough
+                options_builder.maxConnectionIdleTime(60000);
+                MongoClientOptions options = options_builder.build();
+                MongoClient mongo = new MongoClient ("localhost:27017", options);
+
+
+                // Accessing the database and the collections
+                MongoDatabase database = mongo.getDatabase("lime");
+                MongoCollection<Document> usersCollection = database.getCollection("users");
+                MongoCollection<Document> spatialDBCollection = database.getCollection("spatialDB");
+
+                Document myDoc = usersCollection.find(eq("email", email)).first();
+                Integer age = calculateAge(myDoc.get("date_of_birth").toString(), LocalDate.now());
+
+                String data = "email=" + email + ", gender=" + myDoc.get("gender") + ", date_of_birth=" + myDoc.get("date_of_birth") + ", age=" + age + ", lat=" + lat + ", long=" + lon;
                 System.out.println(data);
 
-                //Do something with the data
             });
         });
 
@@ -94,4 +122,25 @@ public class Main {
 
 
 	}
+
+
+    public static int calculateAge(String birthDateString, LocalDate currentDate) {
+
+        DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+        Date birthDate = null;
+        try {
+            birthDate = format.parse(birthDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        LocalDate localBirthDate = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        if ((birthDate != null) && (currentDate != null)) {
+            return Period.between(localBirthDate, currentDate).getYears();
+        } else {
+            return 0;
+        }
+    }
+
 }

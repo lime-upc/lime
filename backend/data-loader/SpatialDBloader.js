@@ -33,8 +33,10 @@ MongoClient.connect(url, function(err, db) {
         var myobj = {
             _id: jsonContent.results[i].place_id,
             name: replacer(JSON.stringify(jsonContent.results[i].name)),
-            lat: jsonContent.results[i].geometry.location.lat,
-            long: jsonContent.results[i].geometry.location.lng,
+            location: {
+                type: "Point",
+                coordinates: [jsonContent.results[i].geometry.location.lng, jsonContent.results[i].geometry.location.lat]
+            },
             price_level: jsonContent.results[i].price_level,
             rating: jsonContent.results[i].rating,
             address: replacer(JSON.stringify(jsonContent.results[i].vicinity)),
@@ -47,7 +49,7 @@ MongoClient.connect(url, function(err, db) {
         };
 
         console.log("Inserting " + myobj.name + " into the collection!");
-        db.collection("SpatialDB").insertOne(myobj, function(err, res) {
+        db.collection("spatialDB").insertOne(myobj, function(err, res) {
             if (err) throw err;
         });
 
