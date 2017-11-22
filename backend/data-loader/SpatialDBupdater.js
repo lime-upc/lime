@@ -24,7 +24,7 @@ MongoClient.connect(url, function(err, db) {
 
     for (let i = 0; i < jsonContent.results.length; i++) {
 
-        db.collection("SpatialDB").findOne({"_id": jsonContent.results[i].place_id}, function(err, result) {
+        db.collection("spatialDB").findOne({"_id": jsonContent.results[i].place_id}, function(err, result) {
             if (err) throw err;
 
             //check if the element is already in the DB
@@ -41,7 +41,7 @@ MongoClient.connect(url, function(err, db) {
                     else perm_closed=false;
 
                     var newvalues = { $set: { price_level: jsonContent.results[i].price_level, rating: jsonContent.results[i].rating, permanently_closed: perm_closed} };
-                    db.collection("SpatialDB").updateOne({"_id": jsonContent.results[i].place_id}, newvalues, function(err, res) {
+                    db.collection("spatialDB").updateOne({"_id": jsonContent.results[i].place_id}, newvalues, function(err, res) {
                         if (err) throw err;
                     });
                     console.log("Updated " + result.name);
@@ -77,7 +77,7 @@ MongoClient.connect(url, function(err, db) {
                 };
 
                 console.log("Inserting " + myobj.name + " into the collection!");
-                db.collection("SpatialDB").insertOne(myobj, function(err, res) {
+                db.collection("spatialDB").insertOne(myobj, function(err, res) {
                     if (err) throw err;
                 });
 

@@ -21,9 +21,11 @@
     "http": "0.0.0",
     "jsonwebtoken": "^8.1.0",
     "kafka-node": "^2.2.3",
+    "kafka-rest": "0.0.5",
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.1",
     "passport": "^0.4.0",
-    "passport-jwt": "^3.0.1"
+    "passport-jwt": "^3.0.1",
+    "webhdfs": "^1.1.1"
   }
 }

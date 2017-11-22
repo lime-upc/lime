@@ -4,6 +4,8 @@ var Consumer = kafka.Consumer;
 var Client = kafka.Client;
 var config = require('./config');
 
+
+
 var avroSchema = {
 	name: 'LocationType',
 	type: 'record',
@@ -73,5 +75,6 @@ consumer.on('error', function(err) {
 process.on('SIGINT', function() {
   consumer.close(true, function() {
     process.exit();
+
   });
 });
