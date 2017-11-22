@@ -44,7 +44,8 @@ db.spatialDB.find() //retrieve all
 db.spatialDB.count() //count number of docs in the collection
 
 
-TO completely REMOVE A COLLECTION: db.spatialDB.drop()
+TO completely REMOVE A COLLECTION: 
+db.spatialDB.drop()
 
 TO completely REMOVE A DATABASE: 
 use databaseToBeDropped
