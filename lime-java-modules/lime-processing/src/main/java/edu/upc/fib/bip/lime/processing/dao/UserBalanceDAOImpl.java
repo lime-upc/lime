@@ -40,7 +40,7 @@ public class UserBalanceDAOImpl implements IUserBalanceDAO {
                 "Can't substract %s points for user %d, current balance is %s", points, userId, currentBalance));
         }
 
-        sql.update("UPDATE UserBalance SET Balance = Balance - ?1 WHERE UserID = ?2", points, userId);
+        sql.update("UPDATE UserBalance SET Balance = Balance - ? WHERE UserID = ?", points, userId);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class UserBalanceDAOImpl implements IUserBalanceDAO {
         if (points < 0) {
             throw new IllegalArgumentException("Can't add " + points + " points to user " + userId);
         }
-        sql.update("UPDATE UserBalance SET Balance = Balance + ?1 WHERE UserID = ?2", points, userId);
+        sql.update("UPDATE UserBalance SET Balance = Balance + ? WHERE UserID = ?", points, userId);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class UserBalanceDAOImpl implements IUserBalanceDAO {
 
     @Override
     public void createUserBalance(int userId, double currentBalance) {
-        sql.update("INSERT INTO UserBalance(UserID, Balance) VALUES (?1, ?2)", userId, currentBalance);
+        sql.update("INSERT INTO UserBalance(UserID, Balance) VALUES (?, ?)", userId, currentBalance);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class UserBalanceDAOImpl implements IUserBalanceDAO {
 
     @Override
     public void setUserBalance(int userId, double currentBalance) {
-        sql.update("UPDATE UserBalance SET Balance = ?1 WHERE UserID = ?2", userId, currentBalance);
+        sql.update("UPDATE UserBalance SET Balance = ? WHERE UserID = ?", userId, currentBalance);
     }
 
     @Override
