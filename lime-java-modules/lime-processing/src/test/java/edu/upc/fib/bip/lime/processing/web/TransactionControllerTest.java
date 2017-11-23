@@ -7,14 +7,19 @@ import edu.upc.fib.bip.lime.processing.model.TransactionStatus;
 import edu.upc.fib.bip.lime.processing.model.TransactionType;
 import edu.upc.fib.bip.lime.processing.service.ITransactionService;
 import edu.upc.fib.bip.lime.processing.web.protocol.*;
+import org.flywaydb.core.Flyway;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
+import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.boot.autoconfigure.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +42,11 @@ public class TransactionControllerTest {
 
     @TestConfiguration
     public static class LimeProcessingTestContext {
+
+        @Bean
+        public FlywayMigrationStrategy flywayMigrationStrategy() {
+            return flyway -> { /* doing nothing */ };
+        }
 
     }
 
@@ -104,6 +114,15 @@ public class TransactionControllerTest {
         assertEquals(userId, infoResponse.getUserId().intValue());
         assertEquals(4.0, infoResponse.getAmount(), 0.001);
         assertEquals(TransactionStatus.SCANNED, infoResponse.getStatus());
+    }
+
+    @Test
+    public void scanningForNonExistingUserCreatesUserBalanceRow() throws Exception {
+        int userId = 457;
+        assertFalse(userBalanceDAO.findByUser(userId).isPresent());
+        String transactionId = transactionService.createTransaction(123, 4.0).getTransactionId();
+        transactionService.scanQrCode(transactionId, userId);
+        assertTrue(userBalanceDAO.findByUser(userId).isPresent());
     }
 
     @Test

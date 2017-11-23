@@ -5,6 +5,7 @@ import edu.upc.fib.bip.lime.processing.dao.IUserBalanceDAO;
 import edu.upc.fib.bip.lime.processing.model.Transaction;
 import edu.upc.fib.bip.lime.processing.model.TransactionStatus;
 import edu.upc.fib.bip.lime.processing.model.TransactionType;
+import edu.upc.fib.bip.lime.processing.model.UserBalance;
 import edu.upc.fib.bip.lime.processing.web.protocol.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -14,6 +15,7 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -48,6 +50,10 @@ public class TransactionServiceImpl implements ITransactionService {
     @Override
     @Transactional
     public ScanQrCodeResponse scanQrCode(String transactionId, int userId) {
+        Optional<UserBalance> userBalance = userBalanceDAO.findByUser(userId);
+        if (!userBalance.isPresent()) {
+            userBalanceDAO.createUserBalance(userId);
+        }
         Transaction transaction = transactionDAO.findById(transactionId);
         transaction.setStatus(TransactionStatus.SCANNED);
         transaction.setUserId(userId);
