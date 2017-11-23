@@ -5,3 +5,4 @@ Sample code to start building both the Real time processor and the data lake inp
 Instructions:
 > Import as Maven project in Eclipse/IntelliJ...
 > Run the main class
+

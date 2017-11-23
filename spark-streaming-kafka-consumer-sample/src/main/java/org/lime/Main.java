@@ -22,8 +22,14 @@ import org.apache.spark.streaming.kafka.*;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
+import org.elasticsearch.client.Client;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
+
+import java.net.InetAddress;
 
 import java.io.ByteArrayOutputStream;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -84,6 +90,8 @@ public class Main {
                 String data = "email=" + email + ", gender=" + myDoc.get("gender") + ", date_of_birth=" + myDoc.get("date_of_birth") + ", age=" + age + ", lat=" + lat + ", long=" + lon;
                 System.out.println(data);
 
+                mongo.close();
+
             });
         });
 
@@ -91,6 +99,18 @@ public class Main {
         jsc.awaitTermination();
 
     }
+
+    public static int saveInElasticSearch() throws UnknownHostException {
+        Client client = TransportClient.builder().build()
+                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
+
+
+
+
+
+        return 1;
+    }
+
 
 	/**
 	 * Use this to get the LocationType object from avro serialized bytes.
