@@ -40,7 +40,7 @@ MongoClient.connect(url, function(err, db) {
             price_level: jsonContent.results[i].price_level,
             rating: jsonContent.results[i].rating,
             address: replacer(JSON.stringify(jsonContent.results[i].vicinity)),
-            permanently_closed: jsonContent.results[i].permanently_closed
+            permanently_closed: perm_closed
         };
 
         console.log("Inserting " + myobj.name + " into the collection!");
