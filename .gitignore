@@ -4,7 +4,6 @@ node_modules/
 app/*.iml
 .DS_Store
 target
-elastic-search/logs/elasticsearch_deprecation.log
-elastic-search/logs/elasticsearch_index_indexing_slowlog.log
-elastic-search/logs/elasticsearch_index_search_slowlog.log
-elastic-search/logs/elasticsearch.log
+elastic-search/logs/*
+/elastic-search/data/*
+
