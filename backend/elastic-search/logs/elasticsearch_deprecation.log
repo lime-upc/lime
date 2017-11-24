@@ -1,0 +1,2 @@
+[2017-11-23T17:56:37,351][WARN ][o.e.d.b.Bootstrap        ] elasticsearch.yaml is deprecated; rename your configuration file to elasticsearch.yml
+[2017-11-24T15:43:31,911][WARN ][o.e.d.b.Bootstrap        ] elasticsearch.yaml is deprecated; rename your configuration file to elasticsearch.yml

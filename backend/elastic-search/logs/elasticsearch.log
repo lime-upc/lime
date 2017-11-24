@@ -1,0 +1,41 @@
+[2017-11-24T15:43:32,207][INFO ][o.e.n.Node               ] [] initializing ...
+[2017-11-24T15:43:32,303][INFO ][o.e.e.NodeEnvironment    ] [WuuaeiX] using [1] data paths, mounts [[/ (/dev/disk1s1)]], net usable_space [11.4gb], net total_space [233.5gb], spins? [unknown], types [apfs]
+[2017-11-24T15:43:32,304][INFO ][o.e.e.NodeEnvironment    ] [WuuaeiX] heap size [1.7gb], compressed ordinary object pointers [true]
+[2017-11-24T15:43:32,327][INFO ][o.e.n.Node               ] node name [WuuaeiX] derived from node ID [WuuaeiX1RimIKqB0gbnf_A]; set [node.name] to override
+[2017-11-24T15:43:32,327][INFO ][o.e.n.Node               ] version[5.6.3], pid[6280], build[1a2f265/2017-10-06T20:33:39.012Z], OS[Mac OS X/10.13.1/x86_64], JVM[Oracle Corporation/Java HotSpot(TM) 64-Bit Server VM/1.8.0_112/25.112-b16]
+[2017-11-24T15:43:32,328][INFO ][o.e.n.Node               ] JVM arguments [-Des.path.home=/Users/Guida/GitHub/lime/backend/elastic-search]
+[2017-11-24T15:43:33,829][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [aggs-matrix-stats]
+[2017-11-24T15:43:33,829][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [ingest-common]
+[2017-11-24T15:43:33,829][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [lang-expression]
+[2017-11-24T15:43:33,829][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [lang-groovy]
+[2017-11-24T15:43:33,829][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [lang-mustache]
+[2017-11-24T15:43:33,830][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [lang-painless]
+[2017-11-24T15:43:33,830][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [parent-join]
+[2017-11-24T15:43:33,830][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [percolator]
+[2017-11-24T15:43:33,830][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [reindex]
+[2017-11-24T15:43:33,830][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [transport-netty3]
+[2017-11-24T15:43:33,830][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [transport-netty4]
+[2017-11-24T15:43:33,831][INFO ][o.e.p.PluginsService     ] [WuuaeiX] no plugins loaded
+[2017-11-24T15:43:36,774][INFO ][o.e.d.DiscoveryModule    ] [WuuaeiX] using discovery type [zen]
+[2017-11-24T15:43:37,380][INFO ][o.e.n.Node               ] initialized
+[2017-11-24T15:43:37,387][INFO ][o.e.n.Node               ] [WuuaeiX] starting ...
+[2017-11-24T15:43:37,432][INFO ][i.n.u.i.PlatformDependent] Your platform does not provide complete low-level API for accessing direct buffers reliably. Unless explicitly requested, heap buffer will always be preferred to avoid potential system instability.
+[2017-11-24T15:43:37,582][INFO ][o.e.t.TransportService   ] [WuuaeiX] publish_address {127.0.0.1:9300}, bound_addresses {[fe80::1]:9300}, {[::1]:9300}, {127.0.0.1:9300}
+[2017-11-24T15:43:37,591][WARN ][o.e.b.BootstrapChecks    ] [WuuaeiX] initial heap size [134217728] not equal to maximum heap size [2147483648]; this can cause resize pauses and prevents mlockall from locking the entire heap
+[2017-11-24T15:43:40,658][INFO ][o.e.c.s.ClusterService   ] [WuuaeiX] new_master {WuuaeiX}{WuuaeiX1RimIKqB0gbnf_A}{7Eg2Xs3aQ86I8NSEewV6Jg}{127.0.0.1}{127.0.0.1:9300}, reason: zen-disco-elected-as-master ([0] nodes joined)
+[2017-11-24T15:43:40,692][INFO ][o.e.h.n.Netty4HttpServerTransport] [WuuaeiX] publish_address {127.0.0.1:9200}, bound_addresses {[fe80::1]:9200}, {[::1]:9200}, {127.0.0.1:9200}
+[2017-11-24T15:43:40,694][INFO ][o.e.n.Node               ] [WuuaeiX] started
+[2017-11-24T15:43:40,882][INFO ][o.e.g.GatewayService     ] [WuuaeiX] recovered [1] indices into cluster_state
+[2017-11-24T15:43:41,210][INFO ][o.e.c.r.a.AllocationService] [WuuaeiX] Cluster health status changed from [RED] to [YELLOW] (reason: [shards started [[twitter][4]] ...]).
+[2017-11-24T15:44:10,750][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.4gb[4.9%], shards will be relocated away from this node
+[2017-11-24T15:44:10,751][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-24T15:44:40,769][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.4gb[4.9%], shards will be relocated away from this node
+[2017-11-24T15:45:10,778][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.4gb[4.9%], shards will be relocated away from this node
+[2017-11-24T15:45:10,778][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-24T15:45:40,788][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.4gb[4.9%], shards will be relocated away from this node
+[2017-11-24T15:46:10,799][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.4gb[4.9%], shards will be relocated away from this node
+[2017-11-24T15:46:10,800][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-24T15:46:40,815][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.4gb[4.9%], shards will be relocated away from this node
+[2017-11-24T15:47:10,830][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.3gb[4.8%], shards will be relocated away from this node
+[2017-11-24T15:47:10,831][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-24T15:47:40,843][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.3gb[4.8%], shards will be relocated away from this node
