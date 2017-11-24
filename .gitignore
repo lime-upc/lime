@@ -4,6 +4,5 @@ node_modules/
 app/*.iml
 .DS_Store
 target
-elastic-search/logs/*
-/elastic-search/data/*
-
+backend/elastic-search/logs/*
+backend/elastic-search/data/*
