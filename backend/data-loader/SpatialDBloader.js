@@ -50,6 +50,12 @@ MongoClient.connect(url, function(err, db) {
 
     }
 
+	// Create the Geospatial index
+	db.collection("spatialDB").createIndex(
+        { location : "2dsphere" }, function(err, result) {
+	    console.log("Created index: "+result);
+	});
+
     db.close();
 
 });
