@@ -84,27 +84,26 @@ public class Main {
                 String email = t.getEmail().toString();
                 String lat = t.getLat().toString();
                 String lon = t.getLong$().toString();
-                // Creating a Mongo client for each RDD (as suggested here to avoid serialization problems: http://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd)
 
+                // Creating a Mongo client for each RDD (as suggested here to avoid serialization problems: http://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd)
                 MongoClientOptions.Builder options_builder = new MongoClientOptions.Builder();
                 //added to set avoid "com.mongodb.MongoSocketReadException: Prematurely reached end of stream", but still not enough
                 options_builder.maxConnectionIdleTime(60000);
                 MongoClientOptions options = options_builder.build();
                 MongoClient mongo = new MongoClient ("localhost:27017", options);
 
-
                 // Accessing the database and the collections
                 MongoDatabase database = mongo.getDatabase("lime");
                 MongoCollection<Document> usersCollection = database.getCollection("users");
                 MongoCollection<Document> spatialDBCollection = database.getCollection("spatialDB");
 
-                Document myDoc = usersCollection.find(eq("email", email)).first();
-                Integer age = calculateAge(myDoc.get("date_of_birth").toString(), LocalDate.now());
+                Document userDoc = usersCollection.find(eq("email", email)).first();
+                Integer age = calculateAge(userDoc.get("date_of_birth").toString(), LocalDate.now());
 
-                String data = "email=" + email + ", gender=" + myDoc.get("gender") + ", date_of_birth=" + myDoc.get("date_of_birth") + ", age=" + age + ", lat=" + lat + ", long=" + lon;
-                System.out.println(data);
+                //String data = "email=" + email + ", gender=" + userDoc.get("gender") + ", date_of_birth=" + userDoc.get("date_of_birth") + ", age=" + age + ", lat=" + lat + ", long=" + lon;
+                //System.out.println(data);
 
-                //saveInElasticSearch(t, myDoc);
+                saveInElasticSearch(t, userDoc);
 
                 mongo.close();
 
@@ -122,12 +121,13 @@ public class Main {
 
     public static void saveInElasticSearch(LocationType t, Document doc) throws IOException {
 
-        // on startup
+        // TODO: set ES storage type to memory/RAM, instead of HDD (https://www.elastic.co/guide/en/elasticsearch/reference/1.4/index-modules-store.html, https://github.com/elastic/elasticsearch/blob/v1.6.0/src/test/java/org/elasticsearch/test/ElasticsearchSingleNodeTest.java)
+        // Create ES client
         TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
                 .addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
 
-        Double lat = Double.parseDouble("41.5515291");
-        Double lon = Double.parseDouble("2.0249877");
+        Double lat = Double.parseDouble(t.getLat().toString());
+        Double lon = Double.parseDouble(t.getLong$().toString());
 
         // Conversion of lat-lon into Military Grid Reference System coordinates
         CoordinateConversion coordConverter = new CoordinateConversion();
@@ -137,12 +137,12 @@ public class Main {
         //Create object to be inserted into Elastic Search
         XContentBuilder builder = jsonBuilder()
                 .startObject()
-                .field("user_id", "kimchy")
+                .field("user_id", doc.get("_id"))
                 .field("grid_cell", MGRScoord1)
                 .field("lat", lat)
                 .field("long", lon)
-                .field("age", 12)
-                .field("gender", "male")
+                .field("age", calculateAge(doc.get("date_of_birth").toString(), LocalDate.now()))
+                .field("gender", doc.get("gender"))
                 .field("last_update", new Timestamp(System.currentTimeMillis()))
                 .endObject();
 
@@ -153,7 +153,7 @@ public class Main {
 
         // MatchAll on the whole cluster with all default options
         SearchResponse responseSearchAll = client.prepareSearch().get();
-        System.out.println("Seach ALL: \n"+responseSearchAll);
+        System.out.println("Search ALL: \n"+responseSearchAll);
 
         // on shutdown
         //client.close();
