@@ -18,7 +18,7 @@ var config = require('./config');
 
 var PERSON_NUMBER = 50;
 var WALKING_SPEED = 1.4; //Meters per second
-var UPDATE_FREQUENCY = 1; //In seconds, how often location is sent
+var UPDATE_FREQUENCY = 10; //In seconds, how often location is sent
 
 //1st. Load files from 'paths' folder
 var paths = [];

@@ -25,7 +25,7 @@ public class Main {
 
 
     public static void main(String[] args) throws Exception {
-		LogManager.getRootLogger().setLevel(Level.ERROR);
+		//LogManager.getRootLogger().setLevel(Level.ERROR);
 
 
 		//Spark parameters
@@ -56,15 +56,16 @@ public class Main {
 
 				//Pre-calculate grid cell (10m precission)
 				CoordinateConversion coordConverter = new CoordinateConversion();
-				String MGRScoord1 = coordConverter.latLon2MGRUTM(location.getLat(), location.getLong$()); // MGRS coordinates with 1 meter precision
+
+				String MGRScoord1 = coordConverter.latLon2MGRUTM(location.getLat(), location.getLong$());
 				String MGRScoord10 = MGRScoord1.substring(0,MGRScoord1.length()-2); // MGRS coordinates with 10 meters precision
 
 				//Save location and the cell into HBase
 				dao.writeToHBase(location,MGRScoord10);
 
 				//Record contains now the data. Now, we store it to HDFS.
-				String data = "timestamp=" + location.getTimestamp() + ", email=" + location.get("email") + ", lat=" + location.get("lat") + ", long=" + location.get("long") + "\n";
-				System.out.println(data);
+				//String data = "timestamp=" + location.getTimestamp() + ", email=" + location.get("email") + ", lat=" + location.get("lat") + ", long=" + location.get("long") + "\n";
+				//System.out.println(data);
 			});
 		});
 
@@ -75,12 +76,10 @@ public class Main {
     }
 
 
-
-
 	/**
 	 * Use this to get the LocationType object from avro serialized bytes.
 	 */
-	public static LocationType deserialize(byte[] bytes) throws Exception {
+	private static LocationType deserialize(byte[] bytes) throws Exception {
 
 
 		SpecificDatumReader<LocationType> datumReader = new SpecificDatumReader<>(LocationType.class);

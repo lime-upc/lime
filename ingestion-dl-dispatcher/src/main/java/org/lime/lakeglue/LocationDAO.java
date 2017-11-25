@@ -59,8 +59,8 @@ public class LocationDAO {
 		String formattedSecond = String.format("%02d", second);
 
 		//key: isma@mail.com_YYYYMMDDhhmmss
-		String rowKey = location.getEmail() + "_" + year + formattedMonth + formattedDay +
-				formattedHour + formattedMinute + formattedSecond;
+		String rowKey = year + formattedMonth + formattedDay +
+				formattedHour + formattedMinute + formattedSecond + "_" +  location.getEmail();
 
 		Put put = new Put(Bytes.toBytes(rowKey));
 		put.addColumn(Bytes.toBytes("position"),Bytes.toBytes("lat"),Bytes.toBytes(location.getLat()));
