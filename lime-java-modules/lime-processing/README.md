@@ -40,15 +40,23 @@ and returns transaction id as String.
 * `id : String` (transaction id)
 * `user : int` (user id)
 * `confirmed : boolean` (flag which identifies that user whether confirms transaction or not)
+and returns JSON object representing full transaction state
 
 ### `PATCH /payback`
 `/payback` is a controller which states that the user wants to pay with real money and receive payback. It consumes JSON object with the following fields:
 * `id : String` (transaction id)
 * `user : int` (user id)
+and returns JSON object representing full transaction state
 
 ### `PATCH /confirm/business`
 `/confirm/business` is a controller which confirms that user payed with real money and it's possible to get him virtual payback. It consumes JSON object with the following fields:
 * `id : String` (transaction id)
 * `confirmed : boolean` (flag which identifies that business owner whether confirms transaction or not)
+and returns JSON object representing full transaction state
 
-Timestamp format for each method is `yyyy-MM-dd HH:mm:ss`
+## Notes
+Each controller returns response wrapped in JSON object with the following structure:
+* `error : boolean` (identifies whether request is handled with error or not)
+* `message : Object` (may contain error message as String, transaction id as String, or full JSON containing all transaction fields).
+
+Timestamp format for each method is `yyyy-MM-dd HH:mm:ss`. 
