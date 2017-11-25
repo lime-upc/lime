@@ -1,42 +1,26 @@
 <div class="container">
-  <div id="crm-header">
-    <div id="logo"></div>
-    <div id="account-name">
-      <h1>Lime's restaurant</h1>
-    </div>
-  </div>
+  <h1>Lime's restaurant</h1>
 
   <div id="crm-content">
+
     <div id="profile-section">
       <h3>Profile <mat-icon>person</mat-icon></h3>
-      <div class="crm-block">
-        <div class="crm-block-row">
-          <div class="crm-block-cell-left">
-            <b>Type of business</b>
-          </div>
-          <div class="crm-block-cell-right">{{ businessTypes.join('; ') }}
-          </div>
-        </div>
-        <div class="crm-block-row">
-          <div class="crm-block-cell-left">
-            <b>Address</b>
-          </div>
-          <div class="crm-block-cell-right">{{ address }}</div>
-        </div>
-
-        <div class="crm-block-row">
-          <div class="crm-block-cell-left">
-            <b>Email</b>
-          </div>
-          <div class="crm-block-cell-right">{{ email }}</div>
-        </div>
-        <div class="crm-block-row">
-          <div class="crm-block-cell-left">
-            <b>Phone number</b>
-          </div>
-          <div class="crm-block-cell-right">{{ phone }}</div>
-        </div>
-      </div>
+          <mat-table #table [dataSource]="dataSource">   
+          <!-- Field Column -->
+          <ng-container matColumnDef="field">
+            <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+            <mat-cell *matCellDef="let profile"> {{profile.field}} </mat-cell>
+          </ng-container>
+              
+          <!-- Value Column -->
+          <ng-container matColumnDef="value">
+            <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+            <mat-cell *matCellDef="let profile"> {{profile.value}} </mat-cell>
+          </ng-container>
+              
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
     </div>
 
     <div id="notifications-section">
@@ -59,7 +43,7 @@
           </div>
         </div>
         <div class="crm-block-row">
-          <button (click)="addNotification('title', 'description')"><b>+</b></button>
+          <button (click)="addNotification('Title', 'Description')" mat-mini-fab><b>+</b></button>
         </div>
       </div>
     </div>
@@ -67,9 +51,5 @@
     <div id="additional-info-section">
       <h3>Additional information</h3>
     </div>
-  </div>
-
-  <div id="crm-footer">
-
   </div>
 </div>

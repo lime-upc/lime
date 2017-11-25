@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'app/services/AuthenticationService';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'profile',
@@ -9,41 +11,25 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  businessTypes: Array<string>;
-  address: string;
-  email: string;
-  phone: string;
+  displayedColumns = ['field', 'value'];
+  dataSource = new MatTableDataSource<Profile>(PROFILE_DATA);
   notifications: Array<{title: string, description: string}> = [];
+  businessData: any = {};
 
-  constructor(private auth: AuthenticationService, router: Router) { 
+  constructor(private auth: AuthenticationService, router: Router, http: Http) { 
     if (!auth.isAuthentificated()) {
       router.navigate(['/login']);
     }
   }
 
   ngOnInit() {
-    this.businessTypes = this.loadBusinessTypes();
-    this.address = this.loadAddress();
-    this.email = this.loadEmail();
-    this.phone = this.loadPhone();
-  }
-
-  // TODO google places API
-
-  loadBusinessTypes() {
-    return ['Italian restaurant', 'Spanish food', 'Russian dessert'];
-  }
-
-  loadAddress() {
-    return 'Campus Nord, C/Jordi Girona, 1-3, 08034 Barcelona';
-  }
-
-  loadEmail() {
-    return 'lime-restaurant@bip.upc.com';
-  }
-
-  loadPhone() {
-    return '+34 6 12 34 56 78';
+    /*this.businessData = this.auth.getBusinessData().then(businessData => {
+      this.businessData = businessData;
+      console.log(this.businessData);
+    })
+    .catch(message => {
+      alert("ERROR: " + message);
+    });*/
   }
 
   addNotification(title: string, description: string) {
@@ -51,3 +37,18 @@ export class ProfileComponent implements OnInit {
     this.notifications = this.notifications.slice(0);
   }
 }
+
+export interface Profile {
+  field: String;
+  value: String;
+}
+
+const PROFILE_DATA: Profile[] = [
+  {field: 'Type of business', value: 'My tags'},
+  {field: 'Address', value: 'My business adress'},
+  {field: 'Email', value: 'My email'}, 
+  {field: 'Phone number', value: 'My phone number'},
+  {field: 'Person in charge', value: 'Me'}
+];
+
+
