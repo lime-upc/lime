@@ -3,3 +3,7 @@
 node_modules/
 app/*.iml
 .DS_Store
+target
+backend/elastic-search/logs/*
+backend/elastic-search/data/*
+backend/elastic-search/logs/elasticsearch.log

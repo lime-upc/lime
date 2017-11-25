@@ -8,7 +8,7 @@ module.exports = {
         },
         {
             "name": "timestamp",
-            "type": "double"
+            "type": "long"
         },
         {
             "name": "lat",
