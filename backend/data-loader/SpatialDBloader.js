@@ -40,11 +40,6 @@ MongoClient.connect(url, function(err, db) {
             price_level: jsonContent.results[i].price_level,
             rating: jsonContent.results[i].rating,
             address: replacer(JSON.stringify(jsonContent.results[i].vicinity)),
-            additional_information: "",
-            notification_texts: [],
-            notification_in_use_index: 0,
-            tags: [],
-            affiliated: false,
             permanently_closed: perm_closed
         };
 
@@ -54,6 +49,12 @@ MongoClient.connect(url, function(err, db) {
         });
 
     }
+
+	// Create the Geospatial index
+	db.collection("spatialDB").createIndex(
+        { location : "2dsphere" }, function(err, result) {
+	    console.log("Created index: "+result);
+	});
 
     db.close();
 
