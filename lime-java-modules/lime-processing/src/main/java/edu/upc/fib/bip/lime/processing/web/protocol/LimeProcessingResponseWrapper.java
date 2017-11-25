@@ -21,11 +21,15 @@ public class LimeProcessingResponseWrapper<T> {
         this.message = message;
     }
 
-    public static LimeProcessingResponseWrapper<String> of(Exception e) {
-        return new LimeProcessingResponseWrapper<>(true, e.getMessage());
+    public static LimeProcessingResponseWrapper<String> error(Exception e) {
+        return error(e.getMessage());
     }
 
-    public static <T> LimeProcessingResponseWrapper<T> of(T response) {
+    public static LimeProcessingResponseWrapper<String> error(String e) {
+        return new LimeProcessingResponseWrapper<>(true, e);
+    }
+
+    public static <T> LimeProcessingResponseWrapper<T> success(T response) {
         return new LimeProcessingResponseWrapper<>(false, response);
     }
 }

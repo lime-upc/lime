@@ -66,10 +66,6 @@ public class TransactionControllerTest {
 
     @Test
     public void getInfoReturnsCorrectTransactionInfo() throws Exception {
-        GetTransactionInfoRequest request = new GetTransactionInfoRequest();
-        request.setTransactionId("1");
-
-        HttpEntity<GetTransactionInfoRequest> requestEntity = new HttpEntity<>(request);
         LimeProcessingResponseTransactionWrapper response =
             restTemplate.getForEntity("/info/1", LimeProcessingResponseTransactionWrapper.class).getBody();
         assertFalse(response.isError());
@@ -274,5 +270,14 @@ public class TransactionControllerTest {
             // that's OK
         }
         assertEquals(30, userBalanceDAO.getCurrentBalance(userId), 0.001);
+    }
+
+    @Test
+    public void userBalanceControllerShouldReturnUserBalance() throws Exception {
+        int userId = 353;
+        userBalanceDAO.createUserBalance(userId, 4.7);
+        LimeProcessingResponseWrapper<Double> responseWrapper = restTemplate.getForObject("/balance?user={userId}", LimeProcessingResponseWrapper.class, userId);
+        Double balance = responseWrapper.getMessage();
+        assertEquals(4.7, balance, 0.001);
     }
 }
