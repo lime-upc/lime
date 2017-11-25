@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * @author Elizaveta Ketova <elizabeth.ooh@gmail.com>
  * @since 19.11.17
@@ -24,6 +27,8 @@ public class GetTransactionInfoResponse {
     private TransactionType type;
     private Integer businessId;
     private Integer userId;
+    private LocalDateTime startedAt;
+    private LocalDateTime finishedAt;
 
     public static GetTransactionInfoResponse of(Transaction transaction) {
         return builder()
@@ -33,6 +38,8 @@ public class GetTransactionInfoResponse {
             .userId(transaction.getUserId())
             .status(transaction.getStatus())
             .type(transaction.getType())
+            .startedAt(transaction.getStartedAt())
+            .finishedAt(transaction.getFinishedAt())
             .build();
     }
 }

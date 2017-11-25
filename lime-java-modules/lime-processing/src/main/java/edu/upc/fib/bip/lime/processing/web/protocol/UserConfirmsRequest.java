@@ -15,6 +15,9 @@ public class UserConfirmsRequest {
     @JsonProperty("id")
     private String transactionId;
 
+    @JsonProperty("user")
+    private Integer userId;
+
     @JsonProperty("confirmed")
     private boolean confirmed;
 }

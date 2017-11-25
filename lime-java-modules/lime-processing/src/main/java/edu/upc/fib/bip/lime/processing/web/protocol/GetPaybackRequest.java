@@ -15,4 +15,7 @@ public class GetPaybackRequest {
     @JsonProperty("id")
     private String transactionId;
 
+    @JsonProperty("user")
+    private Integer userId;
+
 }
