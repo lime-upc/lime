@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 /* Components (pages)*/
 import { AppComponent } from './app.component';
@@ -54,7 +55,8 @@ import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.co
     MatButtonModule,
     MatSidenavModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ],
   providers: [
     AuthenticationService
