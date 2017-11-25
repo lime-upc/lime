@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * @author Maksim Samoylov <samoylov@loyaltyplant.com>
+ * @author Elizaveta Ketova <elizabeth.ooh@gmail.com>
  * @since 25.11.17
  */
 @Getter

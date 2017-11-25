@@ -6,7 +6,7 @@ import edu.upc.fib.bip.lime.processing.web.protocol.LimeProcessingResponseWrappe
 import java.util.List;
 
 /**
- * @author Maksim Samoylov <samoylov@loyaltyplant.com>
+ * @author Elizaveta Ketova <elizabeth.ooh@gmail.com>
  * @since 25.11.17
  */
 public class LimeProcessingResponseListTransactionWrapper extends LimeProcessingResponseWrapper<List<Transaction>> {

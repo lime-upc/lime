@@ -5,7 +5,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 /**
- * @author Maksim Samoylov <samoylov@loyaltyplant.com>
+ * @author Elizaveta Ketova <elizabeth.ooh@gmail.com>
  * @since 25.11.17
  */
 @Getter
