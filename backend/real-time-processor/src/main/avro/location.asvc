@@ -1,6 +1,6 @@
 {
     "namespace": "org.lime",
-    "name": "org.lime.LocationType",
+    "name": "LocationType",
     "type": "record",
     "fields": [
         {
@@ -9,7 +9,7 @@
         },
         {
             "name": "timestamp",
-            "type": "double"
+            "type": "long"
         },
         {
             "name": "lat",
