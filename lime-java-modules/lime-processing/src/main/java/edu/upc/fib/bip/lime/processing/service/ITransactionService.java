@@ -1,9 +1,11 @@
 package edu.upc.fib.bip.lime.processing.service;
 
 import edu.upc.fib.bip.lime.processing.model.Transaction;
+import edu.upc.fib.bip.lime.processing.model.TransactionFilter;
 import edu.upc.fib.bip.lime.processing.web.protocol.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -54,4 +56,11 @@ public interface ITransactionService {
      * @return
      */
     Optional<Transaction> getTransactionInfo(String transactionId);
+
+    /**
+     * Finds all transactions by given filter
+     * @param filter
+     * @return
+     */
+    List<Transaction> findTransactionsByFilter(TransactionFilter filter);
 }

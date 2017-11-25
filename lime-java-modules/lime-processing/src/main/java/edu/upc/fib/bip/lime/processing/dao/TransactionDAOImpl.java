@@ -1,6 +1,7 @@
 package edu.upc.fib.bip.lime.processing.dao;
 
 import edu.upc.fib.bip.lime.processing.model.Transaction;
+import edu.upc.fib.bip.lime.processing.model.TransactionFilter;
 import edu.upc.fib.bip.lime.processing.model.TransactionStatus;
 import edu.upc.fib.bip.lime.processing.model.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -87,7 +89,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 
     @Override
     public List<Transaction> getTransactionsByUser(Integer userId, int offset, int limit) {
-        return sql.query("SELECT * FROM Transactions WHERE userId = ? LIMIT ?, ?", ROW_MAPPER,
+        return sql.query("SELECT * FROM Transactions WHERE UserID = ? LIMIT ?, ?", ROW_MAPPER,
             userId, offset, limit);
     }
 
@@ -98,7 +100,30 @@ public class TransactionDAOImpl implements ITransactionDAO {
 
     @Override
     public List<Transaction> getTransactionsByBusiness(Integer businessId, int offset, int limit) {
-        return sql.query("SELECT * FROM Transactions WHERE businessId = ? LIMIT ?, ?", ROW_MAPPER,
+        return sql.query("SELECT * FROM Transactions WHERE BusinessID = ? LIMIT ?, ?", ROW_MAPPER,
             businessId, offset, limit);
+    }
+
+    @Override
+    public List<Transaction> findTransactionsByFilter(TransactionFilter filter) {
+        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM Transactions WHERE ");
+
+        List<String> sqlFilters = new ArrayList<>();
+        if (filter.getBusinessId() != null) {
+            sqlFilters.add("BusinessID = " + filter.getBusinessId());
+        }
+        if (filter.getUserId() != null) {
+            sqlFilters.add("UserID = " + filter.getUserId());
+        }
+        if (filter.getFrom() != null) {
+            sqlFilters.add("FinishedAt > " + Timestamp.valueOf(filter.getFrom()));
+        }
+        if (filter.getTo() != null) {
+            sqlFilters.add("FinishedAt < " + Timestamp.valueOf(filter.getTo()));
+        }
+        sqlFilters.forEach(sqlFilter -> queryBuilder.append(sqlFilter).append(" AND "));
+        queryBuilder.append("1=1");
+
+        return sql.query(queryBuilder.toString(), ROW_MAPPER);
     }
 }

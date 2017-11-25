@@ -2,6 +2,7 @@ package edu.upc.fib.bip.lime.processing.web;
 
 import edu.upc.fib.bip.lime.processing.dao.IUserBalanceDAO;
 import edu.upc.fib.bip.lime.processing.model.Transaction;
+import edu.upc.fib.bip.lime.processing.model.TransactionFilter;
 import edu.upc.fib.bip.lime.processing.model.UserBalance;
 import edu.upc.fib.bip.lime.processing.service.ITransactionService;
 import edu.upc.fib.bip.lime.processing.utils.LimeGetController;
@@ -11,6 +12,8 @@ import edu.upc.fib.bip.lime.processing.web.protocol.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -33,6 +36,20 @@ public class TransactionController {
             .map(UserBalance::getBalance)
             .<LimeProcessingResponseWrapper<?>>map(LimeProcessingResponseWrapper::success)
             .orElseGet(() -> LimeProcessingResponseWrapper.error("User balance not found"));
+    }
+
+    @LimeGetController("/transactions")
+    public LimeProcessingResponseWrapper<?> userBalance(@RequestParam("boid") int businessId,
+                                                        @RequestParam(value = "user", required = false) Integer userId,
+                                                        @RequestParam(value = "from", required = false) LocalDateTime from,
+                                                        @RequestParam(value = "to", required = false) LocalDateTime to) {
+        List<Transaction> transactionsByFilter = transactionService.findTransactionsByFilter(TransactionFilter.builder()
+            .businessId(businessId)
+            .userId(userId)
+            .from(from)
+            .to(to)
+            .build());
+        return LimeProcessingResponseWrapper.success(transactionsByFilter);
     }
 
     @LimeGetController("/info/{transactionId}")

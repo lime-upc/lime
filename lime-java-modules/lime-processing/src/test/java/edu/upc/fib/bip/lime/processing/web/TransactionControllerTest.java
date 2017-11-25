@@ -7,6 +7,7 @@ import edu.upc.fib.bip.lime.processing.model.TransactionStatus;
 import edu.upc.fib.bip.lime.processing.model.TransactionType;
 import edu.upc.fib.bip.lime.processing.service.ITransactionService;
 import edu.upc.fib.bip.lime.processing.web.protocol.*;
+import edu.upc.fib.bip.lime.processing.web.utils.LimeProcessingResponseListTransactionWrapper;
 import edu.upc.fib.bip.lime.processing.web.utils.LimeProcessingResponseTransactionWrapper;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -276,8 +277,33 @@ public class TransactionControllerTest {
     public void userBalanceControllerShouldReturnUserBalance() throws Exception {
         int userId = 353;
         userBalanceDAO.createUserBalance(userId, 4.7);
-        LimeProcessingResponseWrapper<Double> responseWrapper = restTemplate.getForObject("/balance?user={userId}", LimeProcessingResponseWrapper.class, userId);
+        LimeProcessingResponseWrapper<Double> responseWrapper =
+            restTemplate.getForObject("/balance?user={userId}", LimeProcessingResponseWrapper.class, userId);
         Double balance = responseWrapper.getMessage();
         assertEquals(4.7, balance, 0.001);
+    }
+
+    @Test
+    public void transactionsControllerShouldReturnListOfTransactionsByFilter() throws Exception {
+        for (int i = 10; i < 20; i++) {
+            userBalanceDAO.createUserBalance(i, 15000.0);
+        }
+        for (int i = 0; i < 100; i++) {
+            String transactionId = transactionService.createTransaction((i % 2) + 2849, 1.0);
+            transactionService.userConfirms(transactionId, (i / 2 % 10) + 10, (i / 2) % 2 == 0 );
+        }
+
+        LimeProcessingResponseListTransactionWrapper byBusiness =
+            restTemplate.getForObject("/transactions?boid={boid}",
+                LimeProcessingResponseListTransactionWrapper.class, 2849);
+
+        assertEquals(50, byBusiness.getMessage().size());
+
+
+        LimeProcessingResponseListTransactionWrapper byBusinessAndUser =
+            restTemplate.getForObject("/transactions?boid={boid}&user={user}",
+                LimeProcessingResponseListTransactionWrapper.class, 2849, 17);
+
+        assertEquals(5, byBusinessAndUser.getMessage().size());
     }
 }

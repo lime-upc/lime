@@ -2,10 +2,7 @@ package edu.upc.fib.bip.lime.processing.service;
 
 import edu.upc.fib.bip.lime.processing.dao.ITransactionDAO;
 import edu.upc.fib.bip.lime.processing.dao.IUserBalanceDAO;
-import edu.upc.fib.bip.lime.processing.model.Transaction;
-import edu.upc.fib.bip.lime.processing.model.TransactionStatus;
-import edu.upc.fib.bip.lime.processing.model.TransactionType;
-import edu.upc.fib.bip.lime.processing.model.UserBalance;
+import edu.upc.fib.bip.lime.processing.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +14,7 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -102,6 +100,11 @@ public class TransactionServiceImpl implements ITransactionService {
     @Override
     public Optional<Transaction> getTransactionInfo(String transactionId) {
         return Optional.ofNullable(transactionDAO.findById(transactionId));
+    }
+
+    @Override
+    public List<Transaction> findTransactionsByFilter(TransactionFilter filter) {
+        return transactionDAO.findTransactionsByFilter(filter);
     }
 
     private void createUserBalanceIfNeeded(int userId) {
