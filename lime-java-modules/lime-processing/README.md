@@ -54,9 +54,19 @@ and returns JSON object representing full transaction state
 * `confirmed : boolean` (flag which identifies that business owner whether confirms transaction or not)
 and returns JSON object representing full transaction state
 
+### `GET /balance`
+`/balance` is a controller which returns current user balance. It consumes `user` GET parameter and produces `Double`.
+
+### `GET /transactions`
+`/transactions` is a controller which returns transactions by any given filter. In consumes GET parameters:
+* `boid : int` (business id, optional)
+* `user : int` (user id, optional)
+* `from : Timestamp` (start timestamp, optional)
+* `to : Timestamp` (end timestamp, optional)
+
 ## Notes
 Each controller returns response wrapped in JSON object with the following structure:
 * `error : boolean` (identifies whether request is handled with error or not)
-* `message : Object` (may contain error message as String, transaction id as String, or full JSON containing all transaction fields).
+* `message : Object` (may contain any Object, it depends on underlying handler).
 
 Timestamp format for each method is `yyyy-MM-dd HH:mm:ss`. 

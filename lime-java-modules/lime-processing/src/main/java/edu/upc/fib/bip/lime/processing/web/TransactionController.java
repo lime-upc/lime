@@ -39,7 +39,7 @@ public class TransactionController {
     }
 
     @LimeGetController("/transactions")
-    public LimeProcessingResponseWrapper<?> userBalance(@RequestParam("boid") int businessId,
+    public LimeProcessingResponseWrapper<?> userBalance(@RequestParam(value = "boid", required = false) Integer businessId,
                                                         @RequestParam(value = "user", required = false) Integer userId,
                                                         @RequestParam(value = "from", required = false) LocalDateTime from,
                                                         @RequestParam(value = "to", required = false) LocalDateTime to) {
