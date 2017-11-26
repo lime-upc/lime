@@ -101,6 +101,7 @@ public class Main {
                 Document userDoc = usersCollection.find(eq("email", email)).first();
                 Integer age = calculateAge(userDoc.get("date_of_birth").toString(), LocalDate.now());
 
+                System.out.println("Data about user "+email+" retrieved from mongoDB!");
                 saveInElasticSearch(t, userDoc);
 
                 mongo.close();
@@ -119,7 +120,6 @@ public class Main {
 
     public static void saveInElasticSearch(LocationType t, Document doc) throws IOException {
 
-        // TODO: set ES storage type to memory/RAM, instead of HDD (https://www.elastic.co/guide/en/elasticsearch/reference/1.4/index-modules-store.html, https://github.com/elastic/elasticsearch/blob/v1.6.0/src/test/java/org/elasticsearch/test/ElasticsearchSingleNodeTest.java)
         // Create ES client
         TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
                 .addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
@@ -166,14 +166,12 @@ public class Main {
             e.printStackTrace();
         }
 
-
 /*
         // MatchAll on the whole cluster with all default options
         SearchResponse responseSearchAll = client.prepareSearch().get();
         System.out.println("Search ALL: \n"+responseSearchAll);
 */
 
-        // on shutdown
         //client.close();
 
     }
