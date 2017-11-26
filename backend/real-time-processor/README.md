@@ -6,3 +6,9 @@ Instructions:
 > Import as Maven project in Eclipse/IntelliJ...
 > Run the main class
 
+
+
+Additional information & tutorials:
+https://www.ibm.com/developerworks/library/j-use-elasticsearch-java-apps/index.html
+https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-docs-index.html
+https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-docs-update.html
