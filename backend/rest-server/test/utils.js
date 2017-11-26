@@ -1,7 +1,7 @@
 /*
  * Some util functions for tests. This file is not runnable as a test.
  */
-var config = require('../config');
+var config = require('../../config');
 var jwt = require('jsonwebtoken');
 var crypto = require('crypto');
 
