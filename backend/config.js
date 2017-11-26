@@ -3,6 +3,7 @@
 
 module.exports = {
     db: "mongodb://localhost/lime",
+    db_test: "mongodb://localhost/lime-test",
     port: "3000",
     jwtsecret: "SECRET",
     kafka_enabled: true,

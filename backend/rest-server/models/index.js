@@ -8,5 +8,7 @@
 
 module.exports = {
     User: require('./user.js'),
-    Business: require('./business.js')
+    Business: require('./business.js'),
+    Transaction: require('./transaction.js'),
+    Wallet: require('./wallet.js')
 };

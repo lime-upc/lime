@@ -1,6 +1,6 @@
 var express = require('express'),
     mongoose = require('mongoose'),
-    config = require("./config"),
+    config = require("../config"),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     cors = require('cors');
@@ -17,10 +17,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 //Enable CORS requests on all routes
 app.use(cors());
 //Load models from the ./models folder
-app.models = require('./rest-server/models');
+app.models = require('./models');
 
 //Load routes
-require('./rest-server/routes')(app);
+require('./routes')(app);
 
 //Set-up passport with JWT strategy
 var JwtStrategy = require('passport-jwt').Strategy,
@@ -65,11 +65,13 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 
 
 
-
-
+var MONGO = ( process.env.MONGODB_URI || config.db );
+if(app.settings.env === 'test') {
+    MONGO = config.db_test;
+}
 
 //If Heroku, use local MongoDB URI
-mongoose.connect( process.env.MONGODB_URI || config.db);
+mongoose.connect(MONGO);
 mongoose.connection.once('open', function () {
 
     console.log("[INFO] Connected to MongoDB via Mongoose ");
@@ -81,3 +83,5 @@ mongoose.connection.once('open', function () {
     });
 });
 
+
+module.exports = app;

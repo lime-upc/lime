@@ -2,7 +2,7 @@ var avro = require('avsc');
 var kafka = require('kafka-node');
 var Consumer = kafka.Consumer;
 var Client = kafka.Client;
-var config = require('./config');
+var config = require('../config');
 
 
 
@@ -16,7 +16,7 @@ var avroSchema = {
 		},
 		{
 			name: 'timestamp',
-			type: 'double'
+			type: 'long'
 		},
 		{
 			name: 'lat',

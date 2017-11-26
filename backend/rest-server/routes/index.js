@@ -6,6 +6,8 @@ module.exports = function(app) {
     app.use("/users",require('./user/user')(app));
     app.use("/businesses",require('./business/business')(app));
     app.use("/location",require('./location/location')(app));
+    app.use("/transactions",require('./transaction/transaction')(app));
+    app.use("/wallets",require('./wallet/wallet')(app));
 
 /*
     Sample code from a previous project.

@@ -13,6 +13,7 @@ module.exports = function (app) {
     var router = express.Router();
 
     var User = app.models.User; //Get User Model
+    var Wallet = app.models.Wallet;
 
 
 
@@ -35,10 +36,7 @@ module.exports = function (app) {
 
         User.find({}, 'email first_name last_name date_of_birth gender preferences')
             .then(function(response){
-                if (!response) {
-                    res.status(404).send({"error": true, "message": "The user does not exist"});
-                    return;
-                }
+
 
                 res.send({
                     "error": false,
@@ -54,7 +52,7 @@ module.exports = function (app) {
     });
 
     /**
-     * POST / = Creates new user
+     * POST / = Creates new user and its wallet
      *
      * Authentication: No
      * Permissions: Everybody
@@ -105,11 +103,28 @@ module.exports = function (app) {
         newUser.save()
             .then(function(response){
 
+                //Create new, empty wallet
+                var wallet = new Wallet(
+                    {
+                        email: req.body.email,
+                        balance_amount: 0,
+                        total_money_received: 0,
+                        total_money_spent: 0
+                    }
+                );
 
-                res.send({
-                    "error": false,
-                    "message": response.withoutPassword()
-                });
+
+                //Creates a new wallet also
+                return wallet.save()
+                    .then(function(res){
+                        res.send({
+                            "error": false,
+                            "message": response.withoutPassword()
+                        });
+                    });
+
+
+
             })
             .catch(function(error){
                 //Error because mail already registered (unique key conflict in Mongoose is error 11000).

@@ -9,11 +9,11 @@
  *
  * Author: Ismael Rodriguez. 17/11/2017.
  */
-var PathObject = require('./location-simulator/PathObject');
-var Person = require('./location-simulator/Person');
+var PathObject = require('./PathObject');
+var Person = require('./Person');
 var http = require('http');
 var fs = require('fs');
-var config = require('./config');
+var config = require('../config');
 
 
 var PERSON_NUMBER = 50;

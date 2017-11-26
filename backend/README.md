@@ -22,7 +22,7 @@ Use it for testing.
 
 How to run it:
 1. Make sure Kafka is running
-2. Run node `KafkaMessageLogger.js`
+2. Run `npm run kafka-logger`
 
 How to configure it:
 * Configure connection options in config.js
@@ -33,11 +33,11 @@ Email format is 'test-X@lime.com' where X is number from 0 to 1999. Password is 
 
 How to run it:
 1. Make sure that Backend is running
-2. Run `node fakeUserCreator.js`
+2. Run `npm run fake-users-creator`
 
 How to configure it:
 * Configure connection options in config.js
-* You can change number of created users in fakeUserCreator.js
+* You can change number of created users in main.js
 
 ## Location Simulator
 
@@ -48,11 +48,11 @@ By default, it only simulates 500 simultaneous users sending data every 10 secon
 How to run it:
 1. Make sure that Backend and Kafka are running
 2. Make sure that you created fake users with Fake Users Creator
-3. Run `node locationSimulator.js`
+3. Run `npm run simulator`
 
 How to configure it:
 * Configure connection options in config.js
-* Configure update frequency, walk speed, stops and other parameters in locationSimulator.js
+* Configure update frequency, walk speed, stops and other parameters in main.js
 
 How to add paths:
 1. Go to https://www.gpsies.com, register and create a walking route.

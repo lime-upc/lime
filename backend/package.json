@@ -4,28 +4,37 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon rest-server/server.js",
+    "test": "mocha --recursive ./rest-server/test --timeout 2000",
+    "simulator": "node location-simulator/main.js",
+    "kafka-logger": "node kafka-logger/main.js",
+    "fake-users-creator": "node fake-users-creator/main.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^4.0.1",
     "nodemon": "^1.12.1"
   },
   "dependencies": {
-    "avsc": "^5.0.7",
+    "@google/maps": "^0.4.5",
+    "async": "^2.6.0",
+    "avsc": "^5.1.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "crypto": "^1.0.1",
     "express": "^4.16.2",
     "http": "0.0.0",
     "jsonwebtoken": "^8.1.0",
-    "kafka-node": "^2.2.3",
+    "kafka-node": "^2.3.0",
     "kafka-rest": "0.0.5",
     "mongodb": "^2.2.33",
-    "mongoose": "^4.13.1",
+    "mongoose": "^4.13.5",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
+    "replace": "^0.3.0",
     "webhdfs": "^1.1.1"
   }
 }
