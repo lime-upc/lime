@@ -101,7 +101,7 @@ public class Main {
                 Document userDoc = usersCollection.find(eq("email", email)).first();
                 Integer age = calculateAge(userDoc.get("date_of_birth").toString(), LocalDate.now());
 
-                System.out.println("Data about user "+email+" retrieved from mongoDB!");
+                System.out.println("Data about user "+ email +" retrieved from mongoDB!");
                 saveInElasticSearch(t, userDoc);
 
                 mongo.close();
