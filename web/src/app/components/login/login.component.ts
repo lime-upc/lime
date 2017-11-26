@@ -37,6 +37,10 @@ export class LoginComponent implements OnInit {
           email: "",
           password: ""
         };
+
+        if (auth.isAuthentificated()) {
+          router.navigate(['/']);
+        }
   }
 
   signIn() {
@@ -46,10 +50,9 @@ export class LoginComponent implements OnInit {
             this.loginSuccess=true;
             this.router.navigate(['/']);
         }
-        if (!this.loginSuccess) {
-          alert('Error or password incorrect')
-        }
-    })
+    },(error => {
+      alert('Error or password incorrect')
+    }))
   }
 
   ngOnInit() {

@@ -7,20 +7,28 @@ import edu.upc.fib.bip.lime.processing.model.TransactionStatus;
 import edu.upc.fib.bip.lime.processing.model.TransactionType;
 import edu.upc.fib.bip.lime.processing.service.ITransactionService;
 import edu.upc.fib.bip.lime.processing.web.protocol.*;
+import edu.upc.fib.bip.lime.processing.web.utils.LimeProcessingResponseListTransactionWrapper;
+import edu.upc.fib.bip.lime.processing.web.utils.LimeProcessingResponseTransactionWrapper;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.boot.autoconfigure.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.Assert.*;
@@ -38,6 +46,11 @@ public class TransactionControllerTest {
     @TestConfiguration
     public static class LimeProcessingTestContext {
 
+        @Bean
+        public FlywayMigrationStrategy flywayMigrationStrategy() {
+            return flyway -> { /* doing nothing */ };
+        }
+
     }
 
     @Autowired
@@ -54,14 +67,13 @@ public class TransactionControllerTest {
 
     @Test
     public void getInfoReturnsCorrectTransactionInfo() throws Exception {
-        GetTransactionInfoRequest request = new GetTransactionInfoRequest();
-        request.setTransactionId("1");
+        LimeProcessingResponseTransactionWrapper response =
+            restTemplate.getForEntity("/info/1", LimeProcessingResponseTransactionWrapper.class).getBody();
+        assertFalse(response.isError());
+        Transaction transaction = response.getMessage();
 
-        HttpEntity<GetTransactionInfoRequest> requestEntity = new HttpEntity<>(request);
-        GetTransactionInfoResponse response =
-            restTemplate.getForEntity("/info/1", GetTransactionInfoResponse.class).getBody();
-        assertEquals(1, response.getBusinessId().intValue());
-        assertEquals(3.5, response.getAmount(), 0.001);
+        assertEquals(1, transaction.getBusinessId().intValue());
+        assertEquals(3.5, transaction.getPaymentAmount(), 0.001);
     }
 
     @Test
@@ -71,63 +83,42 @@ public class TransactionControllerTest {
         request.setAmount(3.0);
         HttpEntity<CreateTransactionRequest> requestEntity = new HttpEntity<>(request);
 
-        ResponseEntity<CreateTransactionResponse> createTransactionResponseResponseEntity =
-            restTemplate.postForEntity("/start", requestEntity, CreateTransactionResponse.class);
-        CreateTransactionResponse response = createTransactionResponseResponseEntity.getBody();
+        ResponseEntity<LimeProcessingResponseWrapper> responseEntity =
+            restTemplate.postForEntity("/start", requestEntity, LimeProcessingResponseWrapper.class);
+        LimeProcessingResponseWrapper response = responseEntity.getBody();
 
-        assertNotNull(response.getTransactionId());
-        GetTransactionInfoResponse infoResponse = transactionService.getTransactionInfo(response.getTransactionId());
+        String transactionId = ((String) response.getMessage());
+
+        assertNotNull(transactionId);
+        Transaction infoResponse = transactionService.getTransactionInfo(transactionId).get();
         assertEquals(request.getBusinessId(), infoResponse.getBusinessId().intValue());
-        assertEquals(request.getAmount(), infoResponse.getAmount(), 0.001);
+        assertEquals(request.getAmount(), infoResponse.getPaymentAmount(), 0.001);
         assertEquals(TransactionStatus.NEW, infoResponse.getStatus());
-    }
-
-    @Test
-    public void scanningChangesTransactionStateAndConnectsToUser() throws Exception {
-        int userId = 456;
-        userBalanceDAO.createUserBalance(userId, 5.3);
-
-        String transactionId = transactionService.createTransaction(123, 4.0).getTransactionId();
-
-        ScanQrCodeRequest request = new ScanQrCodeRequest();
-        request.setTransactionId(transactionId);
-        request.setUserId(userId);
-        HttpEntity<ScanQrCodeRequest> requestEntity = new HttpEntity<>(request);
-
-        ResponseEntity<ScanQrCodeResponse> scanQrCodeResponseResponseEntity =
-            restTemplate.postForEntity("/scan", requestEntity, ScanQrCodeResponse.class);
-        assertEquals(HttpStatus.OK, scanQrCodeResponseResponseEntity.getStatusCode());
-        ScanQrCodeResponse response = scanQrCodeResponseResponseEntity.getBody();
-
-        GetTransactionInfoResponse infoResponse = transactionService.getTransactionInfo(transactionId);
-        assertEquals(123, infoResponse.getBusinessId().intValue());
-        assertEquals(userId, infoResponse.getUserId().intValue());
-        assertEquals(4.0, infoResponse.getAmount(), 0.001);
-        assertEquals(TransactionStatus.SCANNED, infoResponse.getStatus());
+        assertNotNull(infoResponse.getStartedAt());
+        assertNull(infoResponse.getFinishedAt());
     }
 
     @Test
     public void userCanConfirmTransactionWithVirtualMoney() throws Exception {
         int userId = 567;
         userBalanceDAO.createUserBalance(userId, 6.7);
-        String transactionId = transactionService.createTransaction(123, 4.0).getTransactionId();
-        transactionService.scanQrCode(transactionId, userId);
+        String transactionId = transactionService.createTransaction(123, 4.0);
 
         UserConfirmsRequest userConfirmsRequest = new UserConfirmsRequest();
         userConfirmsRequest.setTransactionId(transactionId);
+        userConfirmsRequest.setUserId(userId);
         userConfirmsRequest.setConfirmed(true);
         HttpEntity<UserConfirmsRequest> requestEntity = new HttpEntity<>(userConfirmsRequest);
 
-        ResponseEntity<UserConfirmsResponse> response =
-            restTemplate.postForEntity("/confirm/user", requestEntity, UserConfirmsResponse.class);
+        ResponseEntity<LimeProcessingResponseTransactionWrapper> response =
+            restTemplate.exchange("/confirm/user", HttpMethod.PATCH, requestEntity,
+                LimeProcessingResponseTransactionWrapper.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertFalse(response.getBody().isError());
 
-        GetTransactionInfoResponse transactionInfo = transactionService.getTransactionInfo(transactionId);
-        assertEquals(TransactionStatus.COMPLETED, transactionInfo.getStatus());
-        assertEquals(123, transactionInfo.getBusinessId().intValue());
-        assertEquals(4.0, transactionInfo.getAmount(), 0.001);
-        assertEquals(567, transactionInfo.getUserId().intValue());
-
+        Transaction transaction = response.getBody().getMessage();
+        Transaction transactionInfo = transactionService.getTransactionInfo(transactionId).get();
+        assertEquals(transaction, transactionInfo);
         assertEquals(2.7, userBalanceDAO.getCurrentBalance(userId), 0.001);
     }
 
@@ -135,24 +126,21 @@ public class TransactionControllerTest {
     public void userCanDiscardTransactionWithVirtualMoney() throws Exception {
         int userId = 562;
         userBalanceDAO.createUserBalance(userId, 8.5);
-        String transactionId = transactionService.createTransaction(123, 6.4).getTransactionId();
-        transactionService.scanQrCode(transactionId, userId);
+        String transactionId = transactionService.createTransaction(123, 6.4);
 
         UserConfirmsRequest userConfirmsRequest = new UserConfirmsRequest();
         userConfirmsRequest.setTransactionId(transactionId);
+        userConfirmsRequest.setUserId(userId);
         userConfirmsRequest.setConfirmed(false);
         HttpEntity<UserConfirmsRequest> requestEntity = new HttpEntity<>(userConfirmsRequest);
 
-        ResponseEntity<UserConfirmsResponse> response =
-            restTemplate.postForEntity("/confirm/user", requestEntity, UserConfirmsResponse.class);
+        ResponseEntity<LimeProcessingResponseTransactionWrapper> response =
+            restTemplate.exchange("/confirm/user", HttpMethod.PATCH, requestEntity, LimeProcessingResponseTransactionWrapper.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-
-        GetTransactionInfoResponse transactionInfo = transactionService.getTransactionInfo(transactionId);
-        assertEquals(TransactionStatus.DISCARDED, transactionInfo.getStatus());
-        assertEquals(123, transactionInfo.getBusinessId().intValue());
-        assertEquals(6.4, transactionInfo.getAmount(), 0.001);
-        assertEquals(userId, transactionInfo.getUserId().intValue());
-
+        assertFalse(response.getBody().isError());
+        Transaction transaction = response.getBody().getMessage();
+        Transaction transactionInfo = transactionService.getTransactionInfo(transactionId).get();
+        assertEquals(transaction, transactionInfo);
         assertEquals(8.5, userBalanceDAO.getCurrentBalance(userId), 0.001);
     }
 
@@ -160,25 +148,21 @@ public class TransactionControllerTest {
     public void getPaybackWorks() throws Exception {
         int userId = 458;
         userBalanceDAO.createUserBalance(userId, 6.8);
-        String transactionId = transactionService.createTransaction(123, 4.7).getTransactionId();
-        transactionService.scanQrCode(transactionId, userId);
+        String transactionId = transactionService.createTransaction(123, 4.7);
 
         GetPaybackRequest getPaybackRequest = new GetPaybackRequest();
         getPaybackRequest.setTransactionId(transactionId);
+        getPaybackRequest.setUserId(userId);
         HttpEntity<GetPaybackRequest> requestEntity = new HttpEntity<>(getPaybackRequest);
 
-        ResponseEntity<GetPaybackResponse> getPaybackResponseResponseEntity =
-            restTemplate.postForEntity("/payback", requestEntity, GetPaybackResponse.class);
-        assertEquals(HttpStatus.OK, getPaybackResponseResponseEntity.getStatusCode());
+        ResponseEntity<LimeProcessingResponseTransactionWrapper> responseEntity =
+            restTemplate.exchange("/payback", HttpMethod.PATCH, requestEntity, LimeProcessingResponseTransactionWrapper.class);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertFalse(responseEntity.getBody().isError());
+        Transaction transaction = responseEntity.getBody().getMessage();
 
-        GetTransactionInfoResponse transactionInfo = transactionService.getTransactionInfo(transactionId);
-        assertEquals(TransactionStatus.PROCESSING, transactionInfo.getStatus());
-        assertEquals(TransactionType.REAL_MONEY, transactionInfo.getType());
-        assertEquals(123, transactionInfo.getBusinessId().intValue());
-        assertEquals(userId, transactionInfo.getUserId().intValue());
-        assertEquals(4.7, transactionInfo.getAmount(), 0.001);
-        assertEquals(0.5, transactionInfo.getPayback(), 0.001);
-
+        Transaction transactionInfo = transactionService.getTransactionInfo(transactionId).get();
+        assertEquals(transaction, transactionInfo);
         assertEquals(6.8, userBalanceDAO.getCurrentBalance(userId), 0.001);
     }
 
@@ -186,27 +170,23 @@ public class TransactionControllerTest {
     public void businessCanConfirmTransactionWithRealMoney() throws Exception {
         int userId = 245;
         userBalanceDAO.createUserBalance(245, 9.5);
-        String transactionId = transactionService.createTransaction(123, 2.1).getTransactionId();
-        transactionService.scanQrCode(transactionId, userId);
-        transactionService.getPayback(transactionId);
+        String transactionId = transactionService.createTransaction(123, 2.1);
+        transactionService.getPayback(transactionId, userId);
 
         BusinessConfirmsRequest request = new BusinessConfirmsRequest();
         request.setTransactionId(transactionId);
         request.setConfirmed(true);
         HttpEntity<BusinessConfirmsRequest> requestEntity = new HttpEntity<>(request);
 
-        ResponseEntity<BusinessConfirmsResponse> businessConfirmsResponseResponseEntity =
-            restTemplate.postForEntity("/confirm/business", requestEntity, BusinessConfirmsResponse.class);
-        assertEquals(HttpStatus.OK, businessConfirmsResponseResponseEntity.getStatusCode());
+        ResponseEntity<LimeProcessingResponseTransactionWrapper> responseEntity =
+            restTemplate.exchange("/confirm/business", HttpMethod.PATCH,
+                requestEntity, LimeProcessingResponseTransactionWrapper.class);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertFalse(responseEntity.getBody().isError());
+        Transaction transaction = responseEntity.getBody().getMessage();
 
-        GetTransactionInfoResponse infoResponse = transactionService.getTransactionInfo(transactionId);
-        assertEquals(TransactionStatus.COMPLETED, infoResponse.getStatus());
-        assertEquals(TransactionType.REAL_MONEY, infoResponse.getType());
-        assertEquals(123, infoResponse.getBusinessId().intValue());
-        assertEquals(userId, infoResponse.getUserId().intValue());
-        assertEquals(2.1, infoResponse.getAmount(), 0.001);
-        assertEquals(0.2, infoResponse.getPayback(), 0.001);
-
+        Transaction transactionInfo = transactionService.getTransactionInfo(transactionId).get();
+        assertEquals(transaction, transactionInfo);
         assertEquals(9.7, userBalanceDAO.getCurrentBalance(userId), 0.001);
     }
 
@@ -214,26 +194,23 @@ public class TransactionControllerTest {
     public void businessCanDiscardTransactionWithRealMoney() throws Exception {
         int userId = 247;
         userBalanceDAO.createUserBalance(userId, 6.8);
-        String transactionId = transactionService.createTransaction(123, 3.6).getTransactionId();
-        transactionService.scanQrCode(transactionId, userId);
-        transactionService.getPayback(transactionId);
+        String transactionId = transactionService.createTransaction(123, 3.6);
+        transactionService.getPayback(transactionId, userId);
 
         BusinessConfirmsRequest request = new BusinessConfirmsRequest();
         request.setTransactionId(transactionId);
         request.setConfirmed(false);
         HttpEntity<BusinessConfirmsRequest> requestEntity = new HttpEntity<>(request);
 
-        ResponseEntity<BusinessConfirmsResponse> businessConfirmsResponseResponseEntity =
-            restTemplate.postForEntity("/confirm/business", requestEntity, BusinessConfirmsResponse.class);
-        assertEquals(HttpStatus.OK, businessConfirmsResponseResponseEntity.getStatusCode());
+        ResponseEntity<LimeProcessingResponseTransactionWrapper> responseEntity =
+            restTemplate.exchange("/confirm/business", HttpMethod.PATCH,
+                requestEntity, LimeProcessingResponseTransactionWrapper.class);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertFalse(responseEntity.getBody().isError());
+        Transaction transaction = responseEntity.getBody().getMessage();
 
-        GetTransactionInfoResponse infoResponse = transactionService.getTransactionInfo(transactionId);
-        assertEquals(TransactionStatus.DISCARDED, infoResponse.getStatus());
-        assertEquals(TransactionType.REAL_MONEY, infoResponse.getType());
-        assertEquals(123, infoResponse.getBusinessId().intValue());
-        assertEquals(userId, infoResponse.getUserId().intValue());
-        assertEquals(3.6, infoResponse.getAmount(), 0.001);
-        assertEquals(0.4, infoResponse.getPayback(), 0.001);
+        Transaction transactionInfo = transactionService.getTransactionInfo(transactionId).get();
+        assertEquals(transaction, transactionInfo);
 
         assertEquals(6.8, userBalanceDAO.getCurrentBalance(userId), 0.001);
     }
@@ -243,17 +220,19 @@ public class TransactionControllerTest {
         int userId = 367;
         userBalanceDAO.createUserBalance(userId, 1.0);
 
-        String transactionId = transactionService.createTransaction(257, 4.7).getTransactionId();
-        transactionService.scanQrCode(transactionId, userId);
+        String transactionId = transactionService.createTransaction(257, 4.7);
         try {
-            transactionService.userConfirms(transactionId, true);
+            transactionService.userConfirms(transactionId, userId, true);
             fail("User can confirm transaction with amount bigger than his balance");
         } catch (IllegalStateException ignored) {
             // that's OK
         }
 
         assertEquals(1.0, userBalanceDAO.getCurrentBalance(userId), 0.001);
-        assertEquals(TransactionStatus.FAILED, transactionService.getTransactionInfo(transactionId).getStatus());
+        Transaction transactionInfo = transactionService.getTransactionInfo(transactionId).get();
+        assertEquals(TransactionStatus.FAILED, transactionInfo.getStatus());
+        assertNotNull(transactionInfo.getStartedAt());
+        assertNotNull(transactionInfo.getFinishedAt());
     }
 
     @Test
@@ -284,14 +263,47 @@ public class TransactionControllerTest {
 
         assertEquals(30, userBalanceDAO.getCurrentBalance(userId), 0.001);
 
-        String transactionId = transactionService.createTransaction(257, 350.0).getTransactionId();
-        transactionService.scanQrCode(transactionId, userId);
+        String transactionId = transactionService.createTransaction(257, 350.0);
         try {
-            transactionService.userConfirms(transactionId, true);
+            transactionService.userConfirms(transactionId, userId, true);
             fail("User can confirm transaction with amount bigger than his balance");
         } catch (IllegalStateException ignored) {
             // that's OK
         }
         assertEquals(30, userBalanceDAO.getCurrentBalance(userId), 0.001);
+    }
+
+    @Test
+    public void userBalanceControllerShouldReturnUserBalance() throws Exception {
+        int userId = 353;
+        userBalanceDAO.createUserBalance(userId, 4.7);
+        LimeProcessingResponseWrapper<Double> responseWrapper =
+            restTemplate.getForObject("/balance?user={userId}", LimeProcessingResponseWrapper.class, userId);
+        Double balance = responseWrapper.getMessage();
+        assertEquals(4.7, balance, 0.001);
+    }
+
+    @Test
+    public void transactionsControllerShouldReturnListOfTransactionsByFilter() throws Exception {
+        for (int i = 10; i < 20; i++) {
+            userBalanceDAO.createUserBalance(i, 15000.0);
+        }
+        for (int i = 0; i < 100; i++) {
+            String transactionId = transactionService.createTransaction((i % 2) + 2849, 1.0);
+            transactionService.userConfirms(transactionId, (i / 2 % 10) + 10, (i / 2) % 2 == 0 );
+        }
+
+        LimeProcessingResponseListTransactionWrapper byBusiness =
+            restTemplate.getForObject("/transactions?boid={boid}",
+                LimeProcessingResponseListTransactionWrapper.class, 2849);
+
+        assertEquals(50, byBusiness.getMessage().size());
+
+
+        LimeProcessingResponseListTransactionWrapper byBusinessAndUser =
+            restTemplate.getForObject("/transactions?boid={boid}&user={user}",
+                LimeProcessingResponseListTransactionWrapper.class, 2849, 17);
+
+        assertEquals(5, byBusinessAndUser.getMessage().size());
     }
 }

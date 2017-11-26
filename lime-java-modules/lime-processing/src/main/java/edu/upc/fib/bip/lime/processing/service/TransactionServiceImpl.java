@@ -2,10 +2,10 @@ package edu.upc.fib.bip.lime.processing.service;
 
 import edu.upc.fib.bip.lime.processing.dao.ITransactionDAO;
 import edu.upc.fib.bip.lime.processing.dao.IUserBalanceDAO;
-import edu.upc.fib.bip.lime.processing.model.Transaction;
-import edu.upc.fib.bip.lime.processing.model.TransactionStatus;
-import edu.upc.fib.bip.lime.processing.model.TransactionType;
-import edu.upc.fib.bip.lime.processing.web.protocol.*;
+import edu.upc.fib.bip.lime.processing.model.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -37,80 +40,84 @@ public class TransactionServiceImpl implements ITransactionService {
 
     @Override
     @Transactional
-    public CreateTransactionResponse createTransaction(int businessId, Double paymentAmount) {
+    public String createTransaction(int businessId, Double paymentAmount) {
         Transaction transaction = transactionDAO.create(businessId, paymentAmount);
-        eventPublisher.publishEvent(new TransactionEvent(transaction.getTransactionId()));
-        return CreateTransactionResponse.builder()
-            .transactionId(transaction.getTransactionId())
-            .build();
-    }
-
-    @Override
-    @Transactional
-    public ScanQrCodeResponse scanQrCode(String transactionId, int userId) {
-        Transaction transaction = transactionDAO.findById(transactionId);
-        transaction.setStatus(TransactionStatus.SCANNED);
-        transaction.setUserId(userId);
-        eventPublisher.publishEvent(new TransactionEvent(transactionId));
-        transactionDAO.update(transaction);
-        return ScanQrCodeResponse.builder()
-            .build();
+        eventPublisher.publishEvent(new TransactionEvent(transaction));
+        return transaction.getTransactionId();
     }
 
     @Override
     @Transactional(rollbackFor = IllegalStateException.class)
-    public UserConfirmsResponse userConfirms(String transactionId, boolean confirmed) {
+    public Transaction userConfirms(String transactionId, Integer userId, boolean confirmed) {
         Transaction transaction = transactionDAO.findById(transactionId);
-        eventPublisher.publishEvent(new TransactionEvent(transactionId));
+        eventPublisher.publishEvent(new TransactionEvent(transaction));
         transaction.setStatus(TransactionStatus.PROCESSING);
         transaction.setType(TransactionType.VIRTUAL_MONEY);
+        transaction.setUserId(userId);
 
         if (confirmed) {
+            createUserBalanceIfNeeded(userId);
             userBalanceDAO.substractPointsFromUserBalance(transaction.getUserId(), transaction.getPaymentAmount());
             transaction.setStatus(TransactionStatus.COMPLETED);
         } else {
             transaction.setStatus(TransactionStatus.DISCARDED);
         }
+        transaction.setFinishedAt(LocalDateTime.now());
         transactionDAO.update(transaction);
-        return UserConfirmsResponse.builder().build();
+        return transaction;
     }
 
     @Override
     @Transactional
-    public GetPaybackResponse getPayback(String transactionId) {
+    public Transaction getPayback(String transactionId, Integer userId) {
         Transaction transaction = transactionDAO.findById(transactionId);
-        eventPublisher.publishEvent(new TransactionEvent(transactionId));
+        eventPublisher.publishEvent(new TransactionEvent(transaction));
         transaction.setType(TransactionType.REAL_MONEY);
         transaction.setStatus(TransactionStatus.PROCESSING);
         transaction.setPaybackAmount(paybackService.computePaybackFor(transaction));
+        transaction.setUserId(userId);
         transactionDAO.update(transaction);
-        return GetPaybackResponse.builder().build();
+        return transaction;
     }
 
     @Override
     @Transactional
-    public BusinessConfirmsResponse confirmTransaction(String transactionId, boolean confirmed) {
+    public Transaction businessConfirms(String transactionId, boolean confirmed) {
         Transaction transaction = transactionDAO.findById(transactionId);
-        eventPublisher.publishEvent(new TransactionEvent(transactionId));
+        eventPublisher.publishEvent(new TransactionEvent(transaction));
         if (confirmed) {
+            createUserBalanceIfNeeded(transaction.getUserId());
             userBalanceDAO.addPointsToUserBalance(transaction.getUserId(), transaction.getPaybackAmount());
             transaction.setStatus(TransactionStatus.COMPLETED);
         } else {
             transaction.setStatus(TransactionStatus.DISCARDED);
         }
+        transaction.setFinishedAt(LocalDateTime.now());
         transactionDAO.update(transaction);
-        return BusinessConfirmsResponse.builder().build();
+        return transaction;
     }
 
     @Override
-    public GetTransactionInfoResponse getTransactionInfo(String transactionId) {
-        return GetTransactionInfoResponse.of(transactionDAO.findById(transactionId));
+    public Optional<Transaction> getTransactionInfo(String transactionId) {
+        return Optional.ofNullable(transactionDAO.findById(transactionId));
+    }
+
+    @Override
+    public List<Transaction> findTransactionsByFilter(TransactionFilter filter) {
+        return transactionDAO.findTransactionsByFilter(filter);
+    }
+
+    private void createUserBalanceIfNeeded(int userId) {
+        if (!userBalanceDAO.findByUser(userId).isPresent()) {
+            userBalanceDAO.createUserBalance(userId);
+        }
     }
 
     @TransactionalEventListener(fallbackExecution = true, phase = TransactionPhase.AFTER_ROLLBACK)
     public void rollbackTransaction(TransactionEvent transactionEvent) {
-        Transaction transaction = transactionDAO.findById(transactionEvent.getTransactionId());
+        Transaction transaction = transactionEvent.getTransaction();
         transaction.setStatus(TransactionStatus.FAILED);
+        transaction.setFinishedAt(LocalDateTime.now());
         transactionDAO.update(transaction);
 
         if (transaction.getUserId() == null) {
@@ -131,15 +138,10 @@ public class TransactionServiceImpl implements ITransactionService {
         userBalanceDAO.setUserBalance(transaction.getUserId(), allPayback - realPayments);
     }
 
+    @Getter
+    @Setter
+    @AllArgsConstructor
     public static class TransactionEvent {
-        private String transactionId;
-
-        public TransactionEvent(String transactionId) {
-            this.transactionId = transactionId;
-        }
-
-        public String getTransactionId() {
-            return transactionId;
-        }
+        private Transaction transaction;
     }
 }

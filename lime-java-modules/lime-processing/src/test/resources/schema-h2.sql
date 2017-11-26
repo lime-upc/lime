@@ -12,6 +12,8 @@ CREATE TABLE Transactions (
   Status SMALLINT,
   PaymentAmount DECIMAL,
   Payback DECIMAL DEFAULT NULL,
+  StartedAt TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  FinishedAt TIMESTAMP DEFAULT NULL,
   PRIMARY KEY (TransactionID),
   FOREIGN KEY (UserID) REFERENCES UserBalance(UserID)
 );

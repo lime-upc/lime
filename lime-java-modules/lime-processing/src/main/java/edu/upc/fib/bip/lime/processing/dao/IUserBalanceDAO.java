@@ -1,5 +1,9 @@
 package edu.upc.fib.bip.lime.processing.dao;
 
+import edu.upc.fib.bip.lime.processing.model.UserBalance;
+
+import java.util.Optional;
+
 /**
  * @author Elizaveta Ketova <elizabeth.ooh@gmail.com>
  * @since 19.11.17
@@ -17,4 +21,6 @@ public interface IUserBalanceDAO {
     double getCurrentBalance(int userId);
 
     void setUserBalance(int userId, double currentBalance);
+
+    Optional<UserBalance> findByUser(int userId);
 }

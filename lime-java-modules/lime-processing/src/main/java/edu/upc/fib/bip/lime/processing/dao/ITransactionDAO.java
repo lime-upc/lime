@@ -1,6 +1,7 @@
 package edu.upc.fib.bip.lime.processing.dao;
 
 import edu.upc.fib.bip.lime.processing.model.Transaction;
+import edu.upc.fib.bip.lime.processing.model.TransactionFilter;
 
 import java.util.List;
 
@@ -46,4 +47,5 @@ public interface ITransactionDAO {
     List<Transaction> getTransactionsByBusiness(Integer businessId);
     List<Transaction> getTransactionsByBusiness(Integer businessId, int offset, int limit);
 
+    List<Transaction> findTransactionsByFilter(TransactionFilter filter);
 }

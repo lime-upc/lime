@@ -7,26 +7,27 @@ var config = require('../config');
 
 
 var avroSchema = {
-	name: 'LocationType',
-	type: 'record',
-	fields: [
-		{
-			name: 'email',
-			type: 'string'
-		},
-		{
-			name: 'timestamp',
-			type: 'long'
-		},
-		{
-			name: 'lat',
-			type: 'double'
-		},
-		{
-			name: 'long',
-			type: 'double'
-		}
-	]
+
+  name: 'LocationType',
+  type: 'record',
+  fields: [
+    {
+      name: 'email',
+      type: 'string'
+    },
+    {
+      name: 'timestamp',
+      type: 'long'
+    },
+    {
+      name: 'lat',
+      type: 'double'
+    },
+    {
+      name: 'long',
+      type: 'double'
+    }
+  ]
 };
 
 //1st: Create a client

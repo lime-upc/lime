@@ -22,6 +22,8 @@ import org.apache.spark.streaming.kafka.*;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.action.get.GetResponse;
@@ -51,6 +53,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -82,8 +85,6 @@ public class Main {
 				//We need to deserialize data to access the object
 				LocationType t = deserialize(encodedAvroData);
                 String email = t.getEmail().toString();
-                String lat = t.getLat().toString();
-                String lon = t.getLong$().toString();
 
                 // Creating a Mongo client for each RDD (as suggested here to avoid serialization problems: http://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd)
                 MongoClientOptions.Builder options_builder = new MongoClientOptions.Builder();
@@ -100,9 +101,7 @@ public class Main {
                 Document userDoc = usersCollection.find(eq("email", email)).first();
                 Integer age = calculateAge(userDoc.get("date_of_birth").toString(), LocalDate.now());
 
-                //String data = "email=" + email + ", gender=" + userDoc.get("gender") + ", date_of_birth=" + userDoc.get("date_of_birth") + ", age=" + age + ", lat=" + lat + ", long=" + lon;
-                //System.out.println(data);
-
+                System.out.println("Data about user "+email+" retrieved from mongoDB!");
                 saveInElasticSearch(t, userDoc);
 
                 mongo.close();
@@ -121,7 +120,6 @@ public class Main {
 
     public static void saveInElasticSearch(LocationType t, Document doc) throws IOException {
 
-        // TODO: set ES storage type to memory/RAM, instead of HDD (https://www.elastic.co/guide/en/elasticsearch/reference/1.4/index-modules-store.html, https://github.com/elastic/elasticsearch/blob/v1.6.0/src/test/java/org/elasticsearch/test/ElasticsearchSingleNodeTest.java)
         // Create ES client
         TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
                 .addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
@@ -133,29 +131,47 @@ public class Main {
         CoordinateConversion coordConverter = new CoordinateConversion();
         String MGRScoord1 = coordConverter.latLon2MGRUTM(lat, lon); // MGRS coordinates with 1 meter precision
         String MGRScoord10 = MGRScoord1.substring(0,MGRScoord1.length()-2); // MGRS coordinates with 10 meters precision
+        Integer age = calculateAge(doc.get("date_of_birth").toString(), LocalDate.now());
 
-        //Create object to be inserted into Elastic Search
-        XContentBuilder builder = jsonBuilder()
-                .startObject()
-                .field("user_id", doc.get("_id"))
-                .field("grid_cell", MGRScoord1)
-                .field("lat", lat)
-                .field("long", lon)
-                .field("age", calculateAge(doc.get("date_of_birth").toString(), LocalDate.now()))
-                .field("gender", doc.get("gender"))
-                .field("last_update", new Timestamp(System.currentTimeMillis()))
-                .endObject();
+        //insert (if not existing already) or update loc object into locations ES index
+        IndexRequest indexRequest = new IndexRequest("locations", "loc", doc.get("_id").toString())
+                .source(jsonBuilder()
+                        .startObject()
+                        .field("MGRS_coord", MGRScoord10)
+                        .field("lat", lat)
+                        .field("long", lon)
+                        .field("age", age)
+                        .field("gender", doc.get("gender"))
+                        .field("last_update_timestamp", new Timestamp(System.currentTimeMillis()))
+                        .endObject());
+        UpdateRequest updateRequest = new UpdateRequest("locations", "loc", doc.get("_id").toString())
+                .doc(jsonBuilder()
+                        .startObject()
+                        .field("MGRS_coord", MGRScoord10)
+                        .field("lat", lat)
+                        .field("long", lon)
+                        .field("last_update_timestamp", new Timestamp(System.currentTimeMillis()))
+                        .endObject())
+                .upsert(indexRequest);
 
-        //add object to index and get it
-        IndexResponse response = client.prepareIndex("locations", "loc")
-                .setSource(builder)
-                .get();
+        try {
+            client.update(updateRequest).get();
 
+            String email = t.getEmail().toString();
+            System.out.println("UPDATED: email=" + email + ", gender=" + doc.get("gender") + ", date_of_birth=" + doc.get("date_of_birth") + ", age=" + age + ", lat=" + lat + ", long=" + lon);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+/*
         // MatchAll on the whole cluster with all default options
         SearchResponse responseSearchAll = client.prepareSearch().get();
         System.out.println("Search ALL: \n"+responseSearchAll);
+*/
 
-        // on shutdown
         //client.close();
 
     }

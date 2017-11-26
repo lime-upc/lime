@@ -1,8 +1,12 @@
 package edu.upc.fib.bip.lime.processing.service;
 
 import edu.upc.fib.bip.lime.processing.model.Transaction;
+import edu.upc.fib.bip.lime.processing.model.TransactionFilter;
 import edu.upc.fib.bip.lime.processing.web.protocol.*;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Interface for processing
@@ -18,31 +22,24 @@ public interface ITransactionService {
      * @param paymentAmount
      * @return
      */
-    CreateTransactionResponse createTransaction(int businessId, Double paymentAmount);
-
-    /**
-     * This method should be called when QR code is scanned
-     * from Mobile App
-     * @param transactionId
-     * @param userId
-     * @return
-     */
-    ScanQrCodeResponse scanQrCode(String transactionId, int userId);
+    String createTransaction(int businessId, Double paymentAmount);
 
     /**
      * This method should be called when user tries to pay
      * with Virtual Money
      * @param transactionId
+     * @param userId
      * @return
      */
-    UserConfirmsResponse userConfirms(String transactionId, boolean confirm);
+    Transaction userConfirms(String transactionId, Integer userId, boolean confirm);
 
     /**
      * This method should be called when user pays with Real Money
      * @param transactionId
+     * @param userId
      * @return
      */
-    GetPaybackResponse getPayback(String transactionId);
+    Transaction getPayback(String transactionId, Integer userId);
 
     /**
      * This method is called when Business owner confirms
@@ -51,12 +48,19 @@ public interface ITransactionService {
      * @param approved
      * @return
      */
-    BusinessConfirmsResponse confirmTransaction(String transactionId, boolean approved);
+    Transaction businessConfirms(String transactionId, boolean approved);
 
     /**
      * This method may be called at any time to get actual transaction info
      * @param transactionId
      * @return
      */
-    GetTransactionInfoResponse getTransactionInfo(String transactionId);
+    Optional<Transaction> getTransactionInfo(String transactionId);
+
+    /**
+     * Finds all transactions by given filter
+     * @param filter
+     * @return
+     */
+    List<Transaction> findTransactionsByFilter(TransactionFilter filter);
 }

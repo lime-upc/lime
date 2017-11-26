@@ -3,7 +3,7 @@ FROM openjdk:8-jdk
 RUN useradd -d /app -m -s /bin/bash ubuntu
 WORKDIR /app
 
-ADD ./target/processing.jar /app/processing.jar
+ADD ./app/processing.jar /app/processing.jar
 
 EXPOSE 8080
 

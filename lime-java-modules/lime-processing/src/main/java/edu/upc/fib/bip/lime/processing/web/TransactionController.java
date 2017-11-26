@@ -1,11 +1,20 @@
 package edu.upc.fib.bip.lime.processing.web;
 
+import edu.upc.fib.bip.lime.processing.dao.IUserBalanceDAO;
+import edu.upc.fib.bip.lime.processing.model.Transaction;
+import edu.upc.fib.bip.lime.processing.model.TransactionFilter;
+import edu.upc.fib.bip.lime.processing.model.UserBalance;
 import edu.upc.fib.bip.lime.processing.service.ITransactionService;
 import edu.upc.fib.bip.lime.processing.utils.LimeGetController;
+import edu.upc.fib.bip.lime.processing.utils.LimePatchController;
 import edu.upc.fib.bip.lime.processing.utils.LimePostController;
 import edu.upc.fib.bip.lime.processing.web.protocol.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Elizaveta Ketova <elizabeth.ooh@gmail.com>
@@ -17,36 +26,77 @@ public class TransactionController {
     @Autowired
     private ITransactionService transactionService;
 
-    @LimeGetController("/info/{transactionId}")
-    public GetTransactionInfoResponse info(@PathVariable String transactionId) {
-        GetTransactionInfoRequest request = new GetTransactionInfoRequest();
-        request.setTransactionId(transactionId);
-        return transactionService.getTransactionInfo(request.getTransactionId());
+    @Autowired
+    private IUserBalanceDAO userBalanceDAO;
+
+    @LimeGetController("/balance")
+    public LimeProcessingResponseWrapper<?> userBalance(@RequestParam("user") int userId) {
+        Optional<UserBalance> userBalanceWrapper = userBalanceDAO.findByUser(userId);
+        return userBalanceWrapper
+            .map(UserBalance::getBalance)
+            .<LimeProcessingResponseWrapper<?>>map(LimeProcessingResponseWrapper::success)
+            .orElseGet(() -> LimeProcessingResponseWrapper.error("User balance not found"));
     }
 
-    @LimePostController("/confirm/business")
-    public BusinessConfirmsResponse confirm(@RequestBody BusinessConfirmsRequest request) {
-        return transactionService.confirmTransaction(request.getTransactionId(), request.isConfirmed());
+    @LimeGetController("/transactions")
+    public LimeProcessingResponseWrapper<?> userBalance(@RequestParam(value = "boid", required = false) Integer businessId,
+                                                        @RequestParam(value = "user", required = false) Integer userId,
+                                                        @RequestParam(value = "from", required = false) LocalDateTime from,
+                                                        @RequestParam(value = "to", required = false) LocalDateTime to) {
+        List<Transaction> transactionsByFilter = transactionService.findTransactionsByFilter(TransactionFilter.builder()
+            .businessId(businessId)
+            .userId(userId)
+            .from(from)
+            .to(to)
+            .build());
+        return LimeProcessingResponseWrapper.success(transactionsByFilter);
+    }
+
+    @LimeGetController("/info/{transactionId}")
+    public LimeProcessingResponseWrapper<?> info(@PathVariable String transactionId) {
+        Optional<Transaction> transactionInfo = transactionService.getTransactionInfo(transactionId);
+        return transactionInfo
+            .<LimeProcessingResponseWrapper<?>>map(LimeProcessingResponseWrapper::success)
+            .orElseGet(() -> LimeProcessingResponseWrapper.error("Transaction not found"));
     }
 
     @LimePostController("/start")
-    public CreateTransactionResponse start(@RequestBody CreateTransactionRequest request) {
-        return transactionService.createTransaction(request.getBusinessId(), request.getAmount());
+    public LimeProcessingResponseWrapper<?> start(@RequestBody CreateTransactionRequest request) {
+        String transactionId = transactionService.createTransaction(request.getBusinessId(), request.getAmount());
+        return LimeProcessingResponseWrapper.success(transactionId);
     }
 
-    @LimePostController("/payback")
-    public GetPaybackResponse payback(@RequestBody GetPaybackRequest request) {
-        return transactionService.getPayback(request.getTransactionId());
+    @LimePatchController("/confirm/user")
+    public LimeProcessingResponseWrapper<?> userConfirms(@RequestBody UserConfirmsRequest request) {
+        try {
+            Transaction transaction =
+                transactionService.userConfirms(request.getTransactionId(), request.getUserId(), request.isConfirmed());
+            return LimeProcessingResponseWrapper.success(transaction);
+        } catch (Exception e) {
+            return LimeProcessingResponseWrapper.error(e);
+        }
     }
 
-    @LimePostController("/confirm/user")
-    public UserConfirmsResponse hold(@RequestBody UserConfirmsRequest request) {
-        return transactionService.userConfirms(request.getTransactionId(), request.isConfirmed());
+    @LimePatchController("/confirm/business")
+    public LimeProcessingResponseWrapper<?> confirm(@RequestBody BusinessConfirmsRequest request) {
+        try {
+            Transaction transaction =
+                transactionService.businessConfirms(request.getTransactionId(), request.isConfirmed());
+            return LimeProcessingResponseWrapper.success(transaction);
+        } catch (Exception e) {
+            return LimeProcessingResponseWrapper.error(e);
+        }
     }
 
-    @LimePostController("/scan")
-    public ScanQrCodeResponse scan(@RequestBody ScanQrCodeRequest request) {
-        return transactionService.scanQrCode(request.getTransactionId(), request.getUserId());
+    @LimePatchController("/payback")
+    public LimeProcessingResponseWrapper payback(@RequestBody GetPaybackRequest request) {
+        try {
+            Transaction transaction =
+                transactionService.getPayback(request.getTransactionId(), request.getUserId());
+            return LimeProcessingResponseWrapper.success(transaction);
+        } catch (Exception e) {
+            return LimeProcessingResponseWrapper.error(e);
+        }
     }
 
 }
