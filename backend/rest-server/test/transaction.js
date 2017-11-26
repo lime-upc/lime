@@ -655,7 +655,7 @@ describe('POST /transaction', function() {
 
 
 //To create a transaction
-describe('POST /transaction/:id/virtual_money', function() {
+describe('POST /transaction/:id/link_user', function() {
 
 
     var txId;
@@ -722,7 +722,7 @@ describe('POST /transaction/:id/virtual_money', function() {
             virtual_money_used: 0
         };
         chai.request(server)
-            .post('/transactions/' + txId + '/virtual_money')
+            .post('/transactions/' + txId + '/link_user')
             .send(txObject)
             .set('Authorization','jwt ' + user2JWT)
             .end(function(err,res){
@@ -747,7 +747,7 @@ describe('POST /transaction/:id/virtual_money', function() {
             virtual_money_used: 3
         };
         chai.request(server)
-            .post('/transactions/' + txId + '/virtual_money')
+            .post('/transactions/' + txId + '/link_user')
             .send(txObject)
             .set('Authorization','jwt ' + user2JWT)
             .end(function(err,res){
@@ -772,7 +772,7 @@ describe('POST /transaction/:id/virtual_money', function() {
             wrong: "parameter"
         };
         chai.request(server)
-            .post('/transactions/' + txId + '/virtual_money')
+            .post('/transactions/' + txId + '/link_user')
             .send(txObject)
             .set('Authorization','jwt ' + user2JWT)
             .end(function(err,res){
@@ -790,7 +790,7 @@ describe('POST /transaction/:id/virtual_money', function() {
             wrong: "parameter"
         };
         chai.request(server)
-            .post('/transactions/' + acceptedId + '/virtual_money')
+            .post('/transactions/' + acceptedId + '/link_user')
             .send(txObject)
             .set('Authorization','jwt ' + user2JWT)
             .end(function(err,res){
@@ -808,7 +808,7 @@ describe('POST /transaction/:id/virtual_money', function() {
             virtual_money_used: 12
         };
         chai.request(server)
-            .post('/transactions/' + txId + '/virtual_money')
+            .post('/transactions/' + txId + '/link_user')
             .send(txObject)
             .set('Authorization','jwt ' + user2JWT)
             .end(function(err,res){
@@ -826,7 +826,7 @@ describe('POST /transaction/:id/virtual_money', function() {
             virtual_money_used: 9
         };
         chai.request(server)
-            .post('/transactions/' + txId + '/virtual_money')
+            .post('/transactions/' + txId + '/link_user')
             .send(txObject)
             .set('Authorization','jwt ' + user2JWT)
             .end(function(err,res){

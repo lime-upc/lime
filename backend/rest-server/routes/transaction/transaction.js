@@ -197,15 +197,15 @@ module.exports = function (app) {
 
 
     /**
-     * POST /:id/virtual_money.
+     * POST /:id/link_user.
      * Associates a transaction with a user, and specifies how many virtual money the user wants to use.
      * Returns error if vm is more than 50%, if user has not that money, of if transaction is not in "new" state.
      *
      * Authentication: YES
      * Permissions: User
      */
-    router.post("/:transactionID/virtual_money",passport.authenticate('jwt', { session: false }));
-    router.post("/:transactionID/virtual_money", function(req,res){
+    router.post("/:transactionID/link_user",passport.authenticate('jwt', { session: false }));
+    router.post("/:transactionID/link_user", function(req,res){
 
         //Parameters missing
         if(req.body.virtual_money_used===undefined){
