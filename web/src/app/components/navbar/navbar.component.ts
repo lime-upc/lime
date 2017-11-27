@@ -9,8 +9,8 @@ import { AuthenticationService } from 'app/services/AuthenticationService';
 export class NavbarComponent implements OnInit {
 
 
-  constructor(private auth: AuthenticationService) {}
-  
+  constructor(private auth: AuthenticationService) {
+  }
 
   isHidden(){
     return !this.auth.isAuthentificated();

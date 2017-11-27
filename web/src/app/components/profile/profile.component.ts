@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'app/services/AuthenticationService';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
-import { Http } from '@angular/http';
 
 @Component({
   selector: 'profile',
@@ -14,22 +13,33 @@ export class ProfileComponent implements OnInit {
   displayedColumns = ['field', 'value'];
   dataSource = new MatTableDataSource<Profile>(PROFILE_DATA);
   notifications: Array<{title: string, description: string}> = [];
-  businessData: any = {};
 
-  constructor(private auth: AuthenticationService, router: Router, http: Http) { 
+  constructor(private auth: AuthenticationService, router: Router) {
     if (!auth.isAuthentificated()) {
       router.navigate(['/login']);
     }
   }
 
   ngOnInit() {
-    /*this.businessData = this.auth.getBusinessData().then(businessData => {
-      this.businessData = businessData;
-      console.log(this.businessData);
-    })
-    .catch(message => {
-      alert("ERROR: " + message);
-    });*/
+
+    //On init, we load business data and update the view
+    this.auth.getBusinessData()
+      .then(business => {
+
+        var profile: Profile[] = [
+
+          //TODO: fill rest of the data
+          {field: 'Type of business', value: 'My tags'},
+          {field: 'Address', value: 'My business adress'},
+          {field: 'Email', value: business.email},
+          {field: 'Phone number', value: business.phone_number},
+          {field: 'Person in charge', value: business.person_in_charge_name}
+        ];
+
+        this.dataSource = new MatTableDataSource<Profile>(profile);
+
+      });
+
   }
 
   addNotification(title: string, description: string) {
@@ -44,11 +54,11 @@ export interface Profile {
 }
 
 const PROFILE_DATA: Profile[] = [
-  {field: 'Type of business', value: 'My tags'},
-  {field: 'Address', value: 'My business adress'},
-  {field: 'Email', value: 'My email'}, 
-  {field: 'Phone number', value: 'My phone number'},
-  {field: 'Person in charge', value: 'Me'}
+  {field: 'Type of business', value: ''},
+  {field: 'Address', value: ''},
+  {field: 'Email', value: ''},
+  {field: 'Phone number', value: ''},
+  {field: 'Person in charge', value: ''}
 ];
 
 

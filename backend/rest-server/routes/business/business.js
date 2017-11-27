@@ -21,15 +21,15 @@ module.exports = function (app) {
      * Authentication: Yes
      * Permissions: The own BO, Admin
      */
-    //router.get("/:email",passport.authenticate('jwt', { session: false }));
-    router.get("/", function (req, res) {
+    router.get("/:email",passport.authenticate('jwt', { session: false }));
+    router.get("/:email", function (req, res) {
 
-        if (!req.user || req.user.email !== req.headers.email && req.user.email !== 'admin@lime.com'){
+        if ((req.user.email !== req.params.email) && (req.user.email !== 'admin@lime.com')){
             res.status(403).send({error: true, message: "You are not authorized to perform this action"});
             return;
         }
 
-        Business.findOne({email: req.headers.email}, 'email address phone_number person_in_charge_name business')
+        Business.findOne({email: req.params.email}, 'email address phone_number person_in_charge_name business')
             .then(function(result){
 
                 if (!result) {

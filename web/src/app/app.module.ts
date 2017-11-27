@@ -28,6 +28,15 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.component';
 
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    tokenName: 'token',
+    headerPrefix: 'jwt',
+    tokenGetter: (() => {return localStorage.getItem("jwt")}),
+    globalHeaders: [{'Content-Type':'application/json'}],
+  }), http, options);
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +47,7 @@ import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.co
     ProfileComponent,
     FooterComponent,
     PageNotFoundComponent,
-    
+
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -59,7 +68,12 @@ import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.co
     MatTableModule
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }
   ],
   bootstrap: [AppComponent]
 })

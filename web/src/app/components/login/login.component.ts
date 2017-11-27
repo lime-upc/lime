@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthenticationService } from '../../services/AuthenticationService';
-import { AuthHttp } from 'angular2-jwt';
 import { Router } from '@angular/router';
 
 type loginData = {
@@ -22,16 +21,16 @@ export class LoginComponent implements OnInit {
 
   constructor(private http : Http,
               private auth: AuthenticationService,
-              private router: Router) { 
-        
+              private router: Router) {
+
         this.loginSuccess = false;
-        
+
         //To store the local errors
         this.errors = {
           email: undefined,
           password: undefined
         };
-    
+
         //To store the input data
         this.formData = {
           email: "",
