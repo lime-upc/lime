@@ -1,13 +1,8 @@
 package org.lime;
 
-import com.mongodb.*;
 import kafka.serializer.DefaultDecoder;
 import kafka.serializer.StringDecoder;
-import org.apache.avro.io.BinaryDecoder;
-import org.apache.avro.io.BinaryEncoder;
-import org.apache.avro.io.DatumWriter;
-import org.apache.avro.io.DecoderFactory;
-import org.apache.avro.io.EncoderFactory;
+import org.apache.avro.io.*;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.apache.log4j.Level;
@@ -17,34 +12,18 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.streaming.Duration;
 import org.apache.spark.streaming.api.java.JavaPairInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
-import org.apache.spark.streaming.kafka.*;
-
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoCollection;
+import org.apache.spark.streaming.kafka.KafkaUtils;
 import org.bson.Document;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.update.UpdateRequest;
-import org.elasticsearch.client.Client;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
-import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
-
-
-import java.io.IOException;
-import java.net.InetAddress;
 
 import java.io.ByteArrayOutputStream;
-import java.net.UnknownHostException;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -54,15 +33,16 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
-import static com.mongodb.client.model.Filters.eq;
+import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 public class Main {
 
 
     public static void main(String[] args) throws Exception {
 
-        SparkConf conf = new SparkConf().setAppName("03_spark").setMaster("local[*]");
+        SparkConf conf = new SparkConf().setAppName("LIMERealTimeProcessor").setMaster("local[*]");
         JavaSparkContext ctx = new JavaSparkContext(conf);
 
         JavaStreamingContext jsc = new JavaStreamingContext(ctx, new Duration(1000));
@@ -72,10 +52,18 @@ public class Main {
         kafkaParams.put("metadata.broker.list","192.168.56.20:9092"); //Kafka in VM
         Set<String> topics = Collections.singleton("lime-location");	//Topic
 
-		//Create Stream as KafkaStream
-		JavaPairInputDStream<String, byte[]> directKafkaStream = KafkaUtils.createDirectStream(jsc,
-				String.class, byte[].class, StringDecoder.class, DefaultDecoder.class, kafkaParams, topics);
+        //Create Stream as KafkaStream
+        JavaPairInputDStream<String, byte[]> directKafkaStream = KafkaUtils.createDirectStream(jsc,
+                String.class, byte[].class, StringDecoder.class, DefaultDecoder.class, kafkaParams, topics);
 
+        // REMOVE
+        // on startup
+        TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
+                .addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
+        // on shutdown
+        client.close();
+
+/*
         directKafkaStream.foreachRDD(rdd ->{
 
             rdd.foreach(avroRecord -> {
@@ -87,53 +75,71 @@ public class Main {
                 String email = t.getEmail().toString();
 
                 // Creating a Mongo client for each RDD (as suggested here to avoid serialization problems: http://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd)
-                MongoClientOptions.Builder options_builder = new MongoClientOptions.Builder();
-                //added to set avoid "com.mongodb.MongoSocketReadException: Prematurely reached end of stream", but still not enough
-                options_builder.maxConnectionIdleTime(60000);
-                MongoClientOptions options = options_builder.build();
-                MongoClient mongo = new MongoClient ("localhost:27017", options);
+                MongoClient mongo = new MongoClient ("localhost:27017");
 
                 // Accessing the database and the collections
                 MongoDatabase database = mongo.getDatabase("lime");
                 MongoCollection<Document> usersCollection = database.getCollection("users");
                 MongoCollection<Document> spatialDBCollection = database.getCollection("spatialDB");
 
-                Document userDoc = usersCollection.find(eq("email", email)).first();
-                Integer age = calculateAge(userDoc.get("date_of_birth").toString(), LocalDate.now());
+                // REMOVE
+                //this try catch will be removed once the exception due to mongo has been solved
+                try {
+                    // Retrieving information about a user from mongoDB given his email address
+                    Document userDoc = usersCollection.find(eq("email", email)).first();
+                    Integer age = calculateAge(userDoc.get("date_of_birth").toString(), LocalDate.now());
 
-                System.out.println("Data about user "+ email +" retrieved from mongoDB!");
-                saveInElasticSearch(t, userDoc);
+                    saveInElasticSearch(t, userDoc);
+                }
 
+                catch (Exception exc) {
+                    System.out.println(exc);
+                    Document userDoc = new Document();
+                    userDoc.append("date_of_birth", "Sat Feb 08 00:00:00 CET 1975");
+                    userDoc.append("gender", "FakeGender");
+                    userDoc.append("_id", email); // to identify who is the missing user in mongoDB
+
+                    Integer age = calculateAge(userDoc.get("date_of_birth").toString(), LocalDate.now());
+                    saveInElasticSearch(t, userDoc);
+                }
+
+                System.out.println("Data about user "+ email +" retrieved from mongoDB and added to ElasticSearch DB!");
+
+                //Closing the connection with mongoDB
                 mongo.close();
 
             });
         });
 
-		jsc.start();
+        */
+        jsc.start();
         jsc.awaitTermination();
 
     }
 
+
     /**
-     * Use this method to save current location data in Elastic Search in-memory DB.
+     * Use this method to save current location data in the Elastic Search in-memory DB.
      */
 
     public static void saveInElasticSearch(LocationType t, Document doc) throws IOException {
 
-        // Create ES client
-        TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
+        // Creating the ElasticSearch Transport client
+        Settings settings = Settings.builder()
+                .put("client.transport.ping_timeout", 5, TimeUnit.SECONDS).build();
+        TransportClient client = new PreBuiltTransportClient(settings)
                 .addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
 
         Double lat = Double.parseDouble(t.getLat().toString());
         Double lon = Double.parseDouble(t.getLong$().toString());
 
-        // Conversion of lat-lon into Military Grid Reference System coordinates
+        // Converting lat-lon coordinates into Military Grid Reference System coordinates
         CoordinateConversion coordConverter = new CoordinateConversion();
         String MGRScoord1 = coordConverter.latLon2MGRUTM(lat, lon); // MGRS coordinates with 1 meter precision
         String MGRScoord10 = MGRScoord1.substring(0,MGRScoord1.length()-2); // MGRS coordinates with 10 meters precision
         Integer age = calculateAge(doc.get("date_of_birth").toString(), LocalDate.now());
 
-        //insert (if not existing already) or update loc object into locations ES index
+        //inserting (if not existing already) or updating loc object into locations ElasticSearch index
         IndexRequest indexRequest = new IndexRequest("locations", "loc", doc.get("_id").toString())
                 .source(jsonBuilder()
                         .startObject()
@@ -178,36 +184,39 @@ public class Main {
 
 
     /**
-	 * Use this to get the LocationType object from avro serialized bytes.
-	 */
-	public static LocationType deserialize(byte[] bytes) throws Exception {
+     * Use this to get the LocationType object from avro serialized bytes.
+     */
+    public static LocationType deserialize(byte[] bytes) throws Exception {
 
 
-		SpecificDatumReader<LocationType> datumReader = new SpecificDatumReader<>(LocationType.class);
+        SpecificDatumReader<LocationType> datumReader = new SpecificDatumReader<>(LocationType.class);
 
-		BinaryDecoder decoder = DecoderFactory.get().binaryDecoder(bytes, null);
-		return datumReader.read(null,decoder);
+        BinaryDecoder decoder = DecoderFactory.get().binaryDecoder(bytes, null);
+        return datumReader.read(null,decoder);
 
-	}
-
-
-	/**
-	 * Use this to get avro serialization bytes from object.
-	 */
-	public static byte[] serialize(LocationType object) throws Exception{
-
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		BinaryEncoder encoder = EncoderFactory.get().binaryEncoder(out, null);
-		DatumWriter<LocationType> writer = new SpecificDatumWriter<LocationType>(LocationType.getClassSchema());
-
-		writer.write(object, encoder);
-		encoder.flush();
-		out.close();
-		return out.toByteArray();
+    }
 
 
-	}
+    /**
+     * Use this to get avro serialization bytes from object.
+     */
+    public static byte[] serialize(LocationType object) throws Exception{
 
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        BinaryEncoder encoder = EncoderFactory.get().binaryEncoder(out, null);
+        DatumWriter<LocationType> writer = new SpecificDatumWriter<LocationType>(LocationType.getClassSchema());
+
+        writer.write(object, encoder);
+        encoder.flush();
+        out.close();
+        return out.toByteArray();
+
+
+    }
+
+    /**
+     * Use this to get calculate an age starting from two dates in the "EEE MMM dd HH:mm:ss Z yyyy" format.
+     */
 
     public static int calculateAge(String birthDateString, LocalDate currentDate) {
 
