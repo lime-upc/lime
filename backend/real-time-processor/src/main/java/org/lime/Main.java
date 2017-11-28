@@ -1,5 +1,8 @@
 package org.lime;
 
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import kafka.serializer.DefaultDecoder;
 import kafka.serializer.StringDecoder;
 import org.apache.avro.io.*;
@@ -35,12 +38,15 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import static com.mongodb.client.model.Filters.eq;
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 public class Main {
 
 
     public static void main(String[] args) throws Exception {
+        //Required to avoid Exceptions due to dependency conflicts on io.netty Maven dependency
+        System.setProperty("es.set.netty.runtime.available.processors", "false");
 
         SparkConf conf = new SparkConf().setAppName("LIMERealTimeProcessor").setMaster("local[*]");
         JavaSparkContext ctx = new JavaSparkContext(conf);
@@ -56,22 +62,14 @@ public class Main {
         JavaPairInputDStream<String, byte[]> directKafkaStream = KafkaUtils.createDirectStream(jsc,
                 String.class, byte[].class, StringDecoder.class, DefaultDecoder.class, kafkaParams, topics);
 
-        // REMOVE
-        // on startup
-        TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
-                .addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
-        // on shutdown
-        client.close();
-
-/*
         directKafkaStream.foreachRDD(rdd ->{
 
             rdd.foreach(avroRecord -> {
 
-            	//We receive pairs key-value, where the value is avro-serialized data.
-				byte[] encodedAvroData = avroRecord._2;
-				//We need to deserialize data to access the object
-				LocationType t = deserialize(encodedAvroData);
+                //We receive pairs key-value, where the value is avro-serialized data.
+                byte[] encodedAvroData = avroRecord._2;
+                //We need to deserialize data to access the object
+                LocationType t = deserialize(encodedAvroData);
                 String email = t.getEmail().toString();
 
                 // Creating a Mongo client for each RDD (as suggested here to avoid serialization problems: http://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd)
@@ -82,26 +80,12 @@ public class Main {
                 MongoCollection<Document> usersCollection = database.getCollection("users");
                 MongoCollection<Document> spatialDBCollection = database.getCollection("spatialDB");
 
-                // REMOVE
-                //this try catch will be removed once the exception due to mongo has been solved
-                try {
-                    // Retrieving information about a user from mongoDB given his email address
-                    Document userDoc = usersCollection.find(eq("email", email)).first();
-                    Integer age = calculateAge(userDoc.get("date_of_birth").toString(), LocalDate.now());
+                // Retrieving information about a user from mongoDB given his email address
+                Document userDoc = usersCollection.find(eq("email", email)).first();
+                Integer age = calculateAge(userDoc.get("date_of_birth").toString(), LocalDate.now());
 
-                    saveInElasticSearch(t, userDoc);
-                }
-
-                catch (Exception exc) {
-                    System.out.println(exc);
-                    Document userDoc = new Document();
-                    userDoc.append("date_of_birth", "Sat Feb 08 00:00:00 CET 1975");
-                    userDoc.append("gender", "FakeGender");
-                    userDoc.append("_id", email); // to identify who is the missing user in mongoDB
-
-                    Integer age = calculateAge(userDoc.get("date_of_birth").toString(), LocalDate.now());
-                    saveInElasticSearch(t, userDoc);
-                }
+                //Save decorated user information in ElasticSearch index
+                saveInElasticSearch(t, userDoc);
 
                 System.out.println("Data about user "+ email +" retrieved from mongoDB and added to ElasticSearch DB!");
 
@@ -111,7 +95,7 @@ public class Main {
             });
         });
 
-        */
+
         jsc.start();
         jsc.awaitTermination();
 
@@ -177,8 +161,8 @@ public class Main {
         SearchResponse responseSearchAll = client.prepareSearch().get();
         System.out.println("Search ALL: \n"+responseSearchAll);
 */
-
-        //client.close();
+        //Close ES Transport Client >> Note: it adds a significant overhead in terms of time
+        client.close();
 
     }
 
