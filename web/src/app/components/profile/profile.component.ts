@@ -1,22 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'app/services/AuthenticationService';
 import { Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatRadioButton, MatButtonToggleModule } from '@angular/material';
 
 @Component({
   selector: 'profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
+
 export class ProfileComponent implements OnInit {
 
-  displayedColumns = ['field', 'value'];
-  dataSource = new MatTableDataSource<Profile>(PROFILE_DATA);
-  notifications: Array<{title: string, description: string}> = [];
+  displayedColumns = ['field', 'value']
+  dataSource = new MatTableDataSource<Profile>(PROFILE_DATA)
+  notifications: Array<{title: string, description: string}> = []
+  hideNotifForm: boolean
+  newNotification: {title: string, description: string;}
+  toggleText: string
 
   constructor(private auth: AuthenticationService, router: Router) {
     if (!auth.isAuthentificated()) {
       router.navigate(['/login']);
+    }
+
+    this.toggleText="New notification"
+    this.hideNotifForm = true
+    this.newNotification = {
+      title: "",
+      description: ""
     }
   }
 
@@ -24,26 +35,37 @@ export class ProfileComponent implements OnInit {
 
     //On init, we load business data and update the view
     this.auth.getBusinessData()
-      .then(business => {
+      .then(businessOwner => {
 
         var profile: Profile[] = [
 
           //TODO: fill rest of the data
           {field: 'Type of business', value: 'My tags'},
           {field: 'Address', value: 'My business adress'},
-          {field: 'Email', value: business.email},
-          {field: 'Phone number', value: business.phone_number},
-          {field: 'Person in charge', value: business.person_in_charge_name}
+          {field: 'Email', value: businessOwner.email},
+          {field: 'Phone number', value: businessOwner.phone_number},
+          {field: 'Person in charge', value: businessOwner.person_in_charge_name}
         ];
-
-        this.dataSource = new MatTableDataSource<Profile>(profile);
-
+        this.dataSource = new MatTableDataSource<Profile>(profile)
+        
+        //Load automatic notifications to display them in the profile
+        this.notifications = businessOwner.automatic_notifications
       });
 
   }
 
-  addNotification(title: string, description: string) {
-    this.notifications.push({title: title, description: description});
+  toggleNewNotifForm() {
+    if (!this.hideNotifForm) {
+      this.toggleText="New notification"
+    } else {
+      this.toggleText="Cancel"
+    }
+    this.hideNotifForm = !this.hideNotifForm
+    return this.hideNotifForm
+  }
+
+  addNotification() {
+    this.notifications.push(this.newNotification);
     this.notifications = this.notifications.slice(0);
   }
 }

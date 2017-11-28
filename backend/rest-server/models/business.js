@@ -10,7 +10,8 @@ var BusinessSchema = mongoose.Schema({
     person_in_charge_name: {type: String},
     address: {type: String},
     phone_number: {type: String},
-    business: {type: Object}
+    business: {type: Object},
+    automatic_notifications: {type: Object}
 });
 
 //Devuelve un objeto apto para devolver por interfaz rest,

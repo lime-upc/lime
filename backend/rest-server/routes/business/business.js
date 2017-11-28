@@ -29,7 +29,7 @@ module.exports = function (app) {
             return;
         }
 
-        Business.findOne({email: req.params.email}, 'email address phone_number person_in_charge_name business')
+        Business.findOne({email: req.params.email}, 'email address phone_number person_in_charge_name business automatic_notifications')
             .then(function(result){
 
                 if (!result) {

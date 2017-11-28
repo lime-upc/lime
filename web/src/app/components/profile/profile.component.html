@@ -23,7 +23,23 @@
         </mat-table>
     </div>
 
-    <div id="notifications-section">
+    <div id="profile-section">
+      <h3>Automatic notificatons <mat-icon>sms</mat-icon></h3>
+      <div *ngFor="let n of notifications">
+          <mat-radio-button value="n.id"></mat-radio-button>
+          <mat-form-field><input disabled=true matInput [(ngModel)]="n.title"/></mat-form-field>
+          <textarea disabled=true matInput matTextareaAutosize [(ngModel)]="n.description"></textarea>
+      </div>
+
+      <div class="new-notif" [hidden]="hideNotifForm">
+          <mat-form-field><input matInput [(ngModel)]="newNotification.title" placeholder="Title"/></mat-form-field>
+          <mat-form-field><textarea matInput matTextareaAutosize placeholder="Description"></textarea></mat-form-field>
+          <button (click)="addNotification()" mat-raised-button color="primary">Save</button>
+      </div>
+      <mat-button-toggle (click)="toggleNewNotifForm()">{{toggleText}}</mat-button-toggle>
+    </div>
+
+    <!--<div id="notifications-section">
       <h3>Automatic notifications</h3>
 
       <div class="crm-block">
@@ -46,10 +62,10 @@
           <button (click)="addNotification('Title', 'Description')" mat-mini-fab><b>+</b></button>
         </div>
       </div>
-    </div>
+    </div>-->
 
     <div id="additional-info-section">
-      <h3>Additional information</h3>
+      <h3>Additional information <mat-icon>info_outline</mat-icon></h3>
     </div>
   </div>
 </div>

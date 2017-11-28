@@ -66,9 +66,9 @@ export class AuthenticationService {
     this.router.navigate(['/login']);
   }
 
-  
-
-  //Returns a promise with business data.
+  /**
+   * Returns a promise with business data
+   */
   getBusinessData(){
     if(this.loadToken() && this.businessData){
       return Promise.resolve(this.businessData);
@@ -87,8 +87,6 @@ export class AuthenticationService {
       .toPromise()
       .then(res => {
 
-
-
         var response = JSON.parse((res as any)._body);
         var newData = response.message;
 
@@ -97,6 +95,7 @@ export class AuthenticationService {
         this.businessData.person_in_charge_name = newData.person_in_charge_name;
         this.businessData.phone_number = newData.phone_number;
         this.businessData.business = newData.business;
+        this.businessData.automatic_notifications = newData.automatic_notifications;
         return this.businessData;
       })
       .catch(err => {
@@ -105,61 +104,6 @@ export class AuthenticationService {
       });
 
   }
-  /**
-   * Get business owner's data
-   */
-  /*getBusinessData(){
-    return this.loadToken()
-    .then(token => {
-      if (this.token && this.businessData){ //Data already loaded
-
-      }
-      return this.loadBusinessData();
-    })
-
-  }
-
-  private loadBusinessData() {
-    return this.loadToken()
-    .then(token => {
-      if(!token){
-        throw "User is not authenticated";
-      }
-      let email = this.jwtHelper.decodeToken(token as string).email;
-      return this.http.get('http://localhost:3000/businesses/' + email)
-        .toPromise()
-        .then(res => {
-
-          var response = JSON.parse((res as any)._body);
-          var newData = response.message;
-
-          console.log(newData);
-          this.businessData = {};
-          this.businessData.email = newData.email;
-          this.businessData.person_in_charge_name = newData.person_in_charge_name;
-          this.businessData.phone_number = newData.phone_number;
-          this.businessData.business = newData.business;
-          return this.businessData;
-        })
-        .catch(err => {
-          let error = JSON.parse(err._body);
-          throw error.message;
-        });
-      }
-    )
-    .catch(err => {
-      throw err;
-    })
-  }
-
-  private loadToken(){
-    return localStorage.getItem('currentUser')
-      .then((val) => {
-        console.log("Loaded token: " + val.token);
-        this.token = val.token;
-        return this.token;
-      });
-  }*/
 
   /**
    * Update business owner data

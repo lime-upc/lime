@@ -16,6 +16,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 /* Components (pages)*/
 import { AppComponent } from './app.component';
@@ -65,7 +67,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatSidenavModule,
     MatSelectModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    MatRadioModule,
+    MatButtonToggleModule
   ],
   providers: [
     AuthenticationService,
