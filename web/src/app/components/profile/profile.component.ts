@@ -65,8 +65,14 @@ export class ProfileComponent implements OnInit {
   }
 
   addNotification() {
-    this.notifications.push(this.newNotification);
-    this.notifications = this.notifications.slice(0);
+    let notif = {title: this.newNotification.title, description: this.newNotification.description}
+    this.notifications.push(notif);
+
+    //Update automatic notifications in datababse
+    this.auth.addAutomaticNotification(this.newNotification)
+
+    //Hide notification form ield
+    this.toggleNewNotifForm()
   }
 }
 

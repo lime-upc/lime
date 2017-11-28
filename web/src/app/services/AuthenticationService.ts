@@ -28,10 +28,10 @@ export class AuthenticationService {
     return this.loadToken()!=null;
   }
 
-
   loadToken(){
     return localStorage.getItem("jwt");
   }
+
   /**
    * Logs the business owner in
    */
@@ -41,11 +41,7 @@ export class AuthenticationService {
         // login successful if there's a jwt token in the response
         let token = JSON.parse((response as any)._body).message;
         if (token) {
-
-
           localStorage.setItem('jwt',token);
-
-
           // return true to indicate successful login
           return true;
         } else {
@@ -103,6 +99,19 @@ export class AuthenticationService {
         throw error.message;
       });
 
+  }
+
+
+  /**
+   * Add a new automatic notification
+   */
+  addAutomaticNotification(newNotification: any) {
+    var token = this.loadToken()
+    if(!token){
+      return Promise.reject("User is not authenticated");
+    }
+    let email = this.jwtHelper.decodeToken(token as string).email
+    return this.http.put("http://localhost:3000/businesses/" + email, newNotification)
   }
 
   /**
