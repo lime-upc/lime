@@ -24,3 +24,6 @@
 [2017-11-27T13:32:46,744][WARN ][o.e.d.r.RestController   ] Content type detection for rest requests is deprecated. Specify the content type using the [Content-Type] header.
 [2017-11-27T13:32:55,393][WARN ][o.e.d.r.RestController   ] Content type detection for rest requests is deprecated. Specify the content type using the [Content-Type] header.
 [2017-11-28T09:29:11,333][WARN ][o.e.d.b.Bootstrap        ] elasticsearch.yaml is deprecated; rename your configuration file to elasticsearch.yml
+[2017-11-29T10:03:14,798][WARN ][o.e.d.b.Bootstrap        ] elasticsearch.yaml is deprecated; rename your configuration file to elasticsearch.yml
+[2017-11-29T15:33:03,929][WARN ][o.e.d.r.RestController   ] Content type detection for rest requests is deprecated. Specify the content type using the [Content-Type] header.
+[2017-11-29T15:41:09,754][WARN ][o.e.d.r.RestController   ] Content type detection for rest requests is deprecated. Specify the content type using the [Content-Type] header.
