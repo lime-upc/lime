@@ -399,3 +399,1134 @@
 [2017-11-29T15:41:50,061][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 6.9gb[2.9%], shards will be relocated away from this node
 [2017-11-29T15:42:20,075][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 7.1gb[3%], shards will be relocated away from this node
 [2017-11-29T15:42:20,076][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:21:05,571][INFO ][o.e.n.Node               ] [] initializing ...
+[2017-11-30T17:21:05,687][INFO ][o.e.e.NodeEnvironment    ] [WuuaeiX] using [1] data paths, mounts [[/ (/dev/disk1s1)]], net usable_space [15gb], net total_space [233.5gb], spins? [unknown], types [apfs]
+[2017-11-30T17:21:05,688][INFO ][o.e.e.NodeEnvironment    ] [WuuaeiX] heap size [1.7gb], compressed ordinary object pointers [true]
+[2017-11-30T17:21:05,712][INFO ][o.e.n.Node               ] node name [WuuaeiX] derived from node ID [WuuaeiX1RimIKqB0gbnf_A]; set [node.name] to override
+[2017-11-30T17:21:05,713][INFO ][o.e.n.Node               ] version[5.6.3], pid[4553], build[1a2f265/2017-10-06T20:33:39.012Z], OS[Mac OS X/10.13.1/x86_64], JVM[Oracle Corporation/Java HotSpot(TM) 64-Bit Server VM/1.8.0_112/25.112-b16]
+[2017-11-30T17:21:05,713][INFO ][o.e.n.Node               ] JVM arguments [-Des.path.home=/Users/Guida/GitHub/lime/backend/elastic-search]
+[2017-11-30T17:21:09,072][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [aggs-matrix-stats]
+[2017-11-30T17:21:09,073][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [ingest-common]
+[2017-11-30T17:21:09,073][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [lang-expression]
+[2017-11-30T17:21:09,073][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [lang-groovy]
+[2017-11-30T17:21:09,074][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [lang-mustache]
+[2017-11-30T17:21:09,074][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [lang-painless]
+[2017-11-30T17:21:09,074][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [parent-join]
+[2017-11-30T17:21:09,074][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [percolator]
+[2017-11-30T17:21:09,075][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [reindex]
+[2017-11-30T17:21:09,075][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [transport-netty3]
+[2017-11-30T17:21:09,075][INFO ][o.e.p.PluginsService     ] [WuuaeiX] loaded module [transport-netty4]
+[2017-11-30T17:21:09,076][INFO ][o.e.p.PluginsService     ] [WuuaeiX] no plugins loaded
+[2017-11-30T17:21:13,544][INFO ][o.e.d.DiscoveryModule    ] [WuuaeiX] using discovery type [zen]
+[2017-11-30T17:21:14,453][INFO ][o.e.n.Node               ] initialized
+[2017-11-30T17:21:14,453][INFO ][o.e.n.Node               ] [WuuaeiX] starting ...
+[2017-11-30T17:21:14,517][INFO ][i.n.u.i.PlatformDependent] Your platform does not provide complete low-level API for accessing direct buffers reliably. Unless explicitly requested, heap buffer will always be preferred to avoid potential system instability.
+[2017-11-30T17:21:14,742][INFO ][o.e.t.TransportService   ] [WuuaeiX] publish_address {127.0.0.1:9300}, bound_addresses {[fe80::1]:9300}, {[::1]:9300}, {127.0.0.1:9300}
+[2017-11-30T17:21:14,755][WARN ][o.e.b.BootstrapChecks    ] [WuuaeiX] initial heap size [134217728] not equal to maximum heap size [2147483648]; this can cause resize pauses and prevents mlockall from locking the entire heap
+[2017-11-30T17:21:17,863][INFO ][o.e.c.s.ClusterService   ] [WuuaeiX] new_master {WuuaeiX}{WuuaeiX1RimIKqB0gbnf_A}{WMe4S9TQT5m_P2WoN2aFUw}{127.0.0.1}{127.0.0.1:9300}, reason: zen-disco-elected-as-master ([0] nodes joined)
+[2017-11-30T17:21:17,918][INFO ][o.e.h.n.Netty4HttpServerTransport] [WuuaeiX] publish_address {127.0.0.1:9200}, bound_addresses {[fe80::1]:9200}, {[::1]:9200}, {127.0.0.1:9200}
+[2017-11-30T17:21:17,919][INFO ][o.e.n.Node               ] [WuuaeiX] started
+[2017-11-30T17:21:18,274][INFO ][o.e.g.GatewayService     ] [WuuaeiX] recovered [1] indices into cluster_state
+[2017-11-30T17:21:19,413][INFO ][o.e.c.r.a.AllocationService] [WuuaeiX] Cluster health status changed from [RED] to [YELLOW] (reason: [shards started [[locations][2]] ...]).
+[2017-11-30T17:21:47,889][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.9gb[6.4%], shards will be relocated away from this node
+[2017-11-30T17:21:47,890][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:22:17,926][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.6gb[6.2%], shards will be relocated away from this node
+[2017-11-30T17:22:47,949][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.4gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:22:47,950][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:23:17,976][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.3gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:23:48,027][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.3gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:23:48,029][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:24:18,071][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.3gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:24:48,097][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.3gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:24:48,098][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:25:18,125][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.2gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:25:48,144][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.2gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:25:48,146][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:26:18,194][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.2gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:26:48,236][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.2gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:26:48,246][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:27:18,269][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.2gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:27:48,295][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.2gb[6%], shards will be relocated away from this node
+[2017-11-30T17:27:48,296][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:28:18,316][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.2gb[6%], shards will be relocated away from this node
+[2017-11-30T17:28:48,341][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.2gb[6%], shards will be relocated away from this node
+[2017-11-30T17:28:48,343][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:29:18,361][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.2gb[6%], shards will be relocated away from this node
+[2017-11-30T17:29:48,380][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.1gb[6%], shards will be relocated away from this node
+[2017-11-30T17:29:48,381][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:30:18,418][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.1gb[6%], shards will be relocated away from this node
+[2017-11-30T17:30:48,454][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.1gb[6%], shards will be relocated away from this node
+[2017-11-30T17:30:48,456][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:31:18,511][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.1gb[6%], shards will be relocated away from this node
+[2017-11-30T17:31:48,538][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.1gb[6%], shards will be relocated away from this node
+[2017-11-30T17:31:48,538][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:32:18,559][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.1gb[6%], shards will be relocated away from this node
+[2017-11-30T17:32:48,666][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.1gb[6%], shards will be relocated away from this node
+[2017-11-30T17:32:48,672][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:33:18,700][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.1gb[6%], shards will be relocated away from this node
+[2017-11-30T17:33:48,717][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.1gb[6%], shards will be relocated away from this node
+[2017-11-30T17:33:48,719][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:34:18,780][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.1gb[6%], shards will be relocated away from this node
+[2017-11-30T17:34:48,847][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.1gb[5.6%], shards will be relocated away from this node
+[2017-11-30T17:34:48,851][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:35:18,894][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13gb[5.6%], shards will be relocated away from this node
+[2017-11-30T17:35:49,331][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:35:49,334][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:36:19,381][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:36:49,418][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:36:49,420][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:37:19,490][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:37:49,507][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:37:49,511][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:38:19,530][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:38:51,186][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:38:51,187][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:38:51,203][INFO ][o.e.m.j.JvmGcMonitorService] [WuuaeiX] [gc][young][1053][12] duration [848ms], collections [1]/[1.7s], total [848ms]/[1.1s], memory [238.6mb]->[153.6mb]/[1.7gb], all_pools {[young] [198.9mb]->[57.9mb]/[654.5mb]}{[survivor] [12.4mb]->[0b]/[12.5mb]}{[old] [27.1mb]->[95.7mb]/[1.3gb]}
+[2017-11-30T17:38:51,204][WARN ][o.e.m.j.JvmGcMonitorService] [WuuaeiX] [gc][1053] overhead, spent [1.5s] collecting in the last [1.7s]
+[2017-11-30T17:39:21,210][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:39:51,242][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:39:51,243][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:40:21,320][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:40:51,366][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:40:51,370][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:41:21,413][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:41:51,442][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:41:51,443][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:42:21,462][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:42:51,484][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.4%], shards will be relocated away from this node
+[2017-11-30T17:42:51,484][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:43:21,500][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.4%], shards will be relocated away from this node
+[2017-11-30T17:43:51,592][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.4%], shards will be relocated away from this node
+[2017-11-30T17:43:51,594][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:44:21,608][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.4%], shards will be relocated away from this node
+[2017-11-30T17:44:51,634][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T17:44:51,636][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:45:21,668][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:45:51,694][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:45:51,695][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:46:21,720][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.3%], shards will be relocated away from this node
+[2017-11-30T17:46:51,746][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12gb[5.1%], shards will be relocated away from this node
+[2017-11-30T17:46:51,747][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:47:21,786][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.3gb[4.8%], shards will be relocated away from this node
+[2017-11-30T17:47:51,849][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 10.7gb[4.6%], shards will be relocated away from this node
+[2017-11-30T17:47:51,855][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:48:21,908][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 10gb[4.3%], shards will be relocated away from this node
+[2017-11-30T17:48:51,951][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 10.3gb[4.4%], shards will be relocated away from this node
+[2017-11-30T17:48:51,954][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:49:22,030][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 10.3gb[4.4%], shards will be relocated away from this node
+[2017-11-30T17:49:48,186][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][2], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=UR8pqfgxQoqpc9JXpMvtVA]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[_all], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "from" : 0,
+  "size" : 50,
+  "query" : {
+    "bool" : {
+      "should" : [
+        {
+          "match_all" : {
+            "boost" : 1.0
+          }
+        }
+      ],
+      "disable_coord" : false,
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "version" : true,
+  "sort" : [
+    {
+      "MGRS_coord" : {
+        "order" : "desc"
+      }
+    }
+  ],
+  "aggregations" : { }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T17:49:48,186][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][1], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=OhVt5ZcMQSGzDqAFRU36Ag]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[_all], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "from" : 0,
+  "size" : 50,
+  "query" : {
+    "bool" : {
+      "should" : [
+        {
+          "match_all" : {
+            "boost" : 1.0
+          }
+        }
+      ],
+      "disable_coord" : false,
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "version" : true,
+  "sort" : [
+    {
+      "MGRS_coord" : {
+        "order" : "desc"
+      }
+    }
+  ],
+  "aggregations" : { }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T17:49:48,186][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][2], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=UR8pqfgxQoqpc9JXpMvtVA]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[_all], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "from" : 0,
+  "size" : 50,
+  "query" : {
+    "bool" : {
+      "should" : [
+        {
+          "match_all" : {
+            "boost" : 1.0
+          }
+        }
+      ],
+      "disable_coord" : false,
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "version" : true,
+  "sort" : [
+    {
+      "MGRS_coord" : {
+        "order" : "desc"
+      }
+    }
+  ],
+  "aggregations" : { }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T17:49:48,186][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][0], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=bxNZ-_Z0QW6MYlAp5LBQEg]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[_all], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "from" : 0,
+  "size" : 50,
+  "query" : {
+    "bool" : {
+      "should" : [
+        {
+          "match_all" : {
+            "boost" : 1.0
+          }
+        }
+      ],
+      "disable_coord" : false,
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "version" : true,
+  "sort" : [
+    {
+      "MGRS_coord" : {
+        "order" : "desc"
+      }
+    }
+  ],
+  "aggregations" : { }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T17:49:48,319][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][3], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=_yU_gkj1SS6YRKk95MvWqw]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[_all], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "from" : 0,
+  "size" : 50,
+  "query" : {
+    "bool" : {
+      "should" : [
+        {
+          "match_all" : {
+            "boost" : 1.0
+          }
+        }
+      ],
+      "disable_coord" : false,
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "version" : true,
+  "sort" : [
+    {
+      "MGRS_coord" : {
+        "order" : "desc"
+      }
+    }
+  ],
+  "aggregations" : { }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T17:49:48,316][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][4], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=1XCP_7KZTeC4jYjfnvrJsA]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[_all], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "from" : 0,
+  "size" : 50,
+  "query" : {
+    "bool" : {
+      "should" : [
+        {
+          "match_all" : {
+            "boost" : 1.0
+          }
+        }
+      ],
+      "disable_coord" : false,
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "version" : true,
+  "sort" : [
+    {
+      "MGRS_coord" : {
+        "order" : "desc"
+      }
+    }
+  ],
+  "aggregations" : { }
+}}]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T17:49:48,186][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][1], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=OhVt5ZcMQSGzDqAFRU36Ag]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[_all], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "from" : 0,
+  "size" : 50,
+  "query" : {
+    "bool" : {
+      "should" : [
+        {
+          "match_all" : {
+            "boost" : 1.0
+          }
+        }
+      ],
+      "disable_coord" : false,
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "version" : true,
+  "sort" : [
+    {
+      "MGRS_coord" : {
+        "order" : "desc"
+      }
+    }
+  ],
+  "aggregations" : { }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T17:49:48,186][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][3], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=_yU_gkj1SS6YRKk95MvWqw]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[_all], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "from" : 0,
+  "size" : 50,
+  "query" : {
+    "bool" : {
+      "should" : [
+        {
+          "match_all" : {
+            "boost" : 1.0
+          }
+        }
+      ],
+      "disable_coord" : false,
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "version" : true,
+  "sort" : [
+    {
+      "MGRS_coord" : {
+        "order" : "desc"
+      }
+    }
+  ],
+  "aggregations" : { }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T17:49:48,186][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][0], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=bxNZ-_Z0QW6MYlAp5LBQEg]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[_all], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "from" : 0,
+  "size" : 50,
+  "query" : {
+    "bool" : {
+      "should" : [
+        {
+          "match_all" : {
+            "boost" : 1.0
+          }
+        }
+      ],
+      "disable_coord" : false,
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "version" : true,
+  "sort" : [
+    {
+      "MGRS_coord" : {
+        "order" : "desc"
+      }
+    }
+  ],
+  "aggregations" : { }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T17:49:48,328][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][4], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=1XCP_7KZTeC4jYjfnvrJsA]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[_all], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "from" : 0,
+  "size" : 50,
+  "query" : {
+    "bool" : {
+      "should" : [
+        {
+          "match_all" : {
+            "boost" : 1.0
+          }
+        }
+      ],
+      "disable_coord" : false,
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "version" : true,
+  "sort" : [
+    {
+      "MGRS_coord" : {
+        "order" : "desc"
+      }
+    }
+  ],
+  "aggregations" : { }
+}}]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T17:49:48,370][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] All shards failed for phase: [query]
+org.elasticsearch.ElasticsearchException$1: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.ElasticsearchException.guessRootCauses(ElasticsearchException.java:618) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.AbstractSearchAsyncAction.executeNextPhase(AbstractSearchAsyncAction.java:126) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.AbstractSearchAsyncAction.onPhaseDone(AbstractSearchAsyncAction.java:241) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.InitialSearchPhase.onShardFailure(InitialSearchPhase.java:90) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.InitialSearchPhase.access$100(InitialSearchPhase.java:46) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.InitialSearchPhase$1.onFailure(InitialSearchPhase.java:169) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.ActionListenerResponseHandler.handleException(ActionListenerResponseHandler.java:51) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$ContextRestoreResponseHandler.handleException(TransportService.java:1067) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$DirectResponseChannel.processException(TransportService.java:1171) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$DirectResponseChannel.sendResponse(TransportService.java:1149) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.onFailure(TransportService.java:655) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.onFailure(ThreadContext.java:623) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:39) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) ~[elasticsearch-5.6.3.jar:5.6.3]
+	... 3 more
+[2017-11-30T17:49:48,370][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] All shards failed for phase: [query]
+org.elasticsearch.ElasticsearchException$1: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.ElasticsearchException.guessRootCauses(ElasticsearchException.java:618) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.AbstractSearchAsyncAction.executeNextPhase(AbstractSearchAsyncAction.java:126) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.AbstractSearchAsyncAction.onPhaseDone(AbstractSearchAsyncAction.java:241) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.InitialSearchPhase.onShardFailure(InitialSearchPhase.java:90) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.InitialSearchPhase.access$100(InitialSearchPhase.java:46) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.InitialSearchPhase$1.onFailure(InitialSearchPhase.java:169) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.ActionListenerResponseHandler.handleException(ActionListenerResponseHandler.java:51) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$ContextRestoreResponseHandler.handleException(TransportService.java:1067) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$DirectResponseChannel.processException(TransportService.java:1171) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$DirectResponseChannel.sendResponse(TransportService.java:1149) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.onFailure(TransportService.java:655) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.onFailure(ThreadContext.java:623) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:39) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:634) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) ~[elasticsearch-5.6.3.jar:5.6.3]
+	... 3 more
+[2017-11-30T17:49:52,064][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 10gb[4.3%], shards will be relocated away from this node
+[2017-11-30T17:49:52,064][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:50:22,101][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 9.3gb[4%], shards will be relocated away from this node
+[2017-11-30T17:50:52,141][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 10gb[4.3%], shards will be relocated away from this node
+[2017-11-30T17:50:52,141][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:51:22,173][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 10.8gb[4.6%], shards will be relocated away from this node
+[2017-11-30T17:51:52,213][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.7gb[5%], shards will be relocated away from this node
+[2017-11-30T17:51:52,223][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:52:22,318][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13gb[5.5%], shards will be relocated away from this node
+[2017-11-30T17:52:52,368][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 14.2gb[6.1%], shards will be relocated away from this node
+[2017-11-30T17:52:52,381][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:53:22,429][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 15.6gb[6.7%], shards will be relocated away from this node
+[2017-11-30T17:53:52,475][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 16.2gb[6.9%], shards will be relocated away from this node
+[2017-11-30T17:53:52,486][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:54:22,517][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 16.3gb[6.9%], shards will be relocated away from this node
+[2017-11-30T17:54:52,556][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 15.1gb[6.4%], shards will be relocated away from this node
+[2017-11-30T17:54:52,564][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:55:22,586][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.2gb[5.6%], shards will be relocated away from this node
+[2017-11-30T17:55:52,612][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.8gb[5%], shards will be relocated away from this node
+[2017-11-30T17:55:52,614][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:56:22,657][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.2gb[4.8%], shards will be relocated away from this node
+[2017-11-30T17:56:52,702][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 10.8gb[4.6%], shards will be relocated away from this node
+[2017-11-30T17:56:52,706][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:57:22,805][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 9.9gb[4.2%], shards will be relocated away from this node
+[2017-11-30T17:57:53,209][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 9.9gb[4.2%], shards will be relocated away from this node
+[2017-11-30T17:57:53,249][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:58:23,332][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 11.7gb[5%], shards will be relocated away from this node
+[2017-11-30T17:58:53,484][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.4gb[5.7%], shards will be relocated away from this node
+[2017-11-30T17:58:53,497][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T17:59:23,563][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.6gb[5.8%], shards will be relocated away from this node
+[2017-11-30T17:59:53,587][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.6gb[5.8%], shards will be relocated away from this node
+[2017-11-30T17:59:53,589][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:00:23,611][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.1gb[5.6%], shards will be relocated away from this node
+[2017-11-30T18:00:53,637][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.1gb[5.6%], shards will be relocated away from this node
+[2017-11-30T18:00:53,639][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:01:23,654][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.1gb[5.6%], shards will be relocated away from this node
+[2017-11-30T18:01:53,675][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.2gb[5.6%], shards will be relocated away from this node
+[2017-11-30T18:01:53,678][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:02:23,721][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.4gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:02:53,783][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:02:53,786][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:03:23,803][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:03:53,842][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.5gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:03:53,845][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:04:23,885][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.5gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:04:53,903][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.4gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:04:53,903][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:05:23,920][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.4gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:05:53,937][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.4gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:05:53,938][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:06:23,968][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.4gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:06:53,984][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.4gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:06:53,985][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:07:24,016][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.4gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:07:54,039][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.4gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:07:54,041][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:08:24,061][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.4gb[5.3%], shards will be relocated away from this node
+[2017-11-30T18:08:54,088][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:08:54,090][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:09:24,116][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:09:54,140][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:09:54,142][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:10:24,176][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:10:54,207][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.9gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:10:54,209][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:11:24,228][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:11:54,248][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:11:54,248][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:12:24,277][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:12:54,313][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:12:54,316][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:13:24,333][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:13:54,364][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:13:54,376][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:14:24,402][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:14:54,427][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:14:54,427][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:15:24,459][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:15:54,481][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:15:54,484][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:16:24,615][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:16:54,646][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:16:54,648][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:17:24,683][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:17:54,719][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:17:54,721][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:18:16,513][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][1], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=OhVt5ZcMQSGzDqAFRU36Ag]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[locations], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[loc], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "aggregations" : {
+    "agg_terms_MGRS_coord" : {
+      "terms" : {
+        "field" : "MGRS_coord",
+        "size" : 10,
+        "min_doc_count" : 1,
+        "shard_min_doc_count" : 0,
+        "show_term_doc_count_error" : false,
+        "order" : [
+          {
+            "_count" : "desc"
+          },
+          {
+            "_term" : "asc"
+          }
+        ]
+      }
+    }
+  }
+}}]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceConfig.resolve(ValuesSourceConfig.java:96) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.resolveConfig(ValuesSourceAggregationBuilder.java:297) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:290) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:39) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AbstractAggregationBuilder.build(AbstractAggregationBuilder.java:126) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AggregatorFactories$Builder.build(AggregatorFactories.java:347) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:655) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T18:18:16,513][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][4], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=1XCP_7KZTeC4jYjfnvrJsA]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[locations], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[loc], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "aggregations" : {
+    "agg_terms_MGRS_coord" : {
+      "terms" : {
+        "field" : "MGRS_coord",
+        "size" : 10,
+        "min_doc_count" : 1,
+        "shard_min_doc_count" : 0,
+        "show_term_doc_count_error" : false,
+        "order" : [
+          {
+            "_count" : "desc"
+          },
+          {
+            "_term" : "asc"
+          }
+        ]
+      }
+    }
+  }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceConfig.resolve(ValuesSourceConfig.java:96) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.resolveConfig(ValuesSourceAggregationBuilder.java:297) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:290) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:39) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AbstractAggregationBuilder.build(AbstractAggregationBuilder.java:126) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AggregatorFactories$Builder.build(AggregatorFactories.java:347) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:655) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T18:18:16,512][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][2], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=UR8pqfgxQoqpc9JXpMvtVA]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[locations], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[loc], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "aggregations" : {
+    "agg_terms_MGRS_coord" : {
+      "terms" : {
+        "field" : "MGRS_coord",
+        "size" : 10,
+        "min_doc_count" : 1,
+        "shard_min_doc_count" : 0,
+        "show_term_doc_count_error" : false,
+        "order" : [
+          {
+            "_count" : "desc"
+          },
+          {
+            "_term" : "asc"
+          }
+        ]
+      }
+    }
+  }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceConfig.resolve(ValuesSourceConfig.java:96) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.resolveConfig(ValuesSourceAggregationBuilder.java:297) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:290) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:39) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AbstractAggregationBuilder.build(AbstractAggregationBuilder.java:126) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AggregatorFactories$Builder.build(AggregatorFactories.java:347) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:655) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T18:18:16,512][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][0], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=bxNZ-_Z0QW6MYlAp5LBQEg]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[locations], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[loc], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "aggregations" : {
+    "agg_terms_MGRS_coord" : {
+      "terms" : {
+        "field" : "MGRS_coord",
+        "size" : 10,
+        "min_doc_count" : 1,
+        "shard_min_doc_count" : 0,
+        "show_term_doc_count_error" : false,
+        "order" : [
+          {
+            "_count" : "desc"
+          },
+          {
+            "_term" : "asc"
+          }
+        ]
+      }
+    }
+  }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceConfig.resolve(ValuesSourceConfig.java:96) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.resolveConfig(ValuesSourceAggregationBuilder.java:297) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:290) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:39) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AbstractAggregationBuilder.build(AbstractAggregationBuilder.java:126) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AggregatorFactories$Builder.build(AggregatorFactories.java:347) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:655) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T18:18:16,513][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] [locations][3], node[WuuaeiX1RimIKqB0gbnf_A], [P], s[STARTED], a[id=_yU_gkj1SS6YRKk95MvWqw]: Failed to execute [SearchRequest{searchType=QUERY_THEN_FETCH, indices=[locations], indicesOptions=IndicesOptions[id=38, ignore_unavailable=false, allow_no_indices=true, expand_wildcards_open=true, expand_wildcards_closed=false, allow_alisases_to_multiple_indices=true, forbid_closed_indices=true], types=[loc], routing='null', preference='null', requestCache=null, scroll=null, maxConcurrentShardRequests=5, batchedReduceSize=512, preFilterShardSize=128, source={
+  "aggregations" : {
+    "agg_terms_MGRS_coord" : {
+      "terms" : {
+        "field" : "MGRS_coord",
+        "size" : 10,
+        "min_doc_count" : 1,
+        "shard_min_doc_count" : 0,
+        "show_term_doc_count_error" : false,
+        "order" : [
+          {
+            "_count" : "desc"
+          },
+          {
+            "_term" : "asc"
+          }
+        ]
+      }
+    }
+  }
+}}] lastShard [true]
+org.elasticsearch.transport.RemoteTransportException: [WuuaeiX][127.0.0.1:9300][indices:data/read/search[phase/query]]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceConfig.resolve(ValuesSourceConfig.java:96) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.resolveConfig(ValuesSourceAggregationBuilder.java:297) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:290) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:39) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AbstractAggregationBuilder.build(AbstractAggregationBuilder.java:126) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AggregatorFactories$Builder.build(AggregatorFactories.java:347) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:655) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+[2017-11-30T18:18:16,522][DEBUG][o.e.a.s.TransportSearchAction] [WuuaeiX] All shards failed for phase: [query]
+org.elasticsearch.ElasticsearchException$1: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.ElasticsearchException.guessRootCauses(ElasticsearchException.java:618) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.AbstractSearchAsyncAction.executeNextPhase(AbstractSearchAsyncAction.java:126) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.AbstractSearchAsyncAction.onPhaseDone(AbstractSearchAsyncAction.java:241) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.InitialSearchPhase.onShardFailure(InitialSearchPhase.java:90) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.InitialSearchPhase.access$100(InitialSearchPhase.java:46) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.InitialSearchPhase$1.onFailure(InitialSearchPhase.java:169) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.ActionListenerResponseHandler.handleException(ActionListenerResponseHandler.java:51) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$ContextRestoreResponseHandler.handleException(TransportService.java:1067) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$DirectResponseChannel.processException(TransportService.java:1171) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$DirectResponseChannel.sendResponse(TransportService.java:1149) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.onFailure(TransportService.java:655) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.onFailure(ThreadContext.java:623) [elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:39) [elasticsearch-5.6.3.jar:5.6.3]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_112]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_112]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_112]
+Caused by: java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [MGRS_coord] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceConfig.resolve(ValuesSourceConfig.java:96) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.resolveConfig(ValuesSourceAggregationBuilder.java:297) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:290) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.support.ValuesSourceAggregationBuilder.doBuild(ValuesSourceAggregationBuilder.java:39) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AbstractAggregationBuilder.build(AbstractAggregationBuilder.java:126) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.aggregations.AggregatorFactories$Builder.build(AggregatorFactories.java:347) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:655) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:485) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:461) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.search.SearchService.executeQueryPhase(SearchService.java:257) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:343) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.action.search.SearchTransportService$6.messageReceived(SearchTransportService.java:340) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.transport.TransportService$7.doRun(TransportService.java:644) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) ~[elasticsearch-5.6.3.jar:5.6.3]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) ~[elasticsearch-5.6.3.jar:5.6.3]
+	... 3 more
+[2017-11-30T18:18:24,747][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:18:54,772][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:18:54,774][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:19:24,792][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:19:54,831][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:19:54,834][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:20:24,878][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.5%], shards will be relocated away from this node
+[2017-11-30T18:20:54,912][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.8gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:20:54,915][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:21:24,956][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:21:54,992][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:21:54,995][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:22:25,030][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:22:55,073][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:22:55,076][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:23:25,099][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:23:55,120][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:23:55,121][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:24:25,154][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:24:55,182][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:24:55,183][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:25:25,226][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:25:55,258][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:25:55,260][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:26:25,289][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:26:55,312][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:26:55,312][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:27:25,332][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:27:55,361][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:27:55,364][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:28:25,401][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:28:55,424][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:28:55,424][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:29:25,459][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:29:55,482][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:29:55,484][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:30:25,513][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:30:55,539][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:30:55,541][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:31:25,576][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:31:55,610][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:31:55,612][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:32:25,631][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:32:55,660][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:32:55,663][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:33:25,681][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:33:55,722][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:33:55,724][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:34:25,740][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:34:55,758][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.7gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:34:55,759][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:35:25,782][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:35:55,811][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:35:55,812][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:36:25,879][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:36:55,905][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:36:55,907][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:37:25,931][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:37:55,951][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:37:55,951][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:38:25,965][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:38:55,986][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:38:55,986][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:39:26,006][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:39:56,020][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:39:56,021][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:40:26,047][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:40:56,080][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:40:56,082][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:41:26,100][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:41:56,117][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.6gb[5.4%], shards will be relocated away from this node
+[2017-11-30T18:41:56,118][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:42:26,133][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.3gb[5.2%], shards will be relocated away from this node
+[2017-11-30T18:42:56,153][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.3gb[5.2%], shards will be relocated away from this node
+[2017-11-30T18:42:56,153][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:43:26,169][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.3gb[5.2%], shards will be relocated away from this node
+[2017-11-30T18:43:56,201][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.3gb[5.2%], shards will be relocated away from this node
+[2017-11-30T18:43:56,202][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:44:26,222][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.3gb[5.2%], shards will be relocated away from this node
+[2017-11-30T18:44:56,248][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.3gb[5.2%], shards will be relocated away from this node
+[2017-11-30T18:44:56,248][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:45:26,274][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.3gb[5.2%], shards will be relocated away from this node
+[2017-11-30T18:45:56,297][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.3gb[5.2%], shards will be relocated away from this node
+[2017-11-30T18:45:56,297][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:46:26,323][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.3gb[5.2%], shards will be relocated away from this node
+[2017-11-30T18:46:56,343][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 12.3gb[5.2%], shards will be relocated away from this node
+[2017-11-30T18:46:56,343][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:47:26,361][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:47:56,387][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:47:56,388][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:48:26,410][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:48:56,423][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:48:56,424][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:49:26,445][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:49:56,466][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:49:56,466][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:50:26,542][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:50:56,560][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:50:56,560][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:51:26,583][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:51:56,605][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:51:56,606][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:52:26,627][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:52:56,648][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:52:56,648][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:53:26,665][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:53:56,697][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:53:56,698][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:54:26,720][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:54:56,739][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:54:56,739][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:55:26,758][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:55:56,778][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:55:56,778][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:56:26,794][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:56:56,834][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:56:56,837][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:57:26,867][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:57:56,886][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:57:56,886][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:58:26,903][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:58:56,931][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:58:56,933][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
+[2017-11-30T18:59:26,970][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:59:56,987][WARN ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] high disk watermark [90%] exceeded on [WuuaeiX1RimIKqB0gbnf_A][WuuaeiX][/Users/Guida/GitHub/lime/backend/elastic-search/data/nodes/0] free: 13.3gb[5.7%], shards will be relocated away from this node
+[2017-11-30T18:59:56,988][INFO ][o.e.c.r.a.DiskThresholdMonitor] [WuuaeiX] rerouting shards: [high disk watermark exceeded on one or more nodes]
