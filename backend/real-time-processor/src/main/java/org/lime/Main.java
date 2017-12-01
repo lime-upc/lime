@@ -17,11 +17,15 @@ import org.apache.spark.streaming.api.java.JavaPairInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.kafka.KafkaUtils;
 import org.bson.Document;
+import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
+import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.geo.GeoPoint;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 import java.io.ByteArrayOutputStream;
@@ -78,6 +82,44 @@ public class Main {
                 TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
                         .addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
 
+                // Mapping the field of the ElasticSearch documents to be inserted later. This step is required to set "MGRS_coord" as a keyword: aggregation/sorting operations cannot be performed on strings/text fields.
+                XContentBuilder mapping = jsonBuilder()
+                        .startObject()
+                            .startObject("loc")
+                                .startObject("properties")
+                                    .startObject("MGRS_coord")
+                                        .field("type", "keyword")
+                                    .endObject()
+                                    .startObject("location")
+                                        .field("type", "geo_point")
+                                    .endObject()
+                                    .startObject("age")
+                                        .field("type", "long")
+                                    .endObject()
+                                    .startObject("gender")
+                                        .field("type", "text")
+                                    .endObject()
+                                    .startObject("last_update_timestamp")
+                                        .field("type", "date")
+                                    .endObject()
+                                .endObject()
+                            .endObject()
+                        .endObject();
+
+                boolean exists = client.admin().indices()
+                        .prepareExists("locations")
+                        .execute().actionGet().isExists();
+
+                //Create index if it does not exists yet
+                if (exists==false)
+                    client.admin().indices().prepareCreate("locations").get();
+
+                PutMappingResponse putMappingResponse = client.admin().indices()
+                        .preparePutMapping("locations")
+                        .setType("loc")
+                        .setSource(mapping)
+                        .execute().actionGet();
+
                 // PROCESS EACH AVRO MESSAGE IN THE KAFKA FLOW
                 while (partitionOfRecords.hasNext()) {
 
@@ -89,6 +131,8 @@ public class Main {
                     String email = t.getEmail().toString();
                     Double lat = Double.parseDouble(t.getLat().toString());
                     Double lon = Double.parseDouble(t.getLong$().toString());
+                    GeoPoint location = new GeoPoint(lat, lon);
+
                     // Converting lat-lon coordinates into Military Grid Reference System coordinates
                     CoordinateConversion coordConverter = new CoordinateConversion();
                     String MGRScoord1 = coordConverter.latLon2MGRUTM(lat, lon); // MGRS coordinates with 1 meter precision
@@ -103,8 +147,7 @@ public class Main {
                             .source(jsonBuilder()
                                     .startObject()
                                     .field("MGRS_coord", MGRScoord10)
-                                    .field("lat", lat)
-                                    .field("long", lon)
+                                    .field("location", location)
                                     .field("age", age)
                                     .field("gender", userDoc.get("gender"))
                                     .field("last_update_timestamp", new Timestamp(System.currentTimeMillis()))
@@ -113,8 +156,7 @@ public class Main {
                             .doc(jsonBuilder()
                                     .startObject()
                                     .field("MGRS_coord", MGRScoord10)
-                                    .field("lat", lat)
-                                    .field("long", lon)
+                                    .field("location", location)
                                     .field("last_update_timestamp", new Timestamp(System.currentTimeMillis()))
                                     .endObject())
                             .upsert(indexRequest);
@@ -128,7 +170,6 @@ public class Main {
                     }
 
                     System.out.println(">>> Data about user "+ email +" successfully retrieved from mongoDB and added to ElasticSearch index!");
-
 
                 }
 
