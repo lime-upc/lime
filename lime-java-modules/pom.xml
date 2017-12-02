@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>lime-processing</module>
+        <module>lime-transactions-generator</module>
     </modules>
 
     <properties>

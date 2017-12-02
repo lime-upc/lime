@@ -1,3 +1,0 @@
-ALTER TABLE Transactions
-  ADD COLUMN StartedAt TIMESTAMP NOT NULL DEFAULT current_timestamp,
-  ADD COLUMN FinishedAt TIMESTAMP DEFAULT NULL;
