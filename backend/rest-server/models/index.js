@@ -5,10 +5,10 @@
 * Important: When adding a new model, add it also here, like in user.js
 */
 
-
 module.exports = {
     User: require('./user.js'),
     Business: require('./business.js'),
     Transaction: require('./transaction.js'),
-    Wallet: require('./wallet.js')
+    Wallet: require('./wallet.js'),
+    Restaurant: require('./restaurant.js')
 };

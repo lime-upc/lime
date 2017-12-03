@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose'),
 config = require("./config"),
-models = require("./rest-server/models"),
+models = require("./models"),
 crypto = require('crypto');
 process = require('process');
 
