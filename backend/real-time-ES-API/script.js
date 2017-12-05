@@ -13,8 +13,8 @@ var client = new elasticsearch.Client({
 var body = bodybuilder()
 //.query('match', 'gender', 'male')
 //.query('match', 'gender', 'female')
-//.query('range', 'age', {gt: 25})
-//.query('range', 'age', {lt: 30})
+//.query('range', 'age', {gte: 28})
+//.query('range', 'age', {lte: 29})
 .aggregation('terms', 'MGRS_coord')
 .build()
 

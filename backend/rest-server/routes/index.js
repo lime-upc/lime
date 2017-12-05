@@ -9,6 +9,7 @@ module.exports = function(app) {
     app.use("/transactions",require('./transaction/transaction')(app));
     app.use("/wallets",require('./wallet/wallet')(app));
     app.use("/restaurants",require('./restaurant/restaurant')(app));
+    app.use("/real-time-heatmaps",require('./real-time-heatmap/real-time-heatmap')(app)); // NOTE: The "real-time-heatmap API" is NOT part of the Web Services project
 
 /*
     Sample code from a previous project.
