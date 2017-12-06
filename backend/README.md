@@ -11,6 +11,7 @@ This server offers the REST API of Lime.
 How to run it: 
 * Make sure MongoDB is running 
 * If, in config, kafka_enabled is true, then make sure Kafka is running.
+* Make sure you have run the deploy script `npm run deploy`
 * Run `npm start`
 
 How to configure it:
