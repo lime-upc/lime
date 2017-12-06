@@ -9,6 +9,7 @@
 var process = require('process');
 var config = require('../config');
 var rp = require('request-promise');
+var PORT = (process.env.PORT || config.port);
 var preferences = ["american_restaurant",
     "asian_restaurant",
     "bakery",
@@ -85,7 +86,7 @@ function createFakeUsers(USERS){
 
             var post_options = {
 
-                uri: 'http://localhost:' + config.port + "/users",
+                uri: 'http://localhost:' + PORT + "/users",
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -8,6 +8,7 @@ models = require("./models"),
 crypto = require('crypto');
 process = require('process');
 var rp = require('request-promise');
+var PORT = (process.env.PORT || config.port);
 
 var createFakeUsers = require('../fake-users-creator/main');
 var downloadPlacesData = require('../data-loader/dataDownloader');
@@ -131,7 +132,7 @@ function insertFakeBusinesses(){
 
                     var post_options = {
 
-                        uri: 'http://localhost:' + config.port + "/businesses",
+                        uri: 'http://localhost:' + PORT + "/businesses",
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
