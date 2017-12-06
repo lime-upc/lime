@@ -116,7 +116,7 @@ module.exports = function (app) {
 
                 //Creates a new wallet also
                 return wallet.save()
-                    .then(function(res){
+                    .then(function(){
                         res.send({
                             "error": false,
                             "message": response.withoutPassword()

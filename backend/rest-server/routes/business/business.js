@@ -32,7 +32,7 @@ module.exports = function (app) {
         }
 
 
-        Business.find({}, 'email  phone_number person_in_charge_name business automatic_notifications')
+        Business.find({}, 'email phone_number person_in_charge_name business automatic_notifications')
             .then(function(response){
 
 
