@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon backend/rest-server/server.js",
+    "run-prod": "node backend/rest-server/server.js",
     "deploy": "node backend/rest-server/deploy.js",
     "test": "mocha --recursive backend//rest-server/test --timeout 2000 --exit",
     "simulator": "node backend/location-simulator/main.js",
