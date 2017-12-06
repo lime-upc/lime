@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon backend/rest-server/server.js",
     "deploy": "node backend/rest-server/deploy.js",
-    "test": "mocha --recursive backend//rest-server/test --timeout 2000",
+    "test": "mocha --recursive backend//rest-server/test --timeout 2000 --exit",
     "simulator": "node backend/location-simulator/main.js",
     "kafka-logger": "node backend/kafka-logger/main.js",
     "load-restaurants": "node backend/data-loader/load_bootstrap.js",
