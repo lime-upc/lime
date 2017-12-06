@@ -1,6 +1,8 @@
 // Declare variables
 var fs = require('fs');
 var models = require("../rest-server/models");
+var config = require('../config');
+process = require('process');
 
 var Restaurant = models.Restaurant;
 
@@ -13,7 +15,8 @@ var MongoClient = require('mongodb').MongoClient
     , assert = require('assert');
 
 // MongoDB connection URL
-var url = 'mongodb://localhost:27017/lime';
+var url = (process.env.MONGODB_URI || config.db);
+
 var database;
 function main(content) {
 
