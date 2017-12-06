@@ -10,7 +10,8 @@
     "simulator": "node backend/location-simulator/main.js",
     "kafka-logger": "node backend/kafka-logger/main.js",
     "load-restaurants": "node backend/data-loader/load_bootstrap.js",
-    "update-restaurants": "node backend/data-loader/update_bootstrap.js"
+    "update-restaurants": "node backend/data-loader/update_bootstrap.js",
+    "heroku-postbuild" : "node backend/rest-server/deploy.js"
   },
   "author": "",
   "license": "ISC",
