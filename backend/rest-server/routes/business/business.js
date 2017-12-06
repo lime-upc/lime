@@ -13,7 +13,7 @@ module.exports = function (app) {
     var router = express.Router();
 
     var Business = app.models.Business; //Get Business Model
-
+    var Restaurant = app.models.Restaurant; //Get Restaurant Model
 
     /**
      * GET /:email -  Get all info of a business owner (except password)
@@ -49,6 +49,10 @@ module.exports = function (app) {
 
     /**
      * POST / = Creates new business owner
+     * Also, it has a restaurant_id parameter, that is the ID of the restaurant you want to associate with.
+     * If it does not exist, returns 400 error.
+     * If the restaurant is already assigned to another business owner, returns 400 error.
+     * Else, creates the business profile info, and inside it, inserts the information about the restaurant.
      *
      * Authentication: No
      * Permissions: Everybody
@@ -57,7 +61,7 @@ module.exports = function (app) {
     router.post("/", function(req,res){
 
         //Check that all the fields in request are completed
-        if (!req.body.email || !req.body.password || !req.body.person_in_charge_name) {
+        if (!req.body.email || !req.body.password || !req.body.person_in_charge_name || !req.body.restaurant_id) {
                 res.status(400).send({
                     "error": true,
                     "message": "Required parameters are missing"
@@ -65,35 +69,65 @@ module.exports = function (app) {
                 return;
         }
 
-        //Create password hash
-        var passHash = crypto.createHash('md5').update(req.body.password).digest('hex');
+        //First, check that the restaurant_id exists in the spatial DB
+        Restaurant.findOne({_id: req.body.restaurant_id})
+            .then(function(restaurantObject){
+                if(restaurantObject) {
 
-        //Create Mongoose object (business owner)
-        var newBO = new Business(
-            {
-                email: req.body.email,
-                password: passHash,
-                person_in_charge_name: req.body.person_in_charge_name,
-                address: "",
-                phone_number: req.body.phone_number,
-            }
-        );
+                    //Now, we have to check if the restaurant is already taken by a business owner
+                    Business.findOne({"business._id": req.body.restaurant_id})
+                        .then(function(existingBusiness){
+                            if(!existingBusiness){
 
-        newBO.save()
-            .then(function(response){
-                res.send({
-                    "error": false,
-                    "message": response.withoutPassword()
-                });
+                                //Create password hash
+                                var passHash = crypto.createHash('md5').update(req.body.password).digest('hex');
+
+                                //Create Mongoose object (business owner)
+                                var newBO = new Business(
+                                    {
+                                        email: req.body.email,
+                                        password: passHash,
+                                        person_in_charge_name: req.body.person_in_charge_name,
+                                        address: "",
+                                        phone_number: req.body.phone_number,
+                                        business: restaurantObject //Embed the restaurant information
+                                    }
+                                );
+
+                                newBO.save()
+                                    .then(function (response) {
+                                        res.send({
+                                            "error": false,
+                                            "message": response.withoutPassword()
+                                        });
+                                    })
+                                    .catch(function (error) {
+                                        //Error because mail already registered (unique key conflict in Mongoose is error 11000).
+                                        if (error.code === 11000) {
+                                            res.status(400).send({"error": true, "message": "That mail is already registered"});
+                                            return;
+                                        }
+                                        res.status(500).send({"error": true, "message": "Error creating business owner " + error});
+                                    });
+                            }
+                            else{
+                                //Error because another business owner has that restaurant
+                                res.status(400).send({"error": true, "message": "The specified restaurant is already assigned to other BO"});
+                            }
+                        });
+
+                }
+                else{
+                    //Error because could not find such restaurant
+                    res.status(400).send({"error": true, "message": "The specified restaurant does not exist"});
+                }
             })
             .catch(function(error){
-                //Error because mail already registered (unique key conflict in Mongoose is error 11000).
-                if ( error.code === 11000 ) {
-                    res.status(400).send({"error": true, "message": "That mail is already registered"});
-                    return;
-                }
-                res.status(500).send({"error": true, "message": "Error creating business owner " + error});
-            });
+                res.status(500).send({"error": true, "message": "Error checking restaurant information"});
+            })
+
+
+
 
     });
 

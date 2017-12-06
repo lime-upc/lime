@@ -16,8 +16,8 @@ public class Main {
 
 
         //Specify start (inclusive) and end (exclusive) dates to get data from HBase
-        DateDTO start = new DateDTO(2017,11,25,10,16,00);
-        DateDTO end = new DateDTO(2017,11,25,16,28,00);
+        DateDTO start = new DateDTO(2017,11,30,11,00,00);
+        DateDTO end = new DateDTO(2017,11,30,11,32,00);
 
         //Get all the location tuples
         JavaRDD<LocationBean> locationRDD = HBaseLoader.getLocationsInRangeRDD(ctx,start,end);
@@ -30,10 +30,19 @@ public class Main {
         //Reduce so we have the count of people on each cell
         JavaPairRDD<String,Integer> reduced = inGrids.reduceByKey((a,b) -> a+b);
 
-        //Print the retrieved data
+        JavaPairRDD<Integer,String> swapped = reduced.mapToPair(pair -> pair.swap());
+
+        JavaPairRDD<Integer,String> sorted = swapped.sortByKey(false);
+
+
+        for(Tuple2<Integer,String> cell: sorted.take(5)){
+            System.out.println(cell);
+        }
+
+       /* //Print the retrieved data
         reduced.foreach(cellCount -> {
             System.out.println(cellCount);
-        });
+        });*/
 
     }
 }
