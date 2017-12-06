@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lime-upc/lime.svg?branch=master)](https://travis-ci.org/lime-upc/lime)
+
 # lime!
 
 * App: Source code for the mobile application
