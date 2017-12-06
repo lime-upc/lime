@@ -24,12 +24,8 @@ sudo mkdir -p /data/db
 sudo chown -R `id -un` /data/db
 //http://www.opentechguides.com/how-to/article/nodejs/125/express-mongodb-json.html
 
-4) Run the Data Downloader JS script:
-node dataDownloader.js
-
-5) Launch the MongoDB server and run DB loader JS script:
-mongod
-node DBloader.js
+4) Run MongoDB and launch the Data Downloader JS script:
+node load_bootstrap.js
 
 
 

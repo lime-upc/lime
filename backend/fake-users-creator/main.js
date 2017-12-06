@@ -6,11 +6,9 @@
  *
  * Author: Ismael Rodriguez, 17/11/17
  */
-var http = require('http');
 var process = require('process');
 var config = require('../config');
-var USERS = 2000; //Number of users to create
-
+var rp = require('request-promise');
 var preferences = ["american_restaurant",
     "asian_restaurant",
     "bakery",
@@ -49,68 +47,73 @@ var preferences = ["american_restaurant",
     "tea_house",
     "thai_restaurant"];
 
+function createFakeUsers(USERS){
+    console.log("* Creating "  + USERS + " fake end-users");
+    var promises = [];
+    for(var i = 0; i < USERS; i++){
+        (function(){
 
-for(var i = 0; i < USERS; i++){
-    (function(){
+            //Random birth date
+            var dayOfBirth = getRandomInt(1,28);
+            var monthOfBirth = getRandomInt(1,12);
+            var yearOfBirth = getRandomInt(1950,2000);
 
-        //Random birth date
-        var dayOfBirth = getRandomInt(1,28);
-        var monthOfBirth = getRandomInt(1,12);
-        var yearOfBirth = getRandomInt(1950,2000);
-
-        //Random gender
-        var gender = 'female';
-        if(getRandomInt(0,100)>50){
-            gender = 'male';
-        }
-
-        //Random preferences (statistically, 30% of total)
-        var myPrefs = [];
-        preferences.forEach(function(pref){
-            if(getRandomInt(0,100)<30){
-                myPrefs.push(pref);
+            //Random gender
+            var gender = 'female';
+            if(getRandomInt(0,100)>50){
+                gender = 'male';
             }
-        });
 
-
-        var userObject = {
-            "email": "test-" + i + "@lime.com",
-            "first_name": "John" + i,
-            "last_name": "Smith",
-            "password": "123",
-            "date_of_birth": "" + monthOfBirth + "/" + dayOfBirth + "/" + yearOfBirth,
-            "gender": gender,
-            "preferences": myPrefs
-        };
-
-        var post_options = {
-            host: 'localhost',
-            port: config.port,
-            path: '/users',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-
-        // Set up the request
-        var post_req = http.request(post_options, function(res) {
-            res.setEncoding('utf8');
-            res.on('data', function (chunk) {
-                var res = JSON.parse(chunk);
-                if(!res.error){
-                    process.stdout.write(".");
-                }
-                else{
-                    process.stdout.write("x");
+            //Random preferences (statistically, 30% of total)
+            var myPrefs = [];
+            preferences.forEach(function(pref){
+                if(getRandomInt(0,100)<30){
+                    myPrefs.push(pref);
                 }
             });
+
+
+            var userObject = {
+                "email": "test-" + i + "@lime.com",
+                "first_name": "John" + i,
+                "last_name": "Smith",
+                "password": "123",
+                "date_of_birth": "" + monthOfBirth + "/" + dayOfBirth + "/" + yearOfBirth,
+                "gender": gender,
+                "preferences": myPrefs
+            };
+
+            var post_options = {
+
+                uri: 'http://localhost:' + config.port + "/users",
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userObject)
+            };
+
+            promises.push(
+                rp(post_options)
+                .then(function(success){
+                    process.stdout.write(".");
+                })
+                .catch(function(error){
+                    process.stdout.write("x");
+                    console.log(error);
+                })
+            );
+
+
+
+        })();
+    }
+
+    return Promise.all(promises)
+        .then(function(){
+           console.log("\n* Users created successfully")
         });
 
-        // post the data
-        post_req.write(JSON.stringify(userObject));
-        post_req.end();
-    })();
 }
 
 
@@ -118,3 +121,5 @@ for(var i = 0; i < USERS; i++){
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+module.exports = createFakeUsers;

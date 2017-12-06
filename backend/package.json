@@ -5,10 +5,12 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon rest-server/server.js",
+    "deploy": "node rest-server/deploy.js",
     "test": "mocha --recursive ./rest-server/test --timeout 2000",
     "simulator": "node location-simulator/main.js",
     "kafka-logger": "node kafka-logger/main.js",
-    "fake-users-creator": "node fake-users-creator/main.js"
+    "load-restaurants": "node data-loader/load_bootstrap.js",
+    "update-restaurants": "node data-loader/update_bootstrap.js"
   },
   "author": "",
   "license": "ISC",
@@ -37,6 +39,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
     "replace": "^0.3.0",
+    "request-promise": "^4.2.2",
     "webhdfs": "^1.1.1"
   }
 }
