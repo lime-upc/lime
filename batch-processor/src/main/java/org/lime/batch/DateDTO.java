@@ -1,5 +1,8 @@
 package org.lime.batch;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * This class allows to abstract the date management.s
  */
@@ -14,11 +17,26 @@ public class DateDTO {
 
 	public DateDTO(int year, int month, int day, int hour, int minute, int second) {
 		this.year = String.valueOf(year);
-		this.month = String.format("%02d", month-1);
+		this.month = String.format("%02d", month); //TODO: Maybe in HBase there is an error, and month is substracted one!
 		this.day = String.format("%02d", day);
 		this.hour = String.format("%02d", hour);
 		this.minute = String.format("%02d", minute);
 		this.second = String.format("%02d", second);
+
+
+	}
+
+	public DateDTO(long timestamp){
+		Date time=new java.util.Date(timestamp);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(time);
+		this.year = String.format("%02d",cal.get(Calendar.YEAR));
+		this.month = String.format("%02d",cal.get(Calendar.MONTH));
+		this.day = String.format("%02d",cal.get(Calendar.DAY_OF_MONTH));
+		this.hour = String.format("%02d",cal.get(Calendar.HOUR_OF_DAY));
+		this.minute = String.format("%02d",cal.get(Calendar.MINUTE));
+		this.second = String.format("%02d",cal.get(Calendar.SECOND));
+
 
 	}
 
