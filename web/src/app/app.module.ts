@@ -6,6 +6,7 @@ import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { AuthenticationService } from 'app/services/AuthenticationService';
 import { AgmCoreModule } from '@agm/core';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 /* Modules from material design */
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -55,6 +56,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCRaO9CTJImdPCNEx0cU9MSg3a7Lv42Bos'
     }),
+    LeafletModule.forRoot(),
     BrowserModule,
     RouterModule,
     FormsModule,

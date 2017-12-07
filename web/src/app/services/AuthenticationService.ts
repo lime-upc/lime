@@ -111,7 +111,7 @@ export class AuthenticationService {
       return Promise.reject("User is not authenticated");
     }
     let email = this.jwtHelper.decodeToken(token as string).email
-    return this.http.put("http://localhost:3000/businesses/" + email, newNotification)
+    return this.authHttp.put("http://localhost:3000/businesses/" + email, newNotification)
   }
 
   /**

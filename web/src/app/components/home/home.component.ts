@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'app/services/AuthenticationService';
 import { Router } from '@angular/router';
+import { google } from '@agm/core/services/google-maps-types';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import * as L from 'leaflet';
+import { Layer } from 'leaflet';
+import HeatmapOverlay from 'leaflet-heatmap';
 
 @Component({
   selector: 'app-home',
@@ -11,20 +16,42 @@ export class HomeComponent implements OnInit {
 
   date : String; 
   selected: String;
-
-  coordinates = {
-    barcelona: {
-      lat:41.385064,
-      long: 2.173403,
-      zoom: 14,
-    },
-    upc: {
-      lat:41.388004,
-      long: 2.113280
+  map: any;
+  cfg = {
+    // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+    // if scaleRadius is false it will be the constant radius used in pixels
+    "radius": 0.01,
+    "maxOpacity": .5, 
+    // scales the radius based on map zoom
+    "scaleRadius": true, 
+    // if set to false the heatmap uses the global maximum for colorization
+    // if activated: uses the data maximum within the current map boundaries 
+    //   (there will always be a red spot with useLocalExtremas true)
+    "useLocalExtrema": true,
+    // which field name in your data represents the latitude - default "lat"
+    latField: 'lat',
+    // which field name in your data represents the longitude - default "lng"
+    lngField: 'lng',
+    // which field name in your data represents the data value - default "value"
+    valueField: 'count'
+  };
+  testData = {
+    max: 8,
+    data: [{lat: 41.4044991, lng: 2.17429, count: 3},{lat: 41.38176760, lng:2.17156, count: 4}]
+  };
+  /**
+   * Map layers
+   * */
+  baseLayer: Layer = L.tileLayer(
+    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      attribution: '...',
+      maxZoom: 18
     }
-  }
+  );
+  heatmapLayer = new HeatmapOverlay(this.cfg);
 
-  constructor(private auth: AuthenticationService, router: Router) { 
+  constructor(private auth: AuthenticationService, private router: Router) { 
+
     this.date = (new Date()).toDateString();
     this.selected = 'all-users';
     
@@ -34,5 +61,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.heatmapLayer.setData(this.testData);
+    this.map = new L.Map('map', {
+      center: new L.LatLng(41.385064, 2.173403),
+      zoom: 14,
+      layers: [this.baseLayer, this.heatmapLayer]
+    });
   }
 }

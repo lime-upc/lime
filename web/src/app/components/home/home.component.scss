@@ -4,12 +4,12 @@
     position: relative
 } 
 
-.side-panel {
-    margin-left: 70%;
-}
-
-agm-map {
+#map {
     width: 80%;
     height: 850px;
     float: left;
+}
+
+.side-panel {
+    margin-left: 70%;
 }
