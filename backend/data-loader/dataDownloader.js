@@ -44,7 +44,7 @@ function retrieveData(finalCallback)
                             resultsString = resultsString+JSON.stringify(response.json.results[i], null, 4)+",";
                     }
 
-                    console.log("Places of category "+item + " successfully retrieved!");
+                    console.log("* Places of category "+item + " successfully retrieved!");
                     callback(null); //To indicate that iteration is finished, without errors
                 }
                 else{
@@ -70,22 +70,28 @@ function saveResults(resultsString){
 
     resultsString=resultsString.substring(0,resultsString.length-1);
     var date = new Date();
-    fs.appendFile('outputFile.json', '{"download_timestamp" : "'+ date.toUTCString() +'", "results" : ['+resultsString+']}', function(err) {
-        if (err) throw err;
-    });
-    console.log("Places sucessfully retrieved on "+date.toUTCString() + " and written to JSON file!");
+    console.log("* Places sucessfully retrieved on "+date.toUTCString());
+    return '{"download_timestamp" : "'+ date.toUTCString() +'", "results" : ['+resultsString+']}';
+
 }
 
 
-retrieveData(function(err,resultsString){
-    if(err){
-        console.error(err);
-    }
-    else{
-        saveResults(resultsString);
-    }
-});
 
+function main(){
+    return new Promise(function (fulfill,reject){
+        retrieveData(function(err,resultsString){
+            if(err){
+                reject(err);
+                console.error(err);
+            }
+            else{
+                fulfill(saveResults(resultsString));
+            }
+        });
+    });
+}
+
+module.exports = main;
 
 
 //TODO Extend in order to retrieve all the result pages for each query with next_page_token (Now 20*5 results are retrieved) >> maybe next Sprint, not now

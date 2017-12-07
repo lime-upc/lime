@@ -16,12 +16,31 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * This class abstracts loading tuples from HBase in a range.
  */
 public class HBaseLoader {
 
+	public static JavaRDD<LocationBean> getLocationsForDayRDD(JavaSparkContext ctx,String dayString) throws Exception{
+
+
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date startDate = dateFormat.parse(dayString);
+		long startTime = startDate.getTime();
+		long endTime = startTime + (24 * 60 * 60 * 1000); //One day after
+
+
+		DateDTO start = new DateDTO(startTime);
+		DateDTO end = new DateDTO(endTime);
+
+
+		return HBaseLoader.getLocationsInRangeRDD(ctx,start,end);
+	}
 
 	public static JavaRDD<LocationBean> getLocationsInRangeRDD(JavaSparkContext spark,DateDTO start, DateDTO end) throws Exception{
 

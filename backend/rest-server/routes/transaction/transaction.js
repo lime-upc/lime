@@ -12,6 +12,7 @@ module.exports = function (app) {
 
     var Transaction = app.models.Transaction; //Get Transaction model
     var Wallet = app.models.Wallet;
+    var BusinessOwner = app.models.Business;
 
 
     /**
@@ -26,6 +27,11 @@ module.exports = function (app) {
      */
     router.get("/",passport.authenticate('jwt', { session: false }));
     router.get("/",function(req,res){
+
+
+
+
+
 
         var userFilter = req.query.user;
         var boFilter = req.query.bo;

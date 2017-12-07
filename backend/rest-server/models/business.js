@@ -2,13 +2,13 @@
  * Business Owner model.
  */
 var mongoose = require('mongoose');
+var Restaurant = require('./restaurant');
 
 //Define schema
 var BusinessSchema = mongoose.Schema({
     email: {type: String, required:true, unique: true},
     password: {type: String, required: true},
     person_in_charge_name: {type: String},
-    address: {type: String},
     phone_number: {type: String},
     business: {type: Object},
     automatic_notifications: {type: Object}
@@ -21,6 +21,7 @@ BusinessSchema.methods.withoutPassword = function(){
     delete object.password;
     return object;
 };
+
 
 //Compile model
 Business = mongoose.model('Business', BusinessSchema);

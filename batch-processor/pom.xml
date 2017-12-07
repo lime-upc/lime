@@ -79,6 +79,12 @@
             <version>1.2.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.caffinc.sparktools</groupId>
+            <artifactId>mongordd</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
 
     </dependencies>
 

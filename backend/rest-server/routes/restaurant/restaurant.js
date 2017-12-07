@@ -13,6 +13,7 @@ module.exports = function (app) {
     var router = express.Router();
 
     var Restaurant = app.models.Restaurant; //Get Restaurant Model
+    var Business = app.models.Business; //Get Business Model
 
 
     /**
@@ -20,7 +21,6 @@ module.exports = function (app) {
      *
      * Authentication: NO
      */
-    //router.get("/",passport.authenticate('jwt', { session: false })); //No authentication required at the moment
     router.get("/", function (req, res) {
 
         Restaurant.find({}, '_id name location price_level rating address permanently_closed')
@@ -72,6 +72,8 @@ module.exports = function (app) {
      * These fields will only be updated if are passed and are not empty.
      * Any other field will be ignored.
      *
+     * Also, updates the information inside the possible business owner that has the restaurant associated.
+     *
      * Authentication: Yes
      * Permissions: Admin
      */
@@ -114,12 +116,16 @@ module.exports = function (app) {
                     return;
                 }
 
+                //We successfully updated the data. Now, we update the data inside the business owner, if any
+                return Business.findOneAndUpdate({"business._id":req.params.id},{$set: {business: response}})
+                    .then(function(updatedBO){
+                        //Just send back the updated data
+                        res.send({
+                            "error": false,
+                            "message": response
+                        });
+                    });
 
-                //Just send back the updated data
-                res.send({
-                    "error": false,
-                    "message": response
-                });
 
             })
             .catch(function(error){

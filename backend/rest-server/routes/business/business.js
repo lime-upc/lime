@@ -1,5 +1,5 @@
 /**
- * Router module that handles the BISUNESS REST API and BUSINESS OWNER LOGIN
+ * Router module that handles the BUSINESS OWNER REST API
  */
 var express = require('express');
 var crypto = require('crypto');
@@ -13,7 +13,41 @@ module.exports = function (app) {
     var router = express.Router();
 
     var Business = app.models.Business; //Get Business Model
+    var Restaurant = app.models.Restaurant; //Get Restaurant Model
 
+
+    /**
+     * GET / - Gets all business owners, without password
+     *
+     * Authentication: YES
+     * Permissions: Admin
+     */
+    router.get("/",passport.authenticate('jwt', { session: false }));
+    router.get("/", function (req, res) {
+
+
+        if (req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            return;
+        }
+
+
+        Business.find({}, 'email phone_number person_in_charge_name business automatic_notifications')
+            .then(function(response){
+
+
+                res.send({
+                    "error": false,
+                    "message": response
+                });
+            })
+            .catch(function(error){
+                res.status(500).send({"error": true, "message": "Error retrieving business owner data " + error});
+            });
+
+
+
+    });
 
     /**
      * GET /:email -  Get all info of a business owner (except password)
@@ -29,7 +63,7 @@ module.exports = function (app) {
             return;
         }
 
-        Business.findOne({email: req.params.email}, 'email address phone_number person_in_charge_name business automatic_notifications')
+        Business.findOne({email: req.params.email}, 'email  phone_number person_in_charge_name business automatic_notifications')
             .then(function(result){
 
                 if (!result) {
@@ -49,6 +83,10 @@ module.exports = function (app) {
 
     /**
      * POST / = Creates new business owner
+     * Also, it has a restaurant_id parameter, that is the ID of the restaurant you want to associate with.
+     * If it does not exist, returns 400 error.
+     * If the restaurant is already assigned to another business owner, returns 400 error.
+     * Else, creates the business profile info, and inside it, inserts the information about the restaurant.
      *
      * Authentication: No
      * Permissions: Everybody
@@ -57,7 +95,7 @@ module.exports = function (app) {
     router.post("/", function(req,res){
 
         //Check that all the fields in request are completed
-        if (!req.body.email || !req.body.password || !req.body.person_in_charge_name) {
+        if (!req.body.email || !req.body.password || !req.body.person_in_charge_name || !req.body.restaurant_id) {
                 res.status(400).send({
                     "error": true,
                     "message": "Required parameters are missing"
@@ -65,38 +103,165 @@ module.exports = function (app) {
                 return;
         }
 
-        //Create password hash
-        var passHash = crypto.createHash('md5').update(req.body.password).digest('hex');
+        //First, check that the restaurant_id exists in the spatial DB
+        Restaurant.findOne({_id: req.body.restaurant_id})
+            .then(function(restaurantObject){
+                if(restaurantObject) {
 
-        //Create Mongoose object (business owner)
-        var newBO = new Business(
-            {
-                email: req.body.email,
-                password: passHash,
-                person_in_charge_name: req.body.person_in_charge_name,
-                address: "",
-                phone_number: req.body.phone_number,
-            }
-        );
+                    //Now, we have to check if the restaurant is already taken by a business owner
+                    Business.findOne({"business._id": req.body.restaurant_id})
+                        .then(function(existingBusiness){
+                            if(!existingBusiness){
 
-        newBO.save()
+                                //Create password hash
+                                var passHash = crypto.createHash('md5').update(req.body.password).digest('hex');
+
+                                //Create Mongoose object (business owner)
+                                var newBO = new Business(
+                                    {
+                                        email: req.body.email,
+                                        password: passHash,
+                                        person_in_charge_name: req.body.person_in_charge_name,
+                                        phone_number: req.body.phone_number,
+                                        business: restaurantObject //Embed the restaurant information
+                                    }
+                                );
+
+                                newBO.save()
+                                    .then(function (response) {
+                                        res.send({
+                                            "error": false,
+                                            "message": response.withoutPassword()
+                                        });
+                                    })
+                                    .catch(function (error) {
+                                        //Error because mail already registered (unique key conflict in Mongoose is error 11000).
+                                        if (error.code === 11000) {
+                                            res.status(400).send({"error": true, "message": "That mail is already registered"});
+                                            return;
+                                        }
+                                        res.status(500).send({"error": true, "message": "Error creating business owner " + error});
+                                    });
+                            }
+                            else{
+                                //Error because another business owner has that restaurant
+                                res.status(400).send({"error": true, "message": "The specified restaurant is already assigned to other BO"});
+                            }
+                        });
+
+                }
+                else{
+                    //Error because could not find such restaurant
+                    res.status(400).send({"error": true, "message": "The specified restaurant does not exist"});
+                }
+            })
+            .catch(function(error){
+                res.status(500).send({"error": true, "message": "Error checking restaurant information"});
+            })
+
+
+
+
+    });
+
+
+    /**
+     * PUT /:businessOwnerMail
+     *
+     * Updates a business owner.
+     * Only updates attributes password, person_in_charge, phone_number and automatic_notifications.
+     * Only updates those attributes that are passed. Any other is ignored and unchanged.
+     *
+     * Authentication: Yes
+     * Permissions: Admin and the BO being modified
+     */
+    router.put("/:email",passport.authenticate('jwt', { session: false }));
+    router.put("/:email",function (req,res) {
+        if ((req.user.email !== req.params.email) && req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            return;
+        }
+
+        //There is no required parameter.
+
+        var updateObject = {};
+
+        //Update first_name if passed (No need to check string length, as length 0 is falsy in JS)
+        if (req.body.person_in_charge_name){
+            updateObject.person_in_charge_name = req.body.person_in_charge_name;
+        }
+
+        //Update phone_number if passed
+        if (req.body.phone_number){
+            updateObject.phone_number = req.body.phone_number;
+        }
+        //Update password if passed, setting the hash
+        if (req.body.password){
+            updateObject.password = crypto.createHash('md5').update(req.body.password).digest('hex');
+        }
+
+        //Update automatic_notifications if passed
+        if (req.body.automatic_notifications && req.body.automatic_notifications.length > 0){
+            updateObject.automatic_notifications = req.body.automatic_notifications;
+        }
+
+
+        Business.findOneAndUpdate({email: req.params.email}, updateObject, {new:true})
             .then(function(response){
+
+                if(!response){
+                    res.status(404).send({"error": true, "message": "The business does not exist"});
+                    return;
+                }
+
+
+                //Just send the updated data without password
                 res.send({
                     "error": false,
                     "message": response.withoutPassword()
                 });
+
             })
             .catch(function(error){
-                //Error because mail already registered (unique key conflict in Mongoose is error 11000).
-                if ( error.code === 11000 ) {
-                    res.status(400).send({"error": true, "message": "That mail is already registered"});
-                    return;
-                }
-                res.status(500).send({"error": true, "message": "Error creating business owner " + error});
+                res.status(500).send({"error": true, "message": "Error updating business " + error});
             });
 
     });
 
+    /**
+     * DELETE /:email - Deletes a business owner
+     *
+     * Authentication: YES
+     * Permissions: Admin
+     */
+    router.delete("/:email",passport.authenticate('jwt', { session: false }));
+    router.delete("/:email", function(req,res){
+
+        if (req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            return;
+        }
+
+        Business.remove({email:req.params.email})
+            .then(function(obj){
+
+                if(obj.result.n === 0){
+                    res.status(404).send({
+                        "error": true,
+                        "message": "Business owner does not exist"
+                    });
+                    return;
+                }
+
+                res.send({
+                    "error": false,
+                    "message": "Removed successfully"
+                });
+            })
+            .catch(function(error){
+                res.status(500).send({"error": true, "message": "Error removing business owner " + error});
+            });
+    });
 
     /**
      * POST /login - Authenticates the business owner
@@ -149,31 +314,7 @@ module.exports = function (app) {
         
     });
 
-    /**
-     * Add new automatic notification
-     */
-    router.put("/:email",passport.authenticate('jwt', { session: false }));
-    router.put("/:email",function (req,res) {
-        if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
-            return;
-        }
 
-        Business.automatic_notifications.insert(req.body)
-            .then(function(response){
-                if(!response){
-                    res.status(404).send({"error": true, "message": "The business owner does not exist"});
-                    return;
-                }
-                res.send({
-                    "error": false,
-                    "message": response.withoutPassword()
-                })
-                .catch(function(error){
-                    res.status(500).send({"error": true, "message": "Error updating automatic notifications " + error});
-                });
-            })
-    });
 
     return router;
 };
