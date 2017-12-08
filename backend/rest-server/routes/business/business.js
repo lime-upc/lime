@@ -166,7 +166,7 @@ module.exports = function (app) {
 
 
     /**
-     * PUT /:businessOwnerMail
+     * PUT /:email
      *
      * Updates a business owner.
      * Only updates attributes password, person_in_charge, phone_number and automatic_notifications.

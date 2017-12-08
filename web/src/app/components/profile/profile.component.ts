@@ -40,8 +40,8 @@ export class ProfileComponent implements OnInit {
         var profile: Profile[] = [
 
           //TODO: fill rest of the data
-          {field: 'Type of business', value: 'My tags'},
-          {field: 'Address', value: 'My business adress'},
+          {field: 'Type of business', value: businessOwner.business.tags},
+          {field: 'Address', value: businessOwner.business.address},
           {field: 'Email', value: businessOwner.email},
           {field: 'Phone number', value: businessOwner.phone_number},
           {field: 'Person in charge', value: businessOwner.person_in_charge_name}
@@ -55,6 +55,8 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleNewNotifForm() {
+    this.newNotification.title="";
+    this.newNotification.description="";
     if (!this.hideNotifForm) {
       this.toggleText="New notification"
     } else {
@@ -69,9 +71,9 @@ export class ProfileComponent implements OnInit {
     this.notifications.push(notif);
 
     //Update automatic notifications in datababse
-    this.auth.addAutomaticNotification(this.newNotification)
+    this.auth.addAutomaticNotification(notif)
 
-    //Hide notification form ield
+    //Hide & reset notification form field 
     this.toggleNewNotifForm()
   }
 }
