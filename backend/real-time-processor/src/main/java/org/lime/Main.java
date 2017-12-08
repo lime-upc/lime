@@ -152,6 +152,7 @@ public class Main {
                                     .field("gender", userDoc.get("gender"))
                                     .field("last_update_timestamp", new Timestamp(System.currentTimeMillis()))
                                     .endObject());
+
                     UpdateRequest updateRequest = new UpdateRequest("locations", "loc", userDoc.get("_id").toString())
                             .doc(jsonBuilder()
                                     .startObject()

@@ -116,6 +116,10 @@ module.exports = function (app) {
                                 //Create password hash
                                 var passHash = crypto.createHash('md5').update(req.body.password).digest('hex');
 
+                                var tags = [];
+                                if(req.body.tags){
+                                    tags = req.body.tags;
+                                }
                                 //Create Mongoose object (business owner)
                                 var newBO = new Business(
                                     {
@@ -123,6 +127,7 @@ module.exports = function (app) {
                                         password: passHash,
                                         person_in_charge_name: req.body.person_in_charge_name,
                                         phone_number: req.body.phone_number,
+                                        tags: tags,
                                         business: restaurantObject //Embed the restaurant information
                                     }
                                 );
@@ -200,6 +205,9 @@ module.exports = function (app) {
             updateObject.password = crypto.createHash('md5').update(req.body.password).digest('hex');
         }
 
+        if(req.body.tags){
+            updateObject.tags = req.body.tags;
+        }
         //Update automatic_notifications if passed
         if (req.body.automatic_notifications && req.body.automatic_notifications.length > 0){
             updateObject.automatic_notifications = req.body.automatic_notifications;

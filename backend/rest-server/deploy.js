@@ -22,7 +22,43 @@ var Transaction = models.Transaction;
 
 //Database URL
 var dbUrl = (process.env.MONGODB_URI || config.db);
-
+var preferences = ["american_restaurant",
+    "asian_restaurant",
+    "bakery",
+    "bar",
+    "bar_grill",
+    "barbecue_restaurant",
+    "breakfast_restaurant",
+    "buffet_restaurant",
+    "cafe",
+    "chinese_restaurant",
+    "coffee_shop",
+    "deli",
+    "diner",
+    "family_restaurant",
+    "fast_food_restaurant",
+    "french_restaurant",
+    "hamburger_restaurant",
+    "ice_cream_shop",
+    "indian_restaurant",
+    "italian_restaurant",
+    "japanese_restaurant",
+    "korean_restaurant",
+    "liban_restaurant",
+    "meal_takeaway",
+    "mexican_restaurant",
+    "pizza_delivery",
+    "pizza_restaurant",
+    "pub",
+    "ramen_restaurant",
+    "restaurant",
+    "sandwich_shop",
+    "seafood_restaurant",
+    "sports_bar",
+    "steak_house",
+    "sushi_restaurant",
+    "tea_house",
+    "thai_restaurant"];
 
 
 function main(){
@@ -121,11 +157,20 @@ function insertFakeBusinesses(){
                     var phone_number = getRandomInt(900000000,999999999);
                     var restaurant_id = restaurant._id;
 
+                    var tags = [];
+                    //Only 10 percent of total statistically
+                    preferences.forEach(function(pref){
+                        if(getRandomInt(0,100)<10){
+                            tags.push(pref);
+                        }
+                    });
+
                     var object = {
                         email: email,
                         password: password,
                         person_in_charge_name: person_in_charge_name,
                         phone_number: phone_number,
+                        tags: tags,
                         restaurant_id: restaurant_id
                     };
 

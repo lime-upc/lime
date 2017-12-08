@@ -1,4 +1,4 @@
-package org.lime.batch;
+package org.lime.batch.beans;
 
 /**
  * This class represents a tuple value from HBase.
@@ -17,6 +17,7 @@ public class LocationBean {
 	private int minute;
 	private int second;
 	private String cell;
+
 
 	@Override
 	public String toString(){

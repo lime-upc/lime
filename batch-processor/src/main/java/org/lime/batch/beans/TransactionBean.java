@@ -1,4 +1,4 @@
-package org.lime.batch;
+package org.lime.batch.beans;
 
 import java.io.Serializable;
 
@@ -76,5 +76,19 @@ public class TransactionBean  implements Serializable{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "TransactionBean{" +
+				"_id='" + _id + '\'' +
+				", user='" + user + '\'' +
+				", business_owner='" + business_owner + '\'' +
+				", timestamp=" + timestamp +
+				", payback_amount=" + payback_amount +
+				", total_amount=" + total_amount +
+				", virtual_money_used=" + virtual_money_used +
+				", status='" + status + '\'' +
+				'}';
 	}
 }
