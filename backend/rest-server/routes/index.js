@@ -12,13 +12,21 @@ module.exports = function(app) {
     app.use("/restaurants",require('./restaurant/restaurant')(app));
 
     // NOTE: The "real-time-heatmap API" is NOT part of the Web Services project
-    app.use("/real-time-heatmaps",require('./real-time-heatmap/real-time-heatmap')(app));
+
+    if(config.heatmap_fake_data){
+        app.use("/real-time-heatmaps",require('./real-time-heatmap/fake-real-time-heatmap')(app));
+    }
+    else{
+        app.use("/real-time-heatmaps",require('./real-time-heatmap/real-time-heatmap')(app));
+    }
     if(config.analytics_fake_data){
         app.use("/analytics",require('./analytics/fake_analytics')(app));
     }
     else{
         app.use("/analytics",require('./analytics/analytics')(app));
     }
+
+
 
 
 

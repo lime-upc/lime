@@ -1,6 +1,3 @@
-//LIME Server config file. Please, DO NOT SUBMIT IT TO GITHUB.
-//Change the name to config.js!!
-
 module.exports = {
     db: "mongodb://localhost/lime",
     db_test: "mongodb://localhost/lime-test",
@@ -8,6 +5,7 @@ module.exports = {
     jwtsecret: "SECRET",
     kafka_enabled: true,
     kafka_host: "192.168.56.20:2181",
-    analytics_fake_data: true
+    analytics_fake_data: true,
+    heatmap_fake_data: true
 };
 

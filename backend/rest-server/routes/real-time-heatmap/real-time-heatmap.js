@@ -9,7 +9,7 @@ var crypto = require('crypto');
 var config = require('../../../config');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
-
+var mgrs = require('mgrs');
 var elasticsearch = require('elasticsearch');
 var bodybuilder = require('bodybuilder');
 
@@ -20,7 +20,7 @@ module.exports = function (app) {
 
     //Create ElasticSearch client
     var client = new elasticsearch.Client({
-      host: 'localhost:9200',
+      host: '192.168.56.20:9200',
       //log: 'trace'
     });
 
@@ -81,7 +81,7 @@ module.exports = function (app) {
      * Authentication: Yes
      * Permissions: The own BO, Admin
      */
-    router.get("/",passport.authenticate('jwt', { session: false }));
+    //router.get("/",passport.authenticate('jwt', { session: false }));
     router.get("/", function (req, res) {
 
         var body = bodybuilder()
@@ -97,15 +97,18 @@ module.exports = function (app) {
             var jsonData = {};
             var aggregationsArray = resp.aggregations.agg_terms_MGRS_coord.buckets;
 
+            var heatmap = [];
             for (var i = 0; i < aggregationsArray.length; i++) {
                 var key = aggregationsArray[i].key;
                 var doc_count = aggregationsArray[i].doc_count;
-                jsonData[key] = doc_count;
+                var latlong = mgrs.toPoint(key);
+                heatmap.push([latlong[0],latlong[1],doc_count]);
             }
+
 
             res.send({
                 "error": false,
-                "message": jsonData
+                "message": heatmap
             });
 
         }, function (err) {
@@ -121,7 +124,7 @@ module.exports = function (app) {
      * Authentication: Yes
      * Permissions: The own BO, Admin
      */
-    router.get("/gender/:gender",passport.authenticate('jwt', { session: false }));
+    //router.get("/gender/:gender",passport.authenticate('jwt', { session: false }));
     router.get("/gender/:gender", function (req, res) {
 
         //ERROR: required gender does not exist
@@ -141,19 +144,22 @@ module.exports = function (app) {
           body: body
         }).then(function (resp) {
 
-            var jsonData = {};
             var aggregationsArray = resp.aggregations.agg_terms_MGRS_coord.buckets;
 
+            var heatmap = [];
             for (var i = 0; i < aggregationsArray.length; i++) {
                 var key = aggregationsArray[i].key;
                 var doc_count = aggregationsArray[i].doc_count;
-                jsonData[key] = doc_count;
+                var latlong = mgrs.toPoint(key);
+                heatmap.push([latlong[0],latlong[1],doc_count]);
             }
+
 
             res.send({
                 "error": false,
-                "message": jsonData
+                "message": heatmap
             });
+
 
         }, function (err) {
             console.trace(err.message);
@@ -168,7 +174,7 @@ module.exports = function (app) {
      * Authentication: Yes
      * Permissions: The own BO, Admin
      */
-    router.get("/agerange/:agerange",passport.authenticate('jwt', { session: false }));
+    //router.get("/agerange/:agerange",passport.authenticate('jwt', { session: false }));
     router.get("/agerange/:agerange", function (req, res) {
 
         var ageRange = req.params.agerange;
@@ -186,7 +192,7 @@ module.exports = function (app) {
         .query('range', 'age', {gte: ageMin})
         .query('range', 'age', {lte: ageMax})
         .aggregation('terms', 'MGRS_coord')
-        .build()
+        .build();
 
         client.search({
           index: 'locations',
@@ -194,19 +200,23 @@ module.exports = function (app) {
           body: body
         }).then(function (resp) {
 
-            var jsonData = {};
             var aggregationsArray = resp.aggregations.agg_terms_MGRS_coord.buckets;
 
+
+            var heatmap = [];
             for (var i = 0; i < aggregationsArray.length; i++) {
                 var key = aggregationsArray[i].key;
                 var doc_count = aggregationsArray[i].doc_count;
-                jsonData[key] = doc_count;
+                var latlong = mgrs.toPoint(key);
+                heatmap.push([latlong[0],latlong[1],doc_count]);
             }
+
 
             res.send({
                 "error": false,
-                "message": jsonData
+                "message": heatmap
             });
+
 
         }, function (err) {
             console.trace(err.message);

@@ -80,7 +80,7 @@ public class Main {
 
                 // Creating the ElasticSearch Transport client
                 TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
-                        .addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
+                        .addTransportAddress(new TransportAddress(InetAddress.getByName("192.168.56.20"), 9300));
 
                 // Mapping the field of the ElasticSearch documents to be inserted later. This step is required to set "MGRS_coord" as a keyword: aggregation/sorting operations cannot be performed on strings/text fields.
                 XContentBuilder mapping = jsonBuilder()
