@@ -6,7 +6,7 @@ var crypto = require('crypto');
 var config = require('../../../config');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
-
+var generateLinks = require('../linkGenerator');
 
 module.exports = function (app) {
 
@@ -41,7 +41,8 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": response
+                    "message": response,
+                    "_links": generateLinks({self:"/users"})
                 });
             })
             .catch(function(error){
@@ -121,7 +122,13 @@ module.exports = function (app) {
                     .then(function(){
                         res.send({
                             "error": false,
-                            "message": response.withoutPassword()
+                            "message": response.withoutPassword(),
+                            "_links": generateLinks({
+                                self:"/users" + response.email,
+                                likes: "/users/" + response.email + "/likes",
+                                wallet: "/wallets/" + response.email,
+                                list: "/users"
+                            })
                         });
                     });
 
@@ -165,7 +172,13 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": result.withoutPassword()
+                    "message": result.withoutPassword(),
+                    "_links": generateLinks({
+                        self:"/users" + result.email,
+                        likes: "/users/" + result.email + "/likes",
+                        wallet: "/wallets/" + result.email,
+                        list: "/users"
+                    })
                 });
             })
             .catch(function(err){
@@ -243,7 +256,13 @@ module.exports = function (app) {
                 //Just send the updated data without password
                 res.send({
                     "error": false,
-                    "message": response.withoutPassword()
+                    "message": response.withoutPassword(),
+                    "_links": generateLinks({
+                        self:"/users" + response.email,
+                        likes: "/users/" + response.email + "/likes",
+                        wallet: "/wallets/" + response.email,
+                        list: "/users"
+                    })
                 });
 
             })
@@ -286,7 +305,10 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": "Removed successfully"
+                    "message": "Removed successfully",
+                    "_links": generateLinks({
+                         list: "/users"
+                    })
                 });
             })
             .catch(function(error){
@@ -336,7 +358,10 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": token
+                    "message": token,
+                    "_links": generateLinks({
+                        user: "/users/"+ req.body.email
+                    })
                 });
 
             })
@@ -351,7 +376,7 @@ module.exports = function (app) {
 
     //Likes functions
 
-    
+
     /**
      * GET /:email/likes -  Get info of liked restaurants by a user
      *
@@ -377,7 +402,12 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": result.likes
+                    "message": result.likes,
+                    "_links": generateLinks({
+                        self: "/users/" + req.user.email + "/likes/",
+                        user: "/users/"+ req.user.email
+                    })
+
                 });
             })
             .catch(function(err){
@@ -430,7 +460,11 @@ module.exports = function (app) {
                             .then(function(result){
                                 res.send({
                                     "error": false,
-                                    "message": result.likes
+                                    "message": result.likes,
+                                    "_links": generateLinks({
+                                        self: "/users/" + req.user.email + "/likes/",
+                                        user: "/users/"+ req.user.email
+                                    })
                                 });
                             });
 
@@ -484,7 +518,11 @@ module.exports = function (app) {
                     .then(function(result){
                         res.send({
                             "error": false,
-                            "message": result.likes
+                            "message": result.likes,
+                            "_links": generateLinks({
+                                self: "/users/" + req.user.email + "/likes/",
+                                user: "/users/"+ req.user.email
+                            })
                         });
                     });
 
