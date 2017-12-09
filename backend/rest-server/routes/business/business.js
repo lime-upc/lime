@@ -28,7 +28,7 @@ module.exports = function (app) {
 
 
         if (req.user.email !== 'admin@lime.com'){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/businesses"})});
             return;
         }
 
@@ -46,7 +46,7 @@ module.exports = function (app) {
                 });
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error retrieving business owner data " + error});
+                res.status(500).send({"error": true, "message": "Error retrieving business owner data " + error, "_links": generateLinks({list: "/businesses"})});
             });
 
 
@@ -63,7 +63,7 @@ module.exports = function (app) {
     router.get("/:email", function (req, res) {
 
         if ((req.user.email !== req.params.email) && (req.user.email !== 'admin@lime.com')){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/businesses"})});
             return;
         }
 
@@ -71,7 +71,7 @@ module.exports = function (app) {
             .then(function(result){
 
                 if (!result) {
-                    res.status(404).send({"error": true, "message": "The business owner does not exist"});
+                    res.status(404).send({"error": true, "message": "The business owner does not exist","_links": generateLinks({list: "/businesses"})});
                     return;
                 }
 
@@ -85,7 +85,7 @@ module.exports = function (app) {
                 });
             })
             .catch(function(err){
-                res.status(500).send({"error": true, "message": "Error retrieving business owner data"});
+                res.status(500).send({"error": true, "message": "Error retrieving business owner data","_links": generateLinks({list: "/businesses"})});
             });
     });
 
@@ -106,7 +106,8 @@ module.exports = function (app) {
         if (!req.body.email || !req.body.password || !req.body.person_in_charge_name || !req.body.restaurant_id) {
                 res.status(400).send({
                     "error": true,
-                    "message": "Required parameters are missing"
+                    "message": "Required parameters are missing",
+                    "_links": generateLinks({list: "/businesses"})
                 });
                 return;
         }
@@ -154,26 +155,26 @@ module.exports = function (app) {
                                     .catch(function (error) {
                                         //Error because mail already registered (unique key conflict in Mongoose is error 11000).
                                         if (error.code === 11000) {
-                                            res.status(400).send({"error": true, "message": "That mail is already registered"});
+                                            res.status(400).send({"error": true, "message": "That mail is already registered","_links": generateLinks({list: "/businesses"})});
                                             return;
                                         }
-                                        res.status(500).send({"error": true, "message": "Error creating business owner " + error});
+                                        res.status(500).send({"error": true, "message": "Error creating business owner " + error,"_links": generateLinks({list: "/businesses"})});
                                     });
                             }
                             else{
                                 //Error because another business owner has that restaurant
-                                res.status(400).send({"error": true, "message": "The specified restaurant is already assigned to other BO"});
+                                res.status(400).send({"error": true, "message": "The specified restaurant is already assigned to other BO","_links": generateLinks({list: "/businesses"})});
                             }
                         });
 
                 }
                 else{
                     //Error because could not find such restaurant
-                    res.status(400).send({"error": true, "message": "The specified restaurant does not exist"});
+                    res.status(400).send({"error": true, "message": "The specified restaurant does not exist","_links": generateLinks({list: "/businesses"})});
                 }
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error checking restaurant information"});
+                res.status(500).send({"error": true, "message": "Error checking restaurant information","_links": generateLinks({list: "/businesses"})});
             })
 
 
@@ -195,7 +196,7 @@ module.exports = function (app) {
     router.put("/:email",passport.authenticate('jwt', { session: false }));
     router.put("/:email",function (req,res) {
         if ((req.user.email !== req.params.email) && req.user.email !== 'admin@lime.com'){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/businesses"})});
             return;
         }
 
@@ -230,7 +231,7 @@ module.exports = function (app) {
             .then(function(response){
 
                 if(!response){
-                    res.status(404).send({"error": true, "message": "The business does not exist"});
+                    res.status(404).send({"error": true, "message": "The business does not exist","_links": generateLinks({list: "/businesses"})});
                     return;
                 }
 
@@ -241,13 +242,13 @@ module.exports = function (app) {
                     "message": response.withoutPassword(),
                     "_links": generateLinks({
                         list: "/businesses",
-                        self: "/businesses/" + req.params.email
+                        self: "/businesses/" + req.params.email,
                     })
                 });
 
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error updating business " + error});
+                res.status(500).send({"error": true, "message": "Error updating business " + error,"_links": generateLinks({list: "/businesses"})});
             });
 
     });
@@ -262,7 +263,7 @@ module.exports = function (app) {
     router.delete("/:email", function(req,res){
 
         if (req.user.email !== 'admin@lime.com'){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/businesses"})});
             return;
         }
 
@@ -286,7 +287,7 @@ module.exports = function (app) {
                 });
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error removing business owner " + error});
+                res.status(500).send({"error": true, "message": "Error removing business owner " + error,"_links": generateLinks({list: "/businesses"})});
             });
     });
 
@@ -302,7 +303,8 @@ module.exports = function (app) {
                 if (!req.body.email || !req.body.password){
                     res.status(400).send({
                         "error": true,
-                        "message": "Please, specify both email and password"
+                        "message": "Please, specify both email and password",
+                        "_links": generateLinks({list: "/businesses"})
                     });
         
                     return;
@@ -314,7 +316,7 @@ module.exports = function (app) {
         
                         //ERROR: No result, so the username does not exist
                         if(!result){
-                            res.status(401).send({"error": true, "message": "Incorrect email or password"});
+                            res.status(401).send({"error": true, "message": "Incorrect email or password","_links": generateLinks({list: "/businesses"})});
                             return;
                         }
         
@@ -322,7 +324,7 @@ module.exports = function (app) {
         
                         //ERROR: Password is incorrect
                         if (hash !== result.password){
-                            res.status(401).send({"error": true, "message": "Incorrect email or password"});
+                            res.status(401).send({"error": true, "message": "Incorrect email or password","_links": generateLinks({list: "/businesses"})});
                             return;
                         }
         
@@ -338,7 +340,7 @@ module.exports = function (app) {
                         });
                     })
                     .catch(function(error){
-                        res.status(500).send({"error": true, "message": "Error removing business " + error});
+                        res.status(500).send({"error": true, "message": "Error removing business " + error,"_links": generateLinks({list: "/businesses"})});
                     });
         
         
