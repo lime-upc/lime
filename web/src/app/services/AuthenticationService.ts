@@ -12,8 +12,9 @@ import 'rxjs/add/operator/map'
 export class AuthenticationService {
 
   public token: string = null;
-  businessData: any = null;
   jwtHelper: JwtHelper = new JwtHelper();
+  businessData: any = null;
+  realTimeMapData: any = null;
 
   constructor(private http: Http, private router: Router,private authHttp: AuthHttp) {
       // set token if saved in local storage
@@ -22,7 +23,7 @@ export class AuthenticationService {
   }
 
   /**
-   * Returns is the user is authentificated or not
+   * Returns if the user is authentificated or not
    */
   isAuthentificated() {
     return this.loadToken()!=null;
@@ -101,8 +102,31 @@ export class AuthenticationService {
 
   }
 
+  /**
+   * Get the real-time map analytics
+   */
+  getRealTimeMap() {
+    var token = this.loadToken()
+    if(!token){
+      return Promise.reject("User is not authenticated");
+    }
+    return this.http.get("http://localhost:3000/real-time-heatmaps/").toPromise()
+      .then(res => {
+        var response = JSON.parse((res as any)._body);
+        var newRealTimeMapData = response.message;
+        console.log(newRealTimeMapData)
+        this.realTimeMapData = newRealTimeMapData;
+        return this.realTimeMapData
+      })
+      .catch(err => {
+        let error =  JSON.parse(err._body);
+        throw error.message;
+      })
+  }
+
 
   /**
+   * IN PROGRESS
    * Add a new automatic notification
    */
   addAutomaticNotification(newNotification: any) {

@@ -37,8 +37,29 @@ export class HomeComponent implements OnInit {
 
   testData = {
     max: 8,
-    data: [{lat: 41.4044991, lng: 2.17429, count: 3},{lat: 41.38176760, lng:2.17156, count: 4}]
+    data: [
+      {lat: 41.396583354381335, lng:2.296390703227544, count: 5},
+      {lat: 41.381333652516005, lng:2.5676861203867216, count: 4},
+      {lat: 41.38451413367245, lng: 2.386171278364763,count: 4},
+      {lat: 41.39410476743153, lng: 2.2093469273618496, count: 4},
+      {lat: 41.38346162988568, lng: 2.2951472742916526, count: 3},
+      {lat: 41.384028678398224,lng: 2.5669579254688375, count: 3},
+      {lat: 41.39121764783445, lng: 2.0259446110227306, count: 3},
+      {lat: 41.401405487630704, lng: 2.3841530964653748, count: 3},
+      {lat: 41.40375441296311, lng: 1.9349010980835248, count: 3},
+      {lat: 41.405241251856765, lng: 2.5676410997995136, count: 3},
+      {lat: 41.4044991, lng: 2.17429, count: 3},
+      {lat: 41.38176760, lng:2.17156, count: 4}
+    ]
   };
+
+  /**
+   * Location & density data depending on the filter
+   */
+  general_map_data;
+  age_map_data;
+  female_map_data;
+  male_map_data;
 
   /**
    * Map layers
@@ -62,7 +83,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.heatmapLayer.setData(this.testData);
+    this.general_map_data = this.auth.getRealTimeMap();
+    this.heatmapLayer.setData(this.testData); // Set the data to the heatmaplayer
     this.map = new L.Map('map', {
       center: new L.LatLng(41.385064, 2.173403),
       zoom: 14,
