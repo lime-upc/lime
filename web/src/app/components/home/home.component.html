@@ -3,9 +3,8 @@
     <mat-icon>location_on</mat-icon>
     Real-time analytics
   </h1>
-  <agm-map [latitude]="coordinates.barcelona.lat" [longitude]="coordinates.barcelona.long" [zoom]="coordinates.barcelona.zoom">
-      <agm-marker [latitude]="coordinates.upc.lat" [longitude]="coordinates.upc.long"></agm-marker>
-  </agm-map>
+  
+  <div id="map"></div>
 
   <div class="side-panel">
     <p>{{ date }}</p>

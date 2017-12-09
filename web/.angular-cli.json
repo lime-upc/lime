@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/leaflet/dist/leaflet.css"
       ],
       "scripts": [
         "../node_modules/jquery-slim/dist/jquery.slim.js",
