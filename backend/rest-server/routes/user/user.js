@@ -14,6 +14,7 @@ module.exports = function (app) {
 
     var User = app.models.User; //Get User Model
     var Wallet = app.models.Wallet;
+    var Restaurant = app.models.Restaurant;
 
 
 
@@ -95,7 +96,8 @@ module.exports = function (app) {
                 password: passHash,
                 date_of_birth: new Date(req.body.date_of_birth),
                 gender: req.body.gender,
-                preferences: req.body.preferences
+                preferences: req.body.preferences,
+                likes: [] //Starts with empty likes
             }
         );
 
@@ -227,6 +229,8 @@ module.exports = function (app) {
         }
 
 
+        //Cannot update likes as that is done through the likes API
+
         User.findOneAndUpdate({email: req.params.email}, updateObject, {new:true})
             .then(function(response){
 
@@ -340,6 +344,158 @@ module.exports = function (app) {
                 res.status(500).send({"error": true, "message": "Error removing user " + error});
 
             });
+
+
+    });
+
+
+    //Likes functions
+
+    
+    /**
+     * GET /:email/likes -  Get info of liked restaurants by a user
+     *
+     * Authentication: Yes
+     * Permissions: The own user, Admin
+     */
+    router.get("/:email/likes",passport.authenticate('jwt', { session: false }));
+    router.get("/:email/likes", function (req, res) {
+
+        if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            return;
+        }
+
+
+        User.findOne({email: req.params.email}, 'likes')
+            .then(function(result){
+
+                if (!result) {
+                    res.status(404).send({"error": true, "message": "The user does not exist"});
+                    return;
+                }
+
+                res.send({
+                    "error": false,
+                    "message": result.likes
+                });
+            })
+            .catch(function(err){
+                res.status(500).send({"error": true, "message": "Error retrieving user likes"});
+            });
+
+
+    });
+
+    /**
+     * POST /:email/likes/:restaurantId -  Adds a restaurant as liked to a user's profile
+     *
+     * Authentication: Yes
+     * Permissions: The own user, Admin
+     */
+    router.post("/:email/likes/:restaurantId",passport.authenticate('jwt', { session: false }));
+    router.post("/:email/likes/:restaurantId", function (req, res) {
+
+        if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            return;
+        }
+
+
+        //Check that the restaurant exists
+        Restaurant.findOne({_id: req.params.restaurantId})
+            .then(function(result){
+
+                if(!result){
+                    res.status(404).send({error: true, message: "The specified restaurant does not exist in our DB."});
+                    return;
+                }
+
+                //Get the likes array
+                return User.findOne({email: req.params.email}, 'likes')
+                    .then(function(result){
+
+                        if (!result) {
+                            res.status(404).send({"error": true, "message": "The user does not exist"});
+                            return;
+                        }
+
+                        var likes = result.likes;
+                        if(likes.indexOf(req.params.restaurantId)<0){
+                            likes.push(req.params.restaurantId); //If not already, we set
+                        }
+
+                        //Update the user
+                        return User.findOneAndUpdate({email: req.params.email},{$set:{likes:likes}}, {new:true})
+                            .then(function(result){
+                                res.send({
+                                    "error": false,
+                                    "message": result.likes
+                                });
+                            });
+
+
+                    })
+
+
+            })
+            .catch(function(err){
+                res.status(500).send({"error": true, "message": "Error adding user like"});
+            });
+
+
+
+
+
+    });
+
+    /**
+     * DELETE /:email/likes/:restaurantId -  Removes a restaurant as liked from a user's profile
+     *
+     * Authentication: Yes
+     * Permissions: The own user, Admin
+     */
+    router.delete("/:email/likes/:restaurantId",passport.authenticate('jwt', { session: false }));
+    router.delete("/:email/likes/:restaurantId", function (req, res) {
+
+        if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            return;
+        }
+
+
+        //Get the likes array
+        User.findOne({email: req.params.email}, 'likes')
+            .then(function(result){
+
+                if (!result) {
+                    res.status(404).send({"error": true, "message": "The user does not exist"});
+                    return;
+                }
+
+                var likes = result.likes;
+                var index = likes.indexOf(req.params.restaurantId);
+                if(index > -1){
+                    likes.splice(index,1);
+                }
+
+                //Update the user
+                return User.findOneAndUpdate({email: req.params.email},{$set:{likes:likes}}, {new:true})
+                    .then(function(result){
+                        res.send({
+                            "error": false,
+                            "message": result.likes
+                        });
+                    });
+
+
+            })
+            .catch(function(err){
+                res.status(500).send({"error": true, "message": "Error removing user like"});
+            });
+
+
+
 
 
     });

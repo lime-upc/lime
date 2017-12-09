@@ -1,11 +1,9 @@
+/**
+ * Returns batch analytics for previous day from ElasticSearch.
+ * Not a part of the Web Services project.
+ */
 var express = require('express');
-var crypto = require('crypto');
-var config = require('../../../config');
-var passport = require('passport');
-var jwt = require('jsonwebtoken');
-
 var elasticsearch = require('elasticsearch');
-var bodybuilder = require('bodybuilder');
 
 
 function pad(n) {

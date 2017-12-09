@@ -11,7 +11,8 @@ var UserSchema = mongoose.Schema({
     password: {type: String, required: true},
     date_of_birth: {type: Date, required: true},
     gender: {type: String, required: true},
-    preferences:  [{type: String}]
+    preferences:  [{type: String}],
+    likes: [{type: String}]  //List of restaurant IDs
 });
 
 

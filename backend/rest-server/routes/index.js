@@ -4,6 +4,9 @@
 */
 var config = require('../../config');
 module.exports = function(app) {
+
+
+
     app.use("/users",require('./user/user')(app));
     app.use("/businesses",require('./business/business')(app));
     app.use("/location",require('./location/location')(app));
@@ -11,7 +14,8 @@ module.exports = function(app) {
     app.use("/wallets",require('./wallet/wallet')(app));
     app.use("/restaurants",require('./restaurant/restaurant')(app));
 
-    // NOTE: The "real-time-heatmap API" is NOT part of the Web Services project
+
+    /** NOTE: The routes below are NOT PART of the Web Services project **/
 
     if(config.heatmap_fake_data){
         app.use("/real-time-heatmaps",require('./real-time-heatmap/fake-real-time-heatmap')(app));
