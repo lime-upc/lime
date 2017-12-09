@@ -18,7 +18,7 @@ module.exports = function (app) {
     router.get("/",function(req,res){
 
         if (req.user.email !== 'admin@lime.com'){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/wallets"})});
             return;
         }
 
@@ -36,7 +36,7 @@ module.exports = function (app) {
                 });
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error retrieving wallets " + error});
+                res.status(500).send({"error": true, "message": "Error retrieving wallets " + error,"_links": generateLinks({list: "/wallets"})});
             });
 
 
@@ -47,7 +47,7 @@ module.exports = function (app) {
     router.get("/:email",function(req,res){
 
         if(req.user.email!==req.params.email && req.user.email!=="admin@lime.com"){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/wallets"})});
             return;
         }
         Wallet.findOne({email:req.params.email})
@@ -72,7 +72,7 @@ module.exports = function (app) {
                 });
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error retrieving wallet " + error});
+                res.status(500).send({"error": true, "message": "Error retrieving wallet " + error,"_links": generateLinks({list: "/wallets"})});
             });
 
 

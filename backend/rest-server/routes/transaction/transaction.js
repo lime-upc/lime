@@ -83,26 +83,26 @@ module.exports = function (app) {
 
             //No filters
             if(!userFilter && !boFilter){
-                res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+                res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/transactions"})});
                 return;
             }
 
             //If both user and bo specified, requester has to be one of both
             if(userFilter && boFilter){
                 if(userFilter!==req.user.email && boFilter!==req.user.email){
-                    res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+                    res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
             }
             else if(userFilter){ //Only user filter, then has to be user
                 if(userFilter!==req.user.email){
-                    res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+                    res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
             }
             else if(boFilter){  //Only bo filter, then has to be bo
                 if(boFilter!==req.user.email){
-                    res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+                    res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
             }
@@ -122,7 +122,7 @@ module.exports = function (app) {
                 });
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error retrieving transactions " + error});
+                res.status(500).send({"error": true, "message": "Error retrieving transactions " + error,"_links": generateLinks({list: "/transactions"})});
             });
     });
 
@@ -142,6 +142,7 @@ module.exports = function (app) {
             res.status(400).send({
                 "error": true,
                 "message": "Total amount is required"
+                ,"_links": generateLinks({list: "/transactions"})
             });
             return;
         }
@@ -166,7 +167,7 @@ module.exports = function (app) {
                 });
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error creating transaction " + error});
+                res.status(500).send({"error": true, "message": "Error creating transaction " + error,"_links": generateLinks({list: "/transactions"})});
             });
 
 
@@ -182,7 +183,7 @@ module.exports = function (app) {
             .then(function(result){
 
                 if (!result) {
-                    res.status(404).send({"error": true, "message": "The transaction does not exist"});
+                    res.status(404).send({"error": true, "message": "The transaction does not exist","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
@@ -191,7 +192,7 @@ module.exports = function (app) {
                     if(req.user.email!==result.business_owner &&
                        req.user.email!==result.user &&
                        req.user.email!=="admin@lime.com"){
-                        res.status(403).send({"error": true, "message": "Permission forbidden"});
+                        res.status(403).send({"error": true, "message": "Permission forbidden","_links": generateLinks({list: "/transactions"})});
                         return;
                     }
 
@@ -207,7 +208,7 @@ module.exports = function (app) {
                 });
             })
             .catch(function(err){
-                res.status(500).send({"error": true, "message": "Error retrieving transaction data"});
+                res.status(500).send({"error": true, "message": "Error retrieving transaction data","_links": generateLinks({list: "/transactions"})});
             });
 
     });
@@ -229,6 +230,7 @@ module.exports = function (app) {
             res.status(400).send({
                 "error": true,
                 "message": "virtual_money_used is required"
+                ,"_links": generateLinks({list: "/transactions"})
             });
             return;
         }
@@ -242,7 +244,7 @@ module.exports = function (app) {
                 var remainingMoney=  wallet.balance_amount - req.body.virtual_money_used;
                 if(remainingMoney < 0){
 
-                    res.status(400).send({"error": true, "message": "You don't have that amount of virtual money"});
+                    res.status(400).send({"error": true, "message": "You don't have that amount of virtual money","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
@@ -251,19 +253,19 @@ module.exports = function (app) {
 
                         //Transaction not found
                         if(!tx){
-                            res.status(404).send({"error": true, "message": "The transaction does not exist"});
+                            res.status(404).send({"error": true, "message": "The transaction does not exist","_links": generateLinks({list: "/transactions"})});
                             return;
                         }
 
 
                         //If more than 50% paid with vm, error
                         if(2*req.body.virtual_money_used > tx.total_amount){
-                            res.status(400).send({error: true, message:"You cannot pay more than 50% of total with Virtual Money"});
+                            res.status(400).send({error: true, message:"You cannot pay more than 50% of total with Virtual Money","_links": generateLinks({list: "/transactions"})});
                         }
 
                         //Only can do this when new.
                         if(tx.status!=="new"){
-                            res.status(400).send({"error": true, "message": "Transaction status is already " + tx.status});
+                            res.status(400).send({"error": true, "message": "Transaction status is already " + tx.status,"_links": generateLinks({list: "/transactions"})});
                             return;
                         }
 
@@ -293,7 +295,7 @@ module.exports = function (app) {
 
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error updating transaction " + error});
+                res.status(500).send({"error": true, "message": "Error updating transaction " + error,"_links": generateLinks({list: "/transactions"})});
             });
 
 
@@ -321,34 +323,34 @@ module.exports = function (app) {
 
                 //Not found
                 if(!tx){
-                    res.status(404).send({"error": true, "message": "The transaction does not exist"});
+                    res.status(404).send({"error": true, "message": "The transaction does not exist","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
                 //Check BO
                 if(tx.business_owner !== req.user.email && req.user.email !== "admin@lime.com"){
-                    res.status(403).send({"error": true, "message": "You don't have the permission to confirm this transaction"});
+                    res.status(403).send({"error": true, "message": "You don't have the permission to confirm this transaction","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
                 //Check that user paid
                 if(tx.status==="new"){
 
-                    res.status(400).send({"error": true, "message": "User has yet to introduce virtual money amount"});
+                    res.status(400).send({"error": true, "message": "User has yet to introduce virtual money amount","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
                 //Check it is not already confirmed
                 if(tx.status==="confirmed"){
 
-                    res.status(400).send({"error": true, "message": "Transaction is already confirmed"});
+                    res.status(400).send({"error": true, "message": "Transaction is already confirmed","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
                 //Check it is not already rejected
                 if(tx.status==="rejected"){
 
-                    res.status(400).send({"error": true, "message": "Transaction is rejected. Cannot confirm."});
+                    res.status(400).send({"error": true, "message": "Transaction is rejected. Cannot confirm.","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
@@ -388,7 +390,7 @@ module.exports = function (app) {
             })
 
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error confirming transaction " + error});
+                res.status(500).send({"error": true, "message": "Error confirming transaction " + error,"_links": generateLinks({list: "/transactions"})});
             });
 
     });
@@ -413,13 +415,13 @@ module.exports = function (app) {
 
                 //Not found
                 if(!tx){
-                    res.status(404).send({"error": true, "message": "The transaction does not exist"});
+                    res.status(404).send({"error": true, "message": "The transaction does not exist","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
                 //Check BO
                 if(tx.business_owner !== req.user.email && req.user.email !== "admin@lime.com"){
-                    res.status(403).send({"error": true, "message": "You don't have the permission to reject this transaction"});
+                    res.status(403).send({"error": true, "message": "You don't have the permission to reject this transaction","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
@@ -427,14 +429,14 @@ module.exports = function (app) {
                 //Check it is not already confirmed
                 if(tx.status==="confirmed"){
 
-                    res.status(400).send({"error": true, "message": "Transaction is already confirmed"});
+                    res.status(400).send({"error": true, "message": "Transaction is already confirmed","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
                 //Check it is not already rejected
                 if(tx.status==="rejected"){
 
-                    res.status(400).send({"error": true, "message": "Transaction is already rejected"});
+                    res.status(400).send({"error": true, "message": "Transaction is already rejected","_links": generateLinks({list: "/transactions"})});
                     return;
                 }
 
@@ -460,7 +462,7 @@ module.exports = function (app) {
             })
 
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error rejecting transaction " + error});
+                res.status(500).send({"error": true, "message": "Error rejecting transaction " + error,"_links": generateLinks({list: "/transactions"})});
             });
 
     });

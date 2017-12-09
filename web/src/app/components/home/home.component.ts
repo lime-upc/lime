@@ -13,8 +13,35 @@ import HeatmapOverlay from 'leaflet-heatmap';
 })
 export class HomeComponent implements OnInit {
 
-  date : String; 
-  selected: String;
+  date : String;
+
+  selectedFilter: String = 'all-users';
+  selectedGender: String;
+  selectedLowerAge: String;
+  selectedUpperAge: String;
+
+  hideGenderSelector: boolean = true;
+  hideAgeSelector: boolean =  true;
+
+  ageRanges = [
+    {value: '15', viewValue: '15'},
+    {value: '20', viewValue: '20'},
+    {value: '25', viewValue: '25'},
+    {value: '30', viewValue: '30'},
+    {value: '35', viewValue: '35'},
+    {value: '40', viewValue: '40'},
+    {value: '45', viewValue: '45'},
+    {value: '50', viewValue: '50'},
+    {value: '55', viewValue: '55'},
+    {value: '60', viewValue: '60'},
+    {value: '65+', viewValue: '65+'},
+  ];
+
+  /**
+   * Location & density data depending on the filter
+   */
+  currentData = { max: 8, data: []};
+
   map: any;
 
   /**
@@ -35,32 +62,6 @@ export class HomeComponent implements OnInit {
     valueField: 'count' // which field name in your data represents the data value - default "value"
   };
 
-  testData = {
-    max: 8,
-    data: [
-      {lat: 41.396583354381335, lng:2.296390703227544, count: 5},
-      {lat: 41.381333652516005, lng:2.5676861203867216, count: 4},
-      {lat: 41.38451413367245, lng: 2.386171278364763,count: 4},
-      {lat: 41.39410476743153, lng: 2.2093469273618496, count: 4},
-      {lat: 41.38346162988568, lng: 2.2951472742916526, count: 3},
-      {lat: 41.384028678398224,lng: 2.5669579254688375, count: 3},
-      {lat: 41.39121764783445, lng: 2.0259446110227306, count: 3},
-      {lat: 41.401405487630704, lng: 2.3841530964653748, count: 3},
-      {lat: 41.40375441296311, lng: 1.9349010980835248, count: 3},
-      {lat: 41.405241251856765, lng: 2.5676410997995136, count: 3},
-      {lat: 41.4044991, lng: 2.17429, count: 3},
-      {lat: 41.38176760, lng:2.17156, count: 4}
-    ]
-  };
-
-  /**
-   * Location & density data depending on the filter
-   */
-  general_map_data;
-  age_map_data;
-  female_map_data;
-  male_map_data;
-
   /**
    * Map layers
    */
@@ -75,20 +76,50 @@ export class HomeComponent implements OnInit {
   constructor(private auth: AuthenticationService, private router: Router) { 
 
     this.date = (new Date()).toDateString();
-    this.selected = 'all-users';
     
     if (!auth.isAuthentificated()) {
       router.navigate(['/login']);
     }
   }
 
-  ngOnInit() {
-    this.general_map_data = this.auth.getRealTimeMap();
-    this.heatmapLayer.setData(this.testData); // Set the data to the heatmaplayer
-    this.map = new L.Map('map', {
-      center: new L.LatLng(41.385064, 2.173403),
-      zoom: 14,
-      layers: [this.baseLayer, this.heatmapLayer]
-    });
+  selectFilter() {
+    if(this.selectedFilter == "all-users") {
+      this.hideAgeSelector = true;
+      this.hideGenderSelector = true;
+    } 
+    if (this.selectedFilter == "gender") {
+      this.hideAgeSelector = true;
+      this.hideGenderSelector = false;
+    }
+    if (this.selectedFilter == "age") {
+      this.hideGenderSelector = true;
+      this.hideAgeSelector = false;
+    }
   }
+
+  filterMap() {
+    if (this.selectedFilter == "gender") {
+      let currentData = this.auth.getRealTimeMapByGender("male").then(res => {
+        this.currentData.data = res;
+        this.heatmapLayer.setData(this.currentData); // Set the data to the heatmaplayer
+        this.map.layers = [this.baseLayer, this.heatmapLayer]
+      })
+    }
+    if (this.selectedFilter == "age") {
+
+    }
+  }
+
+  ngOnInit() {
+    let currentData = this.auth.getRealTimeMapByAllUser().then(res => {
+      this.currentData.data = res;
+      this.heatmapLayer.setData(this.currentData); // Set the data to the heatmaplayer
+      this.map = new L.Map('map', {
+        center: new L.LatLng(41.385064, 2.173403),
+        zoom: 14,
+        layers: [this.baseLayer, this.heatmapLayer]
+      });
+    })
+  }
+
 }
