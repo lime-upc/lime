@@ -1,3 +1,6 @@
+/**
+ * LIME REST Server
+ */
 var express = require('express'),
     mongoose = require('mongoose'),
     config = require("../config"),
@@ -12,7 +15,6 @@ app.use(passport.initialize()); //Init passport
 //To accept JSON and encoded values in URL
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
 
 //Enable CORS requests on all routes
 app.use(cors());
@@ -30,6 +32,9 @@ var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt'); //JWT comes from Auth Header Bearer strategy
 opts.secretOrKey = config.jwtsecret;
 
+/**
+ * Passport JWT strategy. Loads from the database the corresponding object.
+ */
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 
 
@@ -64,13 +69,13 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 
 
 
-
+//If Heroku, use local MongoDB URI
 var MONGO = ( process.env.MONGODB_URI || config.db );
 if(app.settings.env === 'test') {
     MONGO = config.db_test;
 }
 
-//If Heroku, use local MongoDB URI
+
 mongoose.connect(MONGO);
 mongoose.connection.once('open', function () {
 

@@ -2,10 +2,8 @@
  * Router module that handles the RESTAURANT REST API
  */
 var express = require('express');
-var crypto = require('crypto');
-var config = require('../../../config');
 var passport = require('passport');
-var jwt = require('jsonwebtoken');
+var generateLinks = require('../linkGenerator');
 
 
 module.exports = function (app) {
@@ -28,11 +26,14 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": response
+                    "message": response,
+                    "_links": generateLinks({
+                        self: "/restaurants"
+                    })
                 });
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error retrieving restaurant data " + error});
+                res.status(500).send({"error": true, "message": "Error retrieving restaurant data " + error,"_links": generateLinks({list: "/restaurants"})});
             });
 
     });
@@ -50,17 +51,21 @@ module.exports = function (app) {
             .then(function(result){
 
                 if (!result) {
-                    res.status(404).send({"error": true, "message": "The restaurant does not exist"});
+                    res.status(404).send({"error": true, "message": "The restaurant does not exist","_links": generateLinks({list: "/restaurants"})});
                     return;
                 }
 
                 res.send({
                     "error": false,
-                    "message": result
+                    "message": result,
+                    "_links": generateLinks({
+                        self: "/restaurants/" + req.params.id,
+                        list: "/restaurants"
+                    })
                 });
             })
             .catch(function(err){
-                res.status(500).send({"error": true, "message": "Error retrieving restaurant data"});
+                res.status(500).send({"error": true, "message": "Error retrieving restaurant data","_links": generateLinks({list: "/restaurants"})});
             });
 
 
@@ -81,7 +86,7 @@ module.exports = function (app) {
     router.put("/:id",function (req,res) {
 
         if (req.user.email !== 'admin@lime.com'){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/restaurants"})});
             return;
         }
 
@@ -112,7 +117,7 @@ module.exports = function (app) {
             .then(function(response){
 
                 if(!response){
-                    res.status(404).send({"error": true, "message": "The restaurant does not exist"});
+                    res.status(404).send({"error": true, "message": "The restaurant does not exist","_links": generateLinks({list: "/restaurants"})});
                     return;
                 }
 
@@ -122,14 +127,18 @@ module.exports = function (app) {
                         //Just send back the updated data
                         res.send({
                             "error": false,
-                            "message": response
+                            "message": response,
+                            "_links": generateLinks({
+                                self: "/restaurants/" + req.params.id,
+                                list: "/restaurants"
+                            })
                         });
                     });
 
 
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error updating restaurant " + error});
+                res.status(500).send({"error": true, "message": "Error updating restaurant " + error,"_links": generateLinks({list: "/restaurants"})});
             });
 
     });

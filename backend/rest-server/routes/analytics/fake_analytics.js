@@ -1,16 +1,14 @@
+/**
+ * This module simulates the analytics API,returning fake data stored in the fake_data folder.
+ * This is done so no need to launch Elastic Search etc to test the data.
+ * Not part of the Web Services project.
+ */
 var express = require('express');
 var fs = require('fs');
 
-
-/**
- * This module simulates the analytics API,returning fake data stored in the fake_data folder.
- * This is done so no need to launch Elastic Search etcetera to test the data.
- */
 module.exports = function (app) {
 
     var router = express.Router();
-
-
 
 
     router.get("/rankings/:criteria", function (req, res) {

@@ -6,7 +6,7 @@ var crypto = require('crypto');
 var config = require('../../../config');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
-
+var generateLinks = require('../linkGenerator');
 
 module.exports = function (app) {
 
@@ -14,6 +14,7 @@ module.exports = function (app) {
 
     var User = app.models.User; //Get User Model
     var Wallet = app.models.Wallet;
+    var Restaurant = app.models.Restaurant;
 
 
 
@@ -29,7 +30,7 @@ module.exports = function (app) {
 
 
         if (req.user.email !== 'admin@lime.com'){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/users"})});
             return;
         }
 
@@ -40,11 +41,12 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": response
+                    "message": response,
+                    "_links": generateLinks({self:"/users"})
                 });
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error retrieving user data " + error});
+                res.status(500).send({"error": true, "message": "Error retrieving user data " + error,"_links": generateLinks({list: "/users"})});
             });
 
 
@@ -67,6 +69,7 @@ module.exports = function (app) {
                 res.status(400).send({
                     "error": true,
                     "message": "All the parameters are required"
+                    ,"_links": generateLinks({list: "/users"})
                 });
 
                 return;
@@ -78,6 +81,7 @@ module.exports = function (app) {
             res.status(400).send({
                 "error": true,
                 "message": "Preferences must have at least one element"
+                ,"_links": generateLinks({list: "/users"})
             });
 
             return;
@@ -95,7 +99,8 @@ module.exports = function (app) {
                 password: passHash,
                 date_of_birth: new Date(req.body.date_of_birth),
                 gender: req.body.gender,
-                preferences: req.body.preferences
+                preferences: req.body.preferences,
+                likes: [] //Starts with empty likes
             }
         );
 
@@ -119,7 +124,13 @@ module.exports = function (app) {
                     .then(function(){
                         res.send({
                             "error": false,
-                            "message": response.withoutPassword()
+                            "message": response.withoutPassword(),
+                            "_links": generateLinks({
+                                self:"/users" + response.email,
+                                likes: "/users/" + response.email + "/likes",
+                                wallet: "/wallets/" + response.email,
+                                list: "/users"
+                            })
                         });
                     });
 
@@ -129,10 +140,10 @@ module.exports = function (app) {
             .catch(function(error){
                 //Error because mail already registered (unique key conflict in Mongoose is error 11000).
                 if ( error.code === 11000 ) {
-                    res.status(400).send({"error": true, "message": "That mail is already registered"});
+                    res.status(400).send({"error": true, "message": "That mail is already registered","_links": generateLinks({list: "/users"})});
                     return;
                 }
-                res.status(500).send({"error": true, "message": "Error creating user " + error});
+                res.status(500).send({"error": true, "message": "Error creating user " + error,"_links": generateLinks({list: "/users"})});
             });
 
 
@@ -148,7 +159,7 @@ module.exports = function (app) {
     router.get("/:email", function (req, res) {
 
         if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/users"})});
             return;
         }
 
@@ -157,17 +168,23 @@ module.exports = function (app) {
             .then(function(result){
 
                 if (!result) {
-                    res.status(404).send({"error": true, "message": "The user does not exist"});
+                    res.status(404).send({"error": true, "message": "The user does not exist","_links": generateLinks({list: "/users"})});
                     return;
                 }
 
                 res.send({
                     "error": false,
-                    "message": result.withoutPassword()
+                    "message": result.withoutPassword(),
+                    "_links": generateLinks({
+                        self:"/users" + result.email,
+                        likes: "/users/" + result.email + "/likes",
+                        wallet: "/wallets/" + result.email,
+                        list: "/users"
+                    })
                 });
             })
             .catch(function(err){
-                res.status(500).send({"error": true, "message": "Error retrieving user data"});
+                res.status(500).send({"error": true, "message": "Error retrieving user data","_links": generateLinks({list: "/users"})});
             });
 
 
@@ -188,7 +205,7 @@ module.exports = function (app) {
     router.put("/:email",function (req,res) {
 
         if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/users"})});
             return;
         }
 
@@ -227,6 +244,8 @@ module.exports = function (app) {
         }
 
 
+        //Cannot update likes as that is done through the likes API
+
         User.findOneAndUpdate({email: req.params.email}, updateObject, {new:true})
             .then(function(response){
 
@@ -239,12 +258,18 @@ module.exports = function (app) {
                 //Just send the updated data without password
                 res.send({
                     "error": false,
-                    "message": response.withoutPassword()
+                    "message": response.withoutPassword(),
+                    "_links": generateLinks({
+                        self:"/users" + response.email,
+                        likes: "/users/" + response.email + "/likes",
+                        wallet: "/wallets/" + response.email,
+                        list: "/users"
+                    })
                 });
 
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error updating user " + error});
+                res.status(500).send({"error": true, "message": "Error updating user " + error,"_links": generateLinks({list: "/users"})});
             });
 
 
@@ -265,7 +290,7 @@ module.exports = function (app) {
     router.delete("/:email", function(req,res){
 
         if (req.user.email !== 'admin@lime.com'){
-            res.status(403).send({error: true, message: "You are not authorized to perform this action"});
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/users"})});
             return;
         }
 
@@ -282,11 +307,14 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": "Removed successfully"
+                    "message": "Removed successfully",
+                    "_links": generateLinks({
+                         list: "/users"
+                    })
                 });
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error removing user " + error});
+                res.status(500).send({"error": true, "message": "Error removing user " + error,"_links": generateLinks({list: "/users"})});
             });
     });
 
@@ -304,6 +332,7 @@ module.exports = function (app) {
             res.status(400).send({
                 "error": true,
                 "message": "Please, specify both email and password"
+                ,"_links": generateLinks({list: "/users"})
             });
 
             return;
@@ -315,7 +344,7 @@ module.exports = function (app) {
 
                 //ERROR: No result, so the username does not exist
                 if(!result){
-                    res.status(401).send({"error": true, "message": "Incorrect email or password"});
+                    res.status(401).send({"error": true, "message": "Incorrect email or password","_links": generateLinks({list: "/users"})});
                     return;
                 }
 
@@ -323,7 +352,7 @@ module.exports = function (app) {
 
                 //ERROR: Password is incorrect
                 if (hash !== result.password){
-                    res.status(401).send({"error": true, "message": "Incorrect email or password"});
+                    res.status(401).send({"error": true, "message": "Incorrect email or password","_links": generateLinks({list: "/users"})});
                     return;
                 }
 
@@ -332,14 +361,182 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": token
+                    "message": token,
+                    "_links": generateLinks({
+                        user: "/users/"+ req.body.email
+                    })
                 });
 
             })
             .catch(function(error){
-                res.status(500).send({"error": true, "message": "Error removing user " + error});
+                res.status(500).send({"error": true, "message": "Error removing user " + error,"_links": generateLinks({list: "/users"})});
 
             });
+
+
+    });
+
+
+    //Likes functions
+
+
+    /**
+     * GET /:email/likes -  Get info of liked restaurants by a user
+     *
+     * Authentication: Yes
+     * Permissions: The own user, Admin
+     */
+    router.get("/:email/likes",passport.authenticate('jwt', { session: false }));
+    router.get("/:email/likes", function (req, res) {
+
+        if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/users"})});
+            return;
+        }
+
+
+        User.findOne({email: req.params.email}, 'likes')
+            .then(function(result){
+
+                if (!result) {
+                    res.status(404).send({"error": true, "message": "The user does not exist","_links": generateLinks({list: "/users"})});
+                    return;
+                }
+
+                res.send({
+                    "error": false,
+                    "message": result.likes,
+                    "_links": generateLinks({
+                        self: "/users/" + req.user.email + "/likes/",
+                        user: "/users/"+ req.user.email
+                    })
+
+                });
+            })
+            .catch(function(err){
+                res.status(500).send({"error": true, "message": "Error retrieving user likes","_links": generateLinks({list: "/users"})});
+            });
+
+
+    });
+
+    /**
+     * POST /:email/likes/:restaurantId -  Adds a restaurant as liked to a user's profile
+     *
+     * Authentication: Yes
+     * Permissions: The own user, Admin
+     */
+    router.post("/:email/likes/:restaurantId",passport.authenticate('jwt', { session: false }));
+    router.post("/:email/likes/:restaurantId", function (req, res) {
+
+        if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/users"})});
+            return;
+        }
+
+
+        //Check that the restaurant exists
+        Restaurant.findOne({_id: req.params.restaurantId})
+            .then(function(result){
+
+                if(!result){
+                    res.status(404).send({error: true, message: "The specified restaurant does not exist in our DB.","_links": generateLinks({list: "/users"})});
+                    return;
+                }
+
+                //Get the likes array
+                return User.findOne({email: req.params.email}, 'likes')
+                    .then(function(result){
+
+                        if (!result) {
+                            res.status(404).send({"error": true, "message": "The user does not exist","_links": generateLinks({list: "/users"})});
+                            return;
+                        }
+
+                        var likes = result.likes;
+                        if(likes.indexOf(req.params.restaurantId)<0){
+                            likes.push(req.params.restaurantId); //If not already, we set
+                        }
+
+                        //Update the user
+                        return User.findOneAndUpdate({email: req.params.email},{$set:{likes:likes}}, {new:true})
+                            .then(function(result){
+                                res.send({
+                                    "error": false,
+                                    "message": result.likes,
+                                    "_links": generateLinks({
+                                        self: "/users/" + req.user.email + "/likes/",
+                                        user: "/users/"+ req.user.email
+                                    })
+                                });
+                            });
+
+
+                    })
+
+
+            })
+            .catch(function(err){
+                res.status(500).send({"error": true, "message": "Error adding user like","_links": generateLinks({list: "/users"})});
+            });
+
+
+
+
+
+    });
+
+    /**
+     * DELETE /:email/likes/:restaurantId -  Removes a restaurant as liked from a user's profile
+     *
+     * Authentication: Yes
+     * Permissions: The own user, Admin
+     */
+    router.delete("/:email/likes/:restaurantId",passport.authenticate('jwt', { session: false }));
+    router.delete("/:email/likes/:restaurantId", function (req, res) {
+
+        if (req.user.email !== req.params.email && req.user.email !== 'admin@lime.com'){
+            res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/users"})});
+            return;
+        }
+
+
+        //Get the likes array
+        User.findOne({email: req.params.email}, 'likes')
+            .then(function(result){
+
+                if (!result) {
+                    res.status(404).send({"error": true, "message": "The user does not exist","_links": generateLinks({list: "/users"})});
+                    return;
+                }
+
+                var likes = result.likes;
+                var index = likes.indexOf(req.params.restaurantId);
+                if(index > -1){
+                    likes.splice(index,1);
+                }
+
+                //Update the user
+                return User.findOneAndUpdate({email: req.params.email},{$set:{likes:likes}}, {new:true})
+                    .then(function(result){
+                        res.send({
+                            "error": false,
+                            "message": result.likes,
+                            "_links": generateLinks({
+                                self: "/users/" + req.user.email + "/likes/",
+                                user: "/users/"+ req.user.email
+                            })
+                        });
+                    });
+
+
+            })
+            .catch(function(err){
+                res.status(500).send({"error": true, "message": "Error removing user like","_links": generateLinks({list: "/users"})});
+            });
+
+
+
 
 
     });

@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var passport = require('passport');
+var generateLinks = require('../linkGenerator');
 
 
 module.exports = function (app) {
@@ -28,7 +29,10 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": response
+                    "message": response,
+                    "_links": generateLinks({
+                        list: "/wallets"
+                    })
                 });
             })
             .catch(function(error){
@@ -59,7 +63,12 @@ module.exports = function (app) {
                 }
                 res.send({
                     "error": false,
-                    "message": response
+                    "message": response,
+                    "_links": generateLinks({
+                        self: "/wallets/" + req.user.email,
+                        user: "/users/" + req.user.email,
+                        list: "/wallets"
+                    })
                 });
             })
             .catch(function(error){
