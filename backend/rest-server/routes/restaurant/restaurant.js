@@ -2,10 +2,8 @@
  * Router module that handles the RESTAURANT REST API
  */
 var express = require('express');
-var crypto = require('crypto');
-var config = require('../../../config');
 var passport = require('passport');
-var jwt = require('jsonwebtoken');
+var generateLinks = require('../linkGenerator');
 
 
 module.exports = function (app) {
@@ -28,7 +26,10 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": response
+                    "message": response,
+                    "_links": generateLinks({
+                        self: "/restaurants"
+                    })
                 });
             })
             .catch(function(error){
@@ -56,7 +57,11 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": result
+                    "message": result,
+                    "_links": generateLinks({
+                        self: "/restaurants/" + req.params.id,
+                        list: "/restaurants"
+                    })
                 });
             })
             .catch(function(err){
@@ -122,7 +127,11 @@ module.exports = function (app) {
                         //Just send back the updated data
                         res.send({
                             "error": false,
-                            "message": response
+                            "message": response,
+                            "_links": generateLinks({
+                                self: "/restaurants/" + req.params.id,
+                                list: "/restaurants"
+                            })
                         });
                     });
 
