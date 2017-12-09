@@ -2,8 +2,8 @@
  * Router module that handles the TRANSACTIONS rest API
  */
 var express = require('express');
-var crypto = require('crypto');
 var passport = require('passport');
+var generateLinks = require('../linkGenerator');
 
 
 module.exports = function (app) {
@@ -115,7 +115,10 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": response
+                    "message": response,
+                    "_links": generateLinks({
+                        self: "/transactions"
+                    })
                 });
             })
             .catch(function(error){
@@ -155,7 +158,11 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": response
+                    "message": response,
+                    "_links": generateLinks({
+                        self: "/transactions/" + response._id,
+                        list: "/transactions"
+                    })
                 });
             })
             .catch(function(error){
@@ -192,7 +199,11 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": result
+                    "message": result,
+                    "_links": generateLinks({
+                        self: "/transactions/" + result._id,
+                        list: "/transactions"
+                    })
                 });
             })
             .catch(function(err){
@@ -266,7 +277,11 @@ module.exports = function (app) {
                         return tx.save().then(function(response){
                             res.send({
                                 "error": false,
-                                "message": response
+                                "message": response,
+                                "_links": generateLinks({
+                                    self: "/transactions/" + response._id,
+                                    list: "/transactions"
+                                })
                             });
                         })
 
@@ -358,7 +373,11 @@ module.exports = function (app) {
                         .then(function(r){
                             res.send({
                                 "error": false,
-                                "message": response
+                                "message": response,
+                                "_links": generateLinks({
+                                    self: "/transactions/" + response._id,
+                                    list: "/transactions"
+                                })
                             });
                         });
 
@@ -427,7 +446,11 @@ module.exports = function (app) {
 
                     res.send({
                         "error": false,
-                        "message": response
+                        "message": response,
+                        "_links": generateLinks({
+                            self: "/transactions/" + response._id,
+                            list: "/transactions"
+                        })
                     });
 
                 })
