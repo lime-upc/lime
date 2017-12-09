@@ -1,4 +1,4 @@
-package org.lime.batch;
+package org.lime.batch.externalDataLoaders;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -14,10 +14,10 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.lime.batch.beans.LocationBean;
 
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -26,7 +26,7 @@ import java.util.Date;
  */
 public class HBaseLoader {
 
-	public static JavaRDD<LocationBean> getLocationsForDayRDD(JavaSparkContext ctx,String dayString) throws Exception{
+	public static JavaRDD<LocationBean> getLocationsForDayRDD(JavaSparkContext ctx, String dayString) throws Exception{
 
 
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

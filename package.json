@@ -35,6 +35,7 @@
     "jsonwebtoken": "^8.1.0",
     "kafka-node": "^2.3.0",
     "kafka-rest": "0.0.5",
+    "mgrs": "^1.0.0",
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.6",
     "passport": "^0.4.0",

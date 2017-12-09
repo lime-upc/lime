@@ -1,9 +1,10 @@
-package org.lime.batch;
+package org.lime.batch.externalDataLoaders;
 
 import com.caffinc.sparktools.mongordd.MongoRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.bson.Document;
+import org.lime.batch.beans.TransactionBean;
 import scala.reflect.ClassManifestFactory$;
 
 import java.text.DateFormat;
