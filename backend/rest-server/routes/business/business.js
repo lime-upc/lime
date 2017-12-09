@@ -6,6 +6,7 @@ var crypto = require('crypto');
 var config = require('../../../config');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
+var generateLinks = require('../linkGenerator');
 
 
 module.exports = function (app) {
@@ -38,7 +39,10 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": response
+                    "message": response,
+                    "_links": generateLinks({
+                        self: "/businesses"
+                    })
                 });
             })
             .catch(function(error){
@@ -73,7 +77,11 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": result.withoutPassword()
+                    "message": result.withoutPassword(),
+                    "_links": generateLinks({
+                        list: "/businesses",
+                        self: "/businesses/" + req.params.email
+                    })
                 });
             })
             .catch(function(err){
@@ -136,7 +144,11 @@ module.exports = function (app) {
                                     .then(function (response) {
                                         res.send({
                                             "error": false,
-                                            "message": response.withoutPassword()
+                                            "message": response.withoutPassword(),
+                                            "_links": generateLinks({
+                                                list: "/businesses",
+                                                self: "/businesses/" + req.body.email
+                                            })
                                         });
                                     })
                                     .catch(function (error) {
@@ -226,7 +238,11 @@ module.exports = function (app) {
                 //Just send the updated data without password
                 res.send({
                     "error": false,
-                    "message": response.withoutPassword()
+                    "message": response.withoutPassword(),
+                    "_links": generateLinks({
+                        list: "/businesses",
+                        self: "/businesses/" + req.params.email
+                    })
                 });
 
             })
@@ -263,7 +279,10 @@ module.exports = function (app) {
 
                 res.send({
                     "error": false,
-                    "message": "Removed successfully"
+                    "message": "Removed successfully",
+                    "_links": generateLinks({
+                        list: "/businesses"
+                    })
                 });
             })
             .catch(function(error){
@@ -312,7 +331,10 @@ module.exports = function (app) {
         
                         res.send({
                             "error": false,
-                            "message": token
+                            "message": token,
+                            "_links": generateLinks({
+                                self: "/businesses/" + req.body.email
+                            })
                         });
                     })
                     .catch(function(error){
