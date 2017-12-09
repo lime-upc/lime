@@ -11,7 +11,7 @@ var passport = require('passport');
 var jwt = require('jsonwebtoken');
 
 var elasticsearch = require('elasticsearch');
-var bodybuilder = require('bodybuilder')
+var bodybuilder = require('bodybuilder');
 
 
 module.exports = function (app) {

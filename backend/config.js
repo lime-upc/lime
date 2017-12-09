@@ -7,6 +7,7 @@ module.exports = {
     port: "3000",
     jwtsecret: "SECRET",
     kafka_enabled: true,
-    kafka_host: "192.168.56.20:2181"
+    kafka_host: "192.168.56.20:2181",
+    analytics_fake_data: true
 };
 

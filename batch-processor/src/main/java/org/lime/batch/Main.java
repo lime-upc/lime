@@ -12,7 +12,7 @@ import org.lime.batch.resultDTOs.TransactionRestaurantResults;
 
 public class Main {
 
-    
+
     public static void main(String[] args) throws Exception {
 
 
@@ -20,7 +20,7 @@ public class Main {
         JavaSparkContext ctx = new JavaSparkContext(conf);
 
         ctx.setLogLevel("ERROR");
-        String day = "07/12/2017";
+        String day = "08/12/2017";
 
         //Get all the locations from yesterday
         //JavaRDD<LocationBean> locations = HBaseLoader.getLocationsForDayRDD(ctx,"07/12/2017");
