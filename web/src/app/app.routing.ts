@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.component';
 import { ProfileComponent } from "./components/profile/profile.component";
+import { AnalyticsComponent } from "./components/analytics/analytics.component";
 
 const routes: Routes = [
   {
@@ -28,10 +29,14 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
+    path: 'analytics',
+    component: AnalyticsComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }
-  
+
 ];
 
 @NgModule({

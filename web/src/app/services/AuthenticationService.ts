@@ -172,8 +172,13 @@ export class AuthenticationService {
     if(!token){
       return Promise.reject("User is not authenticated");
     }
-    let email = this.jwtHelper.decodeToken(token as string).email
+    let email = this.getEmail();
     return this.authHttp.put("http://localhost:3000/businesses/" + email, newNotification)
+  }
+
+  getEmail() {
+    let token = this.loadToken();
+    return this.jwtHelper.decodeToken(token as string).email;
   }
 
   /**

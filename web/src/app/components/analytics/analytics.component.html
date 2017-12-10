@@ -1,0 +1,76 @@
+<div class="container">
+  <h1>
+    <mat-icon>pie_chart</mat-icon>
+    Real-time analytics
+  </h1>
+
+  <div class="content">
+    <div class="diagrams-container">
+      <div class="barcharts" [hidden]="hideBarcharts">
+        <div class="barchart-container" *ngIf="barChartGenderLoaded">
+          <canvas baseChart height="400"
+                  [data]="barChartGenderData"
+                  [colors]="barChartColors"
+                  [labels]="barChartGenderLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"></canvas>
+        </div>
+        <div class="barchart-container" *ngIf="barChartAgeLoaded">
+          <canvas baseChart height="400"
+                  [data]="barChartAgeData"
+                  [colors]="barChartColors"
+                  [labels]="barChartAgeLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"></canvas>
+        </div>
+        <div class="barchart-container" *ngIf="barChartHoursLoaded">
+          <canvas baseChart height="400"
+                  [data]="barChartHoursData"
+                  [colors]="barChartColors"
+                  [labels]="barChartHoursLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"></canvas>
+        </div>
+        <!--<canvas baseChart-->
+        <!--[datasets]="barChartAgeData"-->
+        <!--[labels]="barChartAgeLabels"-->
+        <!--[options]="barChartOptions"-->
+        <!--[legend]="barChartLegend"-->
+        <!--[chartType]="barChartType"></canvas>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="side-panel">
+    <h2>Statistics</h2>
+
+    <!-- Gender selector -->
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Gender">
+          <mat-option *ngFor="let gender of genders" [value]="gender.value">
+            {{ gender.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Age range selector -->
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Age">
+          <mat-option *ngFor="let age of ageRanges" [value]="age.value">
+            {{ age.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <h2>Trends</h2>
+
+  </div>
+
+</div>

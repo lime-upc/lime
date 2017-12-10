@@ -7,6 +7,8 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { AuthenticationService } from 'app/services/AuthenticationService';
 import { AgmCoreModule } from '@agm/core';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { HttpClientModule } from "@angular/common/http";
+import { ChartsModule } from "ng2-charts";
 
 /* Modules from material design */
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,6 +32,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { ProfileComponent } from "./components/profile/profile.component";
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.component';
+import { AnalyticsComponent } from "./components/analytics/analytics.component";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -48,9 +51,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     LoginComponent,
     RegistrationComponent,
     ProfileComponent,
+    AnalyticsComponent,
     FooterComponent,
     PageNotFoundComponent,
-
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -61,6 +64,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RouterModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     MatFormFieldModule,
     MatInputModule,
@@ -71,7 +75,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatIconModule,
     MatTableModule,
     MatRadioModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    ChartsModule
   ],
   providers: [
     AuthenticationService,
