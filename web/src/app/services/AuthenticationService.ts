@@ -143,6 +143,25 @@ export class AuthenticationService {
       })
   }
 
+  getRealTimeMapByAge(ageRange) {
+    var token = this.loadToken()
+    if(!token){
+      return Promise.reject("User is not authenticated");
+    }
+    return this.http.get("http://localhost:3000/real-time-heatmaps/agerange/"+ageRange+"/").toPromise()
+      .then(res => {
+        var response = JSON.parse((res as any)._body);
+        var newRealTimeMapData = response.message;
+        this.realTimeMapData = newRealTimeMapData;
+        console.log(this.realTimeMapData)
+        return this.realTimeMapData
+      })
+      .catch(err => {
+        let error =  JSON.parse(err._body);
+        throw error.message;
+      })
+  }
+
 
   /**
    * IN PROGRESS

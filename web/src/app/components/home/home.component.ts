@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
     "maxOpacity": .4, 
     // radius should be small ONLY if scaleRadius is true (or small radius is intended)
     // if scaleRadius is false it will be the constant radius used in pixels
-    "radius": 0.005, // scales the radius based on map zoom
+    "radius": 0.0025, // scales the radius based on map zoom
     "scaleRadius": true, 
     // if set to false the heatmap uses the global maximum for colorization
     // if activated: uses the data maximum within the current map boundaries 
@@ -86,6 +86,11 @@ export class HomeComponent implements OnInit {
     if(this.selectedFilter == "all-users") {
       this.hideAgeSelector = true;
       this.hideGenderSelector = true;
+      let allUsersData = this.auth.getRealTimeMapByAllUser().then(res => {
+        this.currentData.data = res;
+        this.heatmapLayer.setData(this.currentData); // Set the data to the heatmaplayer
+        this.map.layers = [this.baseLayer, this.heatmapLayer]
+      })
     } 
     if (this.selectedFilter == "gender") {
       this.hideAgeSelector = true;
@@ -98,20 +103,30 @@ export class HomeComponent implements OnInit {
   }
 
   filterMap() {
+    //alert(this.selectedFilter)
+
     if (this.selectedFilter == "gender") {
-      let currentData = this.auth.getRealTimeMapByGender("male").then(res => {
+      //alert(this.selectedGender)
+      let byGenderData = this.auth.getRealTimeMapByGender("male").then(res => {
         this.currentData.data = res;
         this.heatmapLayer.setData(this.currentData); // Set the data to the heatmaplayer
         this.map.layers = [this.baseLayer, this.heatmapLayer]
       })
     }
-    if (this.selectedFilter == "age") {
 
+    if (this.selectedFilter == "age") {
+      let ageRange = this.selectedLowerAge+"-"+this.selectedUpperAge //Variable with the range Example : 15-35
+      //alert(ageRange)
+      let byAgeData = this.auth.getRealTimeMapByAge(ageRange).then(res => {
+        this.currentData.data = res;
+        this.heatmapLayer.setData(this.currentData); // Set the data to the heatmaplayer
+        this.map.layers = [this.baseLayer, this.heatmapLayer]
+      })
     }
   }
 
   ngOnInit() {
-    let currentData = this.auth.getRealTimeMapByAllUser().then(res => {
+    let allUsersData = this.auth.getRealTimeMapByAllUser().then(res => {
       this.currentData.data = res;
       this.heatmapLayer.setData(this.currentData); // Set the data to the heatmaplayer
       this.map = new L.Map('map', {

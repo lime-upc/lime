@@ -4,6 +4,10 @@
     position: relative
 } 
 
+.container h1{
+    float: left;
+}
+
 #map {
     width: 80%;
     height: 850px;
@@ -11,7 +15,12 @@
 }
 
 .side-panel {
-    margin-left: 70%;
+    margin-left: 80%;
+}
+
+.all-element p,div,mat-form-field,button{
+    text-align: center;
+    margin-bottom: 3px;
 }
 
 .div {
