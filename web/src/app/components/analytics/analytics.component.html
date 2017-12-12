@@ -1,10 +1,10 @@
 <div class="container">
   <h1>
     <mat-icon>pie_chart</mat-icon>
-    Real-time analytics
+    Batch analytics
   </h1>
 
-  <div class="content">
+  <div class="row">
     <div class="diagrams-container">
       <div class="barcharts" [hidden]="hideBarcharts">
         <div class="barchart-container" *ngIf="barChartGenderLoaded">
@@ -42,35 +42,35 @@
         <!--[chartType]="barChartType"></canvas>-->
       </div>
     </div>
-  </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h3>Top Restaurants</h3>
+          <div *ngFor="let rest of topRestaurants; let i=index;" class="spaced" >
 
-  <div class="side-panel">
-    <h2>Statistics</h2>
+            <div *ngIf="i<10" class="rankingElement">
+              <span><b>{{i+1}}</b> - {{rest.name}}</span>
+            </div>
 
-    <!-- Gender selector -->
-    <div>
-      <mat-form-field>
-        <mat-select placeholder="Gender">
-          <mat-option *ngFor="let gender of genders" [value]="gender.value">
-            {{ gender.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="col">
+          <h3>Top Tags</h3>
+          <div *ngFor="let tag of tags; let i=index;" class="spaced" >
+
+            <div *ngIf="i<10" class="rankingElement">
+              <span><b>{{i+1}}</b> - {{tag.name}} ({{tag.quantity}} transactions)</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
-    <!-- Age range selector -->
-    <div>
-      <mat-form-field>
-        <mat-select placeholder="Age">
-          <mat-option *ngFor="let age of ageRanges" [value]="age.value">
-            {{ age.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <h2>Trends</h2>
-
-  </div>
 
 </div>
