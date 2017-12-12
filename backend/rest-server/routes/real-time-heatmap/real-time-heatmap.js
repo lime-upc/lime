@@ -102,7 +102,7 @@ module.exports = function (app) {
                 var key = aggregationsArray[i].key;
                 var doc_count = aggregationsArray[i].doc_count;
                 var latlong = mgrs.toPoint(key);
-                heatmap.push({lat: latlong[0], lng: latlong[1], count: doc_count});
+                heatmap.push({zone: key, lat: latlong[0], lng: latlong[1], count: doc_count});
             }
 
 
