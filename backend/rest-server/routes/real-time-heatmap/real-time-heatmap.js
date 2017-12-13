@@ -76,7 +76,7 @@ module.exports = function (app) {
     });
 
     /**
-     * GET / -  Get all the data (grid cells MGRS coordinates and number of people per cell) to render the genearl real time heatmap
+     * GET / -  Get all the data (grid cells MGRS coordinates and number of people per cell) to render the general real time heatmap
      *
      * Authentication: Yes
      * Permissions: The own BO, Admin
@@ -84,7 +84,15 @@ module.exports = function (app) {
     //router.get("/",passport.authenticate('jwt', { session: false }));
     router.get("/", function (req, res) {
 
+		timestampMax = new Date(); // now timestamp
+		timestampMin = new Date();
+		timestampMin.setMinutes(timestampMin.getMinutes() - 5); // 5 minutes ago timestamp
+		timestampMaxInteger = timestampMax.getTime();
+		timestampMinInteger = timestampMin.getTime();
+
         var body = bodybuilder()
+        .query('range', 'last_update_timestamp', {gte: timestampMinInteger})
+		.query('range', 'last_update_timestamp', {lte: timestampMaxInteger})
         .aggregation('terms', 'MGRS_coord')
         .build()
 
@@ -132,8 +140,16 @@ module.exports = function (app) {
             res.status(401).send({"error": true, "message": "Incorrect value for the 'gender' parameter (accepted values: 'male', 'female')"});
             return;
         }
+		
+		timestampMax = new Date(); // now timestamp
+		timestampMin = new Date();
+		timestampMin.setMinutes(timestampMin.getMinutes() - 5); // 5 minutes ago timestamp
+		timestampMaxInteger = timestampMax.getTime();
+		timestampMinInteger = timestampMin.getTime();
 
         var body = bodybuilder()
+        .query('range', 'last_update_timestamp', {gte: timestampMinInteger})
+		.query('range', 'last_update_timestamp', {lte: timestampMaxInteger})
         .query('match', 'gender', req.params.gender)
         .aggregation('terms', 'MGRS_coord')
         .build()
@@ -188,7 +204,15 @@ module.exports = function (app) {
             return;
         }
 
+		timestampMax = new Date(); // now timestamp
+		timestampMin = new Date();
+		timestampMin.setMinutes(timestampMin.getMinutes() - 5); // 5 minutes ago timestamp
+		timestampMaxInteger = timestampMax.getTime();
+		timestampMinInteger = timestampMin.getTime();
+
         var body = bodybuilder()
+        .query('range', 'last_update_timestamp', {gte: timestampMinInteger})
+		.query('range', 'last_update_timestamp', {lte: timestampMaxInteger})
         .query('range', 'age', {gte: ageMin})
         .query('range', 'age', {lte: ageMax})
         .aggregation('terms', 'MGRS_coord')
