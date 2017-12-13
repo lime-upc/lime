@@ -161,8 +161,8 @@ module.exports = function(path,token,speedMS,updateFreqS,endCallback){
 
             if(currentDistance <=path.totalDistanceInM){ //If path is not finished, then post to rest endpoint
                 doPost({
-                    lat: currentPoint.lat,
-                    long: currentPoint.long,
+                    lat: currentPoint.long,
+                    long: currentPoint.lat, //Have to swap because they are formed in incorrect order
                     distance: currentDistance
                 });
                 process.stdout.write(".");
