@@ -5,6 +5,7 @@ import { google } from '@agm/core/services/google-maps-types';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import * as L from 'leaflet';
 import HeatmapOverlay from 'leaflet-heatmap';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-home',
@@ -45,16 +46,16 @@ export class HomeComponent implements OnInit {
   map: any;
 
   /**
-   * Heatmap Configuration 
+   * Heatmap Configuration
    */
   cfg = {
-    "maxOpacity": .4, 
+    "maxOpacity": .4,
     // radius should be small ONLY if scaleRadius is true (or small radius is intended)
     // if scaleRadius is false it will be the constant radius used in pixels
-    "radius": 0.025, // scales the radius based on map zoom
-    "scaleRadius": true, 
+    "radius": 0.005, // scales the radius based on map zoom
+    "scaleRadius": true,
     // if set to false the heatmap uses the global maximum for colorization
-    // if activated: uses the data maximum within the current map boundaries 
+    // if activated: uses the data maximum within the current map boundaries
     //   (there will always be a red spot with useLocalExtremas true)
     "useLocalExtrema": true,
     latField: 'lat', // which field name in your data represents the latitude - default "lat"
@@ -73,13 +74,45 @@ export class HomeComponent implements OnInit {
   );
   heatmapLayer = new HeatmapOverlay(this.cfg);
 
-  constructor(private auth: AuthenticationService, private router: Router) { 
+  constructor(private auth: AuthenticationService, private router: Router) {
 
     this.date = (new Date()).toDateString();
-    
+
     if (!auth.isAuthentificated()) {
       router.navigate(['/login']);
     }
+  }
+
+
+  updateMap(){
+    if(this.selectedFilter == "all-users") {
+      let allUsersData = this.auth.getRealTimeMapByAllUser().then(res => {
+        this.currentData.data = res;
+        this.heatmapLayer.setData(this.currentData); // Set the data to the heatmaplayer
+        this.map.layers = [this.baseLayer, this.heatmapLayer]
+      })
+    }
+    else if (this.selectedFilter == "gender") {
+      var gender = this.selectedGender;
+      if(!gender) gender="female";
+
+      let byGenderData = this.auth.getRealTimeMapByGender(gender).then(res => {
+        this.currentData.data = res;
+        this.heatmapLayer.setData(this.currentData); // Set the data to the heatmaplayer
+        this.map.layers = [this.baseLayer, this.heatmapLayer]
+      })
+    }
+
+    else if (this.selectedFilter == "age") {
+      let ageRange = this.selectedLowerAge+"-"+this.selectedUpperAge //Variable with the range Example : 15-35
+      //alert(ageRange)
+      let byAgeData = this.auth.getRealTimeMapByAge(ageRange).then(res => {
+        this.currentData.data = res;
+        this.heatmapLayer.setData(this.currentData); // Set the data to the heatmaplayer
+        this.map.layers = [this.baseLayer, this.heatmapLayer]
+      })
+    }
+
   }
 
   selectFilter() {
@@ -91,7 +124,7 @@ export class HomeComponent implements OnInit {
         this.heatmapLayer.setData(this.currentData); // Set the data to the heatmaplayer
         this.map.layers = [this.baseLayer, this.heatmapLayer]
       })
-    } 
+    }
     if (this.selectedFilter == "gender") {
       this.hideAgeSelector = true;
       this.hideGenderSelector = false;
@@ -134,6 +167,10 @@ export class HomeComponent implements OnInit {
         zoom: 14,
         layers: [this.baseLayer, this.heatmapLayer]
       });
+
+      Observable.interval(1000).subscribe(x => {
+          this.updateMap();
+          });
     })
   }
 

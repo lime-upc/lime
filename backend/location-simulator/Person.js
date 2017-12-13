@@ -66,10 +66,10 @@ module.exports = function(path,token,speedMS,updateFreqS,endCallback){
     var myStops = [];
 
 
-    //PUBLIC: (Re)starts the path from 0.
+    //PUBLIC: (Re)starts the path from random point.
     this.init = function(){
-        currentDistance = 0;
-        currentPoint = path.getPointFromDistanceInM(0);
+        currentDistance = Math.floor(Math.random() * path.totalDistanceInM) + 0
+        currentPoint = path.getPointFromDistanceInM(currentDistance);
         for(var i = 0; i < stopTimes.length; i++){
             var stop = stopTimes[i];
             var prob = randomInRange(0,100,2);

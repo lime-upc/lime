@@ -16,8 +16,8 @@ var fs = require('fs');
 var config = require('../config');
 
 
-var PERSON_NUMBER = 500;
-var WALKING_SPEED = 20; //Meters per second
+var PERSON_NUMBER = 100;
+var WALKING_SPEED = 2; //Meters per second
 var UPDATE_FREQUENCY = 5; //In seconds, how often location is sent
 
 //1st. Load files from 'paths' folder
@@ -37,7 +37,7 @@ for(var i = 0; i < PERSON_NUMBER; i++){
             var randomPath = paths[getRandomInt(0,paths.length -1)]; //Get random path
             var person = new Person(randomPath,token,WALKING_SPEED,UPDATE_FREQUENCY, function(){
                 //When path ends, start again
-                this.init();
+                person.init();
             });
             person.init();
         });

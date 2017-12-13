@@ -116,7 +116,6 @@ module.exports = function (app) {
         
         //SEND: Send payload to Kafka and log result/error
         producer.send(payload, function(error,result){
-            console.info('Sent payload to Kafka: ',payload);
             if (error){
                 res.status(500).send({
                     "error": false,
@@ -126,7 +125,7 @@ module.exports = function (app) {
             }
             else{
                 var formattedResult = result[0];
-                console.log('result: ',result);
+             
                 res.send({
                     "error": false,
                     "message": "OK"
