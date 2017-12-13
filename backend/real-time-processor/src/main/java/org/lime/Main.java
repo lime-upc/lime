@@ -132,11 +132,11 @@ public class Main {
                     Double lat = Double.parseDouble(t.getLat().toString());
                     Double lon = Double.parseDouble(t.getLong$().toString());
                     GeoPoint location = new GeoPoint(lat, lon);
-
+                    
                     // Converting lat-lon coordinates into Military Grid Reference System coordinates
                     CoordinateConversion coordConverter = new CoordinateConversion();
                     String MGRScoord1 = coordConverter.latLon2MGRUTM(lat, lon); // MGRS coordinates with 1 meter precision
-                    String MGRScoord10 = MGRScoord1.substring(0,MGRScoord1.length()-2); // MGRS coordinates with 10 meters precision
+                    String MGRScoord10 = MGRScoord1.substring(0,9) + MGRScoord1.substring(10,MGRScoord1.length()-1); // MGRS coordinates with 10 meters precision
 
                     // Retrieving information about a user from mongoDB given his email address
                     Document userDoc = usersCollection.find(eq("email", email)).first();
