@@ -112,7 +112,7 @@ module.exports = function (app) {
                 var wallet = new Wallet(
                     {
                         email: req.body.email,
-                        balance_amount: 0,
+                        balance_amount: 10,
                         total_money_received: 0,
                         total_money_spent: 0
                     }

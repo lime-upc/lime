@@ -104,14 +104,21 @@ module.exports = function (app) {
 
             var jsonData = {};
             var aggregationsArray = resp.aggregations.agg_terms_MGRS_coord.buckets;
-
             var heatmap = [];
+            var people=0;
             for (var i = 0; i < aggregationsArray.length; i++) {
                 var key = aggregationsArray[i].key;
                 var doc_count = aggregationsArray[i].doc_count;
                 var latlong = mgrs.toPoint(key);
-                heatmap.push({zone: key, lat: latlong[0], lng: latlong[1], count: doc_count});
+                people+=doc_count;
+                heatmap.push({ lat: latlong[1], lng: latlong[0], count: doc_count});
             }
+            for (var i = 0; i < heatmap.length; i++) {
+                heatmap[i].count = heatmap[i].count / people;
+            }
+            console.log(people);
+
+
 
 
             res.send({
@@ -167,7 +174,7 @@ module.exports = function (app) {
                 var key = aggregationsArray[i].key;
                 var doc_count = aggregationsArray[i].doc_count;
                 var latlong = mgrs.toPoint(key);
-                heatmap.push({lat: latlong[0], lng: latlong[1], count: doc_count});
+                heatmap.push({lat: latlong[1], lng: latlong[0], count: doc_count});
             }
 
 
@@ -232,7 +239,7 @@ module.exports = function (app) {
                 var key = aggregationsArray[i].key;
                 var doc_count = aggregationsArray[i].doc_count;
                 var latlong = mgrs.toPoint(key);
-                heatmap.push({lat: latlong[0], lng: latlong[1], count: doc_count});
+                heatmap.push({lat: latlong[1], lng: latlong[0], count: doc_count});
             }
 
 
