@@ -26,54 +26,6 @@ module.exports = function (app) {
 
     var Business = app.models.Business; //Get Business Model (for BO authentication)
 
-    /**
-     * POST /login - Authenticates the business owner
-     *
-     * Authentication: NO
-     * Permissions: anybody
-     */
-    router.post("/login",function(req,res){
-        
-                //ERROR: No user or no password
-                if (!req.body.email || !req.body.password){
-                    res.status(400).send({
-                        "error": true,
-                        "message": "Please, specify both email and password"
-                    });
-        
-                    return;
-                }
-        
-                //Retrieve email from database
-                Business.findOne({email:req.body.email})
-                    .then(function(result){
-        
-                        //ERROR: No result, so the username does not exist
-                        if(!result){
-                            res.status(401).send({"error": true, "message": "Incorrect email or password"});
-                            return;
-                        }
-        
-                        var hash = crypto.createHash('md5').update(req.body.password).digest('hex');
-        
-                        //ERROR: Password is incorrect
-                        if (hash !== result.password){
-                            res.status(401).send({"error": true, "message": "Incorrect email or password"});
-                            return;
-                        }
-        
-                        //No error. Generate JWT with email
-                        var token = jwt.sign({ email: req.body.email, business: true }, config.jwtsecret);
-        
-                        res.send({
-                            "error": false,
-                            "message": token
-                        });
-                    })
-                    .catch(function(error){
-                        res.status(500).send({"error": true, "message": "Error removing business " + error});
-                    });
-    });
 
     /**
      * GET / -  Get all the data (grid cells MGRS coordinates and number of people per cell) to render the general real time heatmap
