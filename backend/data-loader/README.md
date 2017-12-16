@@ -27,6 +27,8 @@ sudo chown -R `id -un` /data/db
 4) Run MongoDB and launch the Data Downloader JS script:
 node load_bootstrap.js
 
+5)To update the places DB, run:
+node update_bootstrap.js
 
 
 >>>> Useful MONGODB commands:
