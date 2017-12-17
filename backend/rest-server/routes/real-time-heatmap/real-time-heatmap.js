@@ -12,6 +12,7 @@ var jwt = require('jsonwebtoken');
 var mgrs = require('mgrs');
 var elasticsearch = require('elasticsearch');
 var bodybuilder = require('bodybuilder');
+var usng = require('usng/usng.js');
 
 
 module.exports = function (app) {
@@ -25,7 +26,6 @@ module.exports = function (app) {
     });
 
     var Business = app.models.Business; //Get Business Model (for BO authentication)
-
 
     /**
      * GET / -  Get all the data (grid cells MGRS coordinates and number of people per cell) to render the general real time heatmap
@@ -45,7 +45,7 @@ module.exports = function (app) {
         var body = bodybuilder()
         .query('range', 'last_update_timestamp', {gte: timestampMinInteger})
 		.query('range', 'last_update_timestamp', {lte: timestampMaxInteger})
-        .aggregation('terms', 'MGRS_coord')
+        .aggregation('terms', 'MGRS_coord10')
         .build()
 
         client.search({
@@ -55,7 +55,7 @@ module.exports = function (app) {
         }).then(function (resp) {
 
             var jsonData = {};
-            var aggregationsArray = resp.aggregations.agg_terms_MGRS_coord.buckets;
+            var aggregationsArray = resp.aggregations.agg_terms_MGRS_coord10.buckets;
             var heatmap = [];
             var people=0;
             for (var i = 0; i < aggregationsArray.length; i++) {
@@ -69,9 +69,6 @@ module.exports = function (app) {
                 heatmap[i].count = heatmap[i].count / people;
             }
             console.log(people);
-
-
-
 
             res.send({
                 "error": false,
@@ -110,7 +107,7 @@ module.exports = function (app) {
         .query('range', 'last_update_timestamp', {gte: timestampMinInteger})
 		.query('range', 'last_update_timestamp', {lte: timestampMaxInteger})
         .query('match', 'gender', req.params.gender)
-        .aggregation('terms', 'MGRS_coord')
+        .aggregation('terms', 'MGRS_coord10')
         .build()
 
         client.search({
@@ -119,7 +116,7 @@ module.exports = function (app) {
           body: body
         }).then(function (resp) {
 
-            var aggregationsArray = resp.aggregations.agg_terms_MGRS_coord.buckets;
+            var aggregationsArray = resp.aggregations.agg_terms_MGRS_coord10.buckets;
 
             var heatmap = [];
             for (var i = 0; i < aggregationsArray.length; i++) {
@@ -129,12 +126,10 @@ module.exports = function (app) {
                 heatmap.push({lat: latlong[1], lng: latlong[0], count: doc_count});
             }
 
-
             res.send({
                 "error": false,
                 "message": heatmap
             });
-
 
         }, function (err) {
             console.trace(err.message);
@@ -174,7 +169,7 @@ module.exports = function (app) {
 		.query('range', 'last_update_timestamp', {lte: timestampMaxInteger})
         .query('range', 'age', {gte: ageMin})
         .query('range', 'age', {lte: ageMax})
-        .aggregation('terms', 'MGRS_coord')
+        .aggregation('terms', 'MGRS_coord10')
         .build();
 
         client.search({
@@ -183,8 +178,7 @@ module.exports = function (app) {
           body: body
         }).then(function (resp) {
 
-            var aggregationsArray = resp.aggregations.agg_terms_MGRS_coord.buckets;
-
+            var aggregationsArray = resp.aggregations.agg_terms_MGRS_coord10.buckets;
 
             var heatmap = [];
             for (var i = 0; i < aggregationsArray.length; i++) {
@@ -194,18 +188,24 @@ module.exports = function (app) {
                 heatmap.push({lat: latlong[1], lng: latlong[0], count: doc_count});
             }
 
-
             res.send({
                 "error": false,
                 "message": heatmap
             });
-
 
         }, function (err) {
             console.trace(err.message);
         });
 
     });
+
+
+
+
+
+
+
+
 
     return router;
 };

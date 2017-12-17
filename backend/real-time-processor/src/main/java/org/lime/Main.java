@@ -82,12 +82,12 @@ public class Main {
                 TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
                         .addTransportAddress(new TransportAddress(InetAddress.getByName("192.168.56.20"), 9300));
 
-                // Mapping the field of the ElasticSearch documents to be inserted later. This step is required to set "MGRS_coord" as a keyword: aggregation/sorting operations cannot be performed on strings/text fields.
+                // Mapping the field of the ElasticSearch documents to be inserted later. This step is required to set "MGRS_coord10" as a keyword: aggregation/sorting operations cannot be performed on strings/text fields.
                 XContentBuilder mapping = jsonBuilder()
                         .startObject()
                             .startObject("loc")
                                 .startObject("properties")
-                                    .startObject("MGRS_coord")
+                                    .startObject("MGRS_coord10")
                                         .field("type", "keyword")
                                     .endObject()
                                     .startObject("MGRS_coord100")
@@ -150,7 +150,7 @@ public class Main {
                     IndexRequest indexRequest = new IndexRequest("locations", "loc", userDoc.get("_id").toString())
                             .source(jsonBuilder()
                                     .startObject()
-                                    .field("MGRS_coord", MGRScoord10)
+                                    .field("MGRS_coord10", MGRScoord10)
                                     .field("MGRS_coord100", MGRScoord100)
                                     .field("location", location)
                                     .field("age", age)
@@ -161,7 +161,7 @@ public class Main {
                     UpdateRequest updateRequest = new UpdateRequest("locations", "loc", userDoc.get("_id").toString())
                             .doc(jsonBuilder()
                                     .startObject()
-                                    .field("MGRS_coord", MGRScoord10)
+                                    .field("MGRS_coord10", MGRScoord10)
                                     .field("MGRS_coord100", MGRScoord100)
                                     .field("location", location)
                                     .field("last_update_timestamp", new Timestamp(System.currentTimeMillis()))
