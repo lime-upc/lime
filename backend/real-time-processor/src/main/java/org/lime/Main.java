@@ -90,6 +90,9 @@ public class Main {
                                     .startObject("MGRS_coord")
                                         .field("type", "keyword")
                                     .endObject()
+                                    .startObject("MGRS_coord100")
+                                        .field("type", "keyword")
+                                    .endObject()
                                     .startObject("location")
                                         .field("type", "geo_point")
                                     .endObject()
@@ -137,6 +140,7 @@ public class Main {
                     CoordinateConversion coordConverter = new CoordinateConversion();
                     String MGRScoord1 = coordConverter.latLon2MGRUTM(lat, lon); // MGRS coordinates with 1 meter precision
                     String MGRScoord10 = MGRScoord1.substring(0,9) + MGRScoord1.substring(10,MGRScoord1.length()-1); // MGRS coordinates with 10 meters precision
+                    String MGRScoord100 = MGRScoord1.substring(0,8) + MGRScoord1.substring(10,MGRScoord1.length()-2); // MGRS coordinates with 100 meters precision
 
                     // Retrieving information about a user from mongoDB given his email address
                     Document userDoc = usersCollection.find(eq("email", email)).first();
@@ -147,6 +151,7 @@ public class Main {
                             .source(jsonBuilder()
                                     .startObject()
                                     .field("MGRS_coord", MGRScoord10)
+                                    .field("MGRS_coord100", MGRScoord100)
                                     .field("location", location)
                                     .field("age", age)
                                     .field("gender", userDoc.get("gender"))
@@ -157,6 +162,7 @@ public class Main {
                             .doc(jsonBuilder()
                                     .startObject()
                                     .field("MGRS_coord", MGRScoord10)
+                                    .field("MGRS_coord100", MGRScoord100)
                                     .field("location", location)
                                     .field("last_update_timestamp", new Timestamp(System.currentTimeMillis()))
                                     .endObject())
