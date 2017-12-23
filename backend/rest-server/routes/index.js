@@ -20,10 +20,10 @@ module.exports = function(app) {
 
 
     if(config.heatmap_fake_data){
-        app.use("/real-time-heatmaps",require('./real-time-heatmap/fake-real-time-heatmap')(app));
+        app.use("/real-time",require('./real-time/fake-real-time-heatmap')(app));
     }
     else{
-        app.use("/real-time-heatmaps",require('./real-time-heatmap/real-time-heatmap')(app));
+        app.use("/real-time",require('./real-time/real-time-heatmap')(app));
     }
     if(config.analytics_fake_data){
         app.use("/analytics",require('./analytics/fake_analytics')(app));

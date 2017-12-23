@@ -43,8 +43,8 @@ module.exports = function (app) {
 		timestampMinInteger = timestampMin.getTime();
 
         var body = bodybuilder()
-        .query('range', 'last_update_timestamp', {gte: timestampMinInteger})
-		.query('range', 'last_update_timestamp', {lte: timestampMaxInteger})
+        //.query('range', 'last_update_timestamp', {gte: timestampMinInteger})
+		//.query('range', 'last_update_timestamp', {lte: timestampMaxInteger})
         .aggregation('terms', 'MGRS_coord10')
         .build()
 

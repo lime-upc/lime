@@ -1,0 +1,76 @@
+<div class="container">
+  <h1>
+    <mat-icon>pie_chart</mat-icon>
+    Batch analytics
+  </h1>
+
+  <div class="row">
+    <div class="diagrams-container">
+      <div class="barcharts" [hidden]="hideBarcharts">
+        <div class="barchart-container" *ngIf="barChartGenderLoaded">
+          <canvas baseChart height="400"
+                  [data]="barChartGenderData"
+                  [colors]="barChartColors"
+                  [labels]="barChartGenderLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"></canvas>
+        </div>
+        <div class="barchart-container" *ngIf="barChartAgeLoaded">
+          <canvas baseChart height="400"
+                  [data]="barChartAgeData"
+                  [colors]="barChartColors"
+                  [labels]="barChartAgeLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"></canvas>
+        </div>
+        <div class="barchart-container" *ngIf="barChartHoursLoaded">
+          <canvas baseChart height="400"
+                  [data]="barChartHoursData"
+                  [colors]="barChartColors"
+                  [labels]="barChartHoursLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"></canvas>
+        </div>
+        <!--<canvas baseChart-->
+        <!--[datasets]="barChartAgeData"-->
+        <!--[labels]="barChartAgeLabels"-->
+        <!--[options]="barChartOptions"-->
+        <!--[legend]="barChartLegend"-->
+        <!--[chartType]="barChartType"></canvas>-->
+      </div>
+    </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h3>Top Restaurants</h3>
+          <div *ngFor="let rest of topRestaurants; let i=index;" class="spaced" >
+
+            <div *ngIf="i<10" class="rankingElement">
+              <span><b>{{i+1}}</b> - {{rest.name}}</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col">
+          <h3>Top Tags</h3>
+          <div *ngFor="let tag of tags; let i=index;" class="spaced" >
+
+            <div *ngIf="i<10" class="rankingElement">
+              <span><b>{{i+1}}</b> - {{tag.name}} ({{tag.quantity}} transactions)</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+</div>

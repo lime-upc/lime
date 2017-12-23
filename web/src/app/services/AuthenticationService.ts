@@ -110,7 +110,7 @@ export class AuthenticationService {
     if(!token){
       return Promise.reject("User is not authenticated");
     }
-    return this.http.get("http://localhost:3000/real-time-heatmaps/").toPromise()
+    return this.http.get("http://localhost:3000/real-time/").toPromise()
       .then(res => {
         var response = JSON.parse((res as any)._body);
         var newRealTimeMapData = response.message;
@@ -129,7 +129,7 @@ export class AuthenticationService {
     if(!token){
       return Promise.reject("User is not authenticated");
     }
-    return this.http.get("http://localhost:3000/real-time-heatmaps/gender/"+gender+"/").toPromise()
+    return this.http.get("http://localhost:3000/real-time/gender/"+gender+"/").toPromise()
       .then(res => {
         var response = JSON.parse((res as any)._body);
         var newRealTimeMapData = response.message;
@@ -148,7 +148,7 @@ export class AuthenticationService {
     if(!token){
       return Promise.reject("User is not authenticated");
     }
-    return this.http.get("http://localhost:3000/real-time-heatmaps/agerange/"+ageRange+"/").toPromise()
+    return this.http.get("http://localhost:3000/real-time/agerange/"+ageRange+"/").toPromise()
       .then(res => {
         var response = JSON.parse((res as any)._body);
         var newRealTimeMapData = response.message;
