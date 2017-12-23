@@ -200,10 +200,69 @@ module.exports = function (app) {
     });
 
 
+        /**
+     * GET /users-nearby/:businessCoord -  Get aggregated data about users nearby a business specified in terms of "lat-lon" coordinates
+     *
+     * Authentication: Yes
+     * Permissions: The own BO, Admin
+     */
+    //router.get("/",passport.authenticate('jwt', { session: false }));
+    router.get("/users-nearby/:businessCoord", function (req, res) {
 
+		var businessCoord = req.params.businessCoord;
+		var parsedBusinessCoord = businessCoord.split("-"); //array of [lat,lon]
+        var converter = new usng.Converter(); // MGRS converter
+        var businessMGRS100 = converter.LLtoMGRS(parsedBusinessCoord[0], parsedBusinessCoord[1], 4);
 
+		timestampMax = new Date(); // now timestamp
+		timestampMin = new Date();
+		timestampMin.setMinutes(timestampMin.getMinutes() - 5); // 5 minutes ago timestamp
+		timestampMaxInteger = timestampMax.getTime();
+		timestampMinInteger = timestampMin.getTime();
 
+        var body = bodybuilder()
+        .query('match', 'MGRS_coord100', businessMGRS100)
+        .query('range', 'last_update_timestamp', {gte: timestampMinInteger})
+		.query('range', 'last_update_timestamp', {lte: timestampMaxInteger})
+        .build()
 
+        client.search({
+          index: 'locations',
+          type: 'loc',
+          body: body
+        }).then(function (resp) {
+
+        var hits = resp.hits.hits;
+
+            var maleCounter = 0;
+            var femaleCounter = 0;
+            var resultsMap = {};
+
+            for (var i = 0; i < resp.hits.hits.length; i++) {
+                if (hits[i]._source.gender=="male")
+                    maleCounter++;
+                else femaleCounter++;
+
+                var age = hits[i]._source.age;
+                if ("age"+age in resultsMap)
+                    resultsMap["age"+age]++;
+                else 
+                    resultsMap["age"+age] = 1;
+            }
+
+            resultsMap["maleCounter"] = maleCounter;
+            resultsMap["femaleCounter"] = femaleCounter;
+
+            res.send({
+                "error": false,
+                "message": resultsMap
+            });
+
+        }, function (err) {
+            console.trace(err.message);
+        });
+
+    });
 
 
 
