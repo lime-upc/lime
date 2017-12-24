@@ -6,6 +6,6 @@ module.exports = {
     kafka_enabled: true,
     kafka_host: "192.168.56.20:2181",
     analytics_fake_data: true,
-    heatmap_fake_data: false
+    heatmap_fake_data: true //heatmap and nearby users stats
 };
 
