@@ -141,6 +141,7 @@ export class AnalyticsComponent implements OnInit {
         this.barChartGenderData = this.toAbsoluteDataset(data, this.barChartGenderLabels);
         this.barChartGenderLoaded = true;
       });
+
     this.getAnalyticsByType("age")
       .then(data => {
         let ageToQuantityMap = data.map(part => { return {'age': part.name, 'quantity': part.quantity}});
@@ -161,6 +162,7 @@ export class AnalyticsComponent implements OnInit {
         this.barChartAgeData = ageStats.map(ageStat => ageStat.quantity);
         this.barChartAgeLoaded = true;
       });
+
     this.getAnalyticsByType("hour")
       .then(data => {
         this.barChartHoursLabels = this.hours.map(hour => hour.viewValue);
