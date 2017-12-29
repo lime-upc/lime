@@ -1,7 +1,7 @@
 <div class="container">
   <h1>
     <mat-icon>pie_chart</mat-icon>
-    Batch analytics
+    Last month analytics in Barcelona
   </h1>
 
   <div class="row">
@@ -45,29 +45,28 @@
     </div>
     <div class="container">
       <div class="row">
+
+        <!-- Restaurants ranking-->
         <div class="col">
           <h3>Top Restaurants</h3>
           <div *ngFor="let rest of topRestaurants; let i=index;" class="spaced" >
-
             <div *ngIf="i<10" class="rankingElement">
               <span><b>{{i+1}}</b> - {{rest.name}}</span>
             </div>
-
           </div>
-
         </div>
 
+        <!-- Tags ranking -->
         <div class="col">
           <h3>Top Tags</h3>
           <div *ngFor="let tag of tags; let i=index;" class="spaced" >
-
             <div *ngIf="i<10" class="rankingElement">
               <span><b>{{i+1}}</b> - {{tag.name}} ({{tag.quantity}} transactions)</span>
             </div>
-
           </div>
-
         </div>
+
+
 
       </div>
     </div>

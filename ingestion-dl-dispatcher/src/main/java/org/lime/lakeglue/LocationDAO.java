@@ -58,7 +58,7 @@ public class LocationDAO {
 		String formattedMinute = String.format("%02d", minute);
 		String formattedSecond = String.format("%02d", second);
 
-		//key: isma@mail.com_YYYYMMDDhhmmss
+		//key:YYYYMMDDhhmmss_email
 		String rowKey = year + formattedMonth + formattedDay +
 				formattedHour + formattedMinute + formattedSecond + "_" +  location.getEmail();
 

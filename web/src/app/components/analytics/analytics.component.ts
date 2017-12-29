@@ -58,12 +58,9 @@ export class AnalyticsComponent implements OnInit {
   ];
 
 
-  topRestaurants = [
-    {"name":"Pastisseria Diaz (Carrer Diagonal)","percentage":1.54},{"name":"Majestic Hotel & Spa Barcelona GL (Passeig de Gràcia)","percentage":1.49},{"name":"Flaherty´s Irish Pub Barcelona (Plaza Joaquim Xirau)","percentage":1.47},{"name":"W Barcelona (Placa de la Rosa dels Vents)","percentage":1.4500000000000002},{"name":"Gran París (Carrer de Muntaner)","percentage":1.4500000000000002},{"name":"Boston Pizza Numancia (Carrer de Numància)","percentage":1.41},{"name":"Barnabier (Torre Mapfre)","percentage":1.41},{"name":"Pastisseria Roca (Carrer Major)","percentage":1.4000000000000001},{"name":"Cup & Cake (Carrer d'Enric Granados)","percentage":1.4000000000000001},{"name":"Pizza Sapri (Carrer Gran de Sant Andreu)","percentage":1.39},{"name":"Restaurant Marmalade (Carrer de la Riera Alta)","percentage":1.38},{"name":"El Pescadito de Mandri (Carrer de Mandri)","percentage":1.38},{"name":"Hotel Novotel Barcelona City (Avinguda Diagonal)","percentage":1.37},{"name":"Hotel Constanza Barcelona (Carrer del Bruc)","percentage":1.37},{"name":"El Principal Del Eixample (Carrer de Provença)","percentage":1.35},{"name":"Piper's Tavern (C/ Buenos Aires)","percentage":1.34},{"name":"Nice Spice (Carrer de Pujades)","percentage":1.3299999999999998},{"name":"Hotel Duquesa de Cardona Barcelona (Passeig de Colom)","percentage":1.3299999999999998},{"name":"Little Bacoa Born (Carrer de Colomines)","percentage":1.3299999999999998},{"name":"Caelum (Carrer de la Palla)","percentage":1.3299999999999998},{"name":"Hofmann Pastisseria (Carrer dels Flassaders)","percentage":1.32},{"name":"El Forn Del Barri (Carrer de la Indústria)","percentage":1.3},{"name":"Pestana Arena Barcelona (Carrer del Consell de Cent)","percentage":1.3},{"name":"Masedy 2001 S.L. (Avinguda de Madrid)","percentage":1.3},{"name":"Domino's Pizza (Carrer del Freser)","percentage":1.3},{"name":"Boston Pizza Alfons XII (Carrer d'Alfons XII)","percentage":1.3},{"name":"Restaurante Alba Granados (Carrer d'Enric Granados)","percentage":1.3},{"name":"Hotel NH Hesperia Barcelona Presidente (Avinguda Diagonal)","percentage":1.28},{"name":"Habana Vieja (Carrer dels Banys Vells)","percentage":1.27},{"name":"ILUNION Barcelona (Carrer de Ramon Turró)","percentage":1.27}
-  ]
+  topRestaurants = []
 
-  tags = [{"name":"french_restaurant","quantity":1762,"percentage":17.62},{"name":"sushi_restaurant","quantity":1511,"percentage":15.110000000000001},{"name":"cafe","quantity":1503,"percentage":15.03},{"name":"pizza_restaurant","quantity":1494,"percentage":14.940000000000001},{"name":"japanese_restaurant","quantity":1428,"percentage":14.280000000000001},{"name":"diner","quantity":1394,"percentage":13.94},{"name":"sandwich_shop","quantity":1353,"percentage":13.530000000000001},{"name":"buffet_restaurant","quantity":1343,"percentage":13.43},{"name":"breakfast_restaurant","quantity":1249,"percentage":12.49},{"name":"coffee_shop","quantity":1227,"percentage":12.27},{"name":"sports_bar","quantity":1222,"percentage":12.22},{"name":"asian_restaurant","quantity":1160,"percentage":11.600000000000001},{"name":"pub","quantity":1160,"percentage":11.600000000000001},{"name":"hamburger_restaurant","quantity":1158,"percentage":11.58},{"name":"bar","quantity":1087,"percentage":10.870000000000001},{"name":"indian_restaurant","quantity":971,"percentage":9.71},{"name":"italian_restaurant","quantity":966,"percentage":9.66},{"name":"deli","quantity":963,"percentage":9.629999999999999},{"name":"restaurant","quantity":959,"percentage":9.59},{"name":"seafood_restaurant","quantity":893,"percentage":8.93},{"name":"tea_house","quantity":878,"percentage":8.780000000000001},{"name":"chinese_restaurant","quantity":872,"percentage":8.72},{"name":"american_restaurant","quantity":868,"percentage":8.68},{"name":"bar_grill","quantity":855,"percentage":8.55},{"name":"pizza_delivery","quantity":842,"percentage":8.42},{"name":"liban_restaurant","quantity":774,"percentage":7.739999999999999},{"name":"korean_restaurant","quantity":756,"percentage":7.5600000000000005},{"name":"bakery","quantity":745,"percentage":7.449999999999999},{"name":"steak_house","quantity":736,"percentage":7.359999999999999},{"name":"barbecue_restaurant","quantity":725,"percentage":7.249999999999999}]
-
+  tags = []
   public hideBarcharts: boolean = false;
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
@@ -116,6 +113,17 @@ export class AnalyticsComponent implements OnInit {
       });
   }
 
+
+  getRankingByType(type: String): Promise<Array<AnalyticsResponsePart>> {
+    return fetch('http://localhost:3000/analytics/rankings/' + type)
+      .then((response: Response) => {
+        return response.json();
+      })
+      .then((responseJson: any) => {
+        return responseJson.message;
+      });
+  }
+
   toRelativeDataset(rawData: Array<AnalyticsResponsePart>, keys: Array<any>): number[] {
     let map = new Map<any, number>(rawData.map(part => {
       return [part.name, part.percentage] as [any, number];
@@ -141,6 +149,17 @@ export class AnalyticsComponent implements OnInit {
         this.barChartGenderData = this.toAbsoluteDataset(data, this.barChartGenderLabels);
         this.barChartGenderLoaded = true;
       });
+
+    this.getRankingByType("tags")
+    .then(data => {
+        this.tags = data;
+    });
+
+    this.getRankingByType("restaurants")
+    .then(data => {
+        this.topRestaurants = data;
+
+    });
 
     this.getAnalyticsByType("age")
       .then(data => {
