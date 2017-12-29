@@ -1,75 +1,88 @@
 <div class="container">
-  <h1>
-    <mat-icon>pie_chart</mat-icon>
-    Last month analytics in Barcelona
-  </h1>
 
+    <div class="row">
+      <div class="col-12 text-center">
+          <h1>
+              <mat-icon>pie_chart</mat-icon>
+              Last month analytics in Barcelona
+            </h1>
+      </div>
+
+    </div>
+  
+  <hr/>
   <div class="row">
-    <div class="diagrams-container">
-      <div class="barcharts" [hidden]="hideBarcharts">
-        <div class="barchart-container" *ngIf="barChartGenderLoaded">
-          <canvas baseChart height="400"
-                  [data]="barChartGenderData"
-                  [colors]="barChartColors"
-                  [labels]="barChartGenderLabels"
-                  [options]="barChartOptions"
-                  [legend]="barChartLegend"
-                  [chartType]="barChartType"></canvas>
+        
+        <div class="col-4 text-center" *ngIf="barChartGenderLoaded">
+            <h3># Transactions per gender</h3>
+            <canvas baseChart height="200"
+              [datasets]="genderData"
+              [labels]="genderLabels"
+              [colors]="genderColors"
+              [options]="barChartOptions"
+              [legend]="genderLegend"
+              [chartType]="genderType"></canvas>
         </div>
-        <div class="barchart-container" *ngIf="barChartAgeLoaded">
-          <canvas baseChart height="400"
+
+      
+
+        <div class="col-4 text-center" *ngIf="barChartAgeLoaded">
+            <h3># Transactions per age</h3>
+          <canvas baseChart height="200"
                   [data]="barChartAgeData"
-                  [colors]="barChartColors"
+                  [colors]="hourcolors"
                   [labels]="barChartAgeLabels"
                   [options]="barChartOptions"
                   [legend]="barChartLegend"
                   [chartType]="barChartType"></canvas>
         </div>
-        <div class="barchart-container" *ngIf="barChartHoursLoaded">
-          <canvas baseChart height="400"
-                  [data]="barChartHoursData"
-                  [colors]="barChartColors"
-                  [labels]="barChartHoursLabels"
-                  [options]="barChartOptions"
-                  [legend]="barChartLegend"
-                  [chartType]="barChartType"></canvas>
+
+      
+        <div class="col-4 text-center" *ngIf="barChartHoursLoaded">
+            <h3># Transactions per hour of day</h3>
+          <canvas baseChart height="200"
+                  [datasets]="hoursData"
+                  [colors]="hourColors"
+                  [labels]="hoursLabels"
+                  [options]="ageOptions"
+                  [legend]="restaurantsLegend"
+                  chartType="line"></canvas>
         </div>
-        <!--<canvas baseChart-->
-        <!--[datasets]="barChartAgeData"-->
-        <!--[labels]="barChartAgeLabels"-->
-        <!--[options]="barChartOptions"-->
-        <!--[legend]="barChartLegend"-->
-        <!--[chartType]="barChartType"></canvas>-->
-      </div>
-    </div>
-    </div>
-    <div class="container">
+  
+  </div>
+  <hr/>
       <div class="row">
 
         <!-- Restaurants ranking-->
-        <div class="col">
+        
+        <div class="col-6 text-center" *ngIf="restaurantsLoaded">
           <h3>Top Restaurants</h3>
-          <div *ngFor="let rest of topRestaurants; let i=index;" class="spaced" >
-            <div *ngIf="i<10" class="rankingElement">
-              <span><b>{{i+1}}</b> - {{rest.name}}</span>
-            </div>
-          </div>
+          <span>% of total transactions</span>
+          <canvas baseChart height="100"
+                  [data]="restaurantsData"
+                  [colors]="genderColors"
+                  [labels]="restaurantsLabels"
+                  [options]="barChartOptions"
+                  [legend]="restaurantsLegend"
+                  [chartType]="restaurantsType"></canvas>
         </div>
 
-        <!-- Tags ranking -->
-        <div class="col">
-          <h3>Top Tags</h3>
-          <div *ngFor="let tag of tags; let i=index;" class="spaced" >
-            <div *ngIf="i<10" class="rankingElement">
-              <span><b>{{i+1}}</b> - {{tag.name}} ({{tag.quantity}} transactions)</span>
-            </div>
+        <div class="col-6 text-center" *ngIf="tagsLoaded">
+            <h3>Top Tags</h3>
+            <span>% of total transactions</span>
+            <canvas baseChart height="100"
+                    [data]="tagsData"
+                    [colors]="genderColors"
+                    [labels]="tagsLabels"
+                    [options]="barChartOptions"
+                    [legend]="tagsLegend"
+                    [chartType]="restaurantsType"></canvas>
           </div>
-        </div>
+
 
 
 
       </div>
-    </div>
 
 
 </div>

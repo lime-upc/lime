@@ -12,6 +12,42 @@ export class AnalyticsComponent implements OnInit {
   private http: HttpClient;
   private authService: AuthenticationService;
 
+  public genderColors: Array<any> = [
+    { // first color
+      backgroundColor: 'blue',
+      borderColor: 'black',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    },
+    { // second color
+      backgroundColor: 'red',
+      borderColor: 'black',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    }];
+
+    public hourColors: Array<any> = [
+      { // first color
+        backgroundColor: 'green',
+        borderColor: 'black',
+        pointBackgroundColor: 'green',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+      },
+      { // second color
+        backgroundColor: 'red',
+        borderColor: 'rgba(225,10,24,0.2)',
+        pointBackgroundColor: 'rgba(225,10,24,0.2)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+      }];
+
   rootUrl = "http://localhost:3000/analytics/transactions";
   ageRanges = [
     {value: '0', viewValue: '18-', from: 0, to: 17},
@@ -64,7 +100,7 @@ export class AnalyticsComponent implements OnInit {
   public hideBarcharts: boolean = false;
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
-    responsive: false,
+    responsive: true,
     scales: {
       yAxes: [{
         ticks: {
@@ -72,6 +108,10 @@ export class AnalyticsComponent implements OnInit {
         }
       }]
     }
+  };
+  public ageOptions: any = {
+    scaleShowVerticalLines: false,
+    responsive: true
   };
   public barChartType: string = 'bar';
   public barChartLegend: boolean = false;
@@ -94,7 +134,30 @@ export class AnalyticsComponent implements OnInit {
   public barChartHoursLabels: string[] = this.hours.map(hours => hours.viewValue);
   public barChartHoursData: number[];
   public barChartHoursLoaded: boolean = false;
+  public restaurantsLoaded: boolean = false;
+  public tagsLoaded: boolean = false;
 
+  public genderLabels: string[] =  [];
+  public genderType: string = 'bar';
+  public genderLegend:boolean = true;
+  public genderData:any[] = [
+    {data: [0], label: 'Male'},
+    {data: [0], label: 'Female'}
+  ];
+  public hoursLabels: string[] =  [];
+  public hoursType: string = 'bar';
+  public hoursLegend:boolean = true;
+  public hoursData:any[] = [];
+
+  public restaurantsLabels: string[] =  [];
+  public restaurantsType: string = 'horizontalBar';
+  public restaurantsLegend:boolean = false;
+  public restaurantsData:any[] = [20,50];
+
+  public tagsLabels: string[] =  [];
+  public tagsType: string = 'horizontalBar';
+  public tagsLegend:boolean = false;
+  public tagsData:any[] = [20,50];
   private email: string;
 
 
@@ -103,8 +166,54 @@ export class AnalyticsComponent implements OnInit {
     this.authService = authService;
   }
 
+
+
+  getGenderAnalytics(){ 
+    return fetch(`${this.rootUrl}/`+"gender")
+    .then((response: Response) => {
+      return response.json();
+    })
+    .then((responseJson: any) => {
+      return responseJson.message;
+    })
+    .then((message: any) => {
+      this.genderData= [
+        {data: [message[0].quantity], label: 'Male (' + message[0].percentage + "%)"},
+        {data: [message[1].quantity], label: 'Female (' + message[1].percentage + "%)"},
+      ];
+      this.barChartGenderLoaded = true;
+    });
+  }
+
+  getHourAnalytics(){ 
+    return fetch(`${this.rootUrl}/`+"hour")
+    .then((response: Response) => {
+      return response.json();
+    })
+    .then((responseJson: any) => {
+      return responseJson.message;
+    })
+    .then((message: any) => {
+
+      var labels = [];
+      var values = [];
+      var percentages = [];
+      for(var i  = 0; i < message.length; i++){
+        labels.push(message[i].name + ":00");
+        values.push(message[i].quantity);
+        percentages.push(message[i].percentage);
+      }
+
+      this.hoursLabels = labels;
+       this.hoursData= [
+         {data: values},
+       ];
+       this.barChartHoursLoaded = true;
+
+    });
+  }
   getAnalyticsByType(type: String): Promise<Array<AnalyticsResponsePart>> {
-    return fetch(`${this.rootUrl}/${type}/${this.email}`)
+    return fetch(`${this.rootUrl}/${type}`)
       .then((response: Response) => {
         return response.json();
       })
@@ -114,13 +223,44 @@ export class AnalyticsComponent implements OnInit {
   }
 
 
-  getRankingByType(type: String): Promise<Array<AnalyticsResponsePart>> {
+  getRankingByType(type: String): any {
     return fetch('http://localhost:3000/analytics/rankings/' + type)
       .then((response: Response) => {
         return response.json();
       })
       .then((responseJson: any) => {
         return responseJson.message;
+      })
+      .then((message: any) => {
+       
+          var size = message.length;
+          if(size>10){
+            size = 10;
+          }
+          var labels = [];
+          var data = [];
+          for(var i=0; i < size; i++){
+            labels.push(message[i].name);
+            data.push(message[i].percentage);
+          }
+          console.log(data);
+          if(type=="restaurants"){
+          this.restaurantsLabels = labels;
+          this.restaurantsData = data;
+          this.restaurantsLoaded = true;
+          }
+          else{
+            this.tagsLabels = labels;
+          this.tagsData = data;
+          this.tagsLoaded = true;
+          }
+          // public restaurantsLabels: string[] =  ["uno","dos"];
+          // public restaurantsType: string = 'horizontalBar';
+          // public restaurantsLegend:boolean = true;
+          // public restaurantsData:any[] = [20,50];
+          // private email: string;
+
+        
       });
   }
 
@@ -133,7 +273,7 @@ export class AnalyticsComponent implements OnInit {
 
   toAbsoluteDataset(rawData: Array<AnalyticsResponsePart>, keys: Array<any>): number[] {
     let map = new Map<any, number>(rawData.map(part => {
-      return [part.name, part.quantity] as [any, number];
+      return [part.name, part.percentage*100] as [any, number];
     }));
     return this.toDataset(map, keys);
   }
@@ -143,23 +283,14 @@ export class AnalyticsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.getGenderAnalytics();
     this.email = this.authService.getEmail();
-    this.getAnalyticsByType("gender")
-      .then(data => {
-        this.barChartGenderData = this.toAbsoluteDataset(data, this.barChartGenderLabels);
-        this.barChartGenderLoaded = true;
-      });
 
-    this.getRankingByType("tags")
-    .then(data => {
-        this.tags = data;
-    });
 
-    this.getRankingByType("restaurants")
-    .then(data => {
-        this.topRestaurants = data;
+    this.getRankingByType("tags");
 
-    });
+    this.getRankingByType("restaurants");
 
     this.getAnalyticsByType("age")
       .then(data => {
@@ -182,12 +313,7 @@ export class AnalyticsComponent implements OnInit {
         this.barChartAgeLoaded = true;
       });
 
-    this.getAnalyticsByType("hour")
-      .then(data => {
-        this.barChartHoursLabels = this.hours.map(hour => hour.viewValue);
-        this.barChartHoursData = this.toAbsoluteDataset(data, this.hours.map(hour => "" + hour.value));
-        this.barChartHoursLoaded = true;
-      });
+    this.getHourAnalytics();
   }
 
 }
