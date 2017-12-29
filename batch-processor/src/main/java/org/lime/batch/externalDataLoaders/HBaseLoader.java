@@ -19,6 +19,7 @@ import org.lime.batch.beans.LocationBean;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -41,6 +42,30 @@ public class HBaseLoader {
 
 		return HBaseLoader.getLocationsInRangeRDD(ctx,start,end);
 	}
+
+	public static JavaRDD<LocationBean> getLocationsForPastMonth(JavaSparkContext ctx, String today) throws Exception{
+
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date todayDate = dateFormat.parse(today);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(todayDate);
+		cal.add(Calendar.DATE, -30);
+		Date dateBefore30Days = cal.getTime();
+
+		long startTime = dateBefore30Days.getTime(); //One month ago
+		long endTime = startTime + (24 * 60 * 60 * 1000); //One day after
+
+
+		DateDTO start = new DateDTO(startTime);
+		DateDTO end = new DateDTO(endTime);
+
+
+		return HBaseLoader.getLocationsInRangeRDD(ctx,start,end);
+	}
+
+
+
+
 
 	public static JavaRDD<LocationBean> getLocationsInRangeRDD(JavaSparkContext spark,DateDTO start, DateDTO end) throws Exception{
 

@@ -4,7 +4,9 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.storage.StorageLevel;
+import org.lime.batch.beans.LocationBean;
 import org.lime.batch.beans.TransactionBean;
+import org.lime.batch.externalDataLoaders.HBaseLoader;
 import org.lime.batch.externalDataLoaders.TransactionsLoader;
 import org.lime.batch.externalDataWriters.ElasticSearchWriter;
 import org.lime.batch.resultDTOs.TransactionProfileResults;
@@ -20,13 +22,17 @@ public class Main {
         JavaSparkContext ctx = new JavaSparkContext(conf);
 
         ctx.setLogLevel("ERROR");
-        String day = "08/12/2017";
+        String today = "08/12/2017";
 
-        //Get all the locations from yesterday
-        //JavaRDD<LocationBean> locations = HBaseLoader.getLocationsForDayRDD(ctx,"07/12/2017");
+        //Get all the locations from previous month
+        JavaRDD<LocationBean> locations = HBaseLoader.getLocationsForPastMonth(ctx,today);
 
         //Get all the confirmed transactions for yesterday as a RDD, for all the Business Owners
-        JavaRDD<TransactionBean> transactions  = TransactionsLoader.getConfirmedTransactionsForDayRDD(ctx,day);
+        //JavaRDD<TransactionBean> transactions  = TransactionsLoader.getConfirmedTransactionsForDayRDD(ctx,today);
+
+        //Get all the confirmed transactions for previous month as a RDD, for all the Business Owners
+        JavaRDD<TransactionBean> transactions = TransactionsLoader.getConfirmedTransactionsForPastMonth(ctx,today);
+
 
         //Persist as this RDD is used by different branches
         transactions.persist(StorageLevel.MEMORY_AND_DISK());
@@ -40,8 +46,8 @@ public class Main {
 
         //Save resultDTOs into elasticSearch
         System.out.println("Saving results to ElasticSearch...");
-        ElasticSearchWriter.writeTransactionProfileResults(tpResults,day);
-        ElasticSearchWriter.writeTransactionRestaurantResults(trResults,day);
+        ElasticSearchWriter.writeTransactionProfileResults(tpResults,today);
+        ElasticSearchWriter.writeTransactionRestaurantResults(trResults,today);
         System.out.println("Done!");
 
     }
