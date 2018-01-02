@@ -44,7 +44,8 @@ export class ProfileComponent implements OnInit {
           {field: 'Address', value: businessOwner.business.address},
           {field: 'Email', value: businessOwner.email},
           {field: 'Phone number', value: businessOwner.phone_number},
-          {field: 'Person in charge', value: businessOwner.person_in_charge_name}
+          {field: 'Person in charge', value: businessOwner.person_in_charge_name},
+          {field: 'Additional information', value: businessOwner.additional_info}
         ];
         this.dataSource = new MatTableDataSource<Profile>(profile)
         
@@ -88,7 +89,8 @@ const PROFILE_DATA: Profile[] = [
   {field: 'Address', value: ''},
   {field: 'Email', value: ''},
   {field: 'Phone number', value: ''},
-  {field: 'Person in charge', value: ''}
+  {field: 'Person in charge', value: ''},
+  {field: 'Additional information', value: ''}
 ];
 
 

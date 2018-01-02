@@ -91,6 +91,7 @@ export class AuthenticationService {
         this.businessData.email = newData.email;
         this.businessData.person_in_charge_name = newData.person_in_charge_name;
         this.businessData.phone_number = newData.phone_number;
+        this.businessData.additional_info = newData.additional_info;
         this.businessData.business = newData.business;
         this.businessData.automatic_notifications = newData.automatic_notifications;
         return this.businessData;

@@ -33,7 +33,7 @@ module.exports = function (app) {
         }
 
 
-        Business.find({}, 'email phone_number person_in_charge_name business automatic_notifications')
+        Business.find({}, 'email phone_number person_in_charge_name additional_info business automatic_notifications')
             .then(function(response){
 
 
@@ -67,7 +67,7 @@ module.exports = function (app) {
             return;
         }
 
-        Business.findOne({email: req.params.email}, 'email  phone_number person_in_charge_name business automatic_notifications')
+        Business.findOne({email: req.params.email}, 'email  phone_number person_in_charge_name additional_info business automatic_notifications')
             .then(function(result){
 
                 if (!result) {
