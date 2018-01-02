@@ -13,10 +13,34 @@ export class ProfileComponent implements OnInit {
 
   displayedColumns = ['field', 'value']
   dataSource = new MatTableDataSource<Profile>(PROFILE_DATA)
+
   notifications: Array<{title: string, description: string}> = []
   hideNotifForm: boolean
   newNotification: {title: string, description: string;}
   toggleText: string
+
+  packages = [
+    {
+      name: "Standard Package",
+      price: "79.99€",
+      description: "The Standard package allows you to ...",
+      icon: "S",
+      currentPackage: true
+    },
+    {
+      name: "Premium Package",
+      price: "149.99€",
+      description: "The Premium package allows you to ...",
+      icon: "P",
+      currentPackage: false,
+    },{
+      name: "Premium+ Package",
+      price: "179.99€",
+      description: "The Premium+ package allows you to ...",
+      icon: "P+",
+      currentPackage: false
+    }
+  ]
 
   constructor(private auth: AuthenticationService, router: Router) {
     if (!auth.isAuthentificated()) {

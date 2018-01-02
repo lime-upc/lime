@@ -4,13 +4,15 @@
 
     <mat-grid-list cols="2" rowHeight="200px">
 
+      <!-- Business name & logo grid -->
       <mat-grid-tile colspan="2" rowspan="1">
         <img src="assets/imgs/lime_logo.png">
         <h1>Lime's restaurant</h1>
       </mat-grid-tile>
 
+      <!-- Business information grid -->
       <mat-grid-tile colspan="1" rowspan="2">
-        <mat-grid-tile-header>Business information <mat-icon>info_outline</mat-icon></mat-grid-tile-header>
+        <mat-grid-tile-header>Business information</mat-grid-tile-header>
         <mat-table #table [dataSource]="dataSource">   
                 
           <ng-container matColumnDef="field">
@@ -27,41 +29,49 @@
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
+
+        <button mat-raised-button color="primary">Modify information</button>
       </mat-grid-tile>
 
+      <!-- Automatic notifications grid -->
       <mat-grid-tile colspan="1" rowspan="2">
-        <mat-grid-tile-header>Automatic notifications <mat-icon>sms</mat-icon></mat-grid-tile-header>
-        <div class="all-notif" *ngFor="let n of notifications">
-          <mat-radio-button value="n.id"></mat-radio-button>
-          <mat-form-field><input disabled=true matInput [(ngModel)]="n.title"/></mat-form-field>
-          <textarea disabled=true matInput matTextareaAutosize [(ngModel)]="n.description"></textarea>
-        </div>
-      
-        <div class="new-notif" [hidden]="hideNotifForm">
-          <mat-form-field><input matInput [(ngModel)]="newNotification.title" placeholder="Title"/></mat-form-field>
-          <mat-form-field><textarea matInput matTextareaAutosize [(ngModel)]="newNotification.description" placeholder="Description"></textarea></mat-form-field>
-          <button (click)="addNotification()" mat-raised-button color="primary">Save</button>
+        <mat-grid-tile-header>Automatic notifications</mat-grid-tile-header>
+        <div class="all-notif">
+          <div *ngFor="let n of notifications">
+            <mat-radio-button value="n.id"></mat-radio-button>
+            <mat-form-field><input disabled=true matInput [(ngModel)]="n.title"/></mat-form-field>
+            <textarea disabled=true matInput matTextareaAutosize [(ngModel)]="n.description"></textarea>
+          </div>
+  
+          <div class="new-notif" [hidden]="hideNotifForm">
+            <mat-form-field><input matInput [(ngModel)]="newNotification.title" placeholder="Title"/></mat-form-field>
+            <mat-form-field><textarea matInput matTextareaAutosize [(ngModel)]="newNotification.description" placeholder="Description"></textarea></mat-form-field>
+            <button (click)="addNotification()" mat-raised-button color="primary">Save</button>
+          </div>
         </div>
         <mat-button-toggle (click)="toggleNewNotifForm()" color="primary">{{toggleText}}</mat-button-toggle>
       </mat-grid-tile>
 
+      <!-- Subcription options grid -->
       <mat-grid-tile colspan="2" rowspan="2">
-        <mat-grid-tile-header>About my subscription<mat-icon>business_center</mat-icon></mat-grid-tile-header>
-        <mat-card class="standard-card">
-          <mat-card-header>
-            <div mat-card-avatar class="standard-icon">S</div>
-            <mat-card-title>Standard Package</mat-card-title>
-            <mat-card-subtitle>79.99€ per month</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              The Standard package allows you to ...
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button color="primary">Update my subscription</button>
-          </mat-card-actions>
-        </mat-card>
+        <mat-grid-tile-header>About my subscription</mat-grid-tile-header>
+
+        <div class="package" *ngFor="let p of packages">
+          <mat-card class="card">
+            <mat-card-header>
+              <div mat-card-avatar class="icon">{{ p.icon }}</div>
+              <mat-card-title>{{ p.name }}</mat-card-title>
+              <mat-card-subtitle>{{ p.price }} per month</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{ p.description }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" disabled={{p.currentPackage}}>Update my subscription</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+
       </mat-grid-tile>
 
     </mat-grid-list>
