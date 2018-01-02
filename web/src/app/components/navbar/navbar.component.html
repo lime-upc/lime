@@ -13,24 +13,44 @@
     <img src="assets/imgs/dashboard.png" />
   </a>
 
-  <button mat-raised-button color="primary" [matMenuTriggerFor]="mainMenu">Menu</button>
+  <button mat-raised-button color="primary" [matMenuTriggerFor]="mainMenu">
+    <mat-icon>dehaze</mat-icon>
+  </button>
   <mat-menu #mainMenu="matMenu">
-    <button mat-menu-item color="primary" routerLink="/" (click)="setCurrentPage('Real-time heat map','location_on')">Real-time heat map</button>
-    <button mat-menu-item routerLink="/nearby-users" (click)="setCurrentPage('Real-time nearby users','pie_chart')">Real-time nearby users</button>
-    <button mat-menu-item routerLink="/analytics" (click)="setCurrentPage('City Analytics: Barcelona','pie_chart')">City Analytics</button>
-    <button mat-menu-item routerLink="/transactions" (click)="setCurrentPage('Transactions','')">Transactions</button>
+    <button mat-menu-item color="primary" routerLink="/" (click)="setCurrentPage('Real-time heat map')">
+      <mat-icon>location_on</mat-icon>
+      Real-time heat map
+    </button>
+    <button mat-menu-item routerLink="/nearby-users" (click)="setCurrentPage('Real-time nearby users')">
+      <mat-icon>pie_chart</mat-icon>
+      Real-time nearby users
+    </button>
+    <button mat-menu-item routerLink="/analytics" (click)="setCurrentPage('City Analytics: Barcelona')">
+      <mat-icon>insert_chart</mat-icon>
+      City Analytics
+    </button>
+    <button mat-menu-item routerLink="/transactions" (click)="setCurrentPage('Transactions')">
+      <mat-icon>attach_money</mat-icon>
+      Transactions
+    </button>
   </mat-menu>
 
-  <h1 class="currentPage">
-      <mat-icon>{{ currentPageIcon }}</mat-icon>
-      {{ currentPageName }} 
-  </h1>
+  <h3 class="currentPage">{{ currentPageName }}</h3>
 
-  <div class="param">
-    <button mat-button color="primary" [matMenuTriggerFor]="menu">Param</button>
+  <div class="account">
+    <button mat-button color="primary" [matMenuTriggerFor]="menu">
+      Account
+      <mat-icon>account_circle</mat-icon>
+    </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/profile" (click)="setCurrentPage('Business profile','')">Profile</button>
-      <button mat-menu-item (click)="logout()">Logout</button>
+      <button mat-menu-item routerLink="/profile" (click)="setCurrentPage('Business profile')">
+        <mat-icon>person</mat-icon>
+        Profile
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        Logout
+      </button>
     </mat-menu>
   </div>
 
