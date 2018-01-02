@@ -12,26 +12,26 @@
   <a class="navbar-brand" routerLink="/">
     <img src="assets/imgs/dashboard.png" />
   </a>
-  <div class="collapse navbar-collapse" id="navbar-main">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">Real-time heat map</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/nearby-users">Real-time nearby users</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/analytics">City Analytics</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/transactions">Transactions</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/profile">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="logout()">Logout</a>
-      </li>
-    </ul>
+
+  <button mat-raised-button color="primary" [matMenuTriggerFor]="mainMenu">Menu</button>
+  <mat-menu #mainMenu="matMenu">
+    <button mat-menu-item color="primary" routerLink="/" (click)="setCurrentPage('Real-time heat map','location_on')">Real-time heat map</button>
+    <button mat-menu-item routerLink="/nearby-users" (click)="setCurrentPage('Real-time nearby users','pie_chart')">Real-time nearby users</button>
+    <button mat-menu-item routerLink="/analytics" (click)="setCurrentPage('City Analytics: Barcelona','pie_chart')">City Analytics</button>
+    <button mat-menu-item routerLink="/transactions" (click)="setCurrentPage('Transactions','')">Transactions</button>
+  </mat-menu>
+
+  <h1 class="currentPage">
+      <mat-icon>{{ currentPageIcon }}</mat-icon>
+      {{ currentPageName }} 
+  </h1>
+
+  <div class="param">
+    <button mat-button color="primary" [matMenuTriggerFor]="menu">Param</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/profile" (click)="setCurrentPage('Business profile','')">Profile</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
   </div>
+
 </nav>

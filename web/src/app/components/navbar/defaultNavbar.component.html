@@ -1,0 +1,37 @@
+<nav  [hidden]="isHidden()" class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button
+    class="navbar-toggler navbar-toggler-right"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbar-main"
+    aria-controls="navbar-main"
+    aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" routerLink="/">
+    <img src="assets/imgs/dashboard.png" />
+  </a>
+  <div class="collapse navbar-collapse" id="navbar-main">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/">Real-time heat map</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/nearby-users">Real-time nearby users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/analytics">City Analytics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/transactions">Transactions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/profile">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

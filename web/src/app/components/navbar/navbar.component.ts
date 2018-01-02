@@ -8,12 +8,19 @@ import { AuthenticationService } from 'app/services/AuthenticationService';
 })
 export class NavbarComponent implements OnInit {
 
+  currentPageIcon: String = "location_on";
+  currentPageName: String = "Real-time heat map"; // Default page when log in
 
   constructor(private auth: AuthenticationService) {
   }
 
   isHidden(){
     return !this.auth.isAuthentificated();
+  }
+
+  setCurrentPage(pageName, pageIcon) {
+    this.currentPageIcon = pageIcon;
+    this.currentPageName = pageName;
   }
 
   logout() {

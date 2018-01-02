@@ -1,3 +1,19 @@
 .container {
   width: 100%
 }
+
+.profile-section {
+  margin: 20px;
+  z-index: 1;
+}
+
+img {
+  position: absolute;
+  right: 40px;
+  float: right;
+  border-radius: 50%;
+  border: 0.3px solid rgb(134, 134, 134);
+  width: 150px;
+  height: 150px;
+  z-index: 2;
+}

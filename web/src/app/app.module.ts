@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatMenuModule}  from '@angular/material/menu';
 
 /* Components (pages)*/
 import { AppComponent } from './app.component';
@@ -79,6 +80,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatTableModule,
     MatRadioModule,
     MatButtonToggleModule,
+    MatMenuModule,
     ChartsModule
   ],
   providers: [
