@@ -1,8 +1,16 @@
 .login-form {
     width: 600px;
     margin: auto;
+    padding: 20px;
     border-radius: 8px;
-    background-color: rgba(190, 190, 190, 0.3);
+    text-align: center;
+    background-color: rgba(245, 237, 237, 0.692);
+}
+
+.background {
+    height: 990px;
+    padding: 300px;
+    background-image: url("../../../assets/imgs/login_background.jpg");
 }
 
 .mat-form-field {
