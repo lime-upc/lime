@@ -20,7 +20,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>edu.upc.fib.bip.lime.TransactionGenerator</mainClass>
+                            <mainClass>edu.upc.fib.bip.lime.transactions.TransactionGenerator</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -60,7 +60,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>edu.upc.fib.bip.lime.TransactionGenerator</mainClass>
+                            <mainClass>edu.upc.fib.bip.lime.transactions.TransactionGenerator</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
