@@ -21,6 +21,7 @@ export class RegistrationComponent implements OnInit {
 
   formData: businessProfile;
   errors: any;
+  hasAccessToRegistration: boolean = false;
 
   constructor(private http : Http, private router: Router, private auth: AuthenticationService) { 
     if (auth.isAuthentificated()) {
@@ -44,6 +45,18 @@ export class RegistrationComponent implements OnInit {
       phone_number: '',
     };
 
+  }
+
+  formHidden() {
+    return !this.hasAccessToRegistration;
+  }
+
+  warningMessage() {
+    return this.hasAccessToRegistration;
+  }
+
+  toggleAccess() {
+    this.hasAccessToRegistration = !this.hasAccessToRegistration;
   }
 
   signUp() {

@@ -13,10 +13,34 @@ export class ProfileComponent implements OnInit {
 
   displayedColumns = ['field', 'value']
   dataSource = new MatTableDataSource<Profile>(PROFILE_DATA)
+
   notifications: Array<{title: string, description: string}> = []
   hideNotifForm: boolean
   newNotification: {title: string, description: string;}
   toggleText: string
+
+  packages = [
+    {
+      name: "Standard Package",
+      price: "79.99€",
+      description: "The Standard package allows you to ...",
+      icon: "S",
+      currentPackage: true
+    },
+    {
+      name: "Premium Package",
+      price: "149.99€",
+      description: "The Premium package allows you to ...",
+      icon: "P",
+      currentPackage: false,
+    },{
+      name: "Premium+ Package",
+      price: "179.99€",
+      description: "The Premium+ package allows you to ...",
+      icon: "P+",
+      currentPackage: false
+    }
+  ]
 
   constructor(private auth: AuthenticationService, router: Router) {
     if (!auth.isAuthentificated()) {
@@ -44,7 +68,8 @@ export class ProfileComponent implements OnInit {
           {field: 'Address', value: businessOwner.business.address},
           {field: 'Email', value: businessOwner.email},
           {field: 'Phone number', value: businessOwner.phone_number},
-          {field: 'Person in charge', value: businessOwner.person_in_charge_name}
+          {field: 'Person in charge', value: businessOwner.person_in_charge_name},
+          {field: 'Additional information', value: businessOwner.additional_info}
         ];
         this.dataSource = new MatTableDataSource<Profile>(profile)
         
@@ -88,7 +113,8 @@ const PROFILE_DATA: Profile[] = [
   {field: 'Address', value: ''},
   {field: 'Email', value: ''},
   {field: 'Phone number', value: ''},
-  {field: 'Person in charge', value: ''}
+  {field: 'Person in charge', value: ''},
+  {field: 'Additional information', value: ''}
 ];
 
 

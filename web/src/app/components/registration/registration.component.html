@@ -1,22 +1,32 @@
-<div class="registration-form">
-  <h1>Registration</h1>
+<div class="background">
 
-  <mat-form-field>
-    <input type="email" required [(ngModel)]="formData.email" matInput placeholder="Email">
-  </mat-form-field>
+  <div [hidden]="warningMessage()" class="info"> 
+    <h1>Registration can only be used by administrators</h1>
+    <p>Its aim is only to test the business dashboard</p>
+    <button (click)="toggleAccess()" mat-raised-button color="primary">I am an administrator</button>
+    <p>If not, contact us at +34 6 XX XX XX XX</p>
+  </div>
 
-  <mat-form-field>
-    <input type="password" required [(ngModel)]="formData.password" matInput placeholder="Password"/>
-  </mat-form-field>
-  
-  <mat-form-field>
-    <input type="text" [(ngModel)]="formData.person_in_charge_name" matInput placeholder="Person in charge">
-  </mat-form-field>
+  <div [hidden]="formHidden()" class="registration-form">
+    <h1>Registration</h1>
 
-  <mat-form-field>
-    <input type="text" [(ngModel)]="formData.phone_number" matInput placeholder="Phone number">
-  </mat-form-field>
+    <mat-form-field>
+      <input type="email" required [(ngModel)]="formData.email" matInput placeholder="Email">
+    </mat-form-field>
 
-  <button (click)="signUp()" mat-raised-button color="primary">Sign up</button>
+    <mat-form-field>
+      <input type="password" required [(ngModel)]="formData.password" matInput placeholder="Password"/>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input type="text" [(ngModel)]="formData.person_in_charge_name" matInput placeholder="Person in charge">
+    </mat-form-field>
 
+    <mat-form-field>
+      <input type="text" [(ngModel)]="formData.phone_number" matInput placeholder="Phone number">
+    </mat-form-field>
+
+    <button (click)="signUp()" mat-raised-button color="primary">Sign up</button>
+
+  </div>
 </div>

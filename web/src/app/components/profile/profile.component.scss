@@ -1,3 +1,37 @@
 .container {
-  width: 100%
+  width: 100%;
+}
+
+.mat-grid-tile .mat-grid-tile-header {
+  background: rgba(88, 140, 183, 0.53);
+  box-shadow: 8px 8px 12px #aaa;
+}
+
+.all-notif {
+  display: block;
+}
+
+.package {
+  margin: auto;
+  width: 20%;
+  height: 70%;
+  text-align: center;
+}
+
+.icon {
+  border: 0.3px solid;
+  background-color: rgb(192, 162, 231);
+  text-align: center;
+  color: white;
+}
+
+img {
+  position: absolute;
+  right: 40px;
+  float: right;
+  border-radius: 50%;
+  box-shadow: 8px 8px 12px #aaa;
+  width: 150px;
+  height: 150px;
+  z-index: 2;
 }

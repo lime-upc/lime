@@ -1,14 +1,18 @@
-<div class="login-form">
-  <h1>Login</h1>
-
-  <mat-form-field>
-    <input class="email" [(ngModel)]="formData.email" matInput placeholder="Email">
-  </mat-form-field>
-
-  <mat-form-field>
-      <input class="password" [(ngModel)]="formData.password" matInput placeholder="Password" type="password"/>
-    </mat-form-field>
+<div class="background">
+  <div class="login-form">
     
+    <img src="assets/imgs/dashboard.png" />
+    <h1>Lime Analytics</h1>
+
+    <mat-form-field>
+      <input class="email" [(ngModel)]="formData.email" matInput placeholder="Email">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input class="password" [(ngModel)]="formData.password" matInput placeholder="Password" type="password"/>
+    </mat-form-field>
+      
     <button (click)="signIn()" mat-raised-button color="primary"> Sign in </button>
-    <a routerLink="/registration" routerLinkActive="active">Register now !</a>
+    <a routerLink="/registration" routerLinkActive="active">How to join us ?</a>
   </div>
+</div>
