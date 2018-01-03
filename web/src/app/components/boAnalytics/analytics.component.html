@@ -16,8 +16,12 @@
   <div class="row">
         <div class="col-6 offset-3 text-center">
             <h3>Number of transactions</h3>
+            <span>From {{textdateToPrety(granularity.start,0)}} to {{textdateToPrety(granularity.start,granularity.long)}}</span>
+            <br/>
+            <span>Total in view: {{inViewTxs}}</span>
+            <br/>
             <span><i>Interactive chart. Click a bar to drill-down. <button class="btn btn-default" *ngIf="granularity.width!='week'"(click)="rollUp()">ROLL-UP</button></i></span>
-            <p align="center">
+             <p align="center">
                 <canvas baseChart width="600"
                 [data]="txsData"
                 [colors]="genderColors"

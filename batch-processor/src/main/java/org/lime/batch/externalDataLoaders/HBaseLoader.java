@@ -14,6 +14,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.lime.batch.beans.DateDTO;
 import org.lime.batch.beans.LocationBean;
 
 import java.io.IOException;

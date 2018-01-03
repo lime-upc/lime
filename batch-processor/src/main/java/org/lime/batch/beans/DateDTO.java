@@ -1,4 +1,4 @@
-package org.lime.batch.externalDataLoaders;
+package org.lime.batch.beans;
 
 import java.util.Calendar;
 import java.util.Date;

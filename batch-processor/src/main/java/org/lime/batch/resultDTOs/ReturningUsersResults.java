@@ -13,6 +13,12 @@ public class ReturningUsersResults {
 		return boFrequencies;
 	}
 
+	public void setEmpty(){
+		boFrequencies.clear();
+		boUniqueUsers.clear();
+		boReturningUsers.clear();
+	}
+
 	public void setBoFrequencies(HashMap<String, List<RankingElement>> boFrequencies) {
 		this.boFrequencies = boFrequencies;
 	}

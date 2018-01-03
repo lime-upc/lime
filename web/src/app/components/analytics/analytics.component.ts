@@ -71,7 +71,10 @@ export class AnalyticsComponent implements OnInit {
  
   public txsOptions: any = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{id: 'y-axis-1', type: 'linear', position: 'left', ticks: {min: 0}}]
+    }
   };
   public barChartType: string = 'bar';
   public barChartLegend: boolean = false;
@@ -82,21 +85,23 @@ export class AnalyticsComponent implements OnInit {
       hoverBackgroundColor: 'rgba(110,110,187,1)'
     }
   ];
+//Include fake data when the server is off
 
-  public txsLabels: string[] = ["1a","2","3"];
-  public txsData: number[] = [4,5,6];
+  public txsLabels: string[] = ["2018 week 1","2018 week 2","2018 week 3"];
+  public txsData: number[] = [15412,12121,17421];
   public txsLoaded: boolean = true;
 
-  public hourLabels: string[] = ["1a","2","3"];
-  public hourData: number[] = [4,5,6];
+  public hourLabels: string[] = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"];
+  public hourData: number[] = [34,34,65,43,56,42,23,65,34,65,76,23,56,78,65,34,56,76,65,45,67,45,65,45];
 
-  public ageLabels: string[] = ["1a","2","3"];
-  public ageData: number[] = [4,5,6];
+  public ageLabels: string[] = ["20","30","40","50","60","70"];
+  public ageData: number[] = [43,12,76,21,86,12];
 
+  public inViewTxs: number = 0;
   public genderLegend:boolean = true;
   public genderData:any[] = [
-    {data: [0], label: 'Male'},
-    {data: [0], label: 'Female'}
+    {data: [65], label: 'Male'},
+    {data: [124], label: 'Female'}
   ];
   public genderLabels: string[] = [];
 
@@ -164,9 +169,11 @@ getTxsData(){
       m.sort(this.compare);
     }
     var newData = [];
+    this.inViewTxs = 0;
     for(var i = 0; i < m.length;i++){
        this.txsLabels[i] = m[i].name;
        newData.push(m[i].count);
+       this.inViewTxs+=m[i].count;
     }
     for(var j = this.txsLabels.length-m.length; j > 0; j--){
       this.txsLabels.pop();
@@ -316,6 +323,53 @@ compare(a,b) {
   }
 
 
+textdateToPrety(text,offset){
+  var d = this.textToDate(text);
+  if(offset!=0) d = this.addDays(d,offset);
+  
+  
+  return ("00" + (d.getDate() )).slice(-2) + "/" + 
+  ("00" + (d.getMonth()+1)).slice(-2) + "/" + 
+  d.getFullYear() + " " + 
+  ("00" + d.getHours()).slice(-2) + ":" + 
+  ("00" + d.getMinutes()).slice(-2);
+}
+
+addDays(date,days) {        
+  var one_day=1000*60*60*24; 
+  return new Date(date.getTime()+(days*one_day) - 1); 
+}
+
+textToDate(text){
+    //YYYY
+    var match = text.match(/^(\d*)$/);
+    if(match!=null){
+        return new Date(match[1])
+    }
+    //YYYY-MM
+    match = text.match(/^(\d*)-(\d*)$/);
+     if(match!=null){
+        return new Date(match[1],match[2]-1)
+    }
+    //YYYY-MM-DD
+    match = text.match(/^(\d*)-(\d*)-(\d*)$/);
+     if(match!=null){
+        return new Date(match[1],match[2]-1,match[3])
+    }
+    //YY-MM-DD HHh
+    match = text.match(/^(\d*)-(\d*)-(\d*) (\d*)h$/);
+     if(match!=null){
+        return new Date(match[1],match[2]-1,match[3],match[4])
+    }
+    
+    //YY-MM-DD week WW
+    match = text.match(/^(\d*) week (\d*)$/);
+     if(match!=null){
+         var d = (1 + (match[2] - 1) * 7); // 1st of January + 7 days for each week
+        return new Date(match[1], 0, d);
+    }
+
+}
 
 
 }

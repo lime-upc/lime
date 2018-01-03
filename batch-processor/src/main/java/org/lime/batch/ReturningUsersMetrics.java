@@ -1,26 +1,15 @@
 package org.lime.batch;
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.storage.StorageLevel;
-import org.bson.Document;
-import org.lime.batch.beans.Hour;
 import org.lime.batch.beans.TransactionBean;
-import org.lime.batch.beans.UserBean;
-import org.lime.batch.resultDTOs.NewResults;
 import org.lime.batch.resultDTOs.RankingElement;
 import org.lime.batch.resultDTOs.ReturningUsersResults;
 import scala.Tuple2;
-import scala.Tuple3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.mongodb.client.model.Filters.eq;
 
 public class ReturningUsersMetrics {
 

@@ -30,6 +30,10 @@ public class Hour implements Serializable{
 	}
 
 	public String getWeek() {
+
+		if(year==2017 && week == 1){ //Fix strange bug with some days of first week of 2018
+			return 2018 + " week " + 1;
+		}
 		return  year + " week " + week;
 	}
 

@@ -25,12 +25,9 @@ module.exports = function(app) {
     else{
         app.use("/real-time",require('./real-time/real-time-heatmap')(app));
     }
-    if(config.analytics_fake_data){
-        app.use("/analytics",require('./analytics/fake_analytics')(app));
-    }
-    else{
-        app.use("/analytics",require('./analytics/analytics')(app));
-    }
+   
+    app.use("/analytics",require('./analytics/analytics')(app));
+    
 
 
 

@@ -9,6 +9,11 @@ public class TransactionRestaurantResults {
 	private List<RankingElement> restaurantRanking;
 	private List<RankingElement> tagRanking;
 
+	public void setEmpty(){
+		restaurantRanking.clear();
+		tagRanking.clear();
+	}
+
 	public List<RankingElement> getRestaurantRanking() {
 		return restaurantRanking;
 	}

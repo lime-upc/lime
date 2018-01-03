@@ -49,7 +49,7 @@ module.exports = function (app) {
                 id: req.params.boMail
             }).then(function (resp) {
 
-                var data = resp._source.json;
+                var data = resp._source.json; 
                 var parsed = JSON.parse(data);
 
                 parsed.frequencies.sort(compare); //Sort frequencies

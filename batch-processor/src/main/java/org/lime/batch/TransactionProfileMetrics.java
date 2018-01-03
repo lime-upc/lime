@@ -7,18 +7,12 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.storage.StorageLevel;
 import org.bson.Document;
+import org.lime.batch.beans.Hour;
 import org.lime.batch.beans.TransactionBean;
 import org.lime.batch.beans.UserBean;
-import org.lime.batch.resultDTOs.RankingElement;
 import org.lime.batch.resultDTOs.TransactionProfileResults;
 import scala.Tuple2;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import scala.Tuple3;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -62,19 +56,23 @@ public class TransactionProfileMetrics {
 				transactionsByUser.join(usersProfiles);
 
 
-		//We reduce by pair <bo,user>, so the result is <<boMail,userMail>,<transactionCount,UserBean>>
-		JavaPairRDD<Tuple2<String,String>,Tuple2<Integer,UserBean>> groupedByBoAndUser =
+		//We reduce by pair <boMail,userMail,hour> <<boMail,userMail,Hour>,<transactionCount,UserBean>
+		JavaPairRDD<Tuple3<String,String,Hour>,Tuple2<Integer,UserBean>> groupedByBoUserHour =
 				usersWithTransactions.mapToPair(ut -> {
-					return new Tuple2<>(new Tuple2<>(ut._2()._1().getBusiness_owner(),ut._1()),new Tuple2<>(1,ut._2()._2()));
-				}).reduceByKey((a,b) -> new Tuple2<>(a._1+b._1,a._2()));
+					return new Tuple2<>(
+							new Tuple3<>(ut._2()._1().getBusiness_owner(),ut._1(),new Hour(ut._2._1.getTimestamp())),new Tuple2<>(1,ut._2()._2())
+					);
+				}).reduceByKey((a,b) -> new Tuple2<>(a._1+b._1,a._2()) );
 
-		//We persist this result as two different branches use this.
-		groupedByBoAndUser.persist(StorageLevel.MEMORY_AND_DISK());
 
+		groupedByBoUserHour.persist(StorageLevel.MEMORY_AND_DISK());
 
 		//Number of transactions grouped by restaurant and user
-		JavaPairRDD<Tuple2<String,String>,Integer> txNumberByBoAndUser = groupedByBoAndUser
-				.mapValues(integerUserBeanTuple2 -> integerUserBeanTuple2._1).reduceByKey((a,b) -> a+b);
+		//uses <<boMail,userMail>,<transactionCount,UserBean>
+		JavaPairRDD<Tuple2<String,String>,Integer> txNumberByBoAndUser = groupedByBoUserHour
+				.mapToPair(t -> new Tuple2<>(new Tuple2<>(t._1()._1(),t._1()._2()),t._2()._1()))
+				.reduceByKey((a,b) -> a+b);
+
 
 		//RESULT: <<boMail,freq>,people>>: For each business owner and month frequency, number of people
 		JavaPairRDD<Tuple2<String,Integer>,Integer> peopleNumberByBoAndFreq = txNumberByBoAndUser
@@ -83,177 +81,114 @@ public class TransactionProfileMetrics {
 
 
 		//RESULT: <boMail,numberOfUniqueUsers>: For each business owner, number of unique users
-		JavaPairRDD<String,Integer> uniqueUsersByBO = groupedByBoAndUser
-				.mapToPair(t -> new Tuple2<>(t._1()._1(),1))
-				.reduceByKey((a,b) -> a+b);
+		//JavaPairRDD<String,Integer> uniqueUsersByBO = groupedByBoAndUser
+		//		.mapToPair(t -> new Tuple2<>(t._1()._1(),1))
+		//		.reduceByKey((a,b) -> a+b);
 
 		//RESULT: <boMail,numberOfUniqueReturningUsers>: For each business owner, number of unique returning users
-		JavaPairRDD<String,Integer> repeatingUsersByBo = groupedByBoAndUser
-				.filter(t -> t._2()._1() > 1)
-				.mapToPair(t -> new Tuple2<>(t._1()._1(),1))
-				.reduceByKey((a,b) -> a+b);
+		//JavaPairRDD<String,Integer> repeatingUsersByBo = groupedByBoAndUser
+		//		.filter(t -> t._2()._1() > 1)
+		//		.mapToPair(t -> new Tuple2<>(t._1()._1(),1))
+		//		.reduceByKey((a,b) -> a+b);
 
 
-
-
-		//RESULT: <<boMail,gender>,<totalCount>: For each business owner and each gender, number of transactions
-		JavaPairRDD<Tuple2<String,String>,Integer> txNumberByBoAndGender = groupedByBoAndUser
+		//RESULT: <<boMail,gender,hourID>,<totalCount>: For each business owner, each gender and each hour, number of transactions
+		JavaPairRDD<Tuple3<String,String,Hour>,Integer> txs_bo_gender_hour = groupedByBoUserHour
 				.mapToPair(g -> {
-					return new Tuple2<>(new Tuple2<>(g._1()._1(),g._2()._2().getGender()),g._2()._1());
+					return new Tuple2<>(new Tuple3<>(g._1()._1(),g._2()._2().getGender(),g._1()._3()),g._2()._1());
 				})
 				.reduceByKey((a,b) -> a+b);
 
-
-		//RESULT: <<boMail,age>,<totalCount>: For each business owner and each age, number of transactions
-		JavaPairRDD<Tuple2<String,Integer>,Integer> txNumberByBoAndAge = groupedByBoAndUser
+		//RESULT: <<gender,hourID>,<totalCount>: In total, for each gender and each hour, number of transactions
+		JavaPairRDD<Tuple2<String,Hour>,Integer> txs_gender_hour = txs_bo_gender_hour
 				.mapToPair(g -> {
-					return new Tuple2<>(new Tuple2<>(g._1()._1(),g._2()._2().getAge()),g._2()._1());
+					return new Tuple2<>(new Tuple2<>(g._1()._2(),g._1()._3()),g._2());
 				})
 				.reduceByKey((a,b) -> a+b);
 
 
-		//RESULT: <<boMail,hourOfDay>,<totalCount>: For each business owner and each hour of day, number of transactions
-		JavaPairRDD<Tuple2<String,Integer>,Integer> txNumberByBoAndHour = transactions
-				.mapToPair(transaction -> {
-					long timestamp = transaction.getTimestamp();
-					Date date = new Date(timestamp);
-					DateFormat formatter = new SimpleDateFormat("HH:mm:ss:SSS");
-					Integer hour = Integer.parseInt(formatter.format(date).split(":")[0]);
-					return new Tuple2<>(new Tuple2<>(transaction.getBusiness_owner(),hour),1);
+
+
+
+		//RESULT: <<boMail,age,hourID>,<totalCount>: For each business owner, each age and each hour, number of transactions
+		JavaPairRDD<Tuple3<String,Integer,Hour>,Integer> txs_bo_age_hour = groupedByBoUserHour
+				.mapToPair(g -> {
+					Integer age = g._2()._2().getAge();
+					if(age <= 10){
+						age = 10;
+					}
+					else if(age <= 20){
+						age = 20;
+					}
+					else if(age <= 30){
+						age = 30;
+					}
+					else if(age <= 40){
+						age = 40;
+					}
+					else if(age <= 50){
+						age = 50;
+					}
+					else if(age <= 60){
+						age = 60;
+					}
+					else if(age <= 70){
+						age = 70;
+					}
+					else if(age <= 80){
+						age = 80;
+					}
+					else if(age <= 90){
+						age = 90;
+					}
+					else{
+						age = 100;
+					}
+
+					return new Tuple2<>(new Tuple3<>(g._1()._1(),age,g._1()._3()),g._2()._1());
 				})
 				.reduceByKey((a,b) -> a+b);
 
-		//* CALCULATE AGGREGATES FROM PREVIOUS RESULTS, FOR ALL THE BUSINESSES *//
 
 
-		//RESULT: For hours, sorted ascending by hour
-		JavaPairRDD<Integer,Integer> txNumberByHour = txNumberByBoAndHour
-				.mapToPair(t ->
-					new Tuple2<>(t._1()._2(),t._2())    //Now we have <Hour,Count>, one tuple for Business Owner
-				)
-				.reduceByKey((a,b) -> a+b).sortByKey();    //Aggregate counts
 
-		//RESULT: For ages, sorted ascending by age
-		JavaPairRDD<Integer,Integer> txNumberByAge = txNumberByBoAndAge
-				.mapToPair(t ->
-					new Tuple2<>(t._1()._2(),t._2())    //Now we have <Age,Count>, one tuple for Business Owner
-				)
-				.reduceByKey((a,b) -> a+b).sortByKey();   //Aggregate counts
+		//RESULT: <<age,hourID>,<totalCount>: In total, for each age and each hour, number of transactions
+		JavaPairRDD<Tuple2<Integer,Hour>,Integer> txs_age_hour = txs_bo_age_hour
+				.mapToPair(g -> {
+					return new Tuple2<>(new Tuple2<>(g._1()._2(),g._1()._3()),g._2());
+				})
+				.reduceByKey((a,b) -> a+b);
 
-		//RESULT: For gender
-		JavaPairRDD<String,Integer> txNumberByGender = txNumberByBoAndGender
-				.mapToPair(t ->
-					new Tuple2<>(t._1()._2(),t._2())    //Now we have <Gender,Count>, one tuple for Business Owner
-				)
-				.reduceByKey((a,b) -> a+b);    //Aggregate counts
+		//RESULT: <<boMail,hourID>,<totalCount>: For each business owner and each hour, number of transactions
+		JavaPairRDD<Tuple2<String,Hour>,Integer> txs_bo_hour = groupedByBoUserHour
+				.mapToPair(g -> {
+					return new Tuple2<>(new Tuple2<>(g._1()._1(),g._1()._3()),g._2()._1());
+				})
+				.reduceByKey((a,b) -> a+b);
+
+		//RESULT: <<hourID>,<totalCount>: In total, for each  hour, number of transactions
+		JavaPairRDD<Hour,Integer> txs_hour = txs_bo_hour
+				.mapToPair(g -> {
+					return new Tuple2<>(g._1()._2(),g._2());
+				})
+				.reduceByKey((a,b) -> a+b);
 
 
-		//Now, we gather resultDTOs and create the objects that will be later stored into ES
-		//Warning, this is done in the driver, but should not be a problem as this is aggregated data
-
-		Long numberTransactions = transactions.count();
-
-		//This structure facilitates later saving into ES
-		HashMap<String,List<RankingElement>> bo_gender_res = new HashMap<>();
-		for(Tuple2<Tuple2<String,String>,Integer> t: txNumberByBoAndGender.collect()){
-			String bo = t._1()._1();
-			List<RankingElement> boList = bo_gender_res.getOrDefault(bo,new ArrayList<>());
-			RankingElement element = new RankingElement();
-			element.setName(t._1()._2());
-			element.setQuantity(t._2());
-			//TODO: should divide by number of transactions of that business, not numberTransactions in general
-			element.setPercentage((double) t._2() * 100.0 / (double) numberTransactions);
-			boList.add(element);
-			bo_gender_res.put(bo,boList);
-		}
-
-		HashMap<String,List<RankingElement>> bo_age_res = new HashMap<>();
-		for(Tuple2<Tuple2<String,Integer>,Integer> t: txNumberByBoAndAge.collect()){
-			String bo = t._1()._1();
-			List<RankingElement> boList = bo_age_res.getOrDefault(bo,new ArrayList<>());
-			RankingElement element = new RankingElement();
-			element.setName(String.valueOf(t._1()._2()));
-			element.setQuantity(t._2());
-			//TODO: should divide by number of transactions of that business, not numberTransactions in general
-
-			element.setPercentage((double) t._2() * 100.0 / (double) numberTransactions);
-			boList.add(element);
-			bo_age_res.put(bo,boList);
-		}
-
-		HashMap<String,List<RankingElement>> bo_hour_res = new HashMap<>();
-		for(Tuple2<Tuple2<String,Integer>,Integer> t: txNumberByBoAndHour.collect()){
-			String bo = t._1()._1();
-			List<RankingElement> boList = bo_hour_res.getOrDefault(bo,new ArrayList<>());
-			RankingElement element = new RankingElement();
-			element.setName(String.valueOf(t._1()._2()));
-			element.setQuantity(t._2());
-			//TODO: should divide by number of transactions of that business, not numberTransactions in general
-			element.setPercentage((double) t._2() * 100.0 / (double) numberTransactions);
-			boList.add(element);
-			bo_hour_res.put(bo,boList);
-		}
-
-		HashMap<String,List<RankingElement>> bo_freq_res = new HashMap<>();
-		for(Tuple2<Tuple2<String,Integer>,Integer> t: peopleNumberByBoAndFreq.collect()){
-			String bo = t._1()._1();
-			List<RankingElement> boList = bo_freq_res.getOrDefault(bo,new ArrayList<>());
-			RankingElement element = new RankingElement();
-			element.setName(String.valueOf(t._1()._2()));
-			element.setQuantity(t._2());
-			boList.add(element);
-			bo_freq_res.put(bo,boList);
-		}
-
-		HashMap<String,Integer> unique_users_list = new HashMap<>();
-		for(Tuple2<String,Integer> t: uniqueUsersByBO.collect()){
-			unique_users_list.put(t._1(),t._2());
-		}
-
-		HashMap<String,Integer> repeating_users_list = new HashMap<>();
-		for(Tuple2<String,Integer> t: repeatingUsersByBo.collect()){
-			repeating_users_list.put(t._1(),t._2());
-		}
-
-		List<RankingElement> ageList = new ArrayList<>();
-		for(Tuple2<Integer,Integer> t: txNumberByAge.collect()){
-			RankingElement e = new RankingElement();
-			e.setName(String.valueOf(t._1()));
-			e.setQuantity(t._2());
-			e.setPercentage((double) t._2() * 100.0 / (double) numberTransactions );
-			ageList.add(e);
-		}
-
-		List<RankingElement> hourList = new ArrayList<>();
-		for(Tuple2<Integer,Integer> t: txNumberByHour.collect()){
-			RankingElement e = new RankingElement();
-			e.setName(String.valueOf(t._1()));
-			e.setQuantity(t._2());
-			e.setPercentage((double) t._2() * 100.0 / (double) numberTransactions );
-			hourList.add(e);
-		}
-
-		List<RankingElement> genderList = new ArrayList<>();
-		for(Tuple2<String,Integer> t: txNumberByGender.collect()){
-			RankingElement e = new RankingElement();
-			e.setName(t._1());
-			e.setQuantity(t._2());
-			e.setPercentage((double) t._2() * 100.0 / (double) numberTransactions );
-			genderList.add(e);
-		}
 
 		TransactionProfileResults results = new TransactionProfileResults();
-		results.setTxBoAge(bo_age_res);
-		results.setTxBoGender(bo_gender_res);
-		results.setTxBoHour(bo_hour_res);
-		results.setTxAge(ageList);
-		results.setTxHour(hourList);
-		results.setTxGender(genderList);
-		results.setPeopleBoFreq(bo_freq_res);
-		results.setUniqueUsersByBo(unique_users_list);
-		results.setReturningUsersByBo(repeating_users_list);
+		results.setTxs_age_hour(txs_age_hour);
+		results.setTxs_gender_hour(txs_gender_hour);
+		results.setTxs_hour(txs_hour);
+		results.setTxs_bo_age_hour(txs_bo_age_hour);
+		results.setTxs_bo_gender_hour(txs_bo_gender_hour);
+		results.setTxs_bo_hour(txs_bo_hour);
 
 		return results;
+
+
+
+
+
 
 	}
 }

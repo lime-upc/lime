@@ -1,92 +1,72 @@
 package org.lime.batch.resultDTOs;
 
+import org.apache.spark.api.java.JavaPairRDD;
+import org.lime.batch.beans.Hour;
+import scala.Tuple2;
+import scala.Tuple3;
+
 import java.util.HashMap;
 import java.util.List;
 
 public class TransactionProfileResults {
 
-	HashMap<String,List<RankingElement>> txBoHour;
-	HashMap<String,List<RankingElement>> txBoAge;
-	HashMap<String,List<RankingElement>> txBoGender;
-	HashMap<String,List<RankingElement>> peopleBoFreq;
+	JavaPairRDD<Tuple3<String,String,Hour>,Integer> txs_bo_gender_hour;
+	JavaPairRDD<Tuple3<String,Integer,Hour>,Integer> txs_bo_age_hour;
+	JavaPairRDD<Tuple2<String,Hour>,Integer> txs_bo_hour;
+
+	JavaPairRDD<Tuple2<String,Hour>,Integer> txs_gender_hour;
+	JavaPairRDD<Tuple2<Integer,Hour>,Integer> txs_age_hour;
+	JavaPairRDD<Hour,Integer> txs_hour;
 
 
-	List<RankingElement> txHour;
-	List<RankingElement> txAge;
-	List<RankingElement> txGender;
-
-	HashMap<String,Integer> uniqueUsersByBo;
-	HashMap<String,Integer> returningUsersByBo;
-
-	public HashMap<String, Integer> getUniqueUsersByBo() {
-		return uniqueUsersByBo;
+	public void setEmpty(){
+		//Do nothing
+	}
+	public JavaPairRDD<Tuple3<String, String, Hour>, Integer> getTxs_bo_gender_hour() {
+		return txs_bo_gender_hour;
 	}
 
-	public void setUniqueUsersByBo(HashMap<String, Integer> uniqueUsersByBo) {
-		this.uniqueUsersByBo = uniqueUsersByBo;
+	public void setTxs_bo_gender_hour(JavaPairRDD<Tuple3<String, String, Hour>, Integer> txs_bo_gender_hour) {
+		this.txs_bo_gender_hour = txs_bo_gender_hour;
 	}
 
-	public HashMap<String, Integer> getReturningUsersByBo() {
-		return returningUsersByBo;
+	public JavaPairRDD<Tuple3<String, Integer, Hour>, Integer> getTxs_bo_age_hour() {
+		return txs_bo_age_hour;
 	}
 
-	public void setReturningUsersByBo(HashMap<String, Integer> returningUsersByBo) {
-		this.returningUsersByBo = returningUsersByBo;
+	public void setTxs_bo_age_hour(JavaPairRDD<Tuple3<String, Integer, Hour>, Integer> txs_bo_age_hour) {
+		this.txs_bo_age_hour = txs_bo_age_hour;
 	}
 
-	public HashMap<String, List<RankingElement>> getPeopleBoFreq() {
-		return peopleBoFreq;
+	public JavaPairRDD<Tuple2<String, Hour>, Integer> getTxs_bo_hour() {
+		return txs_bo_hour;
 	}
 
-	public void setPeopleBoFreq(HashMap<String, List<RankingElement>> peopleBoFreq) {
-		this.peopleBoFreq = peopleBoFreq;
+	public void setTxs_bo_hour(JavaPairRDD<Tuple2<String, Hour>, Integer> txs_bo_hour) {
+		this.txs_bo_hour = txs_bo_hour;
 	}
 
-	public List<RankingElement> getTxHour() {
-		return txHour;
+	public JavaPairRDD<Tuple2<String, Hour>, Integer> getTxs_gender_hour() {
+		return txs_gender_hour;
 	}
 
-	public void setTxHour(List<RankingElement> txHour) {
-		this.txHour = txHour;
+	public void setTxs_gender_hour(JavaPairRDD<Tuple2<String, Hour>, Integer> txs_gender_hour) {
+		this.txs_gender_hour = txs_gender_hour;
 	}
 
-	public List<RankingElement> getTxAge() {
-		return txAge;
+	public JavaPairRDD<Tuple2<Integer, Hour>, Integer> getTxs_age_hour() {
+		return txs_age_hour;
 	}
 
-	public void setTxAge(List<RankingElement> txAge) {
-		this.txAge = txAge;
+	public void setTxs_age_hour(JavaPairRDD<Tuple2<Integer, Hour>, Integer> txs_age_hour) {
+		this.txs_age_hour = txs_age_hour;
 	}
 
-	public List<RankingElement> getTxGender() {
-		return txGender;
+	public JavaPairRDD<Hour, Integer> getTxs_hour() {
+		return txs_hour;
 	}
 
-	public void setTxGender(List<RankingElement> txGender) {
-		this.txGender = txGender;
-	}
-
-	public HashMap<String, List<RankingElement>> getTxBoHour() {
-		return txBoHour;
-	}
-
-	public void setTxBoHour(HashMap<String, List<RankingElement>> txBoHour) {
-		this.txBoHour = txBoHour;
-	}
-
-	public HashMap<String, List<RankingElement>> getTxBoAge() {
-		return txBoAge;
-	}
-
-	public void setTxBoAge(HashMap<String, List<RankingElement>> txBoAge) {
-		this.txBoAge = txBoAge;
-	}
-
-	public HashMap<String, List<RankingElement>> getTxBoGender() {
-		return txBoGender;
-	}
-
-	public void setTxBoGender(HashMap<String, List<RankingElement>> txBoGender) {
-		this.txBoGender = txBoGender;
+	public void setTxs_hour(JavaPairRDD<Hour, Integer> txs_hour) {
+		this.txs_hour = txs_hour;
 	}
 }

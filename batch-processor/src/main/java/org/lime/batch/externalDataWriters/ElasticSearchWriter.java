@@ -12,9 +12,8 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.lime.batch.beans.Hour;
 import org.lime.batch.beans.ReturningUserBean;
-import org.lime.batch.resultDTOs.NewResults;
-import org.lime.batch.resultDTOs.ReturningUsersResults;
 import org.lime.batch.resultDTOs.TransactionProfileResults;
+import org.lime.batch.resultDTOs.ReturningUsersResults;
 import org.lime.batch.resultDTOs.TransactionRestaurantResults;
 import scala.Tuple2;
 import scala.Tuple3;
@@ -34,6 +33,14 @@ public class ElasticSearchWriter {
 
 
 	public static void createIndexWithMap(TransportClient client, String index) throws IOException{
+
+		boolean exists = client.admin().indices()
+				.prepareExists(index)
+				.execute().actionGet().isExists();
+
+		//Create index if it does not exists yet
+		if (exists)
+			return;
 
 		XContentBuilder mapping = jsonBuilder()
 				.startObject()
@@ -69,7 +76,7 @@ public class ElasticSearchWriter {
 				.execute().actionGet();
 	}
 
-	public static void writeNewResults(NewResults newResults) throws Exception{
+	public static void writeNewResults(TransactionProfileResults newResults) throws Exception{
 
 		TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
 				.addTransportAddress(new TransportAddress(InetAddress.getByName("192.168.56.20"), 9300));
@@ -232,7 +239,7 @@ public class ElasticSearchWriter {
 	}
 
 
-	public static void writeReturningUsersResults(ReturningUsersResults ruResults, String day) throws Exception {
+	public static void writeReturningUsersResults(ReturningUsersResults ruResults) throws Exception {
 
 		//Connect to ElasticSearch
 		TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
@@ -260,69 +267,8 @@ public class ElasticSearchWriter {
 
 	}
 
-	public static void writeTransactionProfileResults(TransactionProfileResults tpResults, String day) throws Exception{
 
-		TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
-				.addTransportAddress(new TransportAddress(InetAddress.getByName("192.168.56.20"), 9300));
-
-
-		//SAVE INTO ELASTIC-SEARCH THE PRE-COMPUTED JSON RESULTS FOR FRONTEND
-
-		//Transactions per BO and AGE. For each BO, one entry
-		Iterator it = tpResults.getTxBoAge().entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry)it.next();
-			insertJsonIntoES(client,"age_bo_txs","result",day + "_" + pair.getKey(),pair.getValue());
-			it.remove(); // avoids a ConcurrentModificationException
-		}
-
-		//Transactions per BO and Hour. For each BO, one entry
-		it = tpResults.getTxBoHour().entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry)it.next();
-			insertJsonIntoES(client,"hour_bo_txs","result",day + "_" + pair.getKey(),pair.getValue());
-			it.remove(); // avoids a ConcurrentModificationException
-		}
-
-		//Transactions per BO and Gender. For each BO, one entry
-		it = tpResults.getTxBoGender().entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry)it.next();
-			insertJsonIntoES(client,"gender_bo_txs","result",day + "_" + pair.getKey(),pair.getValue());
-			it.remove(); // avoids a ConcurrentModificationException
-		}
-
-		//People by frequency and BO. For each BO, one entry
-		it = tpResults.getPeopleBoFreq().entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry)it.next();
-			insertJsonIntoES(client,"people_bo_freq","result",day + "_" + pair.getKey(),pair.getValue());
-			it.remove(); // avoids a ConcurrentModificationException
-		}
-
-		it = tpResults.getUniqueUsersByBo().entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry)it.next();
-			insertJsonIntoES(client,"bo_unique_users","result",day + "_" + pair.getKey(),pair.getValue());
-			it.remove(); // avoids a ConcurrentModificationException
-		}
-
-		it = tpResults.getReturningUsersByBo().entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry)it.next();
-			insertJsonIntoES(client,"bo_returning_users","result",day + "_" + pair.getKey(),pair.getValue());
-			it.remove(); // avoids a ConcurrentModificationException
-		}
-
-
-		//Save aggregated transactiosn per gender, age and hour, for all the businesses
-		insertJsonIntoES(client,"gender_txs","result",day,tpResults.getTxGender());
-		insertJsonIntoES(client,"age_txs","result",day,tpResults.getTxAge());
-		insertJsonIntoES(client,"hour_txs","result",day,tpResults.getTxHour());
-
-	}
-
-	public static void writeTransactionRestaurantResults(TransactionRestaurantResults trResults, String day) throws Exception{
+	public static void writeTransactionRestaurantResults(TransactionRestaurantResults trResults) throws Exception{
 
 		TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
 				.addTransportAddress(new TransportAddress(InetAddress.getByName("192.168.56.20"), 9300));
