@@ -9,6 +9,8 @@ import org.lime.batch.beans.TransactionBean;
 import org.lime.batch.externalDataLoaders.HBaseLoader;
 import org.lime.batch.externalDataLoaders.TransactionsLoader;
 import org.lime.batch.externalDataWriters.ElasticSearchWriter;
+import org.lime.batch.resultDTOs.NewResults;
+import org.lime.batch.resultDTOs.ReturningUsersResults;
 import org.lime.batch.resultDTOs.TransactionProfileResults;
 import org.lime.batch.resultDTOs.TransactionRestaurantResults;
 
@@ -22,10 +24,10 @@ public class Main {
         JavaSparkContext ctx = new JavaSparkContext(conf);
 
         ctx.setLogLevel("ERROR");
-        String today = "08/12/2017";
+        String today = "02/01/2018";
 
         //Get all the locations from previous month
-        JavaRDD<LocationBean> locations = HBaseLoader.getLocationsForPastMonth(ctx,today);
+        //JavaRDD<LocationBean> locations = HBaseLoader.getLocationsForPastMonth(ctx,today);
 
         //Get all the confirmed transactions for yesterday as a RDD, for all the Business Owners
         //JavaRDD<TransactionBean> transactions  = TransactionsLoader.getConfirmedTransactionsForDayRDD(ctx,today);
@@ -40,15 +42,20 @@ public class Main {
 
         //Do the processing, and obtain objects ready to save into ElasticSearch
         System.out.println("Calculating users metrics...");
-        TransactionProfileResults tpResults = TransactionProfileMetrics.calculateMetrics(transactions);
+        //NewResults res = newMetrics.calculateMetrics(transactions);
         System.out.println("Calculating restaurant and tags metrics...");
         TransactionRestaurantResults trResults = TransactionRestaurantMetrics.getMetrics(transactions);
 
+
         //Save resultDTOs into elasticSearch
         System.out.println("Saving results to ElasticSearch...");
-        ElasticSearchWriter.writeTransactionProfileResults(tpResults,today);
+
+        //ElasticSearchWriter.writeNewResults(res);
         ElasticSearchWriter.writeTransactionRestaurantResults(trResults,today);
         System.out.println("Done!");
+
+        ReturningUsersResults rur = ReturningUsersMetrics.calculateMetrics(transactions);
+        ElasticSearchWriter.writeReturningUsersResults(rur,today);
 
     }
 

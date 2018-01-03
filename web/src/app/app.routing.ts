@@ -6,6 +6,8 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.component';
 import { ProfileComponent } from "./components/profile/profile.component";
 import { AnalyticsComponent } from "./components/analytics/analytics.component";
+import { BoAnalyticsComponent } from "./components/boAnalytics/analytics.component";
+
 import { NearbyUsersComponent } from "./components/nearby-users/nearby-users.component";
 
 
@@ -33,6 +35,10 @@ const routes: Routes = [
   {
     path: 'analytics',
     component: AnalyticsComponent
+  },
+  {
+    path: 'boAnalytics',
+    component: BoAnalyticsComponent
   },
   {
     path: 'nearby-users',

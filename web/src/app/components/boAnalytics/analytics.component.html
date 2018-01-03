@@ -4,7 +4,7 @@
       <div class="col-12 text-center">
           <h1>
               <mat-icon>pie_chart</mat-icon>
-              City Analytics: Barcelona
+              My Analytics
             </h1>
       </div>
      
@@ -74,29 +74,27 @@
 
         <!-- Restaurants ranking-->
         
-        <div class="col-6 text-center" *ngIf="restaurantsLoaded">
-          <h3>Top Restaurants</h3>
-          <span>% of total transactions</span>
-          <canvas baseChart height="100"
-                  [data]="restaurantsData"
-                  [colors]="genderColors"
-                  [labels]="restaurantsLabels"
-                  [options]="barChartOptions"
-                  [legend]="restaurantsLegend"
-                  [chartType]="restaurantsType"></canvas>
+        <div class="col-6 text-center" *ngIf="returningVisible">
+          <h3>Users bouncing</h3>
+          <span>Total unique users this month: {{uniqueUsers}}</span>
+          <canvas baseChart
+          [data]="returningData"
+          [labels]="returningLabels"
+          chartType="pie"
+          ></canvas>
         </div>
 
-        <div class="col-6 text-center" *ngIf="tagsLoaded">
-            <h3>Top Tags</h3>
-            <span>% of total transactions</span>
-            <canvas baseChart height="100"
-                    [data]="tagsData"
-                    [colors]="genderColors"
-                    [labels]="tagsLabels"
-                    [options]="barChartOptions"
-                    [legend]="tagsLegend"
-                    [chartType]="restaurantsType"></canvas>
-          </div>
+        <div class="col-6 text-center" *ngIf="returningVisible">
+            <h3>Returning users frequency</h3>
+            <span>Times that users returned last month</span>
+            <canvas baseChart
+            [data]="freqData"
+            [labels]="freqLabels"
+            chartType="pie"
+            ></canvas>
+        </div>
+
+      
 
 
 

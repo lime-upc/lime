@@ -72,6 +72,30 @@ public class TransactionProfileMetrics {
 		groupedByBoAndUser.persist(StorageLevel.MEMORY_AND_DISK());
 
 
+		//Number of transactions grouped by restaurant and user
+		JavaPairRDD<Tuple2<String,String>,Integer> txNumberByBoAndUser = groupedByBoAndUser
+				.mapValues(integerUserBeanTuple2 -> integerUserBeanTuple2._1).reduceByKey((a,b) -> a+b);
+
+		//RESULT: <<boMail,freq>,people>>: For each business owner and month frequency, number of people
+		JavaPairRDD<Tuple2<String,Integer>,Integer> peopleNumberByBoAndFreq = txNumberByBoAndUser
+				.mapToPair(t -> new Tuple2<>(new Tuple2<>(t._1()._1(),t._2()),1))
+				.reduceByKey((a,b) -> a+b);
+
+
+		//RESULT: <boMail,numberOfUniqueUsers>: For each business owner, number of unique users
+		JavaPairRDD<String,Integer> uniqueUsersByBO = groupedByBoAndUser
+				.mapToPair(t -> new Tuple2<>(t._1()._1(),1))
+				.reduceByKey((a,b) -> a+b);
+
+		//RESULT: <boMail,numberOfUniqueReturningUsers>: For each business owner, number of unique returning users
+		JavaPairRDD<String,Integer> repeatingUsersByBo = groupedByBoAndUser
+				.filter(t -> t._2()._1() > 1)
+				.mapToPair(t -> new Tuple2<>(t._1()._1(),1))
+				.reduceByKey((a,b) -> a+b);
+
+
+
+
 		//RESULT: <<boMail,gender>,<totalCount>: For each business owner and each gender, number of transactions
 		JavaPairRDD<Tuple2<String,String>,Integer> txNumberByBoAndGender = groupedByBoAndUser
 				.mapToPair(g -> {
@@ -137,6 +161,7 @@ public class TransactionProfileMetrics {
 			RankingElement element = new RankingElement();
 			element.setName(t._1()._2());
 			element.setQuantity(t._2());
+			//TODO: should divide by number of transactions of that business, not numberTransactions in general
 			element.setPercentage((double) t._2() * 100.0 / (double) numberTransactions);
 			boList.add(element);
 			bo_gender_res.put(bo,boList);
@@ -149,6 +174,8 @@ public class TransactionProfileMetrics {
 			RankingElement element = new RankingElement();
 			element.setName(String.valueOf(t._1()._2()));
 			element.setQuantity(t._2());
+			//TODO: should divide by number of transactions of that business, not numberTransactions in general
+
 			element.setPercentage((double) t._2() * 100.0 / (double) numberTransactions);
 			boList.add(element);
 			bo_age_res.put(bo,boList);
@@ -161,9 +188,31 @@ public class TransactionProfileMetrics {
 			RankingElement element = new RankingElement();
 			element.setName(String.valueOf(t._1()._2()));
 			element.setQuantity(t._2());
+			//TODO: should divide by number of transactions of that business, not numberTransactions in general
 			element.setPercentage((double) t._2() * 100.0 / (double) numberTransactions);
 			boList.add(element);
 			bo_hour_res.put(bo,boList);
+		}
+
+		HashMap<String,List<RankingElement>> bo_freq_res = new HashMap<>();
+		for(Tuple2<Tuple2<String,Integer>,Integer> t: peopleNumberByBoAndFreq.collect()){
+			String bo = t._1()._1();
+			List<RankingElement> boList = bo_freq_res.getOrDefault(bo,new ArrayList<>());
+			RankingElement element = new RankingElement();
+			element.setName(String.valueOf(t._1()._2()));
+			element.setQuantity(t._2());
+			boList.add(element);
+			bo_freq_res.put(bo,boList);
+		}
+
+		HashMap<String,Integer> unique_users_list = new HashMap<>();
+		for(Tuple2<String,Integer> t: uniqueUsersByBO.collect()){
+			unique_users_list.put(t._1(),t._2());
+		}
+
+		HashMap<String,Integer> repeating_users_list = new HashMap<>();
+		for(Tuple2<String,Integer> t: repeatingUsersByBo.collect()){
+			repeating_users_list.put(t._1(),t._2());
 		}
 
 		List<RankingElement> ageList = new ArrayList<>();
@@ -200,6 +249,10 @@ public class TransactionProfileMetrics {
 		results.setTxAge(ageList);
 		results.setTxHour(hourList);
 		results.setTxGender(genderList);
+		results.setPeopleBoFreq(bo_freq_res);
+		results.setUniqueUsersByBo(unique_users_list);
+		results.setReturningUsersByBo(repeating_users_list);
+
 		return results;
 
 	}

@@ -33,6 +33,8 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.component';
 import { AnalyticsComponent } from "./components/analytics/analytics.component";
+import { BoAnalyticsComponent } from "./components/boAnalytics/analytics.component";
+
 import { NearbyUsersComponent } from "./components/nearby-users/nearby-users.component";
 
 
@@ -54,6 +56,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RegistrationComponent,
     ProfileComponent,
     AnalyticsComponent,
+    BoAnalyticsComponent,
     NearbyUsersComponent,
     FooterComponent,
     PageNotFoundComponent,

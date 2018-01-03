@@ -7,7 +7,7 @@ import {AuthenticationService} from 'app/services/AuthenticationService';
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.scss']
 })
-export class AnalyticsComponent implements OnInit {
+export class BoAnalyticsComponent implements OnInit {
 
   private http: HttpClient;
   private authService: AuthenticationService;
@@ -93,6 +93,12 @@ export class AnalyticsComponent implements OnInit {
   public ageLabels: string[] = ["1a","2","3"];
   public ageData: number[] = [4,5,6];
 
+  public returningLabels: string[] = [];
+  public returningData: number[] = [];
+  public freqLabels: string[] = [];
+  public freqData: number[] = [];
+  public returningVisible: boolean = false;
+  public uniqueUsers: number = 0;
   public genderLegend:boolean = true;
   public genderData:any[] = [
     {data: [0], label: 'Male'},
@@ -154,7 +160,7 @@ rollUp(){
 }
 
 getTxsData(){
-  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/" + this.granularity.width)
+  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/" + this.granularity.width + "/" + this.email)
   .then((response: Response) => {
     return response.json();
   })
@@ -176,7 +182,7 @@ getTxsData(){
 }
 
 getGenderData(){
-  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/gender")
+  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/gender" + "/" + this.email)
   .then((response: Response) => {
     return response.json();
   })
@@ -191,9 +197,42 @@ getGenderData(){
 
 }
 
+getReturningData(){
+  return fetch("http://localhost:3000/analytics/users/returning/" +  this.email)
+  .then((response: Response) => {
+    return response.json();
+  })
+  .then((responseJson: any) => {
+    var uniqueUsers = responseJson.message.uniqueUsers;
+    this.uniqueUsers = uniqueUsers;
+    var returningUsers = responseJson.message.uniqueReturningUsers;
+    var nonReturningUsers = uniqueUsers - returningUsers;
+    var returningPct = returningUsers * 100 / uniqueUsers;
+    var nonReturningPct = nonReturningUsers * 100 / uniqueUsers;
+    returningPct = Math.round(returningPct * 100) / 100;
+    nonReturningPct = Math.round(nonReturningPct * 100) / 100;
+    this.returningLabels.push("Non returning (" + nonReturningPct + "%)")
+    this.returningLabels.push("Returning (" + returningPct + "%)");
+    this.returningData = [nonReturningUsers,returningUsers];
+   
+    //Now, frequencies
+    var freqs = responseJson.message.frequencies;
+    var fLabels = [];
+    var fData = [];
+    for(var i = 0; i < freqs.length; i++){
+      fLabels.push(freqs[i].name + " (" + (Math.round((freqs[i].quantity * 100 / returningUsers) *100 )/100) + "%)");
+      fData.push(freqs[i].quantity);
+    }
+    this.freqData = fData;
+    this.freqLabels = fLabels;
+    this.returningVisible = true;
+  });
+
+}
+
 
 getHourData(){
-  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/hour")
+  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/hour" + "/" + this.email)
   .then((response: Response) => {
     return response.json();
   })
@@ -213,7 +252,7 @@ getHourData(){
 }
 
 getAgeData(){
-  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/age")
+  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/age" + "/" + this.email)
   .then((response: Response) => {
     return response.json();
   })
@@ -233,7 +272,7 @@ getAgeData(){
 }
 
 getRankingByType(type: String): any {
-  return fetch('http://localhost:3000/analytics/rankings/' + type)
+  return fetch('http://localhost:3000/analytics/rankings/' + type )
     .then((response: Response) => {
       return response.json();
     })
@@ -289,6 +328,7 @@ compare(a,b) {
 
   ngOnInit() {
 
+    this.email = this.authService.getEmail();
     //Set initial criteria
     var monthAgo = new Date();
     monthAgo.setMonth(monthAgo.getMonth()-1);
@@ -306,9 +346,7 @@ compare(a,b) {
     this.getHourData();
     this.getAgeData();
     this.getGenderData();
-    this.getRankingByType("tags");
-
-    this.getRankingByType("restaurants");
+    this.getReturningData();
 
     console.log(this.granularity);
 
