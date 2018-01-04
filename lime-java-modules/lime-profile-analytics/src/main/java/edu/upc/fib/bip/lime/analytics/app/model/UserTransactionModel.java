@@ -1,6 +1,6 @@
 package edu.upc.fib.bip.lime.analytics.app.model;
 
-import edu.upc.fib.bip.lime.transactions.Transaction;
+import edu.upc.fib.bip.lime.analytics.app.model.Transaction;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

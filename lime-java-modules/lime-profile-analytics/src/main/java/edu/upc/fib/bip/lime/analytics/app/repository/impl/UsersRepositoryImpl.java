@@ -3,6 +3,7 @@ package edu.upc.fib.bip.lime.analytics.app.repository.impl;
 import com.mongodb.client.MongoCollection;
 import edu.upc.fib.bip.lime.analytics.app.model.User;
 import edu.upc.fib.bip.lime.analytics.app.repository.UserRepository;
+import edu.upc.fib.bip.lime.analytics.app.repository.mongo.MongoRepository;
 import org.bson.conversions.Bson;
 
 import java.util.List;

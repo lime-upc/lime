@@ -1,7 +1,9 @@
 package edu.upc.fib.bip.lime.analytics.app.service;
 
 import edu.upc.fib.bip.lime.analytics.app.model.FlatUserData;
+import edu.upc.fib.bip.lime.analytics.app.model.TypicalUser;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,6 +12,6 @@ import java.util.Map;
  */
 public interface UserAnalyticsService {
 
-    Map<FlatUserData, Integer> typicalUsersForBusiness(String boEmail);
+    List<TypicalUser> typicalUsersForBusiness(String boEmail);
 
 }
