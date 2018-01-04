@@ -1,7 +1,7 @@
 package edu.upc.fib.bip.lime.analytics;
 
-import edu.upc.fib.bip.lime.analytics.app.model.Gender;
-import edu.upc.fib.bip.lime.analytics.app.model.User;
+import edu.upc.fib.bip.lime.model.Gender;
+import edu.upc.fib.bip.lime.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

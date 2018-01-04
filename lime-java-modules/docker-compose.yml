@@ -7,6 +7,16 @@ services:
     ports:
       - "27017:27017"
 
+  elastic:
+    container_name: elastic
+    image: elasticsearch:2.4
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - cluster.name=default
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+
   transaction-generator:
     container_name: transaction-generator
     build:
@@ -28,3 +38,4 @@ services:
       - "8082:8080"
     links:
       - mongodb
+      - elastic

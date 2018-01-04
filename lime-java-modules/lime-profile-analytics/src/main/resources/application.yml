@@ -4,6 +4,10 @@ mongodb:
   collections:
     users: users
     transactions: transactions
+elasticsearch:
+  host: elastic
+  port: 9300
+  clustername: elasticsearch
 spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration

@@ -12,6 +12,7 @@
     <modules>
         <module>lime-transactions-generator</module>
         <module>lime-profile-analytics</module>
+        <module>lime-model</module>
     </modules>
 
     <properties>

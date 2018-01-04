@@ -1,11 +1,15 @@
 package edu.upc.fib.bip.lime.analytics.app.service.impl;
 
 import edu.upc.fib.bip.lime.analytics.app.model.*;
+import edu.upc.fib.bip.lime.analytics.app.model.analytics.Cluster;
+import edu.upc.fib.bip.lime.analytics.app.model.analytics.MetricsAttribute;
 import edu.upc.fib.bip.lime.analytics.app.repository.TransactionRepository;
 import edu.upc.fib.bip.lime.analytics.app.repository.UserRepository;
 import edu.upc.fib.bip.lime.analytics.app.service.DataAnalyticsService;
 import edu.upc.fib.bip.lime.analytics.app.service.UserAnalyticsService;
-import edu.upc.fib.bip.lime.transactions.Transaction;
+import edu.upc.fib.bip.lime.model.Gender;
+import edu.upc.fib.bip.lime.model.Transaction;
+import edu.upc.fib.bip.lime.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +43,7 @@ public class UserAnalyticsServiceImpl implements UserAnalyticsService {
     private DataAnalyticsService<FlatUserData> dataAnalyticsService;
 
     @Override
-    public Map<FlatUserData, Integer> typicalUsersForBusiness(String boEmail) {
+    public List<TypicalUser> typicalUsersForBusiness(String boEmail) {
         List<Transaction> transactions = transactionRepository.findByBoEmail(boEmail);
         int transactionCount = transactions.size();
         List<String> userEmails = transactions.stream()
@@ -92,7 +96,20 @@ public class UserAnalyticsServiceImpl implements UserAnalyticsService {
                 Cluster::size
             ));
 
-        return clusterRepresentatedByAverageWithCounts;
+        List<TypicalUser> typicalUsers = clusterRepresentatedByAverageWithCounts.entrySet().stream()
+            .map(entry -> {
+                TypicalUser typicalUser = new TypicalUser();
+                typicalUser.setAge(entry.getKey().getAge());
+                typicalUser.setAverageCheck(entry.getKey().getAverageCheck());
+                typicalUser.setAverageTime(entry.getKey().getAverageTime());
+                typicalUser.setGender(entry.getKey().getGender().ordinal());
+                typicalUser.setQuantity(entry.getValue());
+                typicalUser.setPercentage((double) entry.getValue() / userEmails.size());
+                return typicalUser;
+            })
+            .collect(Collectors.toList());
+
+        return typicalUsers;
     }
 
     private UserAverageDataModel toAverage(User user, List<Transaction> transactions) {

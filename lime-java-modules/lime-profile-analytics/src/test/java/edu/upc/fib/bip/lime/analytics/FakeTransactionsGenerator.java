@@ -1,7 +1,8 @@
 package edu.upc.fib.bip.lime.analytics;
 
-import edu.upc.fib.bip.lime.analytics.app.model.User;
-import edu.upc.fib.bip.lime.transactions.Transaction;
+
+import edu.upc.fib.bip.lime.model.Transaction;
+import edu.upc.fib.bip.lime.model.User;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
