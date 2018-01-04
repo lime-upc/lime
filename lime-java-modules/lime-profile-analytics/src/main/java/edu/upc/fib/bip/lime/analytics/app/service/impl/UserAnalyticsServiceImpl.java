@@ -1,11 +1,15 @@
 package edu.upc.fib.bip.lime.analytics.app.service.impl;
 
 import edu.upc.fib.bip.lime.analytics.app.model.*;
+import edu.upc.fib.bip.lime.analytics.app.model.analytics.Cluster;
+import edu.upc.fib.bip.lime.analytics.app.model.analytics.MetricsAttribute;
 import edu.upc.fib.bip.lime.analytics.app.repository.TransactionRepository;
 import edu.upc.fib.bip.lime.analytics.app.repository.UserRepository;
 import edu.upc.fib.bip.lime.analytics.app.service.DataAnalyticsService;
 import edu.upc.fib.bip.lime.analytics.app.service.UserAnalyticsService;
-import edu.upc.fib.bip.lime.analytics.app.model.Transaction;
+import edu.upc.fib.bip.lime.model.Gender;
+import edu.upc.fib.bip.lime.model.Transaction;
+import edu.upc.fib.bip.lime.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

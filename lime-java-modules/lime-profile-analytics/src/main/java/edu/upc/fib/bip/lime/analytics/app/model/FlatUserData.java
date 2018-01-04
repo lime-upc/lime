@@ -1,5 +1,6 @@
 package edu.upc.fib.bip.lime.analytics.app.model;
 
+import edu.upc.fib.bip.lime.model.Gender;
 import lombok.*;
 
 /**

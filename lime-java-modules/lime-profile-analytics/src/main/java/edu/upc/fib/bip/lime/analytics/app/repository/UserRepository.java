@@ -1,6 +1,6 @@
 package edu.upc.fib.bip.lime.analytics.app.repository;
 
-import edu.upc.fib.bip.lime.analytics.app.model.User;
+import edu.upc.fib.bip.lime.model.User;
 
 import java.util.List;
 

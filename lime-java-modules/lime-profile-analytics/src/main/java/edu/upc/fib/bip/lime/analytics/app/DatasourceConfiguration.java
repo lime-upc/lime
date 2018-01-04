@@ -33,8 +33,6 @@ public class DatasourceConfiguration {
                          @Value("${elasticsearch.clustername}") String EsClusterName) throws Exception {
         Settings esSettings = Settings.settingsBuilder()
             .put("cluster.name", EsClusterName)
-            //.put("client.transport.ignore_cluster_name", true)
-            //.put("client.transport.sniff", true)
             .build();
 
         return TransportClient.builder()

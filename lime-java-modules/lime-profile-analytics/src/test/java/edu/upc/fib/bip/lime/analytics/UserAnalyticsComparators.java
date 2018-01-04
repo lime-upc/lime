@@ -1,7 +1,7 @@
 package edu.upc.fib.bip.lime.analytics;
 
 import edu.upc.fib.bip.lime.analytics.app.model.FlatUserData;
-import edu.upc.fib.bip.lime.analytics.app.model.Gender;
+import edu.upc.fib.bip.lime.model.Gender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
