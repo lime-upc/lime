@@ -177,6 +177,10 @@ export class AuthenticationService {
     return this.authHttp.put("http://localhost:3000/businesses/" + email, newNotification)
   }
 
+  setAutomaticNotification(selectedNotification: number) {
+    //Need to set selected_notification value with the number in parameter in database
+  }
+
   getEmail() {
     let token = this.loadToken();
     return this.jwtHelper.decodeToken(token as string).email;

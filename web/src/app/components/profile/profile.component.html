@@ -30,17 +30,16 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
 
-        <button mat-raised-button color="primary">Modify information</button>
+        <button mat-raised-button class="grid-button" color="primary">Modify information</button>
       </mat-grid-tile>
 
       <!-- Automatic notifications grid -->
       <mat-grid-tile colspan="1" rowspan="2">
-        <mat-grid-tile-header>Automatic notifications</mat-grid-tile-header>
+        <mat-grid-tile-header>Automatic notifications {{selectedNotification}}</mat-grid-tile-header>
         <div class="all-notif">
           <div *ngFor="let n of notifications">
-            <mat-radio-button value="n.id"></mat-radio-button>
-            <mat-form-field><input disabled=true matInput [(ngModel)]="n.title"/></mat-form-field>
-            <textarea disabled=true matInput matTextareaAutosize [(ngModel)]="n.description"></textarea>
+            <mat-radio-button (click)="setNotification(n.id)" value="n.id">{{notifications[n.id].title}}</mat-radio-button>
+            <p>{{notifications[n.id].description}}</p>
           </div>
   
           <div class="new-notif" [hidden]="hideNotifForm">
@@ -49,7 +48,7 @@
             <button (click)="addNotification()" mat-raised-button color="primary">Save</button>
           </div>
         </div>
-        <mat-button-toggle (click)="toggleNewNotifForm()" color="primary">{{toggleText}}</mat-button-toggle>
+        <mat-button-toggle class="grid-button" (click)="toggleNewNotifForm()" color="primary">{{toggleText}}</mat-button-toggle>
       </mat-grid-tile>
 
       <!-- Subcription options grid -->
