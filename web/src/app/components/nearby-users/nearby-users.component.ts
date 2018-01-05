@@ -55,6 +55,45 @@ export class NearbyUsersComponent implements OnInit {
     }
   ];
 
+  public genderColors: Array<any> = [
+    { // first color
+      backgroundColor: 'blue',
+      borderColor: 'black',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    },
+    { // second color
+      backgroundColor: 'red',
+      borderColor: 'black',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    }
+  ];
+
+    public ageColors: Array<any> = [
+      { // first color
+        backgroundColor: 'orange',
+        borderColor: 'black',
+        pointBackgroundColor: 'green',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+      },
+      { // second color
+        backgroundColor: 'red',
+        borderColor: 'rgba(225,10,24,0.2)',
+        pointBackgroundColor: 'rgba(225,10,24,0.2)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+      }
+    ];
+
+
   public barChartGenderLabels: string[] = this.genders.map(gender => gender.value);
   public barChartGenderData: number[];
   public barChartGenderLoaded: boolean = false;
