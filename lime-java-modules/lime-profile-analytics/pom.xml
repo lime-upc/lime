@@ -36,12 +36,33 @@
             <artifactId>spring-boot-starter-jetty</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
+
+        <!-- data integration -->
+        <dependency>
+            <groupId>org.mongodb.spark</groupId>
+            <artifactId>mongo-spark-connector_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-elasticsearch</artifactId>
             <version>2.1.9.RELEASE</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
 
         <!-- logging -->
         <dependency>
@@ -56,11 +77,6 @@
             <artifactId>lombok</artifactId>
             <version>1.16.18</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>RELEASE</version>
         </dependency>
 
         <dependency>

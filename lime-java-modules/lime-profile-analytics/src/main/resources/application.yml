@@ -1,3 +1,6 @@
+spark:
+  driver:
+    allowMultipleContexts: true
 mongodb:
   url: mongodb:27017
   name: lime

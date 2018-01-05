@@ -2,6 +2,8 @@ package edu.upc.fib.bip.lime.model;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 /**
  * @author Elizaveta Ketova <elizabeth.ooh@gmail.com>
  * @since 02.12.17
@@ -11,9 +13,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Transaction {
+public class Transaction implements Serializable {
 
-    private int id;
     private String email;
     private String business_owner_id;
     private String timestamp;

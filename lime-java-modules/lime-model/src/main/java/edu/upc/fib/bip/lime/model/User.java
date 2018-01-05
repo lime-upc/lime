@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * @author Elizaveta Ketova <elizabeth.ooh@gmail.com>
  * @since 24.12.17
@@ -13,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class User {
+public class User implements Serializable {
 
     private String email;
     private int age;

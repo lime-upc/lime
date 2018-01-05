@@ -18,19 +18,4 @@ import org.springframework.context.annotation.Profile;
 @ComponentScan("edu.upc.fib.bip.lime.analytics.app")
 public class RootContextConfiguration {
 
-    @Bean
-    @Profile("!unit")
-    public TransactionRepository transactionRepository(@Value("${mongodb.url}") String dbUrl,
-                                                       @Value("${mongodb.name}") String dbName,
-                                                       @Value("${mongodb.collections.transactions}") String transactionsCollection) {
-        return new TransactionRepositoryImpl(dbUrl, dbName, transactionsCollection);
-    }
-
-    @Bean
-    @Profile("!unit")
-    public UserRepository userRepository(@Value("${mongodb.url}") String dbUrl,
-                                         @Value("${mongodb.name}") String dbName,
-                                         @Value("${mongodb.collections.users}") String usersCollection) {
-        return new UsersRepositoryImpl(dbUrl, dbName, usersCollection);
-    }
 }
