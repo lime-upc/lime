@@ -94,7 +94,6 @@ public class SimpleTransactionGenerator {
 
     public static Transaction generateOne(int i) {
         return Transaction.builder()
-            .id(RANDOM.nextInt())
             .email(String.format(USER_EMAIL_FORMAT, RANDOM.nextInt(2000) + 1))
             .business_owner_id(String.format(BO_EMAIL_FORMAT, RANDOM.nextInt(2000) + 1))
             .virtual_money_used(((double) RANDOM.nextInt(100)) / 10)
