@@ -176,7 +176,7 @@ public class Main {
                         e.printStackTrace();
                     }
 
-                    System.out.println(">>> Data about user "+ email +" successfully retrieved from mongoDB and added to ElasticSearch index!");
+                    System.out.println(">>> Data about user "+ email +" successfully retrieved from mongoDB and added to ElasticSearch index at time " + new Timestamp(System.currentTimeMillis()));
 
                 }
 

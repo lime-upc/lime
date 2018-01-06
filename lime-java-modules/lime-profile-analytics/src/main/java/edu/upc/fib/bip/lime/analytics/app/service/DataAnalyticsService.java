@@ -1,7 +1,7 @@
 package edu.upc.fib.bip.lime.analytics.app.service;
 
-import edu.upc.fib.bip.lime.analytics.app.model.Cluster;
-import edu.upc.fib.bip.lime.analytics.app.model.MetricsAttribute;
+import edu.upc.fib.bip.lime.analytics.app.model.analytics.Cluster;
+import edu.upc.fib.bip.lime.analytics.app.model.analytics.MetricsAttribute;
 
 import java.util.List;
 

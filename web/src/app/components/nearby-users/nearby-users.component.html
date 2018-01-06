@@ -4,13 +4,15 @@
     <div class="row">
 
       <div class="col">
-        <h3>{{usersCounter}} users</h3>
+      	<br />
+        <h3>There are {{usersCounter}} users nearby!</h3>
         <!-- <span><b>Text</b></span> -->
 
+	    <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=560x320&maptype=roadmap&markers=color:red%7Csize:mid%7C{{businessCoordComma}}&key=AIzaSyAKDLAzDXqcZXxP7KJUXHUriFI65PKF0wY" class="under" />
 
-        <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=560x320&maptype=roadmap&markers=color:blue%7C{{businessCoordComma}}&key=AIzaSyAKDLAzDXqcZXxP7KJUXHUriFI65PKF0wY" alt="Map">
-        <br />
-        <br />
+	    <img src="../../../assets/imgs/circle.png" class="over" />
+
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
       </div>
 
@@ -25,7 +27,7 @@
         <div class="barchart-container" *ngIf="barChartGenderLoaded">
           <canvas baseChart height="400"
                   [data]="barChartGenderData"
-                  [colors]="barChartColors"
+                  [colors]="genderColors"
                   [labels]="barChartGenderLabels"
                   [options]="barChartOptions"
                   [legend]="barChartLegend"
@@ -35,7 +37,7 @@
         <div class="barchart-container" *ngIf="barChartAgeLoaded">
           <canvas baseChart height="400"
                   [data]="barChartAgeData"
-                  [colors]="barChartColors"
+                  [colors]="ageColors"
                   [labels]="barChartAgeLabels"
                   [options]="barChartOptions"
                   [legend]="barChartLegend"

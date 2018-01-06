@@ -7,12 +7,19 @@ services:
     ports:
       - "27017:27017"
 
+  elastic:
+    container_name: elastic
+    image: elasticsearch:2.4
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - cluster.name=default
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+
   transaction-generator:
     container_name: transaction-generator
-    build:
-      context: ./lime-transactions-generator
-      dockerfile: Dockerfile
-    image: lime/transaction-generator
+    image: elizabbeth/transaction-generator
     environment:
       JAVA_OPTS: '-Dsize=2000 -DdropExisting=true'
     links:
@@ -20,11 +27,9 @@ services:
 
   user-profile-service:
     container_name: user-profile-service
-    build:
-      context: ./lime-profile-analytics
-      dockerfile: Dockerfile
-    image: lime/user-profile-service
+    image: elizabbeth/user-profile-service:latest
     ports:
       - "8082:8080"
     links:
       - mongodb
+      - elastic

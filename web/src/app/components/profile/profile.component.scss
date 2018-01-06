@@ -5,10 +5,26 @@
 .mat-grid-tile .mat-grid-tile-header {
   background: rgba(88, 140, 183, 0.53);
   box-shadow: 8px 8px 12px #aaa;
+  z-index: 2;
+}
+
+.mat-table {
+  position: absolute;
+  left:0px;
+  z-index: 1;
 }
 
 .all-notif {
-  display: block;
+  position: absolute;
+  top: 70px;
+  left: 20px;
+}
+
+.grid-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 3;
 }
 
 .package {

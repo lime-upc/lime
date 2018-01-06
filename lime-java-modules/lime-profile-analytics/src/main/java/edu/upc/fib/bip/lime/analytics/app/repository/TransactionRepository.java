@@ -1,6 +1,6 @@
 package edu.upc.fib.bip.lime.analytics.app.repository;
 
-import edu.upc.fib.bip.lime.transactions.Transaction;
+import edu.upc.fib.bip.lime.model.Transaction;
 
 import java.util.List;
 
@@ -11,4 +11,6 @@ import java.util.List;
 public interface TransactionRepository {
 
     List<Transaction> findByBoEmail(String boEmail);
+
+    List<String> boEmails();
 }

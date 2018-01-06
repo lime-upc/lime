@@ -1,10 +1,13 @@
 package edu.upc.fib.bip.lime.analytics;
 
 import edu.upc.fib.bip.lime.analytics.app.RootContextConfiguration;
-import edu.upc.fib.bip.lime.analytics.app.model.*;
+import edu.upc.fib.bip.lime.analytics.app.model.FlatUserData;
 import edu.upc.fib.bip.lime.analytics.app.repository.TransactionRepository;
 import edu.upc.fib.bip.lime.analytics.app.repository.UserRepository;
-import edu.upc.fib.bip.lime.transactions.Transaction;
+import edu.upc.fib.bip.lime.analytics.app.service.UserAnalyticsService;
+import edu.upc.fib.bip.lime.model.Gender;
+import edu.upc.fib.bip.lime.model.Transaction;
+import edu.upc.fib.bip.lime.model.User;
 import org.assertj.core.util.Lists;
 import org.junit.After;
 import org.junit.Test;
@@ -13,43 +16,33 @@ import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.Repeat;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static edu.upc.fib.bip.lime.analytics.UserAnalyticsComparators.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static edu.upc.fib.bip.lime.analytics.UserAnalyticsComparators.USER_DATA_COMPARATOR;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.assertj.core.api.Assertions.*;
 
 /**
  * @author Elizaveta Ketova <elizabeth.ooh@gmail.com>
  * @since 30.12.17
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = UserClusteringTests.UserClusteringTestContext.class)
+@ActiveProfiles("unit")
 @SuppressWarnings("SpringJavaAutowiringInspection")
 public class UserClusteringTests {
 
@@ -71,33 +64,27 @@ public class UserClusteringTests {
     }
 
     @Autowired
+    private UserAnalyticsService userAnalyticsService;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private TransactionRepository transactionRepository;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @After
     public void tearDown() throws Exception {
         Mockito.reset(userRepository, transactionRepository);
     }
 
-    private static String url(String boEmail) {
-        return "/" + boEmail + "/typical-users";
-    }
-
     private List<FlatUserData> request(String boEmail) {
-        ResponseEntity<List<TypicalUserResponse>> responseEntity =
-            restTemplate.exchange(url(boEmail), HttpMethod.GET, null,
-            new ParameterizedTypeReference<List<TypicalUserResponse>>() {});
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertNotNull(responseEntity.getBody());
-        LOGGER.info("Clusters: {}", responseEntity.getBody());
-        return responseEntity.getBody().stream()
-            .map(TypicalUserResponse::getMessage)
-            .map(TypicalUserResponse.TypicalUserResponsePayload::getFlatUserData)
+        return userAnalyticsService.typicalUsersForBusiness(boEmail).stream()
+            .map(typicalUser -> FlatUserData.builder()
+                .gender(Gender.values()[typicalUser.getGender()])
+                .age(typicalUser.getAge())
+                .averageTime(typicalUser.getAverageTime())
+                .averageCheck(typicalUser.getAverageCheck())
+                .build())
             .collect(Collectors.toList());
     }
 

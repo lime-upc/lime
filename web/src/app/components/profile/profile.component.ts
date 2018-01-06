@@ -11,12 +11,16 @@ import { MatTableDataSource, MatRadioButton, MatButtonToggleModule } from '@angu
 
 export class ProfileComponent implements OnInit {
 
+  /************
+   * VARIABLES
+   ************/
   displayedColumns = ['field', 'value']
   dataSource = new MatTableDataSource<Profile>(PROFILE_DATA)
 
-  notifications: Array<{title: string, description: string}> = []
+  notifications: Array<{id: number , title: string, description: string}> = []
+  selectedNotification: number = 0
+  newNotification: {id: number , title: string, description: string;}
   hideNotifForm: boolean
-  newNotification: {title: string, description: string;}
   toggleText: string
 
   packages = [
@@ -32,8 +36,9 @@ export class ProfileComponent implements OnInit {
       price: "149.99€",
       description: "The Premium package allows you to ...",
       icon: "P",
-      currentPackage: false,
-    },{
+      currentPackage: false
+    },
+    {
       name: "Premium+ Package",
       price: "179.99€",
       description: "The Premium+ package allows you to ...",
@@ -41,6 +46,10 @@ export class ProfileComponent implements OnInit {
       currentPackage: false
     }
   ]
+
+  /*************
+   * CONSTRUCTOR
+   *************/
 
   constructor(private auth: AuthenticationService, router: Router) {
     if (!auth.isAuthentificated()) {
@@ -50,10 +59,15 @@ export class ProfileComponent implements OnInit {
     this.toggleText="New notification"
     this.hideNotifForm = true
     this.newNotification = {
+      id: 0, 
       title: "",
       description: ""
     }
   }
+
+  /***********
+   * FUNCTIONS
+   ***********/
 
   ngOnInit() {
 
@@ -75,8 +89,12 @@ export class ProfileComponent implements OnInit {
         
         //Load automatic notifications to display them in the profile
         this.notifications = businessOwner.automatic_notifications
-      });
 
+        //Init notifications id (not available in db) for selected notification
+        for (let i = 0; i < this.notifications.length; i++) {
+          this.notifications[i].id = i;
+        }
+      });
   }
 
   toggleNewNotifForm() {
@@ -92,7 +110,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addNotification() {
-    let notif = {title: this.newNotification.title, description: this.newNotification.description}
+    let notif = {id: this.notifications.length ,title: this.newNotification.title, description: this.newNotification.description}
     this.notifications.push(notif);
 
     //Update automatic notifications in datababse
@@ -101,7 +119,18 @@ export class ProfileComponent implements OnInit {
     //Hide & reset notification form field 
     this.toggleNewNotifForm()
   }
+
+  setNotification(id) {
+    this.selectedNotification=id;
+    // CHANGE VALUE IN DATABASE !
+    this.auth.setAutomaticNotification(this.selectedNotification)
+  }
+
 }
+
+/****************************
+ * Business information grid
+ ****************************/
 
 export interface Profile {
   field: String;

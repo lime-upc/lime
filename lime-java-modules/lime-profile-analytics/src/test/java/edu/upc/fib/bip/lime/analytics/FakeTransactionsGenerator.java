@@ -1,7 +1,8 @@
 package edu.upc.fib.bip.lime.analytics;
 
-import edu.upc.fib.bip.lime.analytics.app.model.User;
-import edu.upc.fib.bip.lime.transactions.Transaction;
+
+import edu.upc.fib.bip.lime.model.Transaction;
+import edu.upc.fib.bip.lime.model.User;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import static edu.upc.fib.bip.lime.analytics.app.service.impl.UserAnalyticsServiceImpl.DTF;
+import static edu.upc.fib.bip.lime.analytics.app.service.impl.JavaUserAnalyticsService.DTF;
 
 /**
  * @author Elizaveta Ketova <elizabeth.ooh@gmail.com>
@@ -82,7 +83,7 @@ public class FakeTransactionsGenerator extends Random {
         for (Transaction transaction : result) {
             transaction.setBusiness_owner_id(boEmail);
             // what a shit! transaction id should be String! oh god what have I done...
-            transaction.setId(UUID.randomUUID().toString().hashCode());
+            //transaction.setId(UUID.randomUUID().toString().hashCode());
             transaction.setPayback_amount(transaction.getTotal_amount() / 10);
             transaction.setStatus("confirmed");
             transaction.setVirtual_money_used(1.0);
