@@ -57,11 +57,24 @@ function createFakeUsers(USERS){
             //Random birth date
             var dayOfBirth = getRandomInt(1,28);
             var monthOfBirth = getRandomInt(1,12);
+
+            //Young people between 18 and 40 have most probability
+            var ageProb = getRandomInt(0,100);
             var yearOfBirth = getRandomInt(1950,2000);
+            if(ageProb > 50){
+                yearOfBirth = getRandomInt(1980,2000);
+            }
+            else if (ageProb > 30){
+                yearOfBirth = getRandomInt(1980,1960);
+            }
+            else{
+                yearOfBirth = getRandomInt(1950,1980);
+            }
+            
 
             //Random gender
             var gender = 'female';
-            if(getRandomInt(0,100)>50){
+            if(getRandomInt(0,100)>70){
                 gender = 'male';
             }
 

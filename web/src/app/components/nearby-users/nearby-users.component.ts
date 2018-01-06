@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AuthenticationService} from 'app/services/AuthenticationService';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-nearby-users',
@@ -107,7 +108,7 @@ export class NearbyUsersComponent implements OnInit {
   }
 
 
-  ngOnInit() {
+  loadData(){
     this.email = this.authService.getEmail();
 
     this.authService.getBusinessData()
@@ -158,7 +159,14 @@ export class NearbyUsersComponent implements OnInit {
           });
 
       });
+  }
 
+  ngOnInit() {
+    this.loadData();
+
+    Observable.interval(1000).subscribe(x => {
+      this.loadData();
+      });
   }
 
 }

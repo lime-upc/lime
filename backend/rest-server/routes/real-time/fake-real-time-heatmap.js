@@ -6,13 +6,17 @@
 
 var express = require('express');
 var fs = require('fs');
+var mgrs = require('mgrs');
+var simulator = require('./location-simulator/main.js');
 
-
+var people = [];
 module.exports = function (app) {
 
     var router = express.Router();
 
 
+    var locationMap = {};
+    simulator.init(locationMap);
 
     /**
      * GET / -  Get all the data (grid cells MGRS coordinates and number of people per cell) to render the genearl real time heatmap
@@ -24,9 +28,20 @@ module.exports = function (app) {
     router.get("/", function (req, res) {
 
 
-        var content = fs.readFileSync('./backend/rest-server/routes/real-time/fake_data/general_map.json',"utf-8");
+        var heatmap = [];
+        for (var cell in locationMap) {
+            // skip loop if the property is from prototype
+            if(!locationMap.hasOwnProperty(cell)) continue;
 
-        res.send(content);
+            var latlong = mgrs.toPoint(cell);
+            heatmap.push({ lat: latlong[0], lng: latlong[1], count: locationMap[cell]});
+
+            // your code
+        }
+
+        //var content = fs.readFileSync('./backend/rest-server/routes/real-time/fake_data/general_map.json',"utf-8");
+
+        res.send({error:false,message:heatmap});
 
     });
 
@@ -41,14 +56,21 @@ module.exports = function (app) {
     router.get("/gender/:gender", function (req, res) {
 
         //ERROR: required gender does not exist
-        if (req.params.gender != "male" && req.params.gender != "female") {
-            res.status(401).send({"error": true, "message": "Incorrect value for the 'gender' parameter (accepted values: 'male', 'female')"});
-            return;
+        var heatmap = [];
+        for (var cell in locationMap) {
+            // skip loop if the property is from prototype
+            if(!locationMap.hasOwnProperty(cell)) continue;
+
+            var latlong = mgrs.toPoint(cell);
+            if(locationMap[cell]>=2) 
+            heatmap.push({ lat: latlong[0], lng: latlong[1], count: locationMap[cell]});
+
+            // your code
         }
 
-        var content = fs.readFileSync('./backend/rest-server/routes/real-time/fake_data/' + req.params.gender + '_map.json',"utf-8");
+        //var content = fs.readFileSync('./backend/rest-server/routes/real-time/fake_data/general_map.json',"utf-8");
 
-        res.send(content);
+        res.send({error:false,message:heatmap});
 
     });
 
@@ -62,21 +84,22 @@ module.exports = function (app) {
     //router.get("/agerange/:agerange",passport.authenticate('jwt', { session: false }));
     router.get("/agerange/:agerange", function (req, res) {
 
-        var ageRange = req.params.agerange;
-        var parsedAgeRange = ageRange.split("-");
-        var ageMin = parsedAgeRange[0];
-        var ageMax = parsedAgeRange[1];
+         //ERROR: required gender does not exist
+        var heatmap = [];
+        for (var cell in locationMap) {
+            // skip loop if the property is from prototype
+            if(!locationMap.hasOwnProperty(cell)) continue;
 
-        //ERROR: age range not valid
-        if (ageMin<5 || ageMin>100 || ageMax<5 || ageMax>100) {
-            res.status(401).send({"error": true, "message": "Incorrect values for 'agerange parameter (accepted values: 'minAge-maxAge', with ages between 5 and 100)"});
-            return;
+            var latlong = mgrs.toPoint(cell);
+            if(locationMap[cell]>=3) 
+            heatmap.push({ lat: latlong[0], lng: latlong[1], count: locationMap[cell]});
+
+            // your code
         }
 
-        var content = fs.readFileSync('./backend/rest-server/routes/real-time/fake_data/age_map.json',"utf-8");
+        //var content = fs.readFileSync('./backend/rest-server/routes/real-time/fake_data/general_map.json',"utf-8");
 
-        res.send(content);
-
+        res.send({error:false,message:heatmap});
     });
 
 
@@ -107,9 +130,26 @@ module.exports = function (app) {
     //router.get("/",passport.authenticate('jwt', { session: false }));
     router.get("/users-nearby/counter/:businessCoord", function (req, res) {
 
-        var content = fs.readFileSync('./backend/rest-server/routes/real-time/fake_data/nearby_counter.json',"utf-8");
 
-        res.send(content);
+        var number = getRandomInt(0,100);
+
+        if(number>60){
+            var gender = getRandomInt(0,100);
+            if (gender<50) gender = "male";
+            else gender = "female";
+
+            var age = getRandomInt(18,60);
+            people.push({gender:gender,age:age});
+        }
+        else if (number < 20){ //Remove
+            people.pop();
+
+        }
+
+
+        var message = {counter:people.length}
+
+        res.send({error:false,message:message});
 
 
     });
@@ -125,9 +165,29 @@ module.exports = function (app) {
     //router.get("/",passport.authenticate('jwt', { session: false }));
     router.get("/users-nearby/gender/:businessCoord", function (req, res) {
 
-        var content = fs.readFileSync('./backend/rest-server/routes/real-time/fake_data/nearby_gender.json',"utf-8");
+        var number = getRandomInt(0,100);
 
-        res.send(content);
+        if(number>60){
+            var gender = getRandomInt(0,100);
+            if (gender<50) gender = "male";
+            else gender = "female";
+
+            var age = getRandomInt(18,60);
+            people.push({gender:gender,age:age});
+        }
+        else if (number < 20){ //Remove
+            people.pop();
+
+        }
+
+        var message = {maleCounter:0,femaleCounter:0};
+
+        for(var i = 0; i < people.length; i++){
+            if(people[i].gender=="male") message.maleCounter++;
+            else message.femaleCounter++;
+        }
+
+        res.send({error:false,message:message});
 
     });
 
@@ -143,10 +203,32 @@ module.exports = function (app) {
     //router.get("/",passport.authenticate('jwt', { session: false }));
     router.get("/users-nearby/age/:businessCoord", function (req, res) {
 
-        var content = fs.readFileSync('./backend/rest-server/routes/real-time/fake_data/nearby_age.json',"utf-8");
+        var number = getRandomInt(0,100);
 
-        res.send(content);
+        if(number>60){
+            var gender = getRandomInt(0,100);
+            if (gender<50) gender = "male";
+            else gender = "female";
 
+            var age = getRandomInt(18,60);
+            people.push({gender:gender,age:age});
+        }
+        else if (number < 20){ //Remove
+            people.pop();
+
+        }
+
+        var message = {};
+
+        for(var i = 0; i < people.length; i++){
+            var age = "" + people[i].age;
+            if(!message[age]){
+                message[age] = 0;
+            }
+            message[age]++;
+        }
+
+         res.send({error:false,message:message});
 
     });
 
@@ -155,3 +237,7 @@ module.exports = function (app) {
 
     return router;
 };
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

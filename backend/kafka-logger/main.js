@@ -57,11 +57,15 @@ var options = {
 
 var consumer = new Consumer(client,topics,options);
 
+var totalMessages = 0;
 consumer.on('message', function(message) {
 	try{
 		var buf = new Buffer(message.value, 'binary'); // Read string into a buffer.
   var decodedMessage = type.fromBuffer(buf.slice(0)); // Skip prefix.
-  console.log(decodedMessage);
+  totalMessages+=1;
+  if(totalMessages%1000 == 0){
+    console.log(totalMessages);
+  }
 	}
 	catch(error){
 		

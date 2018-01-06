@@ -56,7 +56,7 @@ public class TransactionProfileMetrics {
 				transactionsByUser.join(usersProfiles);
 
 
-		//We reduce by pair <boMail,userMail,hour> <<boMail,userMail,Hour>,<transactionCount,UserBean>
+		//We reduce by pair <boMail,userMail,hour>: <<boMail,userMail,Hour>,<transactionCount,UserBean>
 		JavaPairRDD<Tuple3<String,String,Hour>,Tuple2<Integer,UserBean>> groupedByBoUserHour =
 				usersWithTransactions.mapToPair(ut -> {
 					return new Tuple2<>(
@@ -67,29 +67,6 @@ public class TransactionProfileMetrics {
 
 		groupedByBoUserHour.persist(StorageLevel.MEMORY_AND_DISK());
 
-		//Number of transactions grouped by restaurant and user
-		//uses <<boMail,userMail>,<transactionCount,UserBean>
-		JavaPairRDD<Tuple2<String,String>,Integer> txNumberByBoAndUser = groupedByBoUserHour
-				.mapToPair(t -> new Tuple2<>(new Tuple2<>(t._1()._1(),t._1()._2()),t._2()._1()))
-				.reduceByKey((a,b) -> a+b);
-
-
-		//RESULT: <<boMail,freq>,people>>: For each business owner and month frequency, number of people
-		JavaPairRDD<Tuple2<String,Integer>,Integer> peopleNumberByBoAndFreq = txNumberByBoAndUser
-				.mapToPair(t -> new Tuple2<>(new Tuple2<>(t._1()._1(),t._2()),1))
-				.reduceByKey((a,b) -> a+b);
-
-
-		//RESULT: <boMail,numberOfUniqueUsers>: For each business owner, number of unique users
-		//JavaPairRDD<String,Integer> uniqueUsersByBO = groupedByBoAndUser
-		//		.mapToPair(t -> new Tuple2<>(t._1()._1(),1))
-		//		.reduceByKey((a,b) -> a+b);
-
-		//RESULT: <boMail,numberOfUniqueReturningUsers>: For each business owner, number of unique returning users
-		//JavaPairRDD<String,Integer> repeatingUsersByBo = groupedByBoAndUser
-		//		.filter(t -> t._2()._1() > 1)
-		//		.mapToPair(t -> new Tuple2<>(t._1()._1(),1))
-		//		.reduceByKey((a,b) -> a+b);
 
 
 		//RESULT: <<boMail,gender,hourID>,<totalCount>: For each business owner, each gender and each hour, number of transactions

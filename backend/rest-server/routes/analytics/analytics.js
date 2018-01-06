@@ -68,6 +68,26 @@ module.exports = function (app) {
         });
     });
 
+
+    //Returns typical customer for a certain business
+    router.get("/users/typical/:boMail",function(req,res){
+
+
+        res.send(
+            {
+               "error": false,
+               "message": {
+                    age: "23",
+                    gender: "female",
+                    food_categories: ["indian_food","mexican_food"],
+                    average_spend: "18.23 €",
+                    typical_time: "18:00 - 19:00"
+                } 
+            }
+        );
+        
+    });
+
     router.get("/rankings/:criteria", function (req, res) {
 
 

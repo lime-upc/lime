@@ -49,10 +49,10 @@ export class HomeComponent implements OnInit {
    * Heatmap Configuration
    */
   cfg = {
-    "maxOpacity": .4,
+    "maxOpacity": .5,
     // radius should be small ONLY if scaleRadius is true (or small radius is intended)
     // if scaleRadius is false it will be the constant radius used in pixels
-    "radius": 0.005, // scales the radius based on map zoom
+    "radius": 0.002, // scales the radius based on map zoom
     "scaleRadius": true,
     // if set to false the heatmap uses the global maximum for colorization
     // if activated: uses the data maximum within the current map boundaries

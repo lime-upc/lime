@@ -10,3 +10,4 @@ backend/elastic-search/logs/elasticsearch.log
 backend/elastic-search/logs/elasticsearch.log
 *.swp
 tx.js
+tx_month.js
