@@ -24,6 +24,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule}  from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
 
 /* Components (pages)*/
 import { AppComponent } from './app.component';
@@ -88,6 +89,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatMenuModule,
     MatCardModule,
     MatGridListModule,
+    MatTabsModule,
     ChartsModule
   ],
   providers: [

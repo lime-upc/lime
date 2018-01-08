@@ -1,21 +1,98 @@
 <div class="container">
-
-    <div class="row">
-      <div class="col-12 text-center">
-          <h1>
-              <mat-icon>pie_chart</mat-icon>
-              My Analytics
-            </h1>
-      </div>
-     
-    </div>
-  
-  <hr/>
-
  
-  <div class="row">
+    <mat-tab-group selectedIndex=4>
+
+        <mat-tab label="Total number of transactions">
+            <span>From {{textdateToPrety(granularity.start,0)}} to {{textdateToPrety(granularity.start,granularity.long)}}</span>
+            <br/>
+            <span>Total in view: {{inViewTxs}}</span>
+            <br/>
+             <span><i>Interactive chart. Click a bar to drill-down. <button class="btn btn-default" *ngIf="granularity.width!='week'"(click)="rollUp()">ROLL-UP</button></i></span>
+             <p align="center">
+                <canvas baseChart width="600"
+                [data]="txsData"
+                [colors]="genderColors"
+                [labels]="txsLabels"
+                [options]="txsOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+                (chartClick)="txsClicked($event)"></canvas>
+            </p>
+        </mat-tab>
+
+        <mat-tab label="Transactions in details">
+            <mat-grid-list cols="3" rowHeight="2:1">
+                <mat-grid-tile>
+                    <h3 class='subtitle'># Transactions per hour</h3>
+                    <canvas baseChart width="400"
+                        [data]="hourData"
+                        [colors]="hourColors"
+                        [labels]="hourLabels"
+                        [options]="txsOptions"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                    </canvas>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <h3 class='subtitle'># Transactions per age</h3>
+                    <canvas baseChart width="400"
+                        [data]="ageData"
+                        [colors]="ageColors"
+                        [labels]="ageLabels"
+                        [options]="txsOptions"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                    </canvas>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <h3 class='subtitle'># Transactions per gender</h3>
+                    <canvas baseChart width="400"
+                        [datasets]="genderData"
+                        [labels]="genderLabels"
+                        [colors]="genderColors"
+                        [options]="txsOptions"
+                      [legend]="genderLegend"
+                      [chartType]="barChartType">
+                    </canvas>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab>
+
+        <mat-tab label="Returning customers analytics">
+                <div class="col-6 text-center" *ngIf="returningVisible">
+                        <h3>Users bouncing</h3>
+                        <span>Total unique users this month: {{uniqueUsers}}</span>
+                        <canvas baseChart
+                        [data]="returningData"
+                        [labels]="returningLabels"
+                        chartType="pie"
+                        ></canvas>
+                      </div>
+              
+                      <div class="col-6 text-center" *ngIf="returningVisible">
+                          <h3>Returning users frequency</h3>
+                          <span>Times that users returned last month</span>
+                          <canvas baseChart
+                          [data]="freqData"
+                          [labels]="freqLabels"
+                          chartType="pie"
+                          ></canvas>
+                      </div>
+        </mat-tab>
+
+        <mat-tab label="Typical customer profile">
+            
+        </mat-tab>
+
+    </mat-tab-group>
+    
+    <!---->
+
+    <!--<div class="row">
         <div class="col-6 offset-3 text-center">
-            <h3>Number of transactions</h3>
+            <h3>Total number of transactions</h3>
             <span>From {{textdateToPrety(granularity.start,0)}} to {{textdateToPrety(granularity.start,granularity.long)}}</span>
             <br/>
             <span>Total in view: {{inViewTxs}}</span>
@@ -70,13 +147,9 @@
               [legend]="genderLegend"
               [chartType]="barChartType"></canvas>
         </div>
-        
-  
-  </div>
-  <hr/>
-      <div class="row">
-
-        <!-- Restaurants ranking-->
+    </div>
+    <hr/>
+    <div class="row">
         
         <div class="col-6 text-center" *ngIf="returningVisible">
           <h3>Users bouncing</h3>
@@ -98,12 +171,6 @@
             ></canvas>
         </div>
 
-      
-
-
-
-
-      </div>
-
+      </div>-->
 
 </div>
