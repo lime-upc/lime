@@ -87,6 +87,51 @@
 
         <!-- Typical customer tab -->
         <mat-tab label="Typical customer profile">
+            <img src="../../../assets/imgs/{{typicalCustomer.gender}}_user.png">
+                <mat-grid-list cols="4" rowHeight="150px">
+    
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-grid-tile-header>Gender</mat-grid-tile-header>
+                        <p class='customer-criteria'>
+                            {{typicalCustomer.gender}}
+                        </p>
+                    </mat-grid-tile>
+    
+                    <mat-grid-tile class="right-tile" [colspan]="2" [rowspan]="1">
+                        <mat-grid-tile-header>Age</mat-grid-tile-header>
+                        <p class='customer-criteria'>
+                            {{typicalCustomer.age}}
+                        </p>
+                    </mat-grid-tile>
+    
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-grid-tile-header>Typical time customer is coming by my restaurant</mat-grid-tile-header>
+                        <p class='customer-criteria'>
+                            {{typicalCustomer.typical_time}}
+                        </p>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile class="right-tile" [colspan]="2" [rowspan]="1">
+                        <mat-grid-tile-header>Average amount of virtual money spent</mat-grid-tile-header>
+                        <p class='customer-criteria'>
+                            {{typicalCustomer.average_spend}}
+                        </p>
+                    </mat-grid-tile>
+    
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-grid-tile-header>Food categories</mat-grid-tile-header>
+                        <p class='customer-criteria'>
+                            <mat-chip-list >
+                                <mat-chip *ngFor='let c of typicalCustomer.food_categories'>{{c}}</mat-chip>
+                            </mat-chip-list>
+                        </p>
+                    </mat-grid-tile>
+
+                </mat-grid-list>
+            </mat-tab>
+    
+        </mat-tab-group>
+        <!--<mat-tab label="Typical customer profile">
             <mat-grid-list cols="4" rowHeight="150px">
 
                 <mat-grid-tile [colspan]="3" [rowspan]="1">
@@ -133,9 +178,8 @@
             </mat-grid-list>
         </mat-tab>
 
-    </mat-tab-group>
+    </mat-tab-group>-->
     
-    <!---->
 
     <!--<div class="row">
         <div class="col-6 offset-3 text-center">

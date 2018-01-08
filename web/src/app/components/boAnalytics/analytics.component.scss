@@ -11,13 +11,28 @@
 }
 
 img {
-  width: 300px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 400px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 8px 8px 12px #aaa;
+  z-index: 2;
 }
 
 .mat-grid-tile .mat-grid-tile-header {
   background: rgba(88, 140, 183, 0.53);
   box-shadow: 8px 8px 12px #aaa;
-  z-index: 2;
+  margin-right: 0px;
+  z-index: 1;
+}
+
+.mat-grid-tile .right-tile {
+  position: absolute;
+  right: 10px;
 }
 
 p.customer-criteria {
