@@ -25,6 +25,7 @@ import { MatMenuModule}  from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
 
 /* Components (pages)*/
 import { AppComponent } from './app.component';
@@ -90,6 +91,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatCardModule,
     MatGridListModule,
     MatTabsModule,
+    MatChipsModule,
     ChartsModule
   ],
   providers: [

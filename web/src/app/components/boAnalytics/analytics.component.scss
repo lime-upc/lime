@@ -10,6 +10,22 @@
   left: 20px;
 }
 
+img {
+  width: 300px;
+}
+
+.mat-grid-tile .mat-grid-tile-header {
+  background: rgba(88, 140, 183, 0.53);
+  box-shadow: 8px 8px 12px #aaa;
+  z-index: 2;
+}
+
+p.customer-criteria {
+  position: absolute;
+  top: 70px;
+  left: 10px;
+}
+
 .div {
   padding: 10px;
 }
