@@ -11,26 +11,23 @@ import edu.upc.fib.bip.lime.analytics.app.service.UserAnalyticsService;
 import edu.upc.fib.bip.lime.model.Gender;
 import edu.upc.fib.bip.lime.model.Transaction;
 import edu.upc.fib.bip.lime.model.User;
-import org.apache.spark.Partitioner;
 import org.apache.spark.api.java.JavaPairRDD;
-import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.storage.StorageLevel;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import scala.Tuple2;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoField;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.expr;
 import static com.mongodb.client.model.Filters.or;
 import static edu.upc.fib.bip.lime.analytics.app.service.impl.JavaUserAnalyticsService.DTF;
 import static java.lang.Math.round;
@@ -55,8 +52,8 @@ public class SparkUserAnalyticsService implements UserAnalyticsService, Serializ
     public List<TypicalUser> typicalUsersForBusiness(String boEmail) {
 
         JavaPairRDD<String, Iterable<Transaction>> transactionsByUserEmails = transactionsRDD
-            .filter(transaction -> Objects.equals(transaction.getBusiness_owner_id(), boEmail))
-            .groupBy(Transaction::getEmail)
+            .filter(transaction -> Objects.equals(transaction.getBusiness_owner(), boEmail))
+            .groupBy(Transaction::getUser)
             .persist(StorageLevel.MEMORY_ONLY_2());
 
         List<String> userEmails = transactionsByUserEmails.keys()
@@ -131,7 +128,8 @@ public class SparkUserAnalyticsService implements UserAnalyticsService, Serializ
             .average()
             .orElse(0.0);
         double averageMinuteOfDayRaw = StreamSupport.stream(transactions.spliterator(), true)
-            .mapToLong(transaction -> LocalTime.from(DTF.parse(transaction.getTimestamp()))
+            .mapToLong(Transaction::getTimestamp)
+            .map(ts -> Instant.ofEpochMilli(ts).atZone(ZoneId.systemDefault()).toLocalDateTime()
                 .getLong(ChronoField.MINUTE_OF_DAY))
             .average()
             .orElse(0);

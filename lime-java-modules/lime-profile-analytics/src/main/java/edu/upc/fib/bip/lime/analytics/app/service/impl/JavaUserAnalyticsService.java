@@ -11,9 +11,10 @@ import edu.upc.fib.bip.lime.model.Gender;
 import edu.upc.fib.bip.lime.model.Transaction;
 import edu.upc.fib.bip.lime.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.Comparator;
@@ -47,7 +48,7 @@ public class JavaUserAnalyticsService implements UserAnalyticsService {
         List<Transaction> transactions = transactionRepository.findByBoEmail(boEmail);
         int transactionCount = transactions.size();
         List<String> userEmails = transactions.stream()
-            .map(Transaction::getEmail)
+            .map(Transaction::getUser)
             .distinct()
             .collect(Collectors.toList());
         Map<String, User> users = userRepository.findUsersByEmails(userEmails).stream()
@@ -57,7 +58,7 @@ public class JavaUserAnalyticsService implements UserAnalyticsService {
             ));
 
         Map<String, List<Transaction>> transactionsByEmail = transactions.stream()
-            .collect(Collectors.groupingBy(Transaction::getEmail));
+            .collect(Collectors.groupingBy(Transaction::getUser));
         Map<User, List<Transaction>> transactionsByUsers = transactionsByEmail.entrySet().stream()
             .collect(Collectors.toMap(
                 entry -> users.get(entry.getKey()),
@@ -118,7 +119,8 @@ public class JavaUserAnalyticsService implements UserAnalyticsService {
             .average()
             .orElse(0.0);
         double averageMinuteOfDayRaw = transactions.stream()
-            .mapToLong(transaction -> LocalTime.from(DTF.parse(transaction.getTimestamp()))
+            .mapToLong(Transaction::getTimestamp)
+            .map(ts -> Instant.ofEpochMilli(ts).atZone(ZoneId.systemDefault()).toLocalDateTime()
                 .getLong(ChronoField.MINUTE_OF_DAY))
             .average()
             .orElse(0);

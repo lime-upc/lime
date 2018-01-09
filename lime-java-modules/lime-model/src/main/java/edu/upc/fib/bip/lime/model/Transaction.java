@@ -15,9 +15,9 @@ import java.io.Serializable;
 @Builder
 public class Transaction implements Serializable {
 
-    private String email;
-    private String business_owner_id;
-    private String timestamp;
+    private String user;
+    private String business_owner;
+    private long timestamp;
     private double virtual_money_used;
     private double payback_amount;
     private double total_amount;

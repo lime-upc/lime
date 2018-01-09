@@ -7,6 +7,7 @@ import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.co
 import { ProfileComponent } from "./components/profile/profile.component";
 import { AnalyticsComponent } from "./components/analytics/analytics.component";
 import { BoAnalyticsComponent } from "./components/boAnalytics/analytics.component";
+import { TransactionsComponent } from "./components/transactions/transactions.component";
 
 import { NearbyUsersComponent } from "./components/nearby-users/nearby-users.component";
 
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'nearby-users',
     component: NearbyUsersComponent
+  },
+  {
+    path: 'transactions',
+    component: TransactionsComponent
   },
   {
     path: '**',

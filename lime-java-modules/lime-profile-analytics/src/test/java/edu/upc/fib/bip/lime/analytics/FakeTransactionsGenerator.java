@@ -6,11 +6,11 @@ import edu.upc.fib.bip.lime.model.User;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 import static edu.upc.fib.bip.lime.analytics.app.service.impl.JavaUserAnalyticsService.DTF;
 
@@ -51,7 +51,7 @@ public class FakeTransactionsGenerator extends Random {
         for (int i = 0; i < sigma; i++) {
             Transaction transaction = new Transaction();
             transaction.setTotal_amount(averageCheck + 0.1 * averageCheck * (nextDouble() * 2 - 1));
-            transaction.setTimestamp(DTF.format(startOfDay
+            transaction.setTimestamp(getTime(startOfDay
                 .plusMinutes(averageTimeOfDay - TIME_WINDOW + nextInt(TIME_WINDOW * 2 + 1))));
             result.add(transaction);
         }
@@ -59,7 +59,7 @@ public class FakeTransactionsGenerator extends Random {
         for (int i = 0; i < sigma2; i++) {
             Transaction transaction = new Transaction();
             transaction.setTotal_amount(averageCheck + 0.2 * averageCheck * (nextDouble() * 2 - 1));
-            transaction.setTimestamp(DTF.format(startOfDay
+            transaction.setTimestamp(getTime(startOfDay
                 .plusMinutes(averageTimeOfDay - TIME_WINDOW  * 2 + nextInt(TIME_WINDOW * 4 + 1))));
             result.add(transaction);
         }
@@ -67,7 +67,7 @@ public class FakeTransactionsGenerator extends Random {
         for (int i = 0; i < sigma3; i++) {
             Transaction transaction = new Transaction();
             transaction.setTotal_amount(averageCheck + 0.3 * averageCheck * (nextDouble() * 2 - 1));
-            transaction.setTimestamp(DTF.format(startOfDay
+            transaction.setTimestamp(getTime(startOfDay
                 .plusMinutes(averageTimeOfDay - TIME_WINDOW * 3 + nextInt(TIME_WINDOW * 6 + 1))));
             result.add(transaction);
         }
@@ -75,19 +75,19 @@ public class FakeTransactionsGenerator extends Random {
         for (int i = 0; i < rest; i++) {
             Transaction transaction = new Transaction();
             transaction.setTotal_amount(averageCheck + 0.8 * averageCheck * (nextDouble() * 2 - 1));
-            transaction.setTimestamp(DTF.format(startOfDay
+            transaction.setTimestamp(getTime(startOfDay
                 .plusMinutes(nextInt((int) ChronoUnit.MINUTES.between(startOfDay, startOfDay.plusDays(1))))));
             result.add(transaction);
         }
 
         for (Transaction transaction : result) {
-            transaction.setBusiness_owner_id(boEmail);
+            transaction.setBusiness_owner(boEmail);
             // what a shit! transaction id should be String! oh god what have I done...
             //transaction.setId(UUID.randomUUID().toString().hashCode());
             transaction.setPayback_amount(transaction.getTotal_amount() / 10);
             transaction.setStatus("confirmed");
             transaction.setVirtual_money_used(1.0);
-            transaction.setEmail(users.get(nextInt(users.size())).getEmail());
+            transaction.setUser(users.get(nextInt(users.size())).getEmail());
         }
 
         return result;
@@ -133,5 +133,9 @@ public class FakeTransactionsGenerator extends Random {
             return new FakeTransactionsGenerator(averageCheck, averageTimeOfDay, users, boEmail)
                 .generate(size);
         }
+    }
+
+    private static long getTime(LocalDateTime ldt) {
+        return ldt.atZone(ZoneId.systemDefault()).toOffsetDateTime().toInstant().toEpochMilli();
     }
 }

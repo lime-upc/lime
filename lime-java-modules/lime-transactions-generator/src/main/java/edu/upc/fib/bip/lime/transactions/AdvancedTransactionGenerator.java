@@ -112,7 +112,7 @@ public class AdvancedTransactionGenerator {
     }
 
     private static void generateBar(List<User> users, List<Transaction> transactions) {
-        String barBusinessEmail = "bar@email";
+        String barBusinessEmail = "bo-1@lime.com";
         List<User> barUsers = FakeUsersGenerator.builder()
             .withAverageAge(null)
             .withGenderRatio(Gender.MALE, 2)
@@ -128,7 +128,7 @@ public class AdvancedTransactionGenerator {
         transactions.addAll(transactions1);
     }
     private static void generateCafe(List<User> users, List<Transaction> transactions) {
-        String boEmail = "cafe@email";
+        String boEmail = "bo-2@lime.com";
         List<User> lunchUsers = FakeUsersGenerator.builder()
             .withAverageAge(22)
             .withGenderRatio(Gender.FEMALE, 1.2)
@@ -174,7 +174,7 @@ public class AdvancedTransactionGenerator {
         transactions.addAll(dinners);
     }
     private static void generateRestraunt(List<User> users, List<Transaction> transactions) {
-        String boEmail = "restraunt@email";
+        String boEmail = "bo-3@lime.com";
 
         List<User> users1 = FakeUsersGenerator.builder()
             .withAverageAge(40)
@@ -206,7 +206,7 @@ public class AdvancedTransactionGenerator {
         transactions.addAll(transactions2);
     }
     private static void generateFastfood(List<User> users, List<Transaction> transactions) {
-        String boEmail = "fastfood@email";
+        String boEmail = "bo-4@lime.com";
         List<User> users1 = FakeUsersGenerator.builder()
             .withAverageAge(24)
             .withGenderRatio(Gender.MALE, 1.2)
