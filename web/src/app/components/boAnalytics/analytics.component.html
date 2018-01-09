@@ -2,6 +2,7 @@
  
     <mat-tab-group selectedIndex=4>
 
+        <!-- Total transactions tab -->
         <mat-tab label="Total number of transactions">
             <span>From {{textdateToPrety(granularity.start,0)}} to {{textdateToPrety(granularity.start,granularity.long)}}</span>
             <br/>
@@ -20,6 +21,7 @@
             </p>
         </mat-tab>
 
+        <!-- Transactions in details (hours / age / gender) tab -->
         <mat-tab label="Transactions in details">
             <mat-grid-list cols="3" rowHeight="2:1">
                 <mat-grid-tile>
@@ -60,30 +62,75 @@
             </mat-grid-list>
         </mat-tab>
 
+        <!-- Customers returning tab -->
         <mat-tab label="Returning customers analytics">
                 <div class="col-6 text-center" *ngIf="returningVisible">
-                        <h3>Users bouncing</h3>
-                        <span>Total unique users this month: {{uniqueUsers}}</span>
-                        <canvas baseChart
+                    <h3>Users bouncing</h3>
+                    <span>Total unique users this month: {{uniqueUsers}}</span>
+                    <canvas baseChart
                         [data]="returningData"
                         [labels]="returningLabels"
-                        chartType="pie"
-                        ></canvas>
-                      </div>
+                        chartType="pie">
+                    </canvas>
+                </div>
               
-                      <div class="col-6 text-center" *ngIf="returningVisible">
-                          <h3>Returning users frequency</h3>
-                          <span>Times that users returned last month</span>
-                          <canvas baseChart
-                          [data]="freqData"
-                          [labels]="freqLabels"
-                          chartType="pie"
-                          ></canvas>
-                      </div>
+                <div class="col-6 text-center" *ngIf="returningVisible">
+                    <h3>Returning users frequency</h3>
+                    <span>Times that users returned last month</span>
+                    <canvas baseChart
+                        [data]="freqData"
+                        [labels]="freqLabels"
+                        chartType="pie">
+                    </canvas>
+                </div>
         </mat-tab>
 
+        <!-- Typical customer tab -->
         <mat-tab label="Typical customer profile">
-            
+            <mat-grid-list cols="4" rowHeight="150px">
+
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <mat-grid-tile-header>Gender</mat-grid-tile-header>
+                    <p class='customer-criteria'>
+                        {{typicalCustomer.gender}}
+                    </p>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="picture" [colspan]="1" [rowspan]="3">
+                    <img src="../../../assets/imgs/{{typicalCustomer.gender}}_user.png">
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <mat-grid-tile-header>Age</mat-grid-tile-header>
+                    <p class='customer-criteria'>
+                        {{typicalCustomer.age}}
+                    </p>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <mat-grid-tile-header>Typical time customer is coming by my restaurant</mat-grid-tile-header>
+                    <p class='customer-criteria'>
+                        {{typicalCustomer.typical_time}}
+                    </p>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <mat-grid-tile-header>Food categories</mat-grid-tile-header>
+                    <p class='customer-criteria'>
+                        <mat-chip-list >
+                            <mat-chip *ngFor='let c of typicalCustomer.food_categories'>{{c}}</mat-chip>
+                        </mat-chip-list>
+                    </p>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <mat-grid-tile-header>Average amount of virtual money spent</mat-grid-tile-header>
+                    <p class='customer-criteria'>
+                        {{typicalCustomer.average_spend}}
+                    </p>
+                </mat-grid-tile>
+
+            </mat-grid-list>
         </mat-tab>
 
     </mat-tab-group>

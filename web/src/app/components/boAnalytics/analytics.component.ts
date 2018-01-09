@@ -86,7 +86,13 @@ export class BoAnalyticsComponent implements OnInit {
     }
   ];
 
-
+  public typicalCustomer: {
+    age: number,
+    gender: string,
+    food_categories: Object,
+    average_spend: string,
+    typical_time: string
+  };
 
 //Include fake data when the server is off
   public txsLabels: string[] = ["2018 week 1","2018 week 2","2018 week 3"];
@@ -124,176 +130,205 @@ export class BoAnalyticsComponent implements OnInit {
   constructor(http: HttpClient, authService: AuthenticationService) {
     this.http = http;
     this.authService = authService;
+    this.typicalCustomer = {
+      age: 0,
+      gender: "",
+      food_categories: [],
+      average_spend: "",
+      typical_time: ""
+    }
   }
 
 
-//Used to fire a drillDown
-drillDown(newStart){
+  //Used to fire a drillDown
+  drillDown(newStart){
 
-  if(this.granularity.width=="hour") return; //Cannot drill down more
-  this.granularity.previous.push(this.granularity.start); //Current start goes to list
-  this.granularity.start = newStart; //Update Start
-  if (this.granularity.width=="week") {this.granularity.width="day"; this.granularity.long = "7"}
-  else if (this.granularity.width=="day") {this.granularity.width="hour"; this.granularity.long = "1"}
+    if(this.granularity.width=="hour") return; //Cannot drill down more
+    this.granularity.previous.push(this.granularity.start); //Current start goes to list
+    this.granularity.start = newStart; //Update Start
+    if (this.granularity.width=="week") {this.granularity.width="day"; this.granularity.long = "7"}
+    else if (this.granularity.width=="day") {this.granularity.width="hour"; this.granularity.long = "1"}
 
-  this.getTxsData();
-  this.getHourData();
-  this.getAgeData();
-  this.getGenderData();
-}
+    this.getTxsData();
+    this.getHourData();
+    this.getAgeData();
+    this.getGenderData();
+  }
 
-//Used to fire a rollUp
-rollUp(){
-  if(this.granularity.width=="week") return; //Cannot roll up more
-  if (this.granularity.width=="day") {this.granularity.width="week"; this.granularity.long = "30"}
-  else if (this.granularity.width=="hour") {this.granularity.width="day"; this.granularity.long = "7"};
-  this.granularity.start = this.granularity.previous[this.granularity.previous.length-1];
-  //Remove last element from the array
-  this.granularity.previous.splice(-1,1);
+  //Used to fire a rollUp
+  rollUp(){
+    if(this.granularity.width=="week") return; //Cannot roll up more
+    if (this.granularity.width=="day") {this.granularity.width="week"; this.granularity.long = "30"}
+    else if (this.granularity.width=="hour") {this.granularity.width="day"; this.granularity.long = "7"};
+    this.granularity.start = this.granularity.previous[this.granularity.previous.length-1];
+    //Remove last element from the array
+    this.granularity.previous.splice(-1,1);
 
-  this.getTxsData();
-  this.getHourData();
-  this.getAgeData();
-  this.getGenderData();
-}
+    this.getTxsData();
+    this.getHourData();
+    this.getAgeData();
+    this.getGenderData();
+  }
 
-getTxsData(){
-  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/" + this.granularity.width + "/" + this.email)
-  .then((response: Response) => {
-    return response.json();
-  })
-  .then((responseJson: any) => {
-    var m = responseJson.message;
-    if(this.granularity.width=="hour"){
+  getTxsData(){
+    return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/" + this.granularity.width + "/" + this.email)
+    .then((response: Response) => {
+      return response.json();
+    })
+    .then((responseJson: any) => {
+      var m = responseJson.message;
+      if(this.granularity.width=="hour"){
+        m.sort(this.compare);
+      }
+      var newData = [];
+      this.inViewTxs = 0;
+      for(var i = 0; i < m.length;i++){
+        this.txsLabels[i] = m[i].name;
+        newData.push(m[i].count);
+        this.inViewTxs+=m[i].count;
+      }
+      for(var j = this.txsLabels.length-m.length; j > 0; j--){
+        this.txsLabels.pop();
+      }
+      this.txsData = newData;
+    });
+  }
+
+  getGenderData(){
+    return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/gender" + "/" + this.email)
+    .then((response: Response) => {
+      return response.json();
+    })
+    .then((responseJson: any) => {
+      var m = responseJson.message;
+      this.genderData = [
+        {data: [m[0].count], label:m[0].name},
+        {data: [m[1].count], label:m[1].name},
+      ]
+    
+    });
+
+  }
+
+  getReturningData(){
+    return fetch("http://localhost:3000/analytics/users/returning/" +  this.email)
+    .then((response: Response) => {
+      return response.json();
+    })
+    .then((responseJson: any) => {
+      var uniqueUsers = responseJson.message.uniqueUsers;
+      this.uniqueUsers = uniqueUsers;
+      var returningUsers = responseJson.message.uniqueReturningUsers;
+      var nonReturningUsers = uniqueUsers - returningUsers;
+      var returningPct = returningUsers * 100 / uniqueUsers;
+      var nonReturningPct = nonReturningUsers * 100 / uniqueUsers;
+      returningPct = Math.round(returningPct * 100) / 100;
+      nonReturningPct = Math.round(nonReturningPct * 100) / 100;
+      this.returningLabels.push("Non returning (" + nonReturningPct + "%)")
+      this.returningLabels.push("Returning (" + returningPct + "%)");
+      this.returningData = [nonReturningUsers,returningUsers];
+    
+      //Now, frequencies
+      var freqs = responseJson.message.frequencies;
+      var fLabels = [];
+      var fData = [];
+      for(var i = 0; i < freqs.length; i++){
+        fLabels.push(freqs[i].name + " (" + (Math.round((freqs[i].quantity * 100 / returningUsers) *100 )/100) + "%)");
+        fData.push(freqs[i].quantity);
+      }
+      this.freqData = fData;
+      this.freqLabels = fLabels;
+      this.returningVisible = true;
+    })
+    .catch((error)=>{
+      //Fake data when server is off
+      this.returningLabels = ["Non returning","Returning"];
+      this.returningData = [750,250];
+      this.freqData = [254,111,65,12];
+      this.freqLabels= ["2","3","4","5"];
+      this.returningVisible = true;
+    });
+
+  }
+
+
+  getHourData(){
+    return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/hour" + "/" + this.email)
+    .then((response: Response) => {
+      return response.json();
+    })
+    .then((responseJson: any) => {
+      var m = responseJson.message;
       m.sort(this.compare);
-    }
-    var newData = [];
-    this.inViewTxs = 0;
-    for(var i = 0; i < m.length;i++){
-       this.txsLabels[i] = m[i].name;
-       newData.push(m[i].count);
-       this.inViewTxs+=m[i].count;
-    }
-    for(var j = this.txsLabels.length-m.length; j > 0; j--){
-      this.txsLabels.pop();
-    }
-    this.txsData = newData;
-  });
-}
+      var newData = [];
+      for(var i = 0; i < m.length;i++){
+        this.hourLabels[i] = m[i].name;
+        newData.push(m[i].count);
+      }
+      for(var j = this.hourLabels.length-m.length; j > 0; j--){
+        this.hourLabels.pop();
+      }
+      this.hourData = newData;
+    });
+  }
 
-getGenderData(){
-  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/gender" + "/" + this.email)
-  .then((response: Response) => {
-    return response.json();
-  })
-  .then((responseJson: any) => {
-    var m = responseJson.message;
-    this.genderData = [
-      {data: [m[0].count], label:m[0].name},
-      {data: [m[1].count], label:m[1].name},
-    ]
-   
-  });
-
-}
-
-getReturningData(){
-  return fetch("http://localhost:3000/analytics/users/returning/" +  this.email)
-  .then((response: Response) => {
-    return response.json();
-  })
-  .then((responseJson: any) => {
-    var uniqueUsers = responseJson.message.uniqueUsers;
-    this.uniqueUsers = uniqueUsers;
-    var returningUsers = responseJson.message.uniqueReturningUsers;
-    var nonReturningUsers = uniqueUsers - returningUsers;
-    var returningPct = returningUsers * 100 / uniqueUsers;
-    var nonReturningPct = nonReturningUsers * 100 / uniqueUsers;
-    returningPct = Math.round(returningPct * 100) / 100;
-    nonReturningPct = Math.round(nonReturningPct * 100) / 100;
-    this.returningLabels.push("Non returning (" + nonReturningPct + "%)")
-    this.returningLabels.push("Returning (" + returningPct + "%)");
-    this.returningData = [nonReturningUsers,returningUsers];
-   
-    //Now, frequencies
-    var freqs = responseJson.message.frequencies;
-    var fLabels = [];
-    var fData = [];
-    for(var i = 0; i < freqs.length; i++){
-      fLabels.push(freqs[i].name + " (" + (Math.round((freqs[i].quantity * 100 / returningUsers) *100 )/100) + "%)");
-      fData.push(freqs[i].quantity);
-    }
-    this.freqData = fData;
-    this.freqLabels = fLabels;
-    this.returningVisible = true;
-  })
-  .catch((error)=>{
-    //Fake data when server is off
-    this.returningLabels = ["Non returning","Returning"];
-    this.returningData = [750,250];
-    this.freqData = [254,111,65,12];
-    this.freqLabels= ["2","3","4","5"];
-    this.returningVisible = true;
-  });
-
-}
+  getAgeData(){
+    return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/age" + "/" + this.email)
+    .then((response: Response) => {
+      return response.json();
+    })
+    .then((responseJson: any) => {
+      var m = responseJson.message;
+      m.sort(this.compare);
+      var newData = [];
+      for(var i = 0; i < m.length;i++){
+        this.ageLabels[i] = m[i].name;
+        newData.push(m[i].count);
+      }
+      for(var j = this.ageLabels.length-m.length; j > 0; j--){
+        this.ageLabels.pop();
+      }
+      this.ageData = newData;
+    });
+  }
 
 
-getHourData(){
-  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/hour" + "/" + this.email)
-  .then((response: Response) => {
-    return response.json();
-  })
-  .then((responseJson: any) => {
-    var m = responseJson.message;
-    m.sort(this.compare);
-    var newData = [];
-    for(var i = 0; i < m.length;i++){
-       this.hourLabels[i] = m[i].name;
-       newData.push(m[i].count);
-    }
-    for(var j = this.hourLabels.length-m.length; j > 0; j--){
-      this.hourLabels.pop();
-    }
-    this.hourData = newData;
-  });
-}
+  
+  txsClicked(e:any):void {
+    this.drillDown(e.active[0]._model.label);
+  }
 
-getAgeData(){
-  return fetch("http://localhost:3000/analytics/transactions/" + this.granularity.start + "/" + this.granularity.long + "/age" + "/" + this.email)
-  .then((response: Response) => {
-    return response.json();
-  })
-  .then((responseJson: any) => {
-    var m = responseJson.message;
-    m.sort(this.compare);
-    var newData = [];
-    for(var i = 0; i < m.length;i++){
-       this.ageLabels[i] = m[i].name;
-       newData.push(m[i].count);
-    }
-    for(var j = this.ageLabels.length-m.length; j > 0; j--){
-      this.ageLabels.pop();
-    }
-    this.ageData = newData;
-  });
-}
+  compare(a,b) {
+    if (parseInt(a.name) < parseInt(b.name))
+      return -1;
+    if (parseInt(a.name) > parseInt(b.name))
+      return 1;
+    return 0;
+  }
 
 
- 
-txsClicked(e:any):void {
-  this.drillDown(e.active[0]._model.label);
-}
+  /**************************
+   * TYPICAL CUSTOMER PROFILE
+   **************************/
 
-compare(a,b) {
-  if (parseInt(a.name) < parseInt(b.name))
-    return -1;
-  if (parseInt(a.name) > parseInt(b.name))
-    return 1;
-  return 0;
-}
+  getTypicalCustomer() {
+    return fetch("http://localhost:3000/analytics/users/typical/" + this.email)
+    .then((response: Response) => {
+      return response.json();
+    })
+    .then((responseJson: any) => {
+      var m = responseJson.message;
+      this.typicalCustomer.age = m.age
+      this.typicalCustomer.gender = m.gender
+      this.typicalCustomer.food_categories = m.food_categories
+      this.typicalCustomer.average_spend = m.average_spend
+      this.typicalCustomer.typical_time = m.typical_time
+    });
+  }
 
-
+  /*************************
+   * INIT PAGE AFTER LOADING
+   *************************/
   ngOnInit() {
 
     this.email = this.authService.getEmail();
@@ -315,6 +350,7 @@ compare(a,b) {
     this.getAgeData();
     this.getGenderData();
     this.getReturningData();
+    this.getTypicalCustomer();
 
     console.log(this.granularity);
 
@@ -368,7 +404,6 @@ compare(a,b) {
       }
   
   }
-
 
 
 }
