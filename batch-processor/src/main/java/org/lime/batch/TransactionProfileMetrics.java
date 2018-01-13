@@ -91,10 +91,8 @@ public class TransactionProfileMetrics {
 		JavaPairRDD<Tuple3<String,Integer,Hour>,Integer> txs_bo_age_hour = groupedByBoUserHour
 				.mapToPair(g -> {
 					Integer age = g._2()._2().getAge();
-					if(age <= 10){
-						age = 10;
-					}
-					else if(age <= 20){
+
+					if(age <= 20){
 						age = 20;
 					}
 					else if(age <= 30){

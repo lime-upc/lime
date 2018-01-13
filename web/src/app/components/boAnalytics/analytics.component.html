@@ -1,32 +1,35 @@
 <div class="container">
  
-    <mat-tab-group selectedIndex=4>
+    <mat-tab-group>
 
-        <!-- Total transactions tab -->
-        <mat-tab label="Total number of transactions">
-            <span>From {{textdateToPrety(granularity.start,0)}} to {{textdateToPrety(granularity.start,granularity.long)}}</span>
-            <br/>
-            <span>Total in view: {{inViewTxs}}</span>
-            <br/>
-             <span><i>Interactive chart. Click a bar to drill-down. <button class="btn btn-default" *ngIf="granularity.width!='week'"(click)="rollUp()">ROLL-UP</button></i></span>
-             <p align="center">
-                <canvas baseChart width="600"
-                [data]="txsData"
-                [colors]="genderColors"
-                [labels]="txsLabels"
-                [options]="txsOptions"
-                [legend]="barChartLegend"
-                [chartType]="barChartType"
-                (chartClick)="txsClicked($event)"></canvas>
-            </p>
-        </mat-tab>
-
+      
         <!-- Transactions in details (hours / age / gender) tab -->
-        <mat-tab label="Transactions in details">
+        <mat-tab label="Transactions">
+
+                <div class="row">
+                    <div class="col-6 offset-3 text-center">
+                <h3>Number of Transactions</h3>
+                <span>From {{textdateToPrety(granularity.start,0)}} to {{textdateToPrety(granularity.start,granularity.long)}}</span>
+                <br/>
+                <span>Total in view: {{inViewTxs}}</span>
+                <br/>
+                 <span><i>Interactive chart. Click a bar to drill-down. <button class="btn btn-default" *ngIf="granularity.width!='week'"(click)="rollUp()">ROLL-UP</button></i></span>
+                 <p align="center">
+                    <canvas baseChart width="600" class="bottom"
+                    [data]="txsData"
+                    [colors]="genderColors"
+                    [labels]="txsLabels"
+                    [options]="txsOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                    (chartClick)="txsClicked($event)"></canvas>
+                </p>
+            </div>
+                </div>
             <mat-grid-list cols="3" rowHeight="2:1">
                 <mat-grid-tile>
                     <h3 class='subtitle'># Transactions per hour</h3>
-                    <canvas baseChart width="400"
+                    <canvas baseChart width="400" class="bottom"
                         [data]="hourData"
                         [colors]="hourColors"
                         [labels]="hourLabels"
@@ -38,7 +41,7 @@
 
                 <mat-grid-tile>
                     <h3 class='subtitle'># Transactions per age</h3>
-                    <canvas baseChart width="400"
+                    <canvas baseChart width="400" class="bottom"
                         [data]="ageData"
                         [colors]="ageColors"
                         [labels]="ageLabels"
@@ -64,25 +67,38 @@
 
         <!-- Customers returning tab -->
         <mat-tab label="Returning customers analytics">
-                <div class="col-6 text-center" *ngIf="returningVisible">
-                    <h3>Users bouncing</h3>
-                    <span>Total unique users this month: {{uniqueUsers}}</span>
-                    <canvas baseChart
-                        [data]="returningData"
-                        [labels]="returningLabels"
-                        chartType="pie">
-                    </canvas>
-                </div>
-              
-                <div class="col-6 text-center" *ngIf="returningVisible">
-                    <h3>Returning users frequency</h3>
-                    <span>Times that users returned last month</span>
-                    <canvas baseChart
-                        [data]="freqData"
-                        [labels]="freqLabels"
-                        chartType="pie">
-                    </canvas>
-                </div>
+
+            
+                <div class="row">
+
+                        <!-- Restaurants ranking-->
+                        
+                        <div class="col-6 text-center" *ngIf="returningVisible">
+                          <h3>Users bouncing</h3>
+                          <span>Total unique users this month: {{uniqueUsers}}</span>
+                          <canvas baseChart
+                          [data]="returningData"
+                          [labels]="returningLabels"
+                          chartType="pie"
+                          ></canvas>
+                        </div>
+                
+                        <div class="col-6 text-center" *ngIf="returningVisible">
+                            <h3>Returning users frequency</h3>
+                            <span>Times that users returned last month</span>
+                            <canvas baseChart
+                            [data]="freqData"
+                            [labels]="freqLabels"
+                            chartType="pie"
+                            ></canvas>
+                        </div>
+                
+                      
+                
+                
+                
+                
+                      </div>
         </mat-tab>
 
         <!-- Typical customer tab -->

@@ -106,8 +106,8 @@ export class BoAnalyticsComponent implements OnInit {
   public ageData: number[] = [43,12,76,21,86,12];
 
 
-  public returningLabels: string[] = ["1"];
-  public returningData: number[] = [1];
+  public returningLabels: string[] = [];
+  public returningData: number[] = [];
   public freqLabels: string[] = [];
   public freqData: number[] = [];
   public returningVisible: boolean = false;

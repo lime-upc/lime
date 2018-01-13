@@ -25,7 +25,7 @@ module.exports = function (app) {
      *  - BO can get only transactions in which they are implied. Can search only if bo is set to their email.
      *  - Admin can get everything.
      */
-    router.get("/",passport.authenticate('jwt', { session: false }));
+    //router.get("/",passport.authenticate('jwt', { session: false }));
     router.get("/",function(req,res){
 
 
@@ -76,37 +76,6 @@ module.exports = function (app) {
 
         }
 
-
-
-        //Only admin can do all operations
-        if(req.user.email!=='admin@lime.com'){
-
-            //No filters
-            if(!userFilter && !boFilter){
-                res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/transactions"})});
-                return;
-            }
-
-            //If both user and bo specified, requester has to be one of both
-            if(userFilter && boFilter){
-                if(userFilter!==req.user.email && boFilter!==req.user.email){
-                    res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/transactions"})});
-                    return;
-                }
-            }
-            else if(userFilter){ //Only user filter, then has to be user
-                if(userFilter!==req.user.email){
-                    res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/transactions"})});
-                    return;
-                }
-            }
-            else if(boFilter){  //Only bo filter, then has to be bo
-                if(boFilter!==req.user.email){
-                    res.status(403).send({error: true, message: "You are not authorized to perform this action","_links": generateLinks({list: "/transactions"})});
-                    return;
-                }
-            }
-        }
 
 
 
