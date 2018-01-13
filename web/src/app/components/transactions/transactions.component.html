@@ -1,0 +1,37 @@
+<div class="background">
+  <mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Transaction ID </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction._id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="user">
+      <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.user}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef> Total amount </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.total_amount | number : '1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="received">
+      <mat-header-cell *matHeaderCellDef> Received amount </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.total_amount - transaction.virtual_money_used | number : '1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="vmu">
+      <mat-header-cell *matHeaderCellDef> Virtual money used </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.virtual_money_used | number : '1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ts">
+      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.timestamp | date}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

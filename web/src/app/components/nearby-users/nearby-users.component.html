@@ -8,11 +8,31 @@
         <h3>There are {{usersCounter}} users nearby!</h3>
         <!-- <span><b>Text</b></span> -->
 
-	    <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=560x320&maptype=roadmap&markers=color:red%7Csize:mid%7C{{businessCoordComma}}&key=AIzaSyAKDLAzDXqcZXxP7KJUXHUriFI65PKF0wY" class="under" />
+	    <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=640x400&maptype=roadmap&markers=color:red%7Csize:mid%7C{{businessCoordComma}}&key=AIzaSyAKDLAzDXqcZXxP7KJUXHUriFI65PKF0wY" class="under" />
 
 	    <img src="../../../assets/imgs/circle.png" class="over" />
 
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+      <div class="floating-panel">
+        <div class="all-elements">
+          <p><b>Select a radius</b></p>
+
+          <!-- Select filter -->
+          <mat-form-field>
+              <mat-select [(value)]="selectedFilter">
+                <mat-option value="all-users" >50 meters</mat-option>
+
+              </mat-select>
+          </mat-form-field>
+      </div>
+        </div>
+
+
+
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
 
       </div>
 

@@ -41,6 +41,7 @@ import { AnalyticsComponent } from "./components/analytics/analytics.component";
 import { BoAnalyticsComponent } from "./components/boAnalytics/analytics.component";
 
 import { NearbyUsersComponent } from "./components/nearby-users/nearby-users.component";
+import { TransactionsComponent } from "./components/transactions/transactions.component";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -65,6 +66,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     NearbyUsersComponent,
     FooterComponent,
     PageNotFoundComponent,
+    TransactionsComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

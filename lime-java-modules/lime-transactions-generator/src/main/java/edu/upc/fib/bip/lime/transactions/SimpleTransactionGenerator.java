@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -94,12 +95,12 @@ public class SimpleTransactionGenerator {
 
     public static Transaction generateOne(int i) {
         return Transaction.builder()
-            .email(String.format(USER_EMAIL_FORMAT, RANDOM.nextInt(2000) + 1))
-            .business_owner_id(String.format(BO_EMAIL_FORMAT, RANDOM.nextInt(2000) + 1))
+            .user(String.format(USER_EMAIL_FORMAT, RANDOM.nextInt(2000) + 1))
+            .business_owner(String.format(BO_EMAIL_FORMAT, RANDOM.nextInt(2000) + 1))
             .virtual_money_used(((double) RANDOM.nextInt(100)) / 10)
             .payback_amount(((double) RANDOM.nextInt(100)) / 10)
             .total_amount(((double) RANDOM.nextInt(100)) / 10)
-            .timestamp(DTF.format(DATE))
+            .timestamp(DATE.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
             .build();
     }
 
