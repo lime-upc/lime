@@ -255,7 +255,7 @@ getRankingByType(type: String): any {
         }
         var labels = [];
         var data = [];
-        for(var i=0; i < size; i++){
+        for(var i=1; i < size; i++){
           labels.push(message[i].name);
           data.push(message[i].percentage);
         }
