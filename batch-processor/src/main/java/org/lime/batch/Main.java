@@ -21,7 +21,7 @@ public class Main {
         JavaSparkContext ctx = new JavaSparkContext(conf);
 
         ctx.setLogLevel("ERROR");
-        String today = "05/01/2018";
+        String today = "16/01/2018";
 
 
         //Get all the locations from previous month

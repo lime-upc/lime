@@ -87,12 +87,15 @@ function createFakeUsers(USERS){
             });
 
 
+
+            var years = i%100;
+            var birthYear = 2018 - years;
             var userObject = {
                 "email": "test-" + i + "@lime.com",
                 "first_name": "John" + i,
                 "last_name": "Smith",
                 "password": "123",
-                "date_of_birth": "" + monthOfBirth + "/" + dayOfBirth + "/" + yearOfBirth,
+                "date_of_birth": "" + monthOfBirth + "/" + dayOfBirth + "/" + birthYear,
                 "gender": gender,
                 "preferences": myPrefs
             };

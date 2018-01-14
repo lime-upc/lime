@@ -211,6 +211,22 @@ module.exports = function (app) {
             else gender = "female";
 
             var age = getRandomInt(18,60);
+            var probability = getRandomInt(0,100);
+            //Coffee time, so people from 40 to 60 is more common
+            if(probability>2){
+                if(probability<40){
+                    age = getRandomInt(29,39);
+                }
+                else if(probability<80){
+                    age = getRandomInt(40,55);
+                }
+                else{
+                    age = getRandomInt(56,65);
+                }
+            }
+            else{
+                age = getRandomInt(16,28);
+            }
             people.push({gender:gender,age:age});
         }
         else if (number < 20){ //Remove
