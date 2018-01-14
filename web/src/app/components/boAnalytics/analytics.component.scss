@@ -11,16 +11,36 @@
 }
 
 img {
+  vertical-align:center;
   position: absolute;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 20px;
   left: 0;
   right: 0;
-  width: 400px;
+  width: 250px;
   background-color: white;
   border-radius: 50%;
   box-shadow: 8px 8px 12px #aaa;
   z-index: 2;
+}
+
+div .cards {
+  padding-bottom: 20px;
+  display: flex;
+  margin: auto;
+  padding: auto;
+  
+}
+
+h4 {
+  background-color:  rgba(88, 140, 183, 0.53);
+  border-radius: 5px;
+  padding: 5px;
+  width: 75%;
+}
+
+div .customer-card {
+  width: 50%;
 }
 
 canvas .bottom {
@@ -32,17 +52,6 @@ canvas .bottom {
   box-shadow: 8px 8px 12px #aaa;
   margin-right: 0px;
   z-index: 1;
-}
-
-.mat-grid-tile .right-tile {
-  position: absolute;
-  right: 10px;
-}
-
-p.customer-criteria {
-  position: absolute;
-  top: 70px;
-  left: 10px;
 }
 
 .div {

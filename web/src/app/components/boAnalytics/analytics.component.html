@@ -1,6 +1,6 @@
 <div class="container">
  
-    <mat-tab-group>
+    <mat-tab-group selectedIndex=4>
 
       
         <!-- Transactions in details (hours / age / gender) tab -->
@@ -101,50 +101,66 @@
                       </div>
         </mat-tab>
 
-        <!-- Typical customer tab -->
-        <mat-tab label="Typical customer profile">
-            <img src="../../../assets/imgs/{{typicalCustomer.gender}}_user.png">
-                <mat-grid-list cols="4" rowHeight="150px">
-    
-                    <mat-grid-tile [colspan]="2" [rowspan]="1">
-                        <mat-grid-tile-header>Gender</mat-grid-tile-header>
-                        <p class='customer-criteria'>
-                            {{typicalCustomer.gender}}
-                        </p>
-                    </mat-grid-tile>
-    
-                    <mat-grid-tile class="right-tile" [colspan]="2" [rowspan]="1">
-                        <mat-grid-tile-header>Age</mat-grid-tile-header>
-                        <p class='customer-criteria'>
-                            {{typicalCustomer.age}}
-                        </p>
-                    </mat-grid-tile>
-    
-                    <mat-grid-tile [colspan]="2" [rowspan]="1">
-                        <mat-grid-tile-header>Typical time customer is coming by my restaurant</mat-grid-tile-header>
-                        <p class='customer-criteria'>
-                            {{typicalCustomer.typical_time}}
-                        </p>
-                    </mat-grid-tile>
+         <!-- Typical customer tab -->
+         <mat-tab label="Typical customer profile">
+            <div class="cards">
+                <mat-card class="customer-card">
+                    <img src="../../../assets/imgs/{{typicalCustomer.gender}}_user.png">
+                    <h4>Gender</h4>
+                    <p>{{typicalCustomer.gender}}</p>
+                    
+                    <h4>Age</h4>
+                    <p>{{typicalCustomer.age}}</p>
 
-                    <mat-grid-tile class="right-tile" [colspan]="2" [rowspan]="1">
-                        <mat-grid-tile-header>Average amount of virtual money spent</mat-grid-tile-header>
-                        <p class='customer-criteria'>
-                            {{typicalCustomer.average_spend}}
-                        </p>
-                    </mat-grid-tile>
-    
-                    <mat-grid-tile [colspan]="2" [rowspan]="1">
-                        <mat-grid-tile-header>Food categories</mat-grid-tile-header>
-                        <p class='customer-criteria'>
-                            <mat-chip-list >
-                                <mat-chip *ngFor='let c of typicalCustomer.food_categories'>{{c}}</mat-chip>
-                            </mat-chip-list>
-                        </p>
-                    </mat-grid-tile>
+                    <h4>Food categories</h4>
+                    <mat-chip *ngFor='let c of typicalCustomer.food_categories'>{{c}}</mat-chip>
+                    
+                    <h4>Typical time customer is coming by my restaurant</h4>
+                    <p>{{typicalCustomer.typical_time}}</p>
+                    
+                    <h4>Average amount of virtual money spent</h4>
+                    <p>{{typicalCustomer.average_spend}}</p>
+                </mat-card>
 
-                </mat-grid-list>
-            </mat-tab>
+                <mat-card class="customer-card">
+                    <img src="../../../assets/imgs/male_user.png">
+                    <h4>Gender</h4>
+                    <p>male</p>
+                        
+                    <h4>Age</h4>
+                    <p>27</p>
+        
+                    <h4>Food categories</h4>
+                    <mat-chip>Take-away</mat-chip>
+                        
+                    <h4>Typical time customer is coming by my restaurant</h4>
+                    <p>21:00-22:00</p>
+                        
+                    <h4>Average amount of virtual money spent</h4>
+                    <p>14.35 €</p>
+                </mat-card>
+            </div>
+            <div class='cards'>
+                <mat-card class="customer-card">
+                    <img src="../../../assets/imgs/male_user.png">
+                    <h4>Gender</h4>
+                    <p>male</p>
+                        
+                    <h4>Age</h4>
+                    <p>19</p>
+        
+                    <h4>Food categories</h4>
+                    <mat-chip>italian good</mat-chip>
+                        
+                    <h4>Typical time customer is coming by my restaurant</h4>
+                    <p>19:00-20:00</p>
+                        
+                    <h4>Average amount of virtual money spent</h4>
+                    <p>7.65 €</p>
+                </mat-card>
+            </div>
+
+        </mat-tab>
     
         </mat-tab-group>
         <!--<mat-tab label="Typical customer profile">
