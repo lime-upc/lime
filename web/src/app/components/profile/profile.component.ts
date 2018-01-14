@@ -78,7 +78,7 @@ export class ProfileComponent implements OnInit {
         var profile: Profile[] = [
 
           //TODO: fill rest of the data
-          {field: 'Type of business', value: businessOwner.business.tags},
+          {field: 'Type of business', value: "Churrería & cafetería"},
           {field: 'Address', value: businessOwner.business.address},
           {field: 'Email', value: businessOwner.email},
           {field: 'Phone number', value: businessOwner.phone_number},

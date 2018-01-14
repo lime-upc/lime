@@ -7,63 +7,69 @@
         <mat-tab label="Transactions">
 
                 <div class="row">
-                    <div class="col-6 offset-3 text-center">
-                <h3>Number of Transactions</h3>
-                <span>From {{textdateToPrety(granularity.start,0)}} to {{textdateToPrety(granularity.start,granularity.long)}}</span>
-                <br/>
-                <span>Total in view: {{inViewTxs}}</span>
-                <br/>
-                 <span><i>Interactive chart. Click a bar to drill-down. <button class="btn btn-default" *ngIf="granularity.width!='week'"(click)="rollUp()">ROLL-UP</button></i></span>
-                 <p align="center">
-                    <canvas baseChart width="600" class="bottom"
-                    [data]="txsData"
-                    [colors]="genderColors"
-                    [labels]="txsLabels"
+        <div class="col-6 offset-3 text-center">
+            <h3>Number of transactions</h3>
+            <span>From {{textdateToPrety(granularity.start,0)}} to {{textdateToPrety(granularity.start,granularity.long)}}</span>
+            <br/>
+            <span>Total in view: {{inViewTxs}}</span>
+            <br/>
+            <span><i>Interactive chart. Click a bar to drill-down. <button class="btn btn-default" *ngIf="granularity.width!='week'"(click)="rollUp()">ROLL-UP</button></i></span>
+            
+            
+            <p align="center">
+                <canvas baseChart width="600"
+                [data]="txsData"
+                [colors]="genderColors"
+                [labels]="txsLabels"
+                [options]="txsOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+                (chartClick)="txsClicked($event)"></canvas>
+            </p>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-4 text-center">
+        <h3># Transactions per hour</h3>
+        <p align="center">
+            <canvas baseChart width="400"
+                    [data]="hourData"
+                    [colors]="hourColors"
+                    [labels]="hourLabels"
                     [options]="txsOptions"
                     [legend]="barChartLegend"
-                    [chartType]="barChartType"
-                    (chartClick)="txsClicked($event)"></canvas>
-                </p>
-            </div>
-                </div>
-            <mat-grid-list cols="3" rowHeight="2:1">
-                <mat-grid-tile>
-                    <h3 class='subtitle'># Transactions per hour</h3>
-                    <canvas baseChart width="400" class="bottom"
-                        [data]="hourData"
-                        [colors]="hourColors"
-                        [labels]="hourLabels"
-                        [options]="txsOptions"
-                        [legend]="barChartLegend"
-                        [chartType]="barChartType">
-                    </canvas>
-                </mat-grid-tile>
+                    [chartType]="barChartType">
+            </canvas>
+        </p>
+        </div>
 
-                <mat-grid-tile>
-                    <h3 class='subtitle'># Transactions per age</h3>
-                    <canvas baseChart width="400" class="bottom"
-                        [data]="ageData"
-                        [colors]="ageColors"
-                        [labels]="ageLabels"
-                        [options]="txsOptions"
-                        [legend]="barChartLegend"
-                        [chartType]="barChartType">
-                    </canvas>
-                </mat-grid-tile>
+        <div class="col-4 text-center">
+            <h3># Transactions per age</h3>
+          <canvas baseChart width="400"
+                  [data]="ageData"
+                  [colors]="ageColors"
+                  [labels]="ageLabels"
+                  [options]="txsOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"></canvas>
+        </div>
 
-                <mat-grid-tile>
-                    <h3 class='subtitle'># Transactions per gender</h3>
-                    <canvas baseChart width="400"
-                        [datasets]="genderData"
-                        [labels]="genderLabels"
-                        [colors]="genderColors"
-                        [options]="txsOptions"
-                      [legend]="genderLegend"
-                      [chartType]="barChartType">
-                    </canvas>
-                </mat-grid-tile>
-            </mat-grid-list>
+        <div class="col-4 text-center" >
+            <h3># Transactions per gender</h3>
+            <canvas baseChart width="400"
+              [datasets]="genderData"
+              [labels]="genderLabels"
+              [colors]="genderColors"
+              [options]="txsOptions"
+              [legend]="genderLegend"
+              [chartType]="barChartType"></canvas>
+        </div>
+        
+  
+  </div>
+            
         </mat-tab>
+
 
         <!-- Customers returning tab -->
         <mat-tab label="Returning customers analytics">
